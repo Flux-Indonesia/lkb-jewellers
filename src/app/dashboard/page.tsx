@@ -213,7 +213,7 @@ function ProductForm({
         {formData.category === "watch" && (
           <div className="bg-blue-500/5 border border-blue-500/20 rounded-xl p-6 space-y-6">
             <div className="flex items-center gap-2 mb-4">
-              <Watch size={20} className="text-white" />
+              <Crown size={20} className="text-white" />
               <h3 className="text-lg text-white font-heading">Watch Specifications</h3>
             </div>
             <div>
