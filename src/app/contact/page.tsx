@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { createContact } from "@/lib/contacts";
 
-const prataFont = { fontFamily: '"Prata", "Prata Fallback", serif' };
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -27,11 +30,28 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      const nameParts = formData.name.trim().split(" ");
+      const firstName = nameParts[0] || "";
+      const lastName = nameParts.slice(1).join(" ") || "";
+      await createContact({
+        first_name: firstName,
+        last_name: lastName,
+        email: formData.email,
+        phone: formData.phone,
+        interest: formData.interest,
+        message: formData.message,
+        preferred_contact_method: "email",
+        status: "new",
+      });
       setSubmitted(true);
       setFormData({ name: "", email: "", phone: "", interest: "", message: "" });
-    }, 1500);
+    } catch (err) {
+      console.error("Failed to submit contact:", err);
+      alert("Failed to send message. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -47,12 +67,11 @@ export default function ContactPage() {
             <div className="h-px w-16 bg-gradient-to-l from-transparent to-white" />
           </div>
           <h1
-            className="text-5xl md:text-7xl text-white mb-6 font-normal"
-            style={prataFont}
+            className="text-5xl md:text-7xl text-white mb-6 font-normal font-heading"
           >
             Contact Us
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto font-display">
             We&apos;d love to hear from you. Whether you have a question about
             our collections, bespoke services, or anything else, our team is
             ready to assist.
@@ -63,8 +82,7 @@ export default function ContactPage() {
           {/* Contact Form */}
           <div>
             <h2
-              className="text-2xl text-white mb-8 font-normal"
-              style={prataFont}
+              className="text-2xl text-white mb-8 font-normal font-heading"
             >
               Send Us a Message
             </h2>
@@ -75,8 +93,7 @@ export default function ContactPage() {
                   <Send className="w-7 h-7 text-[#D4AF37]" />
                 </div>
                 <h3
-                  className="text-2xl text-white mb-2 font-normal"
-                  style={prataFont}
+                  className="text-2xl text-white mb-2 font-normal font-heading"
                 >
                   Message Sent
                 </h3>
@@ -84,12 +101,13 @@ export default function ContactPage() {
                   Thank you for reaching out. We&apos;ll get back to you within
                   24 hours.
                 </p>
-                <button
+                <Button
                   onClick={() => setSubmitted(false)}
-                  className="mt-6 text-[#D4AF37] text-sm tracking-widest hover:underline"
+                  className="h-auto mt-6 text-[#D4AF37] text-sm tracking-widest hover:underline"
+                  variant="ghost"
                 >
                   SEND ANOTHER MESSAGE
-                </button>
+                </Button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
@@ -97,13 +115,13 @@ export default function ContactPage() {
                   <label className="block text-gray-400 text-xs tracking-wider uppercase mb-2">
                     Full Name *
                   </label>
-                  <input
+                  <Input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full bg-black/50 border border-gray-700 rounded-lg text-white px-4 py-3 focus:outline-none focus:border-[#D4AF37] transition-colors"
+                    className="h-auto w-full bg-black/50 border border-gray-700 rounded-lg text-white px-4 py-3 focus:outline-none focus:border-[#D4AF37] transition-colors"
                     placeholder="Your full name"
                     style={{ fontSize: "16px" }}
                   />
@@ -113,13 +131,13 @@ export default function ContactPage() {
                     <label className="block text-gray-400 text-xs tracking-wider uppercase mb-2">
                       Email *
                     </label>
-                    <input
+                    <Input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full bg-black/50 border border-gray-700 rounded-lg text-white px-4 py-3 focus:outline-none focus:border-[#D4AF37] transition-colors"
+                      className="h-auto w-full bg-black/50 border border-gray-700 rounded-lg text-white px-4 py-3 focus:outline-none focus:border-[#D4AF37] transition-colors"
                       placeholder="your@email.com"
                       style={{ fontSize: "16px" }}
                     />
@@ -128,12 +146,12 @@ export default function ContactPage() {
                     <label className="block text-gray-400 text-xs tracking-wider uppercase mb-2">
                       Phone
                     </label>
-                    <input
+                    <Input
                       type="tel"
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full bg-black/50 border border-gray-700 rounded-lg text-white px-4 py-3 focus:outline-none focus:border-[#D4AF37] transition-colors"
+                      className="h-auto w-full bg-black/50 border border-gray-700 rounded-lg text-white px-4 py-3 focus:outline-none focus:border-[#D4AF37] transition-colors"
                       placeholder="+44 XXX XXX XXXX"
                       style={{ fontSize: "16px" }}
                     />
@@ -174,13 +192,13 @@ export default function ContactPage() {
                     style={{ fontSize: "16px" }}
                   />
                 </div>
-                <button
+                <Button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-white text-black font-bold tracking-widest py-4 text-sm hover:bg-gray-200 transition-colors disabled:opacity-50"
+                  className="h-auto w-full bg-white text-black font-bold tracking-widest py-4 text-sm hover:bg-gray-200 transition-all duration-300 active:scale-95 disabled:opacity-50"
                 >
                   {loading ? "SENDING..." : "SEND MESSAGE"}
-                </button>
+                </Button>
               </form>
             )}
           </div>
@@ -188,8 +206,7 @@ export default function ContactPage() {
           {/* Contact Info */}
           <div className="space-y-8">
             <h2
-              className="text-2xl text-white mb-8 font-normal"
-              style={prataFont}
+              className="text-2xl text-white mb-8 font-normal font-heading"
             >
               Visit Our Showroom
             </h2>
@@ -247,8 +264,7 @@ export default function ContactPage() {
               <div className="flex items-center gap-3 mb-4">
                 <Clock className="w-5 h-5 text-[#D4AF37]" />
                 <h3
-                  className="text-xl text-white font-normal"
-                  style={prataFont}
+                  className="text-xl text-white font-normal font-heading"
                 >
                   Opening Hours
                 </h3>
@@ -258,12 +274,12 @@ export default function ContactPage() {
                   <span className="text-gray-400">Monday - Friday</span>
                   <span className="text-white">10:00 AM - 6:00 PM</span>
                 </div>
-                <div className="h-px bg-gray-800" />
+                <Separator className="bg-gray-800" />
                 <div className="flex justify-between">
                   <span className="text-gray-400">Saturday</span>
                   <span className="text-white">10:00 AM - 5:00 PM</span>
                 </div>
-                <div className="h-px bg-gray-800" />
+                <Separator className="bg-gray-800" />
                 <div className="flex justify-between">
                   <span className="text-gray-400">Sunday</span>
                   <span className="text-white">By Appointment</span>

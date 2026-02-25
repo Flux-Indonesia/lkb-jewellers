@@ -1,8 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { Crown } from "lucide-react";
 
-const prataFont = { fontFamily: '"Prata", "Prata Fallback", serif' };
 
 const galleryImages = [
   {
@@ -48,12 +48,11 @@ export default function HallOfFamePage() {
             <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#D4AF37]" />
           </div>
           <h1
-            className="text-5xl md:text-7xl lg:text-8xl text-white mb-6 font-normal tracking-wider"
-            style={prataFont}
+            className="text-5xl md:text-7xl lg:text-8xl text-white mb-6 font-normal tracking-wider font-heading"
           >
             HALL OF FAME
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed font-display">
             Celebrating our distinguished clientele and their extraordinary
             pieces
           </p>
@@ -66,11 +65,12 @@ export default function HallOfFamePage() {
               key={index}
               className="aspect-[3/4] overflow-hidden group relative rounded-lg"
             >
-              <img
+              <Image
                 src={image.src}
                 alt={image.alt}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                loading="lazy"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-500" />
               <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#D4AF37]/30 transition-all duration-500 rounded-lg pointer-events-none" />

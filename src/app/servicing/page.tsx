@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { Battery, Settings, RotateCcw, Sparkles, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-const prataFont = { fontFamily: '"Prata", "Prata Fallback", serif' };
 
 const services = [
   {
@@ -50,12 +50,11 @@ export default function ServicingPage() {
             <div className="h-px w-16 bg-gradient-to-l from-transparent to-white" />
           </div>
           <h1
-            className="text-4xl md:text-6xl lg:text-7xl text-white mb-6 font-normal"
-            style={prataFont}
+            className="text-4xl md:text-6xl lg:text-7xl text-white mb-6 font-normal font-heading"
           >
             Watch &amp; Jewellery Servicing
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto font-display">
             Trust your precious timepieces and jewellery to our team of
             certified watchmakers and master craftsmen.
           </p>
@@ -75,8 +74,7 @@ export default function ServicingPage() {
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-3">
                     <h3
-                      className="text-xl text-white font-normal"
-                      style={prataFont}
+                      className="text-xl text-white font-normal font-heading"
                     >
                       {service.title}
                     </h3>
@@ -96,8 +94,7 @@ export default function ServicingPage() {
         {/* Why Choose Us */}
         <div className="text-center mb-16">
           <h2
-            className="text-3xl md:text-4xl text-white mb-8 font-normal"
-            style={prataFont}
+            className="text-3xl md:text-4xl text-white mb-8 font-normal font-heading"
           >
             Why Choose LKB Servicing
           </h2>
@@ -118,8 +115,7 @@ export default function ServicingPage() {
             ].map((item) => (
               <div key={item.title} className="text-center">
                 <h3
-                  className="text-lg text-white mb-2 font-normal"
-                  style={prataFont}
+                  className="text-lg text-white mb-2 font-normal font-heading"
                 >
                   {item.title}
                 </h3>
@@ -133,22 +129,20 @@ export default function ServicingPage() {
         <div className="text-center">
           <div className="bg-gradient-to-br from-gray-900/80 to-black/80 border border-gray-800 rounded-lg p-12">
             <h2
-              className="text-3xl md:text-4xl text-white mb-4 font-normal"
-              style={prataFont}
+              className="text-3xl md:text-4xl text-white mb-4 font-normal font-heading"
             >
               Book Your Service
             </h2>
-            <p className="text-gray-400 mb-8 max-w-xl mx-auto">
+            <p className="text-gray-400 mb-8 max-w-xl mx-auto font-display">
               Contact us to discuss your servicing needs. We offer free
               estimates and collection services for high-value pieces.
             </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-3 bg-white text-black px-10 py-4 font-bold tracking-widest text-sm hover:bg-gray-200 transition-colors"
-            >
-              CONTACT US
-              <ArrowRight className="w-5 h-5" />
-            </Link>
+            <Button asChild className="inline-flex items-center gap-3 bg-white text-black px-10 py-4 h-auto rounded-none font-bold tracking-widest text-sm hover:bg-gray-200 transition-all duration-300 active:scale-95">
+              <Link href="/contact">
+                CONTACT US
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

@@ -1,23 +1,45 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
-import { products } from "@/data/products";
 import { useCart } from "@/context/cart-context";
+import { getProductById } from "@/lib/products";
+import type { Product } from "@/data/products";
+import { Button } from "@/components/ui/button";
+
+const PLACEHOLDER_IMG =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect width='400' height='400' fill='%23111827'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%236b7280' font-family='sans-serif' font-size='14'%3ENo Image%3C/text%3E%3C/svg%3E";
 
 export default function ProductPage() {
   const params = useParams();
   const { addToCart } = useCart();
   const id = params.id as string;
-  const product = products.find((p) => p.id === id);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getProductById(id).then((p) => {
+      setProduct(p);
+      setLoading(false);
+    });
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="bg-black min-h-screen pt-32 pb-24 flex items-center justify-center">
+        <div className="text-white text-xs tracking-widest uppercase animate-pulse">Loading...</div>
+      </div>
+    );
+  }
 
   if (!product) {
     return (
       <div className="bg-black min-h-screen pt-32 pb-24 px-4 md:px-6 flex flex-col items-center justify-center">
         <h1
-          className="text-3xl text-white mb-6"
-          style={{ fontFamily: '"Prata", "Prata Fallback", serif' }}
+          className="text-3xl text-white mb-6 font-heading"
         >
           Product not found
         </h1>
@@ -49,11 +71,15 @@ export default function ProductPage() {
         {/* Two Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Left: Product Image */}
-          <div className="aspect-square bg-gray-900 overflow-hidden rounded-lg">
-            <img
-              src={product.image}
+          <div className="relative aspect-square bg-gray-900 overflow-hidden rounded-lg">
+            <Image
+              src={product.image || PLACEHOLDER_IMG}
               alt={product.name}
-              className="w-full h-full object-contain"
+              fill
+              className="object-contain"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              priority
+              onError={(e) => { (e.target as HTMLImageElement).srcset = ""; (e.target as HTMLImageElement).src = PLACEHOLDER_IMG; }}
             />
           </div>
 
@@ -66,8 +92,7 @@ export default function ProductPage() {
 
             {/* Name */}
             <h1
-              className="text-3xl md:text-4xl font-bold text-white mb-4"
-              style={{ fontFamily: '"Prata", "Prata Fallback", serif' }}
+              className="text-3xl md:text-4xl font-bold text-white mb-4 font-heading"
             >
               {product.name}
             </h1>
@@ -130,18 +155,17 @@ export default function ProductPage() {
 
             {/* Action Buttons */}
             <div className="space-y-3">
-              <button
-                onClick={() => addToCart(product.id)}
-                className="w-full bg-white text-black py-4 font-bold tracking-widest text-sm hover:bg-gray-200 transition-colors cursor-pointer"
+              <Button
+                onClick={() => addToCart(product)}
+                className="h-auto w-full bg-white text-black py-4 font-bold tracking-widest text-sm hover:bg-gray-200 transition-all duration-300 active:scale-95 cursor-pointer"
               >
                 ADD TO CART
-              </button>
-              <Link
-                href="/contact"
-                className="block w-full border border-white text-white py-4 font-bold tracking-widest text-sm hover:bg-white hover:text-black transition-all text-center"
-              >
-                ENQUIRE
-              </Link>
+              </Button>
+              <Button asChild className="h-auto block w-full border border-white text-white py-4 font-bold tracking-widest text-sm hover:bg-white hover:text-black transition-all duration-300 active:scale-95 text-center">
+                <Link href="/contact">
+                  ENQUIRE
+                </Link>
+              </Button>
             </div>
           </div>
         </div>

@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { User, Package, Heart, Settings, LogOut } from "lucide-react";
 
-const prataFont = { fontFamily: '"Prata", "Prata Fallback", serif' };
-
 export default function ProfilePage() {
   return (
     <div className="bg-black min-h-screen pt-32 pb-24 px-4 md:px-6">
@@ -15,8 +13,7 @@ export default function ProfilePage() {
             <User className="w-8 h-8 text-gray-400" />
           </div>
           <h1
-            className="text-4xl md:text-5xl text-white mb-4 font-normal"
-            style={prataFont}
+            className="text-4xl md:text-5xl text-white mb-4 font-normal font-heading"
           >
             My Account
           </h1>
@@ -33,8 +30,7 @@ export default function ProfilePage() {
           >
             <User className="w-8 h-8 text-[#D4AF37] mb-4 group-hover:scale-110 transition-transform" />
             <h3
-              className="text-lg text-white mb-2 font-normal"
-              style={prataFont}
+              className="text-lg text-white mb-2 font-normal font-heading"
             >
               Personal Details
             </h3>
@@ -49,8 +45,7 @@ export default function ProfilePage() {
           >
             <Package className="w-8 h-8 text-[#D4AF37] mb-4 group-hover:scale-110 transition-transform" />
             <h3
-              className="text-lg text-white mb-2 font-normal"
-              style={prataFont}
+              className="text-lg text-white mb-2 font-normal font-heading"
             >
               Order History
             </h3>
@@ -65,8 +60,7 @@ export default function ProfilePage() {
           >
             <Heart className="w-8 h-8 text-[#D4AF37] mb-4 group-hover:scale-110 transition-transform" />
             <h3
-              className="text-lg text-white mb-2 font-normal"
-              style={prataFont}
+              className="text-lg text-white mb-2 font-normal font-heading"
             >
               Wishlist
             </h3>
@@ -81,8 +75,7 @@ export default function ProfilePage() {
           >
             <Settings className="w-8 h-8 text-[#D4AF37] mb-4 group-hover:scale-110 transition-transform" />
             <h3
-              className="text-lg text-white mb-2 font-normal"
-              style={prataFont}
+              className="text-lg text-white mb-2 font-normal font-heading"
             >
               Account Settings
             </h3>
@@ -94,8 +87,7 @@ export default function ProfilePage() {
           <button className="bg-gray-900/50 p-8 rounded-lg border border-gray-800 hover:border-red-500/30 transition-all duration-500 group text-left">
             <LogOut className="w-8 h-8 text-gray-500 mb-4 group-hover:text-red-400 group-hover:scale-110 transition-all" />
             <h3
-              className="text-lg text-white mb-2 font-normal group-hover:text-red-400 transition-colors"
-              style={prataFont}
+              className="text-lg text-white mb-2 font-normal group-hover:text-red-400 transition-colors font-heading"
             >
               Sign Out
             </h3>

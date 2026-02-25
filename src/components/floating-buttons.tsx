@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Phone, ChevronRight, ChevronLeft, ArrowUp } from "lucide-react";
+import { Phone, ChevronRight, ChevronLeft, ChevronUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function FloatingButtons() {
   const [expanded, setExpanded] = useState(true);
@@ -24,9 +25,9 @@ export default function FloatingButtons() {
       {/* Right side - Phone + WhatsApp */}
       <div className="fixed bottom-8 right-8 z-50 flex items-center gap-3">
         {/* Toggle button */}
-        <button
+        <Button
           onClick={() => setExpanded(!expanded)}
-          className="bg-[#D4AF37] text-black p-3 rounded-full shadow-2xl hover:bg-[#D4AF37]/90 transition-all duration-300 hover:scale-110 flex items-center justify-center"
+          className="bg-white text-black p-3 rounded-full shadow-2xl hover:bg-gray-100 hover:scale-110 active:scale-95 h-auto w-auto transition-all duration-300"
           aria-label={expanded ? "Collapse sidebar" : "Expand sidebar"}
         >
           {expanded ? (
@@ -34,7 +35,7 @@ export default function FloatingButtons() {
           ) : (
             <ChevronLeft className="w-5 h-5" />
           )}
-        </button>
+        </Button>
 
         {/* Expandable buttons */}
         <div
@@ -87,11 +88,11 @@ export default function FloatingButtons() {
       >
         <button
           onClick={scrollToTop}
-          className="bg-black border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black p-3 md:p-4 rounded-full shadow-2xl transition-all duration-300 group focus:outline-none"
+          className="bg-black border border-white/70 text-white hover:bg-white hover:text-black px-4 py-3 rounded-[18px] shadow-2xl transition-all duration-300 group focus:outline-none"
           aria-label="Back to Top"
         >
-          <ArrowUp
-            size={24}
+          <ChevronUp
+            size={22}
             className="group-hover:-translate-y-1 transition-transform duration-300"
           />
         </button>

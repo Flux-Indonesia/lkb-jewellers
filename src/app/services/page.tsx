@@ -10,8 +10,8 @@ import {
   Sparkles,
   ArrowRight,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-const prataFont = { fontFamily: '"Prata", "Prata Fallback", serif' };
 
 const services = [
   {
@@ -78,12 +78,11 @@ export default function ServicesPage() {
             <div className="h-px w-16 bg-gradient-to-l from-transparent to-white" />
           </div>
           <h1
-            className="text-5xl md:text-7xl text-white mb-6 font-normal"
-            style={prataFont}
+            className="text-5xl md:text-7xl text-white mb-6 font-normal font-heading"
           >
             Our Services
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto font-display">
             From luxury timepieces to bespoke jewellery, we offer a
             comprehensive range of services tailored to your needs.
           </p>
@@ -101,8 +100,7 @@ export default function ServicesPage() {
                 <service.icon className="w-6 h-6 text-[#D4AF37]" />
               </div>
               <h3
-                className="text-xl text-white mb-3 font-normal"
-                style={prataFont}
+                className="text-xl text-white mb-3 font-normal font-heading"
               >
                 {service.title}
               </h3>
@@ -121,22 +119,20 @@ export default function ServicesPage() {
         <div className="mt-20 text-center">
           <div className="bg-gradient-to-br from-gray-900/80 to-black/80 border border-gray-800 rounded-lg p-12">
             <h2
-              className="text-3xl md:text-4xl text-white mb-4 font-normal"
-              style={prataFont}
+              className="text-3xl md:text-4xl text-white mb-4 font-normal font-heading"
             >
               Need Something Special?
             </h2>
-            <p className="text-gray-400 mb-8 max-w-xl mx-auto">
+            <p className="text-gray-400 mb-8 max-w-xl mx-auto font-display">
               Get in touch with our team to discuss your specific requirements.
               We&apos;re here to help.
             </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-3 bg-white text-black px-10 py-4 font-bold tracking-widest text-sm hover:bg-gray-200 transition-colors"
-            >
-              CONTACT US
-              <ArrowRight className="w-5 h-5" />
-            </Link>
+            <Button asChild className="inline-flex items-center gap-3 bg-white text-black px-10 py-4 h-auto rounded-none font-bold tracking-widest text-sm hover:bg-gray-200 transition-all duration-300 active:scale-95">
+              <Link href="/contact">
+                CONTACT US
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

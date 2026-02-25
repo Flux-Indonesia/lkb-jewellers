@@ -1,7 +1,6 @@
 "use client";
 
 import { createContext, useContext, useState, useCallback, ReactNode } from "react";
-import { products as allProducts, Product } from "@/data/products";
 
 interface CartItem {
   id: string;
@@ -13,7 +12,7 @@ interface CartItem {
 
 interface CartContextType {
   items: CartItem[];
-  addToCart: (productId: string, qty?: number) => void;
+  addToCart: (product: { id: string; name: string; price: number; image: string }, qty?: number) => void;
   removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, qty: number) => void;
   clearCart: () => void;
@@ -30,15 +29,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const addToCart = useCallback(
-    (productId: string, qty: number = 1) => {
-      const product = allProducts.find((p) => p.id === productId);
-      if (!product) return;
-
+    (product: { id: string; name: string; price: number; image: string }, qty: number = 1) => {
       setItems((prev) => {
-        const existing = prev.find((item) => item.id === productId);
+        const existing = prev.find((item) => item.id === product.id);
         if (existing) {
           return prev.map((item) =>
-            item.id === productId
+            item.id === product.id
               ? { ...item, quantity: item.quantity + qty }
               : item
           );

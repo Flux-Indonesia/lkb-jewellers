@@ -1,51 +1,43 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
-export default function EntranceOverlay() {
-  const [showOverlay, setShowOverlay] = useState(true);
+interface EntranceOverlayProps {
+  onEnter: () => void;
+}
+
+export default function EntranceOverlay({ onEnter }: EntranceOverlayProps) {
   const [showContent, setShowContent] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    // Check if user already entered this session
-    if (typeof window !== "undefined") {
-      const entered = sessionStorage.getItem("lkb-entered");
-      if (entered) {
-        setShowOverlay(false);
-        setShowContent(false);
-      }
-    }
-  }, []);
 
   const handleEnter = () => {
     setShowContent(false);
-    setIsPlaying(true);
 
     if (videoRef.current) {
       videoRef.current.currentTime = 0;
       videoRef.current.play();
     }
 
-    // After door opens, hide overlay
+    // After door opens, notify parent to dismiss
     setTimeout(() => {
-      setShowOverlay(false);
       if (typeof window !== "undefined") {
         sessionStorage.setItem("lkb-entered", "true");
       }
+      onEnter();
     }, 2500);
   };
-
-  if (!showOverlay) return null;
 
   return (
     <div className="fixed inset-0 z-[100] bg-black">
       {/* Background image (door closed) */}
-      <img
+      <Image
         src="/DoorClosedPicture.png"
         alt=""
-        className="absolute inset-0 w-full h-full object-cover"
+        fill
+        className="object-cover"
+        priority
       />
 
       {/* Door open video */}
@@ -72,19 +64,13 @@ export default function EntranceOverlay() {
       >
         <div className="text-center mb-12 space-y-4 relative z-10">
           <h1
-            className="text-5xl md:text-7xl lg:text-8xl tracking-wide animate-fade-in text-white uppercase"
-            style={{
-              fontFamily: 'Prata, "Prata Fallback", serif',
-              textShadow:
-                "0 2px 8px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3)",
-            }}
+            className="text-5xl md:text-7xl lg:text-8xl tracking-wide animate-fade-in text-white uppercase font-heading text-shadow-hero"
           >
             Welcome to LKB Jewellers
           </h1>
           <p
             className="text-white text-sm md:text-lg lg:text-xl tracking-[0.3em] animate-slide-up font-semibold"
             style={{
-              fontFamily: "ui-sans-serif, system-ui, sans-serif",
               animationDelay: "0.4s",
               textShadow:
                 "0 2px 8px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3)",
@@ -94,13 +80,13 @@ export default function EntranceOverlay() {
           </p>
         </div>
 
-        <button
+        <Button
           onClick={handleEnter}
           onTouchStart={(e) => {
             e.preventDefault();
             handleEnter();
           }}
-          className="group relative px-12 py-4 bg-white border-2 border-white text-black font-bold tracking-[0.2em] text-sm md:text-base transition-all duration-300 hover:scale-105 active:scale-95 animate-slide-up z-50 cursor-pointer touch-manipulation select-none"
+          className="group relative px-12 py-4 h-auto bg-white border-2 border-white text-black font-bold tracking-[0.2em] text-sm md:text-base hover:scale-105 active:scale-95 animate-slide-up z-50 cursor-pointer touch-manipulation select-none rounded-none hover:bg-white"
           style={{
             animationDelay: "0.6s",
             WebkitTapHighlightColor: "transparent",
@@ -110,7 +96,7 @@ export default function EntranceOverlay() {
           <span className="relative z-10 pointer-events-none">
             ENTER STORE
           </span>
-        </button>
+        </Button>
 
         {/* Ambient glow effects */}
         <div

@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Calendar } from "lucide-react";
-
-const prataFont = { fontFamily: '"Prata", "Prata Fallback", serif' };
+import { Badge } from "@/components/ui/badge";
 
 const blogPosts = [
   {
@@ -52,12 +52,11 @@ export default function BlogPage() {
             <div className="h-px w-16 bg-gradient-to-l from-transparent to-white" />
           </div>
           <h1
-            className="text-5xl md:text-7xl text-white mb-6 font-normal"
-            style={prataFont}
+            className="text-5xl md:text-7xl text-white mb-6 font-normal font-heading"
           >
             Blog
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto font-display">
             Explore our latest articles on luxury jewellery, watch care, and the
             art of fine craftsmanship.
           </p>
@@ -71,17 +70,18 @@ export default function BlogPage() {
               className="group bg-gray-900/30 rounded-lg overflow-hidden border border-gray-800 hover:border-gray-700 transition-all duration-500"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
-                <img
+                <Image
                   src={post.image}
                   alt={post.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  loading="lazy"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute top-4 left-4">
-                  <span className="bg-[#D4AF37] text-black text-xs font-bold tracking-wider px-3 py-1 rounded-full uppercase">
+                  <Badge className="bg-[#D4AF37] text-black text-xs font-bold tracking-wider px-3 py-1 rounded-full uppercase hover:bg-[#D4AF37]">
                     {post.category}
-                  </span>
+                  </Badge>
                 </div>
               </div>
               <div className="p-6">
@@ -90,8 +90,7 @@ export default function BlogPage() {
                   <span>{post.date}</span>
                 </div>
                 <h2
-                  className="text-xl text-white mb-3 font-normal group-hover:text-[#D4AF37] transition-colors"
-                  style={prataFont}
+                  className="text-xl text-white mb-3 font-normal group-hover:text-[#D4AF37] transition-colors font-heading"
                 >
                   {post.title}
                 </h2>

@@ -1,7 +1,5 @@
 import { Scale } from "lucide-react";
 
-const prataFont = { fontFamily: '"Prata", "Prata Fallback", serif' };
-
 const sections = [
   {
     title: "1. Introduction",
@@ -75,12 +73,11 @@ export default function LegalPage() {
             <Scale className="w-6 h-6 text-[#D4AF37]" />
           </div>
           <h1
-            className="text-4xl md:text-6xl text-white mb-6 font-normal"
-            style={prataFont}
+            className="text-4xl md:text-6xl text-white mb-6 font-normal font-heading"
           >
             Terms &amp; Conditions
           </h1>
-          <p className="text-gray-400">
+          <p className="text-gray-400 font-display">
             Last updated: January 2025
           </p>
         </div>
@@ -90,8 +87,7 @@ export default function LegalPage() {
           {sections.map((section) => (
             <div key={section.title}>
               <h2
-                className="text-xl text-white mb-4 font-normal"
-                style={prataFont}
+                className="text-xl text-white mb-4 font-normal font-heading"
               >
                 {section.title}
               </h2>

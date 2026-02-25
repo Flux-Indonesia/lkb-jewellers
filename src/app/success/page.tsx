@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { CheckCircle, ArrowRight, Package, Mail } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-const prataFont = { fontFamily: '"Prata", "Prata Fallback", serif' };
 
 export default function SuccessPage() {
   return (
@@ -18,8 +18,7 @@ export default function SuccessPage() {
         </div>
 
         <h1
-          className="text-4xl md:text-5xl text-white mb-4 font-normal"
-          style={prataFont}
+          className="text-4xl md:text-5xl text-white mb-4 font-normal font-heading"
         >
           Order Confirmed
         </h1>
@@ -59,19 +58,21 @@ export default function SuccessPage() {
 
         {/* Actions */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/shop"
-            className="inline-flex items-center justify-center gap-3 bg-white text-black px-8 py-4 font-bold tracking-widest text-sm hover:bg-gray-200 transition-colors"
-          >
-            CONTINUE SHOPPING
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center gap-3 border border-gray-700 text-white px-8 py-4 font-bold tracking-widest text-sm hover:border-white transition-colors"
-          >
-            BACK TO HOME
-          </Link>
+          <Button asChild className="h-auto rounded-none bg-white text-black px-8 py-4 font-bold tracking-widest text-sm hover:bg-gray-200 transition-all duration-300 active:scale-95">
+            <Link
+              href="/shop"
+            >
+              CONTINUE SHOPPING
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </Button>
+          <Button asChild variant="outline" className="h-auto rounded-none bg-transparent border border-gray-700 text-white px-8 py-4 font-bold tracking-widest text-sm hover:border-white hover:bg-transparent transition-all duration-300 active:scale-95">
+            <Link
+              href="/"
+            >
+              BACK TO HOME
+            </Link>
+          </Button>
         </div>
 
         {/* Decorative */}

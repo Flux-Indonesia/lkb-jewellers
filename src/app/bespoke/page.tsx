@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Pencil, PenTool, Hammer, Package, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-const prataFont = { fontFamily: '"Prata", "Prata Fallback", serif' };
 
 const processSteps = [
   {
@@ -63,12 +64,11 @@ export default function BespokePage() {
             <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#D4AF37]" />
           </div>
           <h1
-            className="text-5xl md:text-7xl lg:text-8xl text-white mb-6 font-normal"
-            style={prataFont}
+            className="text-5xl md:text-7xl lg:text-8xl text-white mb-6 font-normal text-shadow-hero font-heading"
           >
             Bespoke Designs
           </h1>
-          <p className="text-gray-300 text-lg md:text-xl max-w-2xl leading-relaxed">
+          <p className="text-gray-300 text-lg md:text-xl max-w-2xl leading-relaxed text-shadow-hero font-display">
             Create something truly unique. Our master craftsmen will bring your
             vision to life.
           </p>
@@ -87,8 +87,7 @@ export default function BespokePage() {
                 </span>
               </div>
               <h2
-                className="text-4xl md:text-5xl text-white font-normal"
-                style={prataFont}
+                className="text-4xl md:text-5xl text-white font-normal font-heading"
               >
                 One of a Kind
               </h2>
@@ -104,21 +103,23 @@ export default function BespokePage() {
                 piece. Whether you come with a clear design or just an idea,
                 our team will guide you through every step of the journey.
               </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-3 bg-white text-black px-8 py-4 font-bold tracking-widest text-sm hover:bg-gray-200 transition-colors"
-              >
-                START YOUR JOURNEY
-                <ArrowRight className="w-5 h-5" />
-              </Link>
+              <Button asChild className="inline-flex items-center gap-3 bg-white text-black px-8 py-4 h-auto rounded-none font-bold tracking-widest text-sm hover:bg-gray-200 transition-all duration-300 active:scale-95">
+                <Link href="/contact">
+                  START YOUR JOURNEY
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </Button>
             </div>
             <div className="relative group">
               <div className="absolute -inset-4 bg-gradient-to-r from-[#D4AF37]/20 via-transparent to-[#D4AF37]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl" />
               <div className="relative overflow-hidden rounded-lg">
-                <img
+                <Image
                   src="https://i0.wp.com/lkbjewellers.com/wp-content/uploads/2023/10/DAVIDO-42-scaled.jpg?resize=1229%2C1536&ssl=1"
                   alt="Bespoke jewellery creation"
+                  width={1229}
+                  height={1536}
                   className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
               </div>
@@ -141,8 +142,7 @@ export default function BespokePage() {
               <div className="h-px w-16 bg-gradient-to-l from-transparent to-white" />
             </div>
             <h2
-              className="text-4xl md:text-5xl text-white font-normal"
-              style={prataFont}
+              className="text-4xl md:text-5xl text-white font-normal font-heading"
             >
               Our Process
             </h2>
@@ -156,7 +156,6 @@ export default function BespokePage() {
               >
                 <span
                   className="absolute top-4 right-4 text-[#D4AF37]/20 text-3xl font-bold"
-                  style={prataFont}
                 >
                   {step.number}
                 </span>
@@ -164,8 +163,7 @@ export default function BespokePage() {
                   <step.icon className="w-6 h-6 text-[#D4AF37]" />
                 </div>
                 <h3
-                  className="text-xl text-white mb-3 font-normal"
-                  style={prataFont}
+                  className="text-xl text-white mb-3 font-normal font-heading"
                 >
                   {step.title}
                 </h3>
@@ -178,13 +176,12 @@ export default function BespokePage() {
 
           {/* CTA */}
           <div className="mt-20 text-center">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-3 bg-white text-black px-10 py-4 font-bold tracking-widest text-sm hover:bg-gray-200 transition-colors"
-            >
-              BOOK A CONSULTATION
-              <ArrowRight className="w-5 h-5" />
-            </Link>
+            <Button asChild className="inline-flex items-center gap-3 bg-white text-black px-10 py-4 h-auto rounded-none font-bold tracking-widest text-sm hover:bg-gray-200 transition-all duration-300 active:scale-95">
+              <Link href="/contact">
+                BOOK A CONSULTATION
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

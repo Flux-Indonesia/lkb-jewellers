@@ -2,22 +2,25 @@ import type { Metadata } from "next";
 import { Montserrat, Prata } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/cart-context";
+import { AuthProvider } from "@/context/auth-context";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import AppShell from "@/components/app-shell";
 import TopBanner from "@/components/top-banner";
-import EntranceOverlay from "@/components/entrance-overlay";
 import FloatingButtons from "@/components/floating-buttons";
 
 const montserrat = Montserrat({
-  variable: "--font-montserrat",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
+  variable: "--font-montserrat",
 });
 
 const prata = Prata({
-  variable: "--font-prata",
   subsets: ["latin"],
   weight: "400",
+  display: "swap",
+  variable: "--font-prata",
 });
 
 export const metadata: Metadata = {
@@ -35,20 +38,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${montserrat.variable} ${prata.variable}`}>
       <body
-        className={`${montserrat.variable} ${prata.variable} antialiased`}
-        style={{ fontFamily: '"Montserrat", sans-serif' }}
+        className={`antialiased ${montserrat.className}`}
         suppressHydrationWarning
       >
-        <CartProvider>
-          <EntranceOverlay />
-          <TopBanner />
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-          <FloatingButtons />
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <AppShell>
+              <TopBanner />
+              <Navbar />
+              <main className="pt-24">{children}</main>
+              <Footer />
+            </AppShell>
+            <FloatingButtons />
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );
