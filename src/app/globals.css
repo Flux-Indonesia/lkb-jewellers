@@ -12,7 +12,7 @@
 
   --font-sans: var(--font-montserrat), "Montserrat", ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-montserrat), "Montserrat", sans-serif;
-  --font-heading: var(--font-prata), "Prata", serif;
+  --font-heading: "Times New Roman", Times, serif;
   --font-body: var(--font-montserrat), "Montserrat", ui-sans-serif, system-ui, sans-serif;
   --font-display: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
@@ -173,9 +173,9 @@ body {
   transform-style: preserve-3d;
 }
 
-/* Prata heading override */
+/* Heading override */
 .font-heading {
-  font-family: var(--font-prata), "Prata", serif !important;
+  font-family: "Times New Roman", Times, serif !important;
 }
 
 .font-body {

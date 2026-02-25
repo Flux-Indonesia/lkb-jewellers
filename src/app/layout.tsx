@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, Prata } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/cart-context";
 import { AuthProvider } from "@/context/auth-context";
@@ -16,12 +16,6 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
 });
 
-const prata = Prata({
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-  variable: "--font-prata",
-});
 
 export const metadata: Metadata = {
   title:
@@ -38,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${prata.variable}`}>
+    <html lang="en" className={`${montserrat.variable}`}>
       <body
         className={`antialiased ${montserrat.className}`}
         suppressHydrationWarning

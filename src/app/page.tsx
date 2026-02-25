@@ -12,7 +12,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 
-
 export default function HomePage() {
 	const [email, setEmail] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -45,25 +44,26 @@ export default function HomePage() {
 				</video>
 				<div className="absolute inset-0 bg-black/40" />
 				<div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
-					<h2 className="text-white tracking-[0.3em] text-3xl leading-tight mb-6 animate-slide-up text-shadow-hero font-heading">
+					<h2 className="text-white tracking-[0.3em] text-sm md:text-2xl mb-6 animate-slide-up" style={{ fontFamily: "ui-sans-serif, system-ui, sans-serif" }}>
 						TIMELESS ELEGANCE
 					</h2>
-					<h1 className="text-6xl md:text-9xl lg:text-[12rem] text-white mb-8 animate-fade-in font-normal leading-tight! text-shadow-hero font-heading">
+					<h1 className="text-7xl md:text-9xl lg:text-[12rem] text-white mb-8 animate-fade-in font-normal font-heading" style={{ lineHeight: "normal" }}>
 						CRAFTED WITH
 						<br />
 						PASSION
 					</h1>
 					<p
-						className="max-w-xl text-gray-200 text-base md:text-lg mb-10 leading-relaxed animate-slide-up text-shadow-hero"
+						className="max-w-xl text-gray-200 text-base md:text-lg mb-10 leading-relaxed animate-slide-up"
 						style={{
 							animationDelay: "0.2s",
+							fontFamily: '"Mona Sans", "Mona Sans Fallback", ui-sans-serif, system-ui, sans-serif',
 						}}
 					>
 						LKB Jewellers brings you exceptional pieces that tell your story. Each creation is a testament to our commitment to quality and artistry.
 					</p>
-					<Button variant="outline" asChild className="border-white text-white bg-transparent px-10 py-4 h-auto text-sm tracking-widest hover:bg-white hover:text-black rounded-none animate-slide-up hover:scale-105 active:scale-95 transition-all duration-300" style={{ animationDelay: "0.4s" }}>
-						<Link href="/shop">EXPLORE COLLECTION</Link>
-					</Button>
+					<Link href="/shop" className="border border-white text-white px-10 py-4 text-sm tracking-widest hover:bg-white hover:text-black transition-all duration-300 animate-slide-up" style={{ animationDelay: "0.4s" }}>
+						EXPLORE COLLECTION
+					</Link>
 				</div>
 			</section>
 
@@ -77,17 +77,11 @@ export default function HomePage() {
 					<div className="text-center mb-8">
 						<div className="inline-flex items-center gap-4 mb-4">
 							<div className="h-px w-12 bg-gradient-to-r from-transparent to-white" />
-							<span className="text-gray-200 text-xs tracking-[0.4em] uppercase">
-								New Collection
-							</span>
+							<span className="text-gray-200 text-xs tracking-[0.4em] uppercase">New Collection</span>
 							<div className="h-px w-12 bg-gradient-to-l from-transparent to-white" />
 						</div>
-						<h2 className="text-4xl md:text-5xl text-white mb-4 font-normal font-heading">
-							Latest Arrivals
-						</h2>
-						<p className="text-gray-300 text-base max-w-xl mx-auto font-display">
-							Scroll to discover our newest pieces, each one crafted with precision and passion
-						</p>
+						<h2 className="text-4xl md:text-5xl text-white mb-4 font-normal font-heading">Latest Arrivals</h2>
+						<p className="text-gray-300 text-base max-w-xl mx-auto font-display">Scroll to discover our newest pieces, each one crafted with precision and passion</p>
 					</div>
 				</div>
 
@@ -157,9 +151,7 @@ export default function HomePage() {
 						<div className="flex flex-col justify-center space-y-6 md:space-y-8 max-w-xl mx-auto lg:mx-0 py-8 md:py-12">
 							<div className="flex items-center gap-4">
 								<div className="h-px w-16 bg-gradient-to-r from-transparent to-white" />
-								<span className="text-white uppercase tracking-[0.3em] text-xs font-light">
-									Bespoke Craftsmanship
-								</span>
+								<span className="text-white uppercase tracking-[0.3em] text-xs font-light">Bespoke Craftsmanship</span>
 							</div>
 							<h2 className="text-4xl md:text-5xl lg:text-6xl leading-tight font-heading">
 								<span className="text-white block mb-2 font-bold tracking-[0.2em]">CRAFTING MOMENTS</span>
@@ -167,9 +159,7 @@ export default function HomePage() {
 								<span className="block text-white font-bold tracking-[0.2em]">LAST A LIFETIME</span>
 							</h2>
 							<div className="relative pl-6 border-l-2 border-white/30">
-								<p className="text-gray-300 text-base leading-relaxed">
-									We design more than jewellery. We create heirlooms that capture memories and emotions with uncompromising craftsmanship.
-								</p>
+								<p className="text-gray-300 text-base leading-relaxed">We design more than jewellery. We create heirlooms that capture memories and emotions with uncompromising craftsmanship.</p>
 							</div>
 							<div className="flex flex-wrap gap-4 pt-4">
 								<Button asChild className="group relative px-6 py-3 h-auto bg-white text-black font-bold tracking-widest text-sm overflow-hidden hover:shadow-2xl hover:shadow-white/50 rounded-none hover:bg-white active:scale-95 transition-all duration-300">
@@ -232,9 +222,7 @@ export default function HomePage() {
 						</video>
 						<div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50" />
 						<div className="relative z-10 text-center max-w-4xl px-6">
-							<h2 className="text-6xl md:text-8xl text-white mb-8 uppercase font-bold text-shadow-hero font-heading">
-								{section.title}
-							</h2>
+							<h2 className="text-6xl md:text-8xl text-white mb-8 uppercase font-bold text-shadow-hero font-heading">{section.title}</h2>
 							<Button variant="link" asChild className="text-white border-b border-white pb-2 hover:text-gray-300 hover:border-gray-300 hover:no-underline tracking-widest text-sm rounded-none h-auto px-0">
 								<Link href={section.link}>
 									DISCOVER <ArrowRight size={16} />
@@ -255,17 +243,13 @@ export default function HomePage() {
 					<div className="text-center mb-12">
 						<div className="inline-flex items-center gap-4 mb-6">
 							<div className="h-px w-16 bg-gradient-to-r from-transparent to-white" />
-							<span className="text-white text-xs tracking-[0.5em] uppercase">
-								Our Expertise
-							</span>
+							<span className="text-white text-xs tracking-[0.5em] uppercase">Our Expertise</span>
 							<div className="h-px w-16 bg-gradient-to-l from-transparent to-white" />
 						</div>
 						<h2 className="text-5xl md:text-6xl text-white mb-6 font-normal font-heading">
 							What We <span className="text-white">Offer</span>
 						</h2>
-						<p className="text-gray-400 text-lg max-w-2xl mx-auto font-display">
-							Exceptional services tailored to your vision
-						</p>
+						<p className="text-gray-400 text-lg max-w-2xl mx-auto font-display">Exceptional services tailored to your vision</p>
 						<Button variant="link" asChild className="text-gray-500 hover:text-white text-xs tracking-widest uppercase pt-4 h-auto p-0 hover:no-underline group">
 							<Link href="/contact">
 								Contact a Specialist
@@ -293,9 +277,7 @@ export default function HomePage() {
 										<div className="w-12 h-12 mb-4 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transform -translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
 											<ArrowRight size={20} className="text-[#D4AF37] rotate-[-45deg]" />
 										</div>
-										<h3 className="text-2xl md:text-3xl text-white mb-2 md:mb-3 transition-all duration-300 group-hover:text-white font-bold font-heading">
-											{card.title}
-										</h3>
+										<h3 className="text-2xl md:text-3xl text-white mb-2 md:mb-3 transition-all duration-300 group-hover:text-white font-bold font-heading">{card.title}</h3>
 										<p className="text-gray-400 text-xs md:text-sm leading-relaxed opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-150">{card.description}</p>
 										<div className="flex items-center gap-2 text-[#D4AF37] text-[0.65rem] md:text-xs tracking-widest uppercase mt-3 md:mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
 											Learn More
@@ -323,17 +305,13 @@ export default function HomePage() {
 					<div className="text-center mb-12">
 						<div className="inline-flex items-center gap-4 mb-6">
 							<div className="h-px w-16 bg-gradient-to-r from-transparent to-white" />
-							<span className="text-white text-xs tracking-[0.5em] uppercase">
-								Curated Collections
-							</span>
+							<span className="text-white text-xs tracking-[0.5em] uppercase">Curated Collections</span>
 							<div className="h-px w-16 bg-gradient-to-l from-transparent to-white" />
 						</div>
 						<h2 className="text-5xl md:text-6xl text-white mb-6 font-normal font-heading">
 							Shop By <span className="font-normal text-white">Category</span>
 						</h2>
-						<p className="text-gray-400 text-lg max-w-2xl mx-auto font-display">
-							Discover Excellence
-						</p>
+						<p className="text-gray-400 text-lg max-w-2xl mx-auto font-display">Discover Excellence</p>
 					</div>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
@@ -349,9 +327,7 @@ export default function HomePage() {
 								</div>
 								<div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
 								<div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-8">
-									<h3 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-[0.15em] md:tracking-[0.2em] text-white mb-1 md:mb-2 font-heading">
-										{cat.title}
-									</h3>
+									<h3 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-[0.15em] md:tracking-[0.2em] text-white mb-1 md:mb-2 font-heading">{cat.title}</h3>
 									<p className="text-gray-300 text-xs md:text-sm tracking-[0.15em] md:tracking-[0.2em] uppercase">{cat.sub}</p>
 								</div>
 								<div className="absolute inset-0 border-2 border-gray-800 group-hover:border-white/50 transition-all duration-500 pointer-events-none rounded-lg" />
@@ -378,12 +354,8 @@ export default function HomePage() {
 								<span className="text-white text-xs tracking-[0.5em] uppercase">Stay Connected</span>
 								<div className="h-px w-12 bg-gradient-to-l from-transparent to-white" />
 							</div>
-							<h2 className="text-5xl md:text-6xl lg:text-7xl text-white mb-6 leading-tight font-normal font-heading">
-								Join Our Circle
-							</h2>
-							<p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-display">
-								Subscribe to receive exclusive updates on new collections, private sales, and insider access to the world of LKB Jewellers.
-							</p>
+							<h2 className="text-5xl md:text-6xl lg:text-7xl text-white mb-6 leading-tight font-normal font-heading">Join Our Circle</h2>
+							<p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-display">Subscribe to receive exclusive updates on new collections, private sales, and insider access to the world of LKB Jewellers.</p>
 						</div>
 
 						<div className="relative px-4">
@@ -428,9 +400,7 @@ export default function HomePage() {
 									<div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 mx-auto mb-2 md:mb-3 lg:mb-4 rounded-full bg-white/10 border border-white/30 flex items-center justify-center">
 										<span className="text-white text-lg sm:text-xl md:text-2xl">{stat.icon}</span>
 									</div>
-									<h3 className="text-white font-semibold mb-1 md:mb-2 text-xs sm:text-sm md:text-base font-heading">
-										{stat.title}
-									</h3>
+									<h3 className="text-white font-semibold mb-1 md:mb-2 text-xs sm:text-sm md:text-base font-heading">{stat.title}</h3>
 									<p className="text-gray-500 text-[0.65rem] sm:text-xs md:text-sm">{stat.desc}</p>
 								</div>
 							))}
@@ -448,34 +418,14 @@ export default function HomePage() {
 					<div className="flex flex-col md:flex-row items-center justify-center gap-0 md:gap-8 border border-gray-800 bg-[#050505] relative z-10 mx-auto max-w-6xl">
 						{/* Left - Showroom Image */}
 						<div className="w-full md:w-1/2 h-[300px] md:h-[500px] relative transition-all duration-700 overflow-hidden group">
-							<Image
-								src={showroomTab === "london" ? "https://www.lkbjewellers.com/showroomEntry.jpg" : "https://www.lkbjewellers.com/showroomEntry2.jpg"}
-								alt={showroomTab === "london" ? "Hatton Garden Showroom" : "International Service"}
-								fill
-								className="object-cover transform group-hover:scale-105 transition-transform duration-700"
-								sizes="(max-width: 768px) 100vw, 50vw"
-							/>
+							<Image src={showroomTab === "london" ? "https://www.lkbjewellers.com/showroomEntry.jpg" : "https://www.lkbjewellers.com/showroomEntry2.jpg"} alt={showroomTab === "london" ? "Hatton Garden Showroom" : "International Service"} fill className="object-cover transform group-hover:scale-105 transition-transform duration-700" sizes="(max-width: 768px) 100vw, 50vw" />
 							<div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
 							{/* Location Tabs */}
 							<div className="absolute bottom-8 left-8 flex gap-3 z-10">
-								<button
-									onClick={() => setShowroomTab("london")}
-									className={`px-6 py-4 text-sm font-bold tracking-widest uppercase transition-all ${
-										showroomTab === "london"
-											? "bg-white text-black"
-											: "bg-black/60 text-white hover:bg-white/20"
-									}`}
-								>
+								<button onClick={() => setShowroomTab("london")} className={`px-6 py-4 text-sm font-bold tracking-widest uppercase transition-all ${showroomTab === "london" ? "bg-white text-black" : "bg-black/60 text-white hover:bg-white/20"}`}>
 									London HQ
 								</button>
-								<button
-									onClick={() => setShowroomTab("international")}
-									className={`px-6 py-4 text-sm font-bold tracking-widest uppercase transition-all ${
-										showroomTab === "international"
-											? "bg-white text-black"
-											: "bg-black/60 text-white hover:bg-white/20"
-									}`}
-								>
+								<button onClick={() => setShowroomTab("international")} className={`px-6 py-4 text-sm font-bold tracking-widest uppercase transition-all ${showroomTab === "international" ? "bg-white text-black" : "bg-black/60 text-white hover:bg-white/20"}`}>
 									International
 								</button>
 							</div>
@@ -483,17 +433,11 @@ export default function HomePage() {
 
 						{/* Right - Info */}
 						<div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center items-center md:items-start text-center md:text-left">
-							<span className="text-white text-xs tracking-[0.3em] uppercase mb-4 block">
-								{showroomTab === "london" ? "The Experience" : "Global Service"}
-							</span>
-							<h2 className="text-3xl md:text-4xl text-white mb-6 leading-tight font-heading">
-								{showroomTab === "london" ? "Visit Our Showroom" : "International Delivery"}
-							</h2>
+							<span className="text-white text-xs tracking-[0.3em] uppercase mb-4 block">{showroomTab === "london" ? "The Experience" : "Global Service"}</span>
+							<h2 className="text-3xl md:text-4xl text-white mb-6 leading-tight font-heading">{showroomTab === "london" ? "Visit Our Showroom" : "International Delivery"}</h2>
 							<div className="w-12 h-0.5 bg-gray-800 mb-8" />
 							<p className="text-gray-400 leading-relaxed mb-8 max-w-md text-base">
-								{showroomTab === "london"
-									? "Immerse yourself in the world of Local Kettle Brothers. Our Hatton Garden boutique offers a private, exclusive environment to view our exclusive timepieces and discuss bespoke commissions."
-									: "We cater to international clients with personalized service. No need to travel to us - once you have decided on your chosen watch, we will have a member of our team personally fly to hand deliver it to you, anywhere in the world."}
+								{showroomTab === "london" ? "Immerse yourself in the world of Local Kettle Brothers. Our Hatton Garden boutique offers a private, exclusive environment to view our exclusive timepieces and discuss bespoke commissions." : "We cater to international clients with personalized service. No need to travel to us - once you have decided on your chosen watch, we will have a member of our team personally fly to hand deliver it to you, anywhere in the world."}
 							</p>
 
 							{/* Contact Details */}
@@ -535,7 +479,9 @@ export default function HomePage() {
 											</div>
 											<div className="text-left">
 												<h4 className="text-white text-sm font-bold uppercase tracking-wide font-heading">WhatsApp</h4>
-												<a href="https://wa.me/447802323652?text=Hello%2C%20I%27m%20interested%20in%20visiting%20your%20showroom" target="_blank" rel="noopener noreferrer" className="text-gray-400 text-sm transition-colors font-display">+44 78 0232 3652</a>
+												<a href="https://wa.me/447802323652?text=Hello%2C%20I%27m%20interested%20in%20visiting%20your%20showroom" target="_blank" rel="noopener noreferrer" className="text-gray-400 text-sm transition-colors font-display">
+													+44 78 0232 3652
+												</a>
 											</div>
 										</div>
 									</>
@@ -563,12 +509,7 @@ export default function HomePage() {
 								)}
 							</div>
 
-							<Link
-								href="https://maps.google.com/?q=New+House+67-68+Hatton+Garden+London+EC1N+8JY"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="bg-white text-black px-8 py-3 text-sm font-bold tracking-widest hover:bg-gray-200 transition-all duration-300 inline-flex items-center gap-2 active:scale-95"
-							>
+							<Link href="https://maps.google.com/?q=New+House+67-68+Hatton+Garden+London+EC1N+8JY" target="_blank" rel="noopener noreferrer" className="bg-white text-black px-8 py-3 text-sm font-bold tracking-widest hover:bg-gray-200 transition-all duration-300 inline-flex items-center gap-2 active:scale-95">
 								GET DIRECTIONS <ArrowRight size={16} />
 							</Link>
 						</div>
