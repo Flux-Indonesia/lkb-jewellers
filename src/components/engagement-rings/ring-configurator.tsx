@@ -294,7 +294,6 @@ export function RingConfigurator({ ring, gemstones }: RingConfiguratorProps) {
                       sizes="(max-width: 640px) 50vw, 200px"
                       className="object-cover"
                       onError={() => {}}
-                      unoptimized
                     />
                     {gem.badge && (
                       <div className="absolute top-2 left-2 bg-emerald-950/80 border border-emerald-800/50 rounded-full px-2 py-0.5">

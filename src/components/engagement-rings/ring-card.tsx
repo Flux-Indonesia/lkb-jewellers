@@ -7,6 +7,7 @@ import type { Ring } from '@/data/engagement-rings'
 
 interface RingCardProps {
   ring: Ring
+  priority?: boolean
 }
 
 function formatPrice(price: number, currency: string): string {
@@ -41,7 +42,7 @@ function RingImageFallback({ name }: { name: string }) {
   )
 }
 
-export function RingCard({ ring }: RingCardProps) {
+export function RingCard({ ring, priority = false }: RingCardProps) {
   const [imgError, setImgError] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
 
@@ -77,7 +78,7 @@ export function RingCard({ ring }: RingCardProps) {
                     : 'opacity-100 scale-100 group-hover:scale-105'
                 }`}
                 onError={() => setImgError(true)}
-                unoptimized
+                priority={priority}
               />
               {/* Hover image (second image) */}
               {hoverImage !== primaryImage && (
@@ -90,7 +91,6 @@ export function RingCard({ ring }: RingCardProps) {
                     isHovered ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
                   }`}
                   onError={() => {}}
-                  unoptimized
                 />
               )}
             </>

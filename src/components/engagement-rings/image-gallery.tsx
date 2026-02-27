@@ -86,7 +86,6 @@ export function ImageGallery({ images, thumbnails, alt }: ImageGalleryProps) {
                 sizes="80px"
                 className="object-cover"
                 onError={() => setThumbErrors(prev => ({ ...prev, [i]: true }))}
-                unoptimized
               />
             )}
           </button>
@@ -115,7 +114,6 @@ export function ImageGallery({ images, thumbnails, alt }: ImageGalleryProps) {
                 className="object-cover"
                 onError={() => setMainImgError(true)}
                 priority={activeIndex === 0}
-                unoptimized
               />
             )}
           </motion.div>
