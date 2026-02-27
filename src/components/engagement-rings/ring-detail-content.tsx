@@ -124,7 +124,7 @@ export function RingDetailContent({ ring, gemstones }: RingDetailContentProps) {
                   <Star key={i} size={14} className="text-[#D4AF37] fill-[#D4AF37]" />
                 ))}
               </div>
-              <span className="text-gray-400 text-xs">5.0 · Cullen Jewellery</span>
+              <span className="text-gray-400 text-xs">5.0 · LKB Jewellers</span>
             </div>
 
             {/* Description */}
