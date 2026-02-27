@@ -102,14 +102,20 @@ export function RingCard({ ring }: RingCardProps) {
 
         {/* Card content */}
         <div className="p-4">
+          {/* Setting style label */}
+          {ring.settingStyle && (
+            <p className="text-gray-600 text-[10px] font-medium tracking-widest uppercase mb-1">
+              {ring.settingStyle.replace(/_/g, ' ')}
+            </p>
+          )}
           <h3 className="font-heading text-white text-base font-medium tracking-wide mb-1 group-hover:text-[#D4AF37] transition-colors duration-200">
             {ring.name}
           </h3>
           <p className="text-gray-500 text-xs leading-relaxed line-clamp-2 mb-3">
             {ring.title.replace(`${ring.name} - `, '')}
           </p>
-          <p className="text-[#D4AF37] text-sm font-medium tracking-wide">
-            From {formatPrice(ring.basePrice, ring.currency)} {ring.currency}
+          <p className="text-[#D4AF37] text-sm font-medium uppercase tracking-widest">
+            Starting {formatPrice(ring.basePrice, ring.currency)} {ring.currency}
           </p>
         </div>
       </div>

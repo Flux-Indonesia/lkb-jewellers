@@ -28,6 +28,7 @@ export function EngagementRingsContent({ rings }: EngagementRingsContentProps) {
 
   const [activeFilters, setActiveFilters] = useState<ActiveFilters>(initialFilters)
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
+  const [sortBy, setSortBy] = useState<'recommended' | 'price_asc' | 'price_desc'>('recommended')
 
   // Filter rings
   const filteredRings = useMemo(
@@ -35,7 +36,15 @@ export function EngagementRingsContent({ rings }: EngagementRingsContentProps) {
     [rings, activeFilters]
   )
 
-  const visibleRings = filteredRings.slice(0, visibleCount)
+  // Sort rings
+  const sortedRings = useMemo(() => {
+    const sorted = [...filteredRings]
+    if (sortBy === 'price_asc') sorted.sort((a, b) => a.basePrice - b.basePrice)
+    if (sortBy === 'price_desc') sorted.sort((a, b) => b.basePrice - a.basePrice)
+    return sorted
+  }, [filteredRings, sortBy])
+
+  const visibleRings = sortedRings.slice(0, visibleCount)
   const hasMore = visibleCount < filteredRings.length
 
   const handleFilterChange = useCallback((filters: ActiveFilters) => {
@@ -56,14 +65,21 @@ export function EngagementRingsContent({ rings }: EngagementRingsContentProps) {
 
   return (
     <div className="min-h-screen bg-black">
-      {/* Page header */}
-      <div className="container mx-auto px-4 pt-12 pb-6">
-        <h1 className="font-heading text-white text-4xl md:text-5xl font-light tracking-wide mb-2">
-          Engagement Rings
-        </h1>
-        <p className="text-gray-500 text-sm">
-          {filteredRings.length} settings available
-        </p>
+      {/* Hero section */}
+      <div className="relative w-full bg-zinc-950 border-b border-zinc-800 overflow-hidden">
+        <div className="container mx-auto px-4 py-12 md:py-16">
+          <p className="text-gray-500 text-xs font-medium tracking-widest uppercase mb-3">
+            Engagement Rings
+          </p>
+          <h1 className="font-heading text-white text-3xl md:text-4xl font-light tracking-wide mb-3">
+            {activeFilters.shape
+              ? `${activeFilters.shape.charAt(0).toUpperCase() + activeFilters.shape.slice(1)} Cut Engagement Rings`
+              : 'Engagement Rings'}
+          </h1>
+          <p className="text-gray-500 text-sm max-w-xl">
+            Crafted by our jewellers with care and precision.
+          </p>
+        </div>
       </div>
 
       {/* Filter bar */}
@@ -135,10 +151,24 @@ export function EngagementRingsContent({ rings }: EngagementRingsContentProps) {
           </div>
         ) : (
           <>
-            {/* Results count */}
-            <p className="text-gray-600 text-xs mb-6">
-              Showing {visibleRings.length} of {filteredRings.length} rings
-            </p>
+            {/* Sort bar */}
+            <div className="flex items-center justify-between mb-6">
+              <p className="text-gray-600 text-xs">
+                {filteredRings.length} settings available
+              </p>
+              <div className="flex items-center gap-2">
+                <span className="text-gray-500 text-xs">Sort:</span>
+                <select
+                  value={sortBy}
+                  onChange={e => setSortBy(e.target.value as typeof sortBy)}
+                  className="bg-zinc-900 border border-zinc-700 text-white text-xs px-3 py-1.5 rounded appearance-none cursor-pointer hover:border-zinc-500 focus:outline-none focus:border-[#D4AF37]"
+                >
+                  <option value="recommended">Recommended</option>
+                  <option value="price_asc">Price: Low to High</option>
+                  <option value="price_desc">Price: High to Low</option>
+                </select>
+              </div>
+            </div>
 
             {/* Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
@@ -158,6 +188,21 @@ export function EngagementRingsContent({ rings }: EngagementRingsContentProps) {
                 </button>
               </div>
             )}
+
+            {/* SEO section */}
+            <div className="mt-16 pt-12 border-t border-zinc-800">
+              <h3 className="font-heading text-white text-xl font-light tracking-wide mb-4">
+                Engagement Rings — Timeless, Forever.
+              </h3>
+              <div className="max-w-3xl space-y-4 text-gray-500 text-sm leading-relaxed">
+                <p>
+                  Timeless, brilliant and universally adored — an engagement ring is a style icon perfect for those who treasure elegant, enduring beauty. Each ring is handcrafted using premium materials and lab grown gemstones.
+                </p>
+                <p>
+                  At LKB Jewellers, every ring is handcrafted using premium materials and ethically sourced gemstones. Explore the collection online or begin your journey in one of our showrooms.
+                </p>
+              </div>
+            </div>
           </>
         )}
       </div>
