@@ -22,95 +22,95 @@ export const navMenuData = {
   watches: {
     title: "WATCHES",
     defaultImage:
-      "https://i.ibb.co/7xC4CJYW/ALL-WEB-NEW-BATCH-NO-SERIAL-001.jpg",
+      "/images/static/nav-rolex.jpg",
     brands: [
       {
         name: "Rolex",
         desc: "The crown of watchmaking excellence",
         link: "/shop?brand=rolex",
         image:
-          "https://i.ibb.co/7xC4CJYW/ALL-WEB-NEW-BATCH-NO-SERIAL-001.jpg",
+          "/images/static/nav-rolex.jpg",
       },
       {
         name: "Audemars Piguet",
         desc: "Masters of haute horlogerie since 1875",
         link: "/shop?brand=audemars-piguet",
         image:
-          "https://i.ibb.co/LDs8VR8Q/ALL-WEB-NEW-BATCH-NO-SERIAL-034.jpg",
+          "/images/static/nav-ap.jpg",
       },
       {
         name: "Cartier",
         desc: "Timeless elegance and French savoir-faire",
         link: "/shop?brand=cartier",
         image:
-          "https://i.ibb.co/B24TNgh7/ALL-WEB-NEW-BATCH-NO-SERIAL-081.jpg",
+          "/images/static/nav-cartier.jpg",
       },
       {
         name: "Patek Philippe",
         desc: "The ultimate symbol of prestige",
         link: "/shop?brand=patek-philippe",
-        image: "https://i.ibb.co/pS4Lh0W/1.jpg",
+        image: "/images/static/nav-patek.jpg",
       },
       {
         name: "Richard Mille",
         desc: "Revolutionary ultra-lightweight timepieces",
         link: "/shop?brand=richard-mille",
         image:
-          "https://i.ibb.co/mFrW0gvS/ALL-WEB-NEW-BATCH-NO-SERIAL-019.jpg",
+          "/images/static/nav-rm.jpg",
       },
     ],
   },
   jewellery: {
     title: "JEWELLERY",
-    defaultImage: "https://i.ibb.co/m5z17bfC/1.jpg",
+    defaultImage: "/images/static/nav-chain.jpg",
     categories: [
       {
         name: "Chains",
         desc: "Cuban links, rope chains & tennis necklaces",
         link: "/shop?category=chains",
-        image: "https://i.ibb.co/m5z17bfC/1.jpg",
+        image: "/images/static/nav-chain.jpg",
       },
       {
         name: "Bracelets",
         desc: "Diamond & gold statement pieces",
         link: "/shop?category=bracelets",
-        image: "https://i.ibb.co/m5z17bfC/1.jpg",
+        image: "/images/static/nav-chain.jpg",
       },
       {
         name: "Rings",
         desc: "Signet rings & diamond band masterpieces",
         link: "/shop?category=rings",
-        image: "https://i.ibb.co/9m8McVnp/1.jpg",
+        image: "/images/static/nav-ring.jpg",
       },
       {
         name: "Pendants",
         desc: "Custom designs & classic motifs",
         link: "/shop?category=pendants",
-        image: "https://i.ibb.co/4ZTkytsR/JEWELLERY-WEB-NEW-03.jpg",
+        image: "/images/static/nav-pendant.jpg",
       },
     ],
   },
   accessories: {
     title: "ACCESSORIES",
-    defaultImage: "https://i.ibb.co/9HRG7t7H/WEBNEWHATS-8.jpg",
+    defaultImage: "/images/static/nav-caps.jpg",
     items: [
       {
         name: "LKB Flagship Caps",
         desc: "Premium trucker hats & exclusive headwear",
         link: "/shop?category=flagship caps",
-        image: "https://i.ibb.co/9HRG7t7H/WEBNEWHATS-8.jpg",
+        image: "/images/static/nav-caps.jpg",
       },
       {
         name: "Watch Strap",
         desc: "Exclusive straps & custom watch accessories",
         link: "/shop?category=watch strap",
-        image: "https://i.ibb.co/ZzZ31LRN/RM-Dark-Blue-Watch-Strap.jpg",
+        image: "/images/static/nav-strap.jpg",
       },
       {
         name: "Lifestyle",
         desc: "Apparel, gifts & collector items",
         link: "/shop?category=lifestyle",
-        image: "https://i.ibb.co/JjVknWhJ/1.jpg",
+        image: "/images/static/nav-lifestyle.jpg",
       },
     ],
   },
@@ -128,7 +128,7 @@ export const navMenuData = {
         name: "Sell",
         desc: "Get competitive valuations for your exclusive items",
         link: "/we-buy",
-        image: "https://i.ibb.co/pS4Lh0W/1.jpg",
+        image: "/images/static/nav-patek.jpg",
       },
       {
         name: "Watches/Jewellery Servicing",
@@ -213,28 +213,28 @@ export const serviceCards = [
     id: "buy",
     title: "WE BUY",
     image:
-      "https://i0.wp.com/lkbjewellers.com/wp-content/uploads/2023/10/WE-BUY-WATCHES-scaled.jpg?fit=1638%2C2048&ssl=1",
+      "/images/static/service-we-buy.jpg",
     description: "Competitive valuations for your exclusive timepieces.",
   },
   {
     id: "sell",
     title: "WE SELL",
     image:
-      "https://i0.wp.com/lkbjewellers.com/wp-content/uploads/2023/10/SELL-YOUR-WATCH.jpg?w=1020&ssl=1",
+      "/images/static/service-we-sell.jpg",
     description: "Sourcing the rarest pieces from around the globe.",
   },
   {
     id: "service",
     title: "SERVICING",
     image:
-      "https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?w=800&q=80",
+      "/images/static/service-servicing.jpg",
     description: "Expert restoration and maintenance for longevity.",
   },
   {
     id: "bespoke",
     title: "BESPOKE",
     image:
-      "https://i0.wp.com/lkbjewellers.com/wp-content/uploads/2023/10/IMG_4101-scaled.jpg?fit=1638%2C2048&ssl=1",
+      "/images/static/service-bespoke.jpg",
     description: "Custom designs crafted to your exact specifications.",
   },
 ];

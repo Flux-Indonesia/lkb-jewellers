@@ -18,7 +18,7 @@ export default function ShowroomSection() {
           {/* Left - Showroom Image */}
           <div className="w-full md:w-1/2 h-[300px] md:h-[500px] relative transition-all duration-700 overflow-hidden group">
             <Image
-              src={showroomTab === "london" ? "https://www.lkbjewellers.com/showroomEntry.jpg" : "https://www.lkbjewellers.com/showroomEntry2.jpg"}
+              src={showroomTab === "london" ? "/images/static/showroom-entry.jpg" : "/images/static/showroom-entry-2.jpg"}
               alt={showroomTab === "london" ? "Hatton Garden Showroom" : "International Service"}
               fill
               className="object-cover transform group-hover:scale-105 transition-transform duration-700"

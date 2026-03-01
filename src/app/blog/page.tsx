@@ -13,7 +13,7 @@ const blogPosts = [
     excerpt:
       "Discover the essential factors to consider when selecting an engagement ring that will be treasured for a lifetime. From diamond cuts to metal choices, our experts guide you through every decision.",
     image:
-      "https://i0.wp.com/lkbjewellers.com/wp-content/uploads/2023/10/DAVIDO-42-scaled.jpg?resize=1229%2C1536&ssl=1",
+      "/about-us/davido-42.webp",
     category: "Jewellery Guide",
   },
   {
@@ -23,7 +23,7 @@ const blogPosts = [
     excerpt:
       "Your luxury timepiece is an investment worth protecting. Learn the essential maintenance tips to keep your watch running perfectly and looking its best for years to come.",
     image:
-      "https://i0.wp.com/lkbjewellers.com/wp-content/uploads/2023/10/WE-BUY-WATCHES-scaled.jpg?fit=1638%2C2048&ssl=1",
+      "/images/static/service-we-buy.jpg",
     category: "Watch Care",
   },
   {
@@ -33,7 +33,7 @@ const blogPosts = [
     excerpt:
       "Follow the journey of a custom LKB pendant from initial sketch to final polish. See how our master jewellers transform raw materials into wearable art.",
     image:
-      "https://i0.wp.com/lkbjewellers.com/wp-content/uploads/2025/02/LKB-GRM-CROWN-JEWELS-BTS-64-scaled.jpeg?resize=1400%2C788&ssl=1",
+      "/about-us/crown-jewels.webp",
     category: "Behind The Scenes",
   },
 ];

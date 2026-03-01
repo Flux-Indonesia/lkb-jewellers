@@ -7,7 +7,7 @@ import ShowroomSection from "@/components/showroom-section";
 
 const hallOfFameItems = [
 	{
-		image: "https://i.ibb.co/m5z17bfC/1.jpg",
+		image: "/images/static/nav-chain.jpg",
 		title: "24mm Raised Diamond Pointer",
 		subtitle: "MIAMI CUBAN CHAIN",
 		year: "YEAR 2024",
@@ -16,17 +16,17 @@ const hallOfFameItems = [
 		featured: true,
 	},
 	{
-		image: "https://i.ibb.co/9m8McVnp/1.jpg",
+		image: "/images/static/nav-ring.jpg",
 		title: "Rose Gold Diamond Collection",
 		subtitle: "ETERNITY RING",
 	},
 	{
-		image: "https://i.ibb.co/4ZTkytsR/JEWELLERY-WEB-NEW-03.jpg",
+		image: "/images/static/nav-pendant.jpg",
 		title: "JH Custom Diamond",
 		subtitle: "BESPOKE PENDANT",
 	},
 	{
-		image: "https://i.ibb.co/wNpxTJ2p/Batman-Updated.jpg",
+		image: "/images/static/hof-batman.jpg",
 		title: "Rolex Batman",
 		subtitle: "GMT MASTER II",
 	},

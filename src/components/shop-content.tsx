@@ -80,11 +80,11 @@ function getModelFamily(name: string, brand: string): string {
 }
 
 const brandCarouselData = [
-  { name: "Rolex", image: "https://i.ibb.co/7xC4CJYW/ALL-WEB-NEW-BATCH-NO-SERIAL-001.jpg" },
-  { name: "Cartier", image: "https://i.ibb.co/B24TNgh7/ALL-WEB-NEW-BATCH-NO-SERIAL-081.jpg" },
-  { name: "Richard Mille", image: "https://i.ibb.co/mFrW0gvS/ALL-WEB-NEW-BATCH-NO-SERIAL-019.jpg" },
-  { name: "Audemars Piguet", image: "https://i.ibb.co/LDs8VR8Q/ALL-WEB-NEW-BATCH-NO-SERIAL-034.jpg" },
-  { name: "Patek Philippe", image: "https://i.ibb.co/pS4Lh0W/1.jpg" },
+  { name: "Rolex", image: "/images/static/nav-rolex.jpg" },
+  { name: "Cartier", image: "/images/static/nav-cartier.jpg" },
+  { name: "Richard Mille", image: "/images/static/nav-rm.jpg" },
+  { name: "Audemars Piguet", image: "/images/static/nav-ap.jpg" },
+  { name: "Patek Philippe", image: "/images/static/nav-patek.jpg" },
 ];
 
 interface ShopContentProps {

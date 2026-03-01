@@ -197,7 +197,7 @@ export default function HomePage() {
 									<div className="absolute -inset-24 bg-white/20 rounded-full blur-[140px] opacity-90 animate-pulse" style={{ animationDuration: "3s" }} />
 									<div className="absolute -inset-12 bg-white/15 rounded-full blur-[80px] opacity-95 animate-pulse group-hover:opacity-100 transition-opacity duration-1000" style={{ animationDuration: "6s", animationDelay: "1.5s" }} />
 									<div className="relative w-full h-full overflow-hidden rounded-lg shadow-[0_0_80px_rgba(255,255,255,0.6)]">
-										<Image src="https://i0.wp.com/lkbjewellers.com/wp-content/uploads/2023/12/MINI-LKB-PENDANT.jpg?w=1500&ssl=1" alt="Exclusive bespoke pendant craftsmanship" fill className="object-contain transform group-hover:scale-105 transition-transform duration-700 relative z-10" sizes="(max-width: 1024px) 100vw, 50vw" />
+										<Image src="/images/static/home-mini-pendant.jpg" alt="Exclusive bespoke pendant craftsmanship" fill className="object-contain transform group-hover:scale-105 transition-transform duration-700 relative z-10" sizes="(max-width: 1024px) 100vw, 50vw" />
 										<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
 										<div className="absolute top-6 right-6 bg-black/80 backdrop-blur-sm border border-white/50 px-4 py-2 rounded-full z-20">
 											<span className="text-white text-xs font-semibold tracking-wider">HANDCRAFTED</span>
@@ -316,9 +316,9 @@ export default function HomePage() {
 
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
 						{[
-							{ href: "/watches", img: "https://i.ibb.co/ynGMQB6f/1-blue-gold.jpg", alt: "Exclusive Watches", title: "TIMEPIECES", sub: "Exclusive Watches" },
-							{ href: "/shop?category=luxury-jewellery", img: "https://i.ibb.co/m5z17bfC/1.jpg", alt: "Fine Jewellery", title: "EXCLUSIVE JEWELLERY", sub: "Bespoke Creations" },
-							{ href: "/accessories", img: "https://i.ibb.co/9HRG7t7H/WEBNEWHATS-8.jpg", alt: "LKB Merchandise", title: "ACCESSORIES", sub: "Premium Accessories", extraClass: "md:col-span-2 lg:col-span-1" },
+							{ href: "/watches", img: "/images/static/cat-blue-gold.jpg", alt: "Exclusive Watches", title: "TIMEPIECES", sub: "Exclusive Watches" },
+							{ href: "/shop?category=luxury-jewellery", img: "/images/static/nav-chain.jpg", alt: "Fine Jewellery", title: "EXCLUSIVE JEWELLERY", sub: "Bespoke Creations" },
+							{ href: "/accessories", img: "/images/static/nav-caps.jpg", alt: "LKB Merchandise", title: "ACCESSORIES", sub: "Premium Accessories", extraClass: "md:col-span-2 lg:col-span-1" },
 						].map((cat) => (
 							<Link key={cat.title} href={cat.href} className={`group relative h-[250px] md:h-[280px] lg:h-[300px] overflow-hidden block rounded-lg ${cat.extraClass || ""}`}>
 								<div className="absolute inset-0 overflow-hidden">
@@ -418,7 +418,7 @@ export default function HomePage() {
 					<div className="flex flex-col md:flex-row items-center justify-center gap-0 md:gap-8 border border-gray-800 bg-[#050505] relative z-10 mx-auto max-w-6xl">
 						{/* Left - Showroom Image */}
 						<div className="w-full md:w-1/2 h-[300px] md:h-[500px] relative transition-all duration-700 overflow-hidden group">
-							<Image src={showroomTab === "london" ? "https://www.lkbjewellers.com/showroomEntry.jpg" : "https://www.lkbjewellers.com/showroomEntry2.jpg"} alt={showroomTab === "london" ? "Hatton Garden Showroom" : "International Service"} fill className="object-cover transform group-hover:scale-105 transition-transform duration-700" sizes="(max-width: 768px) 100vw, 50vw" />
+							<Image src={showroomTab === "london" ? "/images/static/showroom-entry.jpg" : "/images/static/showroom-entry-2.jpg"} alt={showroomTab === "london" ? "Hatton Garden Showroom" : "International Service"} fill className="object-cover transform group-hover:scale-105 transition-transform duration-700" sizes="(max-width: 768px) 100vw, 50vw" />
 							<div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
 							{/* Location Tabs */}
 							<div className="absolute bottom-8 left-8 flex gap-3 z-10">
