@@ -66,19 +66,7 @@ export function RingCard({ ring, priority = false }: RingCardProps) {
             <RingImageFallback name={ring.name} />
           ) : (
             <>
-              {/* Primary image */}
-              <Image
-                src={primaryImage}
-                alt={`${ring.name} engagement ring`}
-                fill
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
-                className={`object-cover transition-opacity duration-500 ${
-                  isHovered && hoverImage !== primaryImage ? 'opacity-0' : 'opacity-100'
-                }`}
-                onError={() => setImgError(true)}
-                priority={priority}
-              />
-              {/* Hover image — pre-loaded eagerly to prevent flicker on hover */}
+              {/* Hover image — sits behind primary, always rendered & loaded */}
               {hoverImage !== primaryImage && (
                 <Image
                   src={hoverImage}
@@ -86,12 +74,22 @@ export function RingCard({ ring, priority = false }: RingCardProps) {
                   fill
                   loading="eager"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
-                  className={`object-cover absolute inset-0 transition-opacity duration-500 ${
-                    isHovered ? 'opacity-100' : 'opacity-0'
-                  }`}
+                  className="object-cover absolute inset-0"
                   onError={() => {}}
                 />
               )}
+              {/* Primary image — fades out on hover, revealing hover image beneath */}
+              <Image
+                src={primaryImage}
+                alt={`${ring.name} engagement ring`}
+                fill
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
+                className={`object-cover absolute inset-0 z-10 transition-opacity duration-500 ${
+                  isHovered && hoverImage !== primaryImage ? 'opacity-0' : 'opacity-100'
+                }`}
+                onError={() => setImgError(true)}
+                priority={priority}
+              />
             </>
           )}
 
