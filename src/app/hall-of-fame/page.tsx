@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Crown } from "lucide-react";
+import ShowroomSection from "@/components/showroom-section";
 
 const pieces = [
 	{
@@ -302,6 +303,7 @@ export default function HallOfFamePage() {
 					</div>
 				</div>
 			</div>
+			<ShowroomSection />
 		</div>
 	);
 }

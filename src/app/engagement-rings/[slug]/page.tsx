@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { RingDetailContent } from '@/components/engagement-rings/ring-detail-content'
+import ShowroomSection from '@/components/showroom-section'
 import { fetchAllSlugs, fetchGemstones, fetchRingBySlug } from '@/lib/supabase-rings'
 
 interface PageProps {
@@ -33,5 +34,10 @@ export default async function RingDetailPage({ params }: PageProps) {
 
   if (!ring) notFound()
 
-  return <RingDetailContent ring={ring} gemstones={gemstones} />
+  return (
+    <>
+      <RingDetailContent ring={ring} gemstones={gemstones} />
+      <ShowroomSection />
+    </>
+  )
 }

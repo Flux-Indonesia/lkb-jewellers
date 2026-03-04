@@ -234,7 +234,7 @@ export const serviceCards = [
     id: "bespoke",
     title: "BESPOKE",
     image:
-      "/images/static/service-bespoke.jpg",
+      "/bespoke/bespoke.JPG",
     description: "Custom designs crafted to your exact specifications.",
   },
 ];

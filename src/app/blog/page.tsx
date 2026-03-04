@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Calendar } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import ShowroomSection from "@/components/showroom-section";
 
 const blogPosts = [
   {
@@ -113,6 +114,7 @@ export default function BlogPage() {
           <div className="h-px w-24 bg-gradient-to-l from-transparent to-white/30" />
         </div>
       </div>
+      <ShowroomSection />
     </div>
   );
 }

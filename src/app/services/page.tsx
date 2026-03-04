@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import ShowroomSection from "@/components/showroom-section";
 import {
   Watch,
   Gem,
@@ -136,6 +137,7 @@ export default function ServicesPage() {
           </div>
         </div>
       </div>
+      <ShowroomSection />
     </div>
   );
 }

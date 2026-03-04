@@ -8,6 +8,7 @@ import { ArrowLeft, ChevronLeft, ChevronRight, X, Truck, Shield, BadgeCheck } fr
 import { useCart } from "@/context/cart-context";
 import { getProductById } from "@/lib/products";
 import type { Product } from "@/data/products";
+import ShowroomSection from "@/components/showroom-section";
 import { EnquiryModal } from "@/components/enquiry-modal";
 
 const PLACEHOLDER_IMG =
@@ -440,6 +441,7 @@ export default function ProductPage() {
           </div>
         </div>
       )}
+      <ShowroomSection />
     </div>
   );
 }
