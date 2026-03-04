@@ -51,6 +51,7 @@ function RingImageFallback({ name }: { name: string }) {
 export function RingCard({ ring, priority = false }: RingCardProps) {
   const [imgError, setImgError] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
+  const [isHoverImageLoaded, setIsHoverImageLoaded] = useState(false)
 
   const primaryImage = ring.thumbnails[0] ?? ring.images[0]
   const hoverImage = ring.thumbnails[1] ?? ring.thumbnails[0] ?? ring.images[0]
@@ -78,11 +79,13 @@ export function RingCard({ ring, priority = false }: RingCardProps) {
                   src={hoverImage}
                   alt={`${ring.name} engagement ring alternate view`}
                   fill
-                  loading="eager"
+                  priority={priority}
+                  loading={priority ? undefined : 'eager'}
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
                   className="object-cover absolute inset-0"
                   placeholder="blur"
                   blurDataURL={BLUR_PLACEHOLDER}
+                  onLoad={() => setIsHoverImageLoaded(true)}
                   onError={() => {}}
                 />
               )}
@@ -92,8 +95,8 @@ export function RingCard({ ring, priority = false }: RingCardProps) {
                 alt={`${ring.name} engagement ring`}
                 fill
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
-                className={`object-cover absolute inset-0 z-10 transition-opacity duration-500 ${
-                  isHovered && hoverImage !== primaryImage ? 'opacity-0' : 'opacity-100'
+                className={`object-cover absolute inset-0 z-10 transition-opacity duration-200 ${
+                  isHovered && isHoverImageLoaded && hoverImage !== primaryImage ? 'opacity-0' : 'opacity-100'
                 }`}
                 placeholder="blur"
                 blurDataURL={BLUR_PLACEHOLDER}

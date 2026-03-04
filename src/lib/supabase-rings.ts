@@ -57,7 +57,7 @@ function mapToRing(
     basePrice: Number(row.base_price_usd),
     currency: row.currency ?? 'USD',
     images: orderedImages.map(image => image.image_url),
-    thumbnails: orderedImages.map(image => toThumbnailUrl(image.thumbnail_url ?? image.image_url)),
+    thumbnails: orderedImages.map(image => image.image_url),
     metalOptions: orderedMetals.map(metal => metal.label),
     settingOptions: orderedSettings.map(setting => setting.label),
     sideStonesOptions: orderedSideStones.map(sideStone => sideStone.label),
