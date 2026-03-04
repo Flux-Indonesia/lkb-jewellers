@@ -72,23 +72,22 @@ export function RingCard({ ring, priority = false }: RingCardProps) {
                 alt={`${ring.name} engagement ring`}
                 fill
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
-                className={`object-cover transition-all duration-700 ${
-                  isHovered && hoverImage !== primaryImage
-                    ? 'opacity-0 scale-105'
-                    : 'opacity-100 scale-100 group-hover:scale-105'
+                className={`object-cover transition-opacity duration-500 ${
+                  isHovered && hoverImage !== primaryImage ? 'opacity-0' : 'opacity-100'
                 }`}
                 onError={() => setImgError(true)}
                 priority={priority}
               />
-              {/* Hover image (second image) */}
+              {/* Hover image — pre-loaded eagerly to prevent flicker on hover */}
               {hoverImage !== primaryImage && (
                 <Image
                   src={hoverImage}
                   alt={`${ring.name} engagement ring alternate view`}
                   fill
+                  loading="eager"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
-                  className={`object-cover absolute inset-0 transition-all duration-700 ${
-                    isHovered ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
+                  className={`object-cover absolute inset-0 transition-opacity duration-500 ${
+                    isHovered ? 'opacity-100' : 'opacity-0'
                   }`}
                   onError={() => {}}
                 />
