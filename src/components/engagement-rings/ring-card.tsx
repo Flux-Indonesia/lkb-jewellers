@@ -95,6 +95,7 @@ export function RingCard({ ring, priority = false }: RingCardProps) {
   const [imgError, setImgError] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
   const [isHoverImageLoaded, setIsHoverImageLoaded] = useState(false)
+  const [dbPrefs, setDbPrefs] = useState<{ thumbnail_url: string | null; hover_url: string | null } | null>(null)
 
   const orderedImages = useMemo(() => {
     const seen = new Set<string>()
@@ -120,6 +121,20 @@ export function RingCard({ ring, priority = false }: RingCardProps) {
   }
 
   const defaultColor = getColorFromUrl(orderedImages[0] ?? '')
+
+  // Fetch DB preferences (fail-open: fallback to existing logic on error)
+  useEffect(() => {
+    fetch(`/api/rings/preferences?slug=${encodeURIComponent(ring.slug)}`)
+      .then(r => r.ok ? r.json() : null)
+      .then(json => {
+        if (!json?.data || !defaultColor) return
+        const colorPref = json.data[defaultColor]
+        if (colorPref?.thumbnail_url || colorPref?.hover_url) {
+          setDbPrefs(colorPref)
+        }
+      })
+      .catch(() => {}) // fail-open
+  }, [ring.slug, defaultColor])
   const manualMappedBySlug = MANUAL_HOVER_OVERRIDES[ring.slug]
   const mappedBySlug = hoverBoxMap[ring.slug]
   const manualMappedHoverImage =
@@ -149,6 +164,7 @@ export function RingCard({ ring, priority = false }: RingCardProps) {
       : undefined
 
   const primaryImage =
+    dbPrefs?.thumbnail_url ??
     manualPrimaryImage ??
     orderedImages.find(url => {
       if (mappedHoverImage && url === mappedHoverImage) return false
@@ -159,6 +175,7 @@ export function RingCard({ ring, priority = false }: RingCardProps) {
     orderedImages[0]
 
   const hoverImage =
+    (dbPrefs?.hover_url && dbPrefs.hover_url !== primaryImage ? dbPrefs.hover_url : undefined) ??
     (fallbackMappedHoverImage && fallbackMappedHoverImage !== primaryImage
       ? fallbackMappedHoverImage
       : undefined) ??
