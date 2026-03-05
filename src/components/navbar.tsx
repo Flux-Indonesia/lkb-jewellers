@@ -28,7 +28,7 @@ const navLinks: { label: string; key: MenuKey | null; href: string }[] = [
 	{ label: "WATCHES", key: "watches", href: "/shop?category=watch" },
 	{ label: "JEWELLERY", key: "jewellery", href: "/shop?category=luxury-jewellery" },
 	{ label: "ACCESSORIES", key: "accessories", href: "/shop?category=merchandise" },
-	{ label: "ENGAGEMENT RINGS", key: null, href: "/engagement-rings" },
+	{ label: "RINGS", key: null, href: "/engagement-rings" },
 ];
 
 const rightLinks: { label: string; key: MenuKey }[] = [
