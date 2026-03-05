@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Ring } from '@/data/engagement-rings'
@@ -53,8 +53,60 @@ export function RingCard({ ring, priority = false }: RingCardProps) {
   const [isHovered, setIsHovered] = useState(false)
   const [isHoverImageLoaded, setIsHoverImageLoaded] = useState(false)
 
-  const primaryImage = ring.thumbnails[0] ?? ring.images[0]
-  const hoverImage = ring.thumbnails[1] ?? ring.thumbnails[0] ?? ring.images[0]
+  const orderedImages = useMemo(() => {
+    const seen = new Set<string>()
+    const merged = [...ring.thumbnails, ...ring.images]
+    const result: string[] = []
+
+    for (const url of merged) {
+      const key = url.trim().toLowerCase().split('?')[0]
+      if (seen.has(key)) continue
+      seen.add(key)
+      result.push(url)
+    }
+
+    return result
+  }, [ring.thumbnails, ring.images])
+
+  const getImageNumber = (url: string): number | null => {
+    const filename = url.split('/').pop() ?? ''
+    const match = filename.match(/_(\d+)\.[a-zA-Z0-9]+$/)
+    if (!match) return null
+    const parsed = Number(match[1])
+    return Number.isFinite(parsed) ? parsed : null
+  }
+
+  const preferredHoverNumbers = [2, 5, 3, 1, 6, 4]
+
+  const primaryImage =
+    orderedImages.find(url => {
+      const n = getImageNumber(url)
+      return n !== 2 && n !== 5
+    }) ??
+    orderedImages[0]
+
+  const hoverImage =
+    orderedImages.find(url => {
+      if (url === primaryImage) return false
+      const n = getImageNumber(url)
+      return n !== null && preferredHoverNumbers.includes(n)
+    }) ??
+    orderedImages.find(url => url !== primaryImage) ??
+    primaryImage
+
+  useEffect(() => {
+    setIsHoverImageLoaded(false)
+
+    if (!hoverImage || hoverImage === primaryImage) {
+      setIsHoverImageLoaded(true)
+      return
+    }
+
+    const preload = new window.Image()
+    preload.src = hoverImage
+    preload.onload = () => setIsHoverImageLoaded(true)
+    preload.onerror = () => setIsHoverImageLoaded(false)
+  }, [hoverImage, primaryImage])
 
   return (
     <Link
@@ -79,8 +131,7 @@ export function RingCard({ ring, priority = false }: RingCardProps) {
                   src={hoverImage}
                   alt={`${ring.name} engagement ring alternate view`}
                   fill
-                  priority={priority}
-                  loading={priority ? undefined : 'eager'}
+                  loading="eager"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
                   className="object-cover absolute inset-0"
                   placeholder="blur"

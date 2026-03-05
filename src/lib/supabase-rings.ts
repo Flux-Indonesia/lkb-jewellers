@@ -5,6 +5,24 @@ import { createClient } from '@/lib/supabase-server'
 
 type OrderedRow = { _order: number | null }
 
+function normalizeImageUrl(url: string): string {
+  return url.trim().toLowerCase().split('?')[0]
+}
+
+function dedupeImageUrls(urls: string[]): string[] {
+  const seen = new Set<string>()
+  const result: string[] = []
+
+  for (const url of urls) {
+    const key = normalizeImageUrl(url)
+    if (seen.has(key)) continue
+    seen.add(key)
+    result.push(url)
+  }
+
+  return result
+}
+
 function sortByOrder<T extends OrderedRow>(rows: T[]): T[] {
   return [...rows].sort((a, b) => (a._order ?? 0) - (b._order ?? 0))
 }
@@ -48,6 +66,9 @@ function mapToRing(
       }
     : {}
 
+  const orderedImageUrls = orderedImages.map(image => image.image_url)
+  const uniqueImageUrls = dedupeImageUrls(orderedImageUrls)
+
   return {
     id: row.slug,
     slug: row.slug,
@@ -56,8 +77,8 @@ function mapToRing(
     description: row.description ?? '',
     basePrice: Number(row.base_price_usd),
     currency: row.currency ?? 'USD',
-    images: orderedImages.map(image => image.image_url),
-    thumbnails: orderedImages.map(image => image.image_url),
+    images: uniqueImageUrls,
+    thumbnails: uniqueImageUrls,
     metalOptions: orderedMetals.map(metal => metal.label),
     settingOptions: orderedSettings.map(setting => setting.label),
     sideStonesOptions: orderedSideStones.map(sideStone => sideStone.label),

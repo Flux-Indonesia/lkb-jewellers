@@ -42,6 +42,20 @@ function metalToColorKey(metal: string): string {
   return 'white' // Platinum & White Gold both use white images
 }
 
+function dedupeUrls(urls: string[]): string[] {
+  const seen = new Set<string>()
+  const result: string[] = []
+
+  for (const url of urls) {
+    const key = url.trim().toLowerCase().split('?')[0]
+    if (seen.has(key)) continue
+    seen.add(key)
+    result.push(url)
+  }
+
+  return result
+}
+
 export function RingDetailContent({ ring, gemstones }: RingDetailContentProps) {
   const [selectedMetal, setSelectedMetal] = useState(ring.metalOptions[0] ?? 'Platinum')
 
@@ -53,7 +67,8 @@ export function RingDetailContent({ ring, gemstones }: RingDetailContentProps) {
       const filename = url.split('/').pop() ?? ''
       return filename.startsWith(colorKey + '_')
     })
-    return filtered.length > 0 ? filtered : ring.images
+    const source = filtered.length > 0 ? filtered : ring.images
+    return dedupeUrls(source)
   }, [ring.images, colorKey])
 
   const galleryThumbs = useMemo(() => {
@@ -61,7 +76,8 @@ export function RingDetailContent({ ring, gemstones }: RingDetailContentProps) {
       const filename = url.split('/').pop() ?? ''
       return filename.startsWith(colorKey + '_')
     })
-    return filtered.length > 0 ? filtered : ring.thumbnails
+    const source = filtered.length > 0 ? filtered : ring.thumbnails
+    return dedupeUrls(source)
   }, [ring.thumbnails, colorKey])
 
   const formattedPrice = new Intl.NumberFormat('en-US', {
