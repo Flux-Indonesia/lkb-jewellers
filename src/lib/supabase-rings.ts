@@ -50,14 +50,6 @@ async function mapToRing(
   specs: any,
   prefs?: Record<string, { thumbnail_url: string | null; hover_url: string | null }>
 ): Promise<Ring> {
-  row: any,
-  images: any[],
-  metals: any[],
-  settings: any[],
-  sideStones: any[],
-  sizes: any[],
-  specs: any
-): Ring {
   const orderedImages = sortByOrder(images)
   const orderedMetals = sortByOrder(metals)
   const orderedSettings = sortByOrder(settings)
@@ -92,7 +84,6 @@ async function mapToRing(
       }
     }
   }
-  const uniqueImageUrls = dedupeImageUrls(orderedImageUrls)
 
   return {
     id: row.slug,
@@ -162,16 +153,6 @@ export async function fetchAllRings(): Promise<Ring[]> {
       Array.isArray(row.engagement_ring_specs) ? row.engagement_ring_specs[0] ?? null : row.engagement_ring_specs ?? null
     )
   ))
-    mapToRing(
-      row,
-      row.engagement_ring_images ?? [],
-      row.engagement_ring_metal_options ?? [],
-      row.engagement_ring_setting_options ?? [],
-      row.engagement_ring_side_stone_options ?? [],
-      row.engagement_ring_sizes ?? [],
-      Array.isArray(row.engagement_ring_specs) ? row.engagement_ring_specs[0] ?? null : row.engagement_ring_specs ?? null
-    )
-  )
 }
 
 export async function fetchRingBySlug(slug: string): Promise<Ring | null> {
