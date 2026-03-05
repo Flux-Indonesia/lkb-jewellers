@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { MapPin } from "lucide-react";
 import { siteConfig } from "@/data/products";
-import { addSubscriber } from "@/lib/newsletter";
 
 export default function Footer() {
   const [logoVisible, setLogoVisible] = useState(false);
@@ -23,7 +22,12 @@ export default function Footer() {
     if (!newsletterEmail.trim()) return;
     setNewsletterStatus("loading");
     try {
-      await addSubscriber(newsletterEmail.trim());
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: newsletterEmail.trim() }),
+      });
+      if (!res.ok) throw new Error("Failed to subscribe");
       setNewsletterStatus("success");
       setNewsletterEmail("");
       setTimeout(() => setNewsletterStatus("idle"), 4000);

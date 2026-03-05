@@ -13,8 +13,40 @@ export function EnquiryModal({ isOpen, onClose, product }: { isOpen: boolean; on
   const [visitedOthers, setVisitedOthers] = useState(false);
   const [optOutNewsletter, setOptOutNewsletter] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   if (!isOpen) return null;
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName,
+          email,
+          phone,
+          contactMethod,
+          message,
+          visitedOthers,
+          optOutNewsletter,
+          productId: product.id,
+          productName: product.name,
+          productPrice: product.price,
+          productCategory: product.category,
+          productImage: product.images?.[0] || "",
+        }),
+      });
+      if (!res.ok) throw new Error("Failed to submit");
+      setSubmitted(true);
+    } catch {
+      alert("Failed to submit enquiry. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const inputClass = "w-full bg-black border border-gray-800 text-white p-3 text-sm focus:border-white outline-none transition-colors placeholder:text-gray-400";
 
@@ -48,7 +80,7 @@ export function EnquiryModal({ isOpen, onClose, product }: { isOpen: boolean; on
             </button>
           </div>
         ) : (
-          <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="p-6 space-y-6 max-h-[70vh] overflow-y-auto">
+          <form onSubmit={handleSubmit} className="p-6 space-y-6 max-h-[70vh] overflow-y-auto">
             {/* Personal Information */}
             <div>
               <h3 className="text-xl text-white mb-4 flex items-center gap-2 font-serif">
@@ -114,8 +146,8 @@ export function EnquiryModal({ isOpen, onClose, product }: { isOpen: boolean; on
             </div>
 
             <div className="border-t border-gray-800 pt-6 flex gap-4">
-              <button type="submit" className="flex-1 bg-white text-black font-bold py-4 px-8 hover:bg-gray-200 transition-colors tracking-widest text-sm">
-                SUBMIT ENQUIRY
+              <button type="submit" disabled={loading} className="flex-1 bg-white text-black font-bold py-4 px-8 hover:bg-gray-200 transition-colors tracking-widest text-sm disabled:opacity-50">
+                {loading ? "SUBMITTING..." : "SUBMIT ENQUIRY"}
               </button>
               <button type="button" onClick={onClose} className="px-8 py-4 border border-gray-800 text-white hover:border-white transition-colors text-sm tracking-widest">
                 CANCEL
