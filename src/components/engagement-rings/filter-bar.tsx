@@ -193,9 +193,6 @@ export function FilterBar({ activeFilters, onFilterChange }: FilterBarProps) {
   // Active labels for header display
   const activeShape = shapeOptions.find(o => o.value === activeFilters.shape)
 
-  // Metal: separate two_tone from main grid (shown as header badge)
-  const mainMetalOptions = metalOptions.filter(o => o.value !== 'two_tone')
-  const twoToneOption = metalOptions.find(o => o.value === 'two_tone')
 
   return (
     <div className="w-full bg-zinc-950 border-b border-zinc-800">
@@ -243,26 +240,9 @@ export function FilterBar({ activeFilters, onFilterChange }: FilterBarProps) {
             <SectionHeader
               label="Metal Type"
               tooltip="The precious metal used for the band and setting. Each metal has unique properties and appearance."
-              rightContent={
-                twoToneOption ? (
-                  <button
-                    onClick={() => toggleFilter('metal', 'two_tone')}
-                    className={`
-                      text-[10px] font-bold tracking-widest uppercase border px-2 py-0.5
-                      rounded transition-all duration-200
-                      ${activeFilters.metal === 'two_tone'
-                        ? 'border-[#D4AF37] text-[#D4AF37] bg-[#D4AF37]/10'
-                        : 'border-zinc-700 text-gray-500 hover:border-zinc-600 hover:text-gray-300'
-                      }
-                    `}
-                  >
-                    TWO TONE
-                  </button>
-                ) : undefined
-              }
             />
             <div className="flex flex-wrap gap-2">
-              {mainMetalOptions.map(opt => (
+              {metalOptions.map(opt => (
                 <FilterButton
                   key={opt.value}
                   isActive={activeFilters.metal === opt.value}
