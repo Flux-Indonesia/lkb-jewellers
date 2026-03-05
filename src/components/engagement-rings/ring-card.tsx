@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Ring } from '@/data/engagement-rings'
+import ringHoverBoxMap from '@/data/ring-hover-box-map.json'
 
 // Tiny dark blur placeholder — 1x1 pixel zinc-900 (#18181b) sebagai base64 JPEG
 const BLUR_PLACEHOLDER =
@@ -14,6 +15,48 @@ const BLUR_PLACEHOLDER =
 interface RingCardProps {
   ring: Ring
   priority?: boolean
+}
+
+type RingColorKey = 'yellow' | 'white' | 'rose'
+
+type HoverBoxMap = Record<string, Partial<Record<RingColorKey, string>>>
+
+const hoverBoxMap = ringHoverBoxMap as HoverBoxMap
+
+const MANUAL_HOVER_OVERRIDES: Partial<Record<string, Partial<Record<RingColorKey, string>>>> = {
+  'ring-allison': {
+    yellow:
+      'https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/allison/yellow_2.jpg',
+    white:
+      'https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/allison/white_2.jpg',
+    rose: 'https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/allison/rose_2.jpg',
+  },
+  'ring-alexia': {
+    yellow:
+      'https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alexia/yellow_5.jpg',
+    white:
+      'https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alexia/white_5.jpg',
+    rose: 'https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alexia/rose_5.jpg',
+  },
+}
+
+const MANUAL_PRIMARY_NUMBER_OVERRIDES: Partial<Record<string, number>> = {
+  'ring-allison': 1,
+}
+
+const GLOBAL_FALLBACK_HOVER_IMAGE =
+  hoverBoxMap['ring-allison']?.yellow ??
+  hoverBoxMap['ring-allison']?.white ??
+  hoverBoxMap['ring-allison']?.rose ??
+  hoverBoxMap['ring-adina']?.yellow ??
+  hoverBoxMap['ring-alexia']?.yellow
+
+function getColorFromUrl(url: string): RingColorKey | null {
+  const filename = (url.split('/').pop() ?? '').toLowerCase()
+  if (filename.startsWith('yellow_')) return 'yellow'
+  if (filename.startsWith('white_')) return 'white'
+  if (filename.startsWith('rose_')) return 'rose'
+  return null
 }
 
 function formatPrice(price: number, currency: string): string {
@@ -76,22 +119,49 @@ export function RingCard({ ring, priority = false }: RingCardProps) {
     return Number.isFinite(parsed) ? parsed : null
   }
 
-  const preferredHoverNumbers = [2, 5, 3, 1, 6, 4]
+  const defaultColor = getColorFromUrl(orderedImages[0] ?? '')
+  const manualMappedBySlug = MANUAL_HOVER_OVERRIDES[ring.slug]
+  const mappedBySlug = hoverBoxMap[ring.slug]
+  const manualMappedHoverImage =
+    defaultColor && manualMappedBySlug?.[defaultColor]
+      ? manualMappedBySlug[defaultColor]
+      : undefined
+  const mappedHoverImage =
+    manualMappedHoverImage ??
+    (defaultColor && mappedBySlug?.[defaultColor] ? mappedBySlug[defaultColor] : undefined)
+  const fallbackMappedHoverImage =
+    mappedHoverImage ??
+    manualMappedBySlug?.yellow ??
+    manualMappedBySlug?.white ??
+    manualMappedBySlug?.rose ??
+    mappedBySlug?.yellow ??
+    mappedBySlug?.white ??
+    mappedBySlug?.rose ??
+    GLOBAL_FALLBACK_HOVER_IMAGE
+
+  const manualPrimaryNumber = MANUAL_PRIMARY_NUMBER_OVERRIDES[ring.slug]
+  const manualPrimaryImage =
+    manualPrimaryNumber !== undefined
+      ? orderedImages.find(url => {
+          if (mappedHoverImage && url === mappedHoverImage) return false
+          return getImageNumber(url) === manualPrimaryNumber
+        })
+      : undefined
 
   const primaryImage =
+    manualPrimaryImage ??
     orderedImages.find(url => {
+      if (mappedHoverImage && url === mappedHoverImage) return false
       const n = getImageNumber(url)
       return n !== 2 && n !== 5
     }) ??
+    orderedImages.find(url => url !== mappedHoverImage) ??
     orderedImages[0]
 
   const hoverImage =
-    orderedImages.find(url => {
-      if (url === primaryImage) return false
-      const n = getImageNumber(url)
-      return n !== null && preferredHoverNumbers.includes(n)
-    }) ??
-    orderedImages.find(url => url !== primaryImage) ??
+    (fallbackMappedHoverImage && fallbackMappedHoverImage !== primaryImage
+      ? fallbackMappedHoverImage
+      : undefined) ??
     primaryImage
 
   useEffect(() => {
@@ -103,9 +173,25 @@ export function RingCard({ ring, priority = false }: RingCardProps) {
     }
 
     const preload = new window.Image()
+    const forceLoadedAfterTimeout = window.setTimeout(() => {
+      setIsHoverImageLoaded(true)
+    }, 1200)
+
     preload.src = hoverImage
-    preload.onload = () => setIsHoverImageLoaded(true)
-    preload.onerror = () => setIsHoverImageLoaded(false)
+    preload.onload = () => {
+      window.clearTimeout(forceLoadedAfterTimeout)
+      setIsHoverImageLoaded(true)
+    }
+    preload.onerror = () => {
+      window.clearTimeout(forceLoadedAfterTimeout)
+      setIsHoverImageLoaded(true)
+    }
+
+    return () => {
+      window.clearTimeout(forceLoadedAfterTimeout)
+      preload.onload = null
+      preload.onerror = null
+    }
   }, [hoverImage, primaryImage])
 
   return (
@@ -133,11 +219,11 @@ export function RingCard({ ring, priority = false }: RingCardProps) {
                   fill
                   loading="eager"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
-                  className="object-cover absolute inset-0"
+                  className={`object-cover absolute inset-0 ${isHoverImageLoaded ? 'opacity-100' : 'opacity-0'}`}
                   placeholder="blur"
                   blurDataURL={BLUR_PLACEHOLDER}
                   onLoad={() => setIsHoverImageLoaded(true)}
-                  onError={() => {}}
+                  onError={() => setIsHoverImageLoaded(true)}
                 />
               )}
               {/* Primary image — fades out on hover, revealing hover image beneath */}

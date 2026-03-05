@@ -1,0 +1,506 @@
+{
+  "summary": {
+    "total_active_rings": 224,
+    "rings_present_in_hover_map": 221,
+    "rings_with_any_missing_color": 12,
+    "missing_color_groups": 18,
+    "rings_without_any_hover_mapping": 3,
+    "missing_color_count": {
+      "yellow": 5,
+      "white": 8,
+      "rose": 5
+    },
+    "rings_without_any_hover_mapping_list": [
+      "ring-alina",
+      "ring-ava",
+      "ring-rose"
+    ]
+  },
+  "rings_with_missing_hover": [
+    {
+      "slug": "ring-adelyn",
+      "available_colors": [
+        "rose",
+        "white",
+        "yellow"
+      ],
+      "mapped_colors": [
+        "rose",
+        "white"
+      ],
+      "missing_colors": [
+        "yellow"
+      ],
+      "details": {
+        "yellow": {
+          "image_count": 3,
+          "orders": [
+            1,
+            2,
+            3
+          ],
+          "image_urls": [
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/adelyn/yellow_1.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/adelyn/yellow_3.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/adelyn/yellow_5.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "ring-alina",
+      "available_colors": [
+        "rose",
+        "white",
+        "yellow"
+      ],
+      "mapped_colors": [],
+      "missing_colors": [
+        "rose",
+        "white",
+        "yellow"
+      ],
+      "details": {
+        "rose": {
+          "image_count": 5,
+          "orders": [
+            81,
+            82,
+            83,
+            84,
+            85
+          ],
+          "image_urls": [
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alina/rose_1.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alina/rose_2.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alina/rose_3.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alina/rose_4.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alina/rose_5.jpg"
+          ]
+        },
+        "white": {
+          "image_count": 5,
+          "orders": [
+            41,
+            42,
+            43,
+            44,
+            45
+          ],
+          "image_urls": [
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alina/white_1.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alina/white_2.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alina/white_3.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alina/white_4.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alina/white_5.jpg"
+          ]
+        },
+        "yellow": {
+          "image_count": 5,
+          "orders": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "image_urls": [
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alina/yellow_1.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alina/yellow_2.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alina/yellow_3.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alina/yellow_4.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alina/yellow_5.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "ring-arlo",
+      "available_colors": [
+        "rose",
+        "white",
+        "yellow"
+      ],
+      "mapped_colors": [
+        "white",
+        "yellow"
+      ],
+      "missing_colors": [
+        "rose"
+      ],
+      "details": {
+        "rose": {
+          "image_count": 5,
+          "orders": [
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "image_urls": [
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/arlo/rose_1.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/arlo/rose_3.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/arlo/rose_4.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/arlo/rose_5.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/arlo/rose_6.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "ring-ava",
+      "available_colors": [
+        "rose",
+        "white",
+        "yellow"
+      ],
+      "mapped_colors": [],
+      "missing_colors": [
+        "rose",
+        "white",
+        "yellow"
+      ],
+      "details": {
+        "rose": {
+          "image_count": 5,
+          "orders": [
+            80,
+            81,
+            82,
+            83,
+            84
+          ],
+          "image_urls": [
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ava/rose_1.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ava/rose_2.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ava/rose_3.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ava/rose_4.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ava/rose_5.jpg"
+          ]
+        },
+        "white": {
+          "image_count": 5,
+          "orders": [
+            41,
+            42,
+            43,
+            44,
+            45
+          ],
+          "image_urls": [
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ava/white_1.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ava/white_2.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ava/white_3.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ava/white_4.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ava/white_5.jpg"
+          ]
+        },
+        "yellow": {
+          "image_count": 5,
+          "orders": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "image_urls": [
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ava/yellow_1.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ava/yellow_2.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ava/yellow_3.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ava/yellow_4.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ava/yellow_5.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "ring-ayla",
+      "available_colors": [
+        "rose",
+        "white",
+        "yellow"
+      ],
+      "mapped_colors": [
+        "white",
+        "yellow"
+      ],
+      "missing_colors": [
+        "rose"
+      ],
+      "details": {
+        "rose": {
+          "image_count": 5,
+          "orders": [
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "image_urls": [
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ayla/rose_1.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ayla/rose_3.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ayla/rose_4.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ayla/rose_5.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ayla/rose_6.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "ring-chantelle",
+      "available_colors": [
+        "rose",
+        "white",
+        "yellow"
+      ],
+      "mapped_colors": [
+        "rose",
+        "yellow"
+      ],
+      "missing_colors": [
+        "white"
+      ],
+      "details": {
+        "white": {
+          "image_count": 4,
+          "orders": [
+            5,
+            6,
+            7,
+            14
+          ],
+          "image_urls": [
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/chantelle/white_2.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/chantelle/white_3.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/chantelle/white_4.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/chantelle/white_5.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "ring-daya",
+      "available_colors": [
+        "rose",
+        "white",
+        "yellow"
+      ],
+      "mapped_colors": [
+        "rose",
+        "yellow"
+      ],
+      "missing_colors": [
+        "white"
+      ],
+      "details": {
+        "white": {
+          "image_count": 4,
+          "orders": [
+            6,
+            7,
+            8,
+            9
+          ],
+          "image_urls": [
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/daya/white_1.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/daya/white_3.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/daya/white_4.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/daya/white_5.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "ring-ella",
+      "available_colors": [
+        "rose",
+        "white",
+        "yellow"
+      ],
+      "mapped_colors": [
+        "rose",
+        "yellow"
+      ],
+      "missing_colors": [
+        "white"
+      ],
+      "details": {
+        "white": {
+          "image_count": 4,
+          "orders": [
+            6,
+            7,
+            8,
+            9
+          ],
+          "image_urls": [
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ella/white_1.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ella/white_3.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ella/white_4.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ella/white_5.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "ring-penelope",
+      "available_colors": [
+        "rose",
+        "white",
+        "yellow"
+      ],
+      "mapped_colors": [
+        "rose",
+        "white"
+      ],
+      "missing_colors": [
+        "yellow"
+      ],
+      "details": {
+        "yellow": {
+          "image_count": 4,
+          "orders": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "image_urls": [
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/penelope/yellow_1.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/penelope/yellow_3.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/penelope/yellow_4.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/penelope/yellow_5.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "ring-poppy",
+      "available_colors": [
+        "rose",
+        "white",
+        "yellow"
+      ],
+      "mapped_colors": [
+        "rose",
+        "yellow"
+      ],
+      "missing_colors": [
+        "white"
+      ],
+      "details": {
+        "white": {
+          "image_count": 4,
+          "orders": [
+            6,
+            7,
+            8,
+            9
+          ],
+          "image_urls": [
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/poppy/white_1.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/poppy/white_3.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/poppy/white_4.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/poppy/white_5.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "ring-rose",
+      "available_colors": [
+        "rose",
+        "white",
+        "yellow"
+      ],
+      "mapped_colors": [],
+      "missing_colors": [
+        "rose",
+        "white",
+        "yellow"
+      ],
+      "details": {
+        "rose": {
+          "image_count": 4,
+          "orders": [
+            5,
+            6,
+            7,
+            8
+          ],
+          "image_urls": [
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rose/rose_1.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rose/rose_2.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rose/rose_3.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rose/rose_4.jpg"
+          ]
+        },
+        "white": {
+          "image_count": 4,
+          "orders": [
+            3,
+            4,
+            9,
+            10
+          ],
+          "image_urls": [
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rose/white_1.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rose/white_2.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rose/white_3.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rose/white_4.jpg"
+          ]
+        },
+        "yellow": {
+          "image_count": 4,
+          "orders": [
+            1,
+            2,
+            11,
+            12
+          ],
+          "image_urls": [
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rose/yellow_1.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rose/yellow_2.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rose/yellow_3.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rose/yellow_4.jpg"
+          ]
+        }
+      }
+    },
+    {
+      "slug": "ring-shai",
+      "available_colors": [
+        "rose",
+        "white",
+        "yellow"
+      ],
+      "mapped_colors": [
+        "rose",
+        "yellow"
+      ],
+      "missing_colors": [
+        "white"
+      ],
+      "details": {
+        "white": {
+          "image_count": 4,
+          "orders": [
+            6,
+            7,
+            8,
+            9
+          ],
+          "image_urls": [
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/shai/white_1.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/shai/white_3.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/shai/white_4.jpg",
+            "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/shai/white_5.jpg"
+          ]
+        }
+      }
+    }
+  ]
+}

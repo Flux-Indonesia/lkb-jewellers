@@ -1,0 +1,12 @@
+{
+  "rings_with_hover_box": 221,
+  "total_active_rings": 224,
+  "total_color_groups": 672,
+  "accepted_color_groups": 654,
+  "black_ratio_threshold": 0.07,
+  "very_dark_ratio_threshold": 0.05,
+  "bright_ratio_min": 0.05,
+  "bright_ratio_max": 0.35,
+  "saturation_mean_min": 0.1,
+  "saturation_mean_max": 0.25
+}

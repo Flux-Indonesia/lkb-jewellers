@@ -239,7 +239,7 @@ export function RingConfigurator({ ring, gemstones, selectedMetal, onMetalChange
 
           <ConfigRow
             label="Stone Type"
-            tooltip="Choose between lab grown diamonds, natural diamonds, moissanite, or lab grown sapphires."
+            tooltip="Choose between lab grown diamonds, natural diamonds, or lab grown sapphires."
           >
             <div className="grid grid-cols-2 gap-2">
               {stoneTypes.map(opt => (

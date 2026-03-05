@@ -1,0 +1,1098 @@
+{
+  "ring-adelyn": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/adelyn/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/adelyn/white_2.jpg"
+  },
+  "ring-adina": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/adina/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/adina/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/adina/yellow_2.jpg"
+  },
+  "ring-adrian": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/adrian/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/adrian/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/adrian/yellow_2.jpg"
+  },
+  "ring-aida": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aida/rose_3.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aida/white_3.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aida/yellow_3.jpg"
+  },
+  "ring-ainsley": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ainsley/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ainsley/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ainsley/yellow_2.jpg"
+  },
+  "ring-aisha": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aisha/rose_3.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aisha/white_3.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aisha/yellow_3.jpg"
+  },
+  "ring-alessia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alessia/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alessia/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alessia/yellow_2.jpg"
+  },
+  "ring-alex": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alex/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alex/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alex/yellow_2.jpg"
+  },
+  "ring-alexandria": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alexandria/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alexandria/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alexandria/yellow_2.jpg"
+  },
+  "ring-alexia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alexia/rose_5.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alexia/white_5.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alexia/yellow_5.jpg"
+  },
+  "ring-alia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alia/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alia/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alia/yellow_2.jpg"
+  },
+  "ring-alice": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alice/rose_5.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alice/white_5.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alice/yellow_5.jpg"
+  },
+  "ring-allison": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/allison/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/allison/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/allison/yellow_2.jpg"
+  },
+  "ring-alyssa": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alyssa/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alyssa/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/alyssa/yellow_2.jpg"
+  },
+  "ring-amanda": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/amanda/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/amanda/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/amanda/yellow_2.jpg"
+  },
+  "ring-amor": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/amor/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/amor/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/amor/yellow_2.jpg"
+  },
+  "ring-amy": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/amy/rose_3.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/amy/white_3.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/amy/yellow_3.jpg"
+  },
+  "ring-analyce": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/analyce/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/analyce/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/analyce/yellow_2.jpg"
+  },
+  "ring-angelina": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/angelina/rose_3.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/angelina/white_3.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/angelina/yellow_3.jpg"
+  },
+  "ring-anna": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/anna/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/anna/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/anna/yellow_2.jpg"
+  },
+  "ring-annie": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/annie/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/annie/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/annie/yellow_2.jpg"
+  },
+  "ring-annika": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/annika/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/annika/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/annika/yellow_2.jpg"
+  },
+  "ring-arabella": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/arabella/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/arabella/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/arabella/yellow_2.jpg"
+  },
+  "ring-ari": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ari/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ari/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ari/yellow_2.jpg"
+  },
+  "ring-aria": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aria/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aria/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aria/yellow_2.jpg"
+  },
+  "ring-arielle": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/arielle/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/arielle/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/arielle/yellow_2.jpg"
+  },
+  "ring-arlo": {
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/arlo/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/arlo/yellow_2.jpg"
+  },
+  "ring-ashlea": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ashlea/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ashlea/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ashlea/yellow_2.jpg"
+  },
+  "ring-aspen": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aspen/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aspen/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aspen/yellow_2.jpg"
+  },
+  "ring-aster": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aster/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aster/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aster/yellow_2.jpg"
+  },
+  "ring-athena": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/athena/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/athena/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/athena/yellow_2.jpg"
+  },
+  "ring-aubrey": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aubrey/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aubrey/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aubrey/yellow_2.jpg"
+  },
+  "ring-aurelie": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aurelie/rose_5.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aurelie/white_5.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/aurelie/yellow_5.jpg"
+  },
+  "ring-avery": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/avery/rose_3.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/avery/white_3.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/avery/yellow_3.jpg"
+  },
+  "ring-ayla": {
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ayla/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ayla/yellow_2.jpg"
+  },
+  "ring-bella": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/bella/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/bella/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/bella/yellow_2.jpg"
+  },
+  "ring-bethany": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/bethany/rose_5.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/bethany/white_5.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/bethany/yellow_5.jpg"
+  },
+  "ring-billie": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/billie/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/billie/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/billie/yellow_2.jpg"
+  },
+  "ring-bindi": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/bindi/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/bindi/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/bindi/yellow_2.jpg"
+  },
+  "ring-blair": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/blair/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/blair/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/blair/yellow_2.jpg"
+  },
+  "ring-blossom": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/blossom/rose_5.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/blossom/white_5.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/blossom/yellow_5.jpg"
+  },
+  "ring-bonnie": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/bonnie/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/bonnie/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/bonnie/yellow_2.jpg"
+  },
+  "ring-brandi": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/brandi/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/brandi/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/brandi/yellow_2.jpg"
+  },
+  "ring-bree": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/bree/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/bree/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/bree/yellow_2.jpg"
+  },
+  "ring-briar": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/briar/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/briar/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/briar/yellow_2.jpg"
+  },
+  "ring-bronte": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/bronte/rose_3.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/bronte/white_3.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/bronte/yellow_3.jpg"
+  },
+  "ring-brooke": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/brooke/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/brooke/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/brooke/yellow_2.jpg"
+  },
+  "ring-brooklyn": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/brooklyn/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/brooklyn/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/brooklyn/yellow_2.jpg"
+  },
+  "ring-cali": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/cali/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/cali/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/cali/yellow_2.jpg"
+  },
+  "ring-camilla": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/camilla/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/camilla/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/camilla/yellow_2.jpg"
+  },
+  "ring-candice": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/candice/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/candice/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/candice/yellow_2.jpg"
+  },
+  "ring-carly": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/carly/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/carly/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/carly/yellow_2.jpg"
+  },
+  "ring-carmella": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/carmella/rose_3.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/carmella/white_3.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/carmella/yellow_3.jpg"
+  },
+  "ring-caroline": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/caroline/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/caroline/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/caroline/yellow_2.jpg"
+  },
+  "ring-cartia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/cartia/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/cartia/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/cartia/yellow_2.jpg"
+  },
+  "ring-casey": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/casey/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/casey/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/casey/yellow_2.jpg"
+  },
+  "ring-cataleya": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/cataleya/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/cataleya/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/cataleya/yellow_2.jpg"
+  },
+  "ring-cecilia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/cecilia/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/cecilia/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/cecilia/yellow_2.jpg"
+  },
+  "ring-chantelle": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/chantelle/rose_1.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/chantelle/yellow_1.jpg"
+  },
+  "ring-charlie": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/charlie/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/charlie/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/charlie/yellow_2.jpg"
+  },
+  "ring-charmaine": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/charmaine/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/charmaine/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/charmaine/yellow_2.jpg"
+  },
+  "ring-claudia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/claudia/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/claudia/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/claudia/yellow_2.jpg"
+  },
+  "ring-cynthia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/cynthia/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/cynthia/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/cynthia/yellow_2.jpg"
+  },
+  "ring-dahlia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/dahlia/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/dahlia/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/dahlia/yellow_2.jpg"
+  },
+  "ring-daisy": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/daisy/rose_3.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/daisy/white_3.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/daisy/yellow_3.jpg"
+  },
+  "ring-dakota": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/dakota/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/dakota/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/dakota/yellow_2.jpg"
+  },
+  "ring-daniela": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/daniela/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/daniela/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/daniela/yellow_2.jpg"
+  },
+  "ring-daphne": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/daphne/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/daphne/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/daphne/yellow_2.jpg"
+  },
+  "ring-daya": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/daya/rose_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/daya/yellow_2.jpg"
+  },
+  "ring-delilah": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/delilah/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/delilah/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/delilah/yellow_2.jpg"
+  },
+  "ring-delta": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/delta/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/delta/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/delta/yellow_2.jpg"
+  },
+  "ring-elena": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/elena/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/elena/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/elena/yellow_2.jpg"
+  },
+  "ring-eliana": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/eliana/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/eliana/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/eliana/yellow_2.jpg"
+  },
+  "ring-elise": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/elise/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/elise/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/elise/yellow_2.jpg"
+  },
+  "ring-ella": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ella/rose_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ella/yellow_2.jpg"
+  },
+  "ring-elle": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/elle/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/elle/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/elle/yellow_2.jpg"
+  },
+  "ring-ellie": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ellie/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ellie/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ellie/yellow_2.jpg"
+  },
+  "ring-elphie": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/elphie/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/elphie/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/elphie/yellow_2.jpg"
+  },
+  "ring-elsie": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/elsie/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/elsie/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/elsie/yellow_2.jpg"
+  },
+  "ring-emily": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/emily/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/emily/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/emily/yellow_2.jpg"
+  },
+  "ring-emma": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/emma/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/emma/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/emma/yellow_2.jpg"
+  },
+  "ring-emmy": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/emmy/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/emmy/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/emmy/yellow_2.jpg"
+  },
+  "ring-evangeline": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/evangeline/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/evangeline/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/evangeline/yellow_2.jpg"
+  },
+  "ring-eve": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/eve/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/eve/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/eve/yellow_2.jpg"
+  },
+  "ring-evelyn": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/evelyn/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/evelyn/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/evelyn/yellow_2.jpg"
+  },
+  "ring-everleigh": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/everleigh/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/everleigh/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/everleigh/yellow_2.jpg"
+  },
+  "ring-fiona": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/fiona/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/fiona/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/fiona/yellow_2.jpg"
+  },
+  "ring-francesca": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/francesca/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/francesca/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/francesca/yellow_2.jpg"
+  },
+  "ring-frankie": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/frankie/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/frankie/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/frankie/yellow_2.jpg"
+  },
+  "ring-freesia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/freesia/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/freesia/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/freesia/yellow_2.jpg"
+  },
+  "ring-freya": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/freya/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/freya/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/freya/yellow_2.jpg"
+  },
+  "ring-gabrielle": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/gabrielle/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/gabrielle/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/gabrielle/yellow_2.jpg"
+  },
+  "ring-gemma": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/gemma/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/gemma/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/gemma/yellow_2.jpg"
+  },
+  "ring-genevieve": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/genevieve/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/genevieve/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/genevieve/yellow_2.jpg"
+  },
+  "ring-georgia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/georgia/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/georgia/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/georgia/yellow_2.jpg"
+  },
+  "ring-gigi": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/gigi/rose_3.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/gigi/white_3.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/gigi/yellow_3.jpg"
+  },
+  "ring-ginny": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ginny/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ginny/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ginny/yellow_2.jpg"
+  },
+  "ring-giselle": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/giselle/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/giselle/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/giselle/yellow_2.jpg"
+  },
+  "ring-glinda": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/glinda/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/glinda/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/glinda/yellow_2.jpg"
+  },
+  "ring-grace": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/grace/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/grace/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/grace/yellow_2.jpg"
+  },
+  "ring-greta": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/greta/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/greta/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/greta/yellow_2.jpg"
+  },
+  "ring-gwyneth": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/gwyneth/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/gwyneth/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/gwyneth/yellow_2.jpg"
+  },
+  "ring-halle": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/halle/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/halle/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/halle/yellow_2.jpg"
+  },
+  "ring-hannah": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/hannah/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/hannah/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/hannah/yellow_2.jpg"
+  },
+  "ring-hayley": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/hayley/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/hayley/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/hayley/yellow_2.jpg"
+  },
+  "ring-hilary": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/hilary/rose_5.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/hilary/white_5.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/hilary/yellow_5.jpg"
+  },
+  "ring-iris": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/iris/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/iris/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/iris/yellow_2.jpg"
+  },
+  "ring-isla": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/isla/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/isla/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/isla/yellow_2.jpg"
+  },
+  "ring-ivy": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ivy/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ivy/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/ivy/yellow_2.jpg"
+  },
+  "ring-jacinta": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jacinta/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jacinta/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jacinta/yellow_2.jpg"
+  },
+  "ring-jackie": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jackie/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jackie/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jackie/yellow_2.jpg"
+  },
+  "ring-jana": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jana/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jana/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jana/yellow_2.jpg"
+  },
+  "ring-jane": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jane/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jane/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jane/yellow_2.jpg"
+  },
+  "ring-jayden": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jayden/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jayden/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jayden/yellow_2.jpg"
+  },
+  "ring-jaylene": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jaylene/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jaylene/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jaylene/yellow_2.jpg"
+  },
+  "ring-jennifer": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jennifer/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jennifer/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/jennifer/yellow_2.jpg"
+  },
+  "ring-josephine": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/josephine/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/josephine/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/josephine/yellow_2.jpg"
+  },
+  "ring-journee": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/journee/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/journee/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/journee/yellow_2.jpg"
+  },
+  "ring-judy": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/judy/rose_3.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/judy/white_3.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/judy/yellow_3.jpg"
+  },
+  "ring-julia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/julia/rose_5.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/julia/white_5.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/julia/yellow_5.jpg"
+  },
+  "ring-juliette": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/juliette/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/juliette/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/juliette/yellow_2.jpg"
+  },
+  "ring-kala": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kala/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kala/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kala/yellow_2.jpg"
+  },
+  "ring-kate": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kate/rose_3.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kate/white_3.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kate/yellow_3.jpg"
+  },
+  "ring-kelsey": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kelsey/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kelsey/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kelsey/yellow_2.jpg"
+  },
+  "ring-kiana": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kiana/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kiana/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kiana/yellow_2.jpg"
+  },
+  "ring-kimia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kimia/rose_1.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kimia/white_1.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kimia/yellow_1.jpg"
+  },
+  "ring-kirsten": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kirsten/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kirsten/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kirsten/yellow_2.jpg"
+  },
+  "ring-kyla": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kyla/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kyla/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/kyla/yellow_2.jpg"
+  },
+  "ring-lara": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/lara/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/lara/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/lara/yellow_2.jpg"
+  },
+  "ring-leila": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/leila/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/leila/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/leila/yellow_2.jpg"
+  },
+  "ring-leslie": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/leslie/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/leslie/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/leslie/yellow_2.jpg"
+  },
+  "ring-lexie": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/lexie/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/lexie/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/lexie/yellow_2.jpg"
+  },
+  "ring-liberty": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/liberty/rose_5.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/liberty/white_5.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/liberty/yellow_5.jpg"
+  },
+  "ring-lilly": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/lilly/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/lilly/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/lilly/yellow_2.jpg"
+  },
+  "ring-lorelai": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/lorelai/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/lorelai/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/lorelai/yellow_2.jpg"
+  },
+  "ring-lorena": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/lorena/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/lorena/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/lorena/yellow_2.jpg"
+  },
+  "ring-louise": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/louise/rose_5.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/louise/white_5.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/louise/yellow_5.jpg"
+  },
+  "ring-luna": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/luna/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/luna/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/luna/yellow_2.jpg"
+  },
+  "ring-mabeline": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/mabeline/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/mabeline/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/mabeline/yellow_2.jpg"
+  },
+  "ring-madeline": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/madeline/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/madeline/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/madeline/yellow_2.jpg"
+  },
+  "ring-maeve": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/maeve/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/maeve/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/maeve/yellow_2.jpg"
+  },
+  "ring-mahlia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/mahlia/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/mahlia/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/mahlia/yellow_2.jpg"
+  },
+  "ring-maisy": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/maisy/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/maisy/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/maisy/yellow_2.jpg"
+  },
+  "ring-mariah": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/mariah/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/mariah/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/mariah/yellow_2.jpg"
+  },
+  "ring-matisse": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/matisse/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/matisse/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/matisse/yellow_2.jpg"
+  },
+  "ring-meesha": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/meesha/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/meesha/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/meesha/yellow_2.jpg"
+  },
+  "ring-meghan": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/meghan/rose_3.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/meghan/white_3.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/meghan/yellow_3.jpg"
+  },
+  "ring-melody": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/melody/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/melody/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/melody/yellow_2.jpg"
+  },
+  "ring-merida": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/merida/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/merida/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/merida/yellow_2.jpg"
+  },
+  "ring-mia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/mia/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/mia/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/mia/yellow_2.jpg"
+  },
+  "ring-miller": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/miller/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/miller/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/miller/yellow_2.jpg"
+  },
+  "ring-molly": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/molly/rose_5.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/molly/white_5.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/molly/yellow_5.jpg"
+  },
+  "ring-morgan": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/morgan/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/morgan/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/morgan/yellow_2.jpg"
+  },
+  "ring-myrtle": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/myrtle/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/myrtle/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/myrtle/yellow_2.jpg"
+  },
+  "ring-naomi": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/naomi/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/naomi/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/naomi/yellow_2.jpg"
+  },
+  "ring-nara": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/nara/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/nara/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/nara/yellow_2.jpg"
+  },
+  "ring-natalie": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/natalie/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/natalie/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/natalie/yellow_2.jpg"
+  },
+  "ring-nienna": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/nienna/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/nienna/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/nienna/yellow_2.jpg"
+  },
+  "ring-nina": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/nina/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/nina/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/nina/yellow_2.jpg"
+  },
+  "ring-noelle": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/noelle/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/noelle/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/noelle/yellow_2.jpg"
+  },
+  "ring-nola": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/nola/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/nola/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/nola/yellow_2.jpg"
+  },
+  "ring-noor": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/noor/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/noor/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/noor/yellow_2.jpg"
+  },
+  "ring-nora": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/nora/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/nora/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/nora/yellow_2.jpg"
+  },
+  "ring-octavia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/octavia/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/octavia/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/octavia/yellow_2.jpg"
+  },
+  "ring-olive": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/olive/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/olive/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/olive/yellow_2.jpg"
+  },
+  "ring-olivia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/olivia/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/olivia/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/olivia/yellow_2.jpg"
+  },
+  "ring-paige": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/paige/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/paige/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/paige/yellow_2.jpg"
+  },
+  "ring-parker": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/parker/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/parker/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/parker/yellow_2.jpg"
+  },
+  "ring-penelope": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/penelope/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/penelope/white_2.jpg"
+  },
+  "ring-phoebe": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/phoebe/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/phoebe/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/phoebe/yellow_2.jpg"
+  },
+  "ring-pia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/pia/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/pia/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/pia/yellow_2.jpg"
+  },
+  "ring-polly": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/polly/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/polly/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/polly/yellow_2.jpg"
+  },
+  "ring-poppy": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/poppy/rose_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/poppy/yellow_2.jpg"
+  },
+  "ring-rachel": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rachel/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rachel/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rachel/yellow_2.jpg"
+  },
+  "ring-racquel": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/racquel/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/racquel/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/racquel/yellow_2.jpg"
+  },
+  "ring-raleigh": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/raleigh/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/raleigh/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/raleigh/yellow_2.jpg"
+  },
+  "ring-rita": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rita/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rita/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rita/yellow_2.jpg"
+  },
+  "ring-river": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/river/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/river/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/river/yellow_2.jpg"
+  },
+  "ring-rosalia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rosalia/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rosalia/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rosalia/yellow_2.jpg"
+  },
+  "ring-rosie": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rosie/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rosie/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rosie/yellow_2.jpg"
+  },
+  "ring-rowena": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rowena/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rowena/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/rowena/yellow_2.jpg"
+  },
+  "ring-sadie": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sadie/rose_3.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sadie/white_3.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sadie/yellow_3.jpg"
+  },
+  "ring-sage": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sage/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sage/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sage/yellow_2.jpg"
+  },
+  "ring-salma": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/salma/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/salma/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/salma/yellow_2.jpg"
+  },
+  "ring-sasha": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sasha/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sasha/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sasha/yellow_2.jpg"
+  },
+  "ring-savannah": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/savannah/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/savannah/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/savannah/yellow_2.jpg"
+  },
+  "ring-scarlett": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/scarlett/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/scarlett/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/scarlett/yellow_2.jpg"
+  },
+  "ring-selena": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/selena/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/selena/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/selena/yellow_2.jpg"
+  },
+  "ring-sena": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sena/rose_1.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sena/white_1.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sena/yellow_1.jpg"
+  },
+  "ring-shai": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/shai/rose_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/shai/yellow_2.jpg"
+  },
+  "ring-sharon": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sharon/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sharon/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sharon/yellow_2.jpg"
+  },
+  "ring-shelly": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/shelly/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/shelly/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/shelly/yellow_2.jpg"
+  },
+  "ring-sheridan": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sheridan/rose_3.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sheridan/white_3.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sheridan/yellow_3.jpg"
+  },
+  "ring-sherry": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sherry/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sherry/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sherry/yellow_2.jpg"
+  },
+  "ring-sierra": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sierra/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sierra/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sierra/yellow_2.jpg"
+  },
+  "ring-silvana": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/silvana/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/silvana/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/silvana/yellow_2.jpg"
+  },
+  "ring-siobhan": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/siobhan/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/siobhan/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/siobhan/yellow_2.jpg"
+  },
+  "ring-sophia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sophia/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sophia/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/sophia/yellow_2.jpg"
+  },
+  "ring-soraya": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/soraya/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/soraya/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/soraya/yellow_2.jpg"
+  },
+  "ring-stephanie": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/stephanie/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/stephanie/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/stephanie/yellow_2.jpg"
+  },
+  "ring-suki": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/suki/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/suki/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/suki/yellow_2.jpg"
+  },
+  "ring-svea": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/svea/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/svea/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/svea/yellow_2.jpg"
+  },
+  "ring-tahlia": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/tahlia/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/tahlia/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/tahlia/yellow_2.jpg"
+  },
+  "ring-tanya": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/tanya/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/tanya/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/tanya/yellow_2.jpg"
+  },
+  "ring-taylor": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/taylor/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/taylor/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/taylor/yellow_2.jpg"
+  },
+  "ring-tessa": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/tessa/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/tessa/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/tessa/yellow_2.jpg"
+  },
+  "ring-thea": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/thea/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/thea/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/thea/yellow_2.jpg"
+  },
+  "ring-tilly": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/tilly/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/tilly/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/tilly/yellow_2.jpg"
+  },
+  "ring-trinity": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/trinity/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/trinity/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/trinity/yellow_2.jpg"
+  },
+  "ring-valeria": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/valeria/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/valeria/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/valeria/yellow_2.jpg"
+  },
+  "ring-violetta": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/violetta/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/violetta/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/violetta/yellow_2.jpg"
+  },
+  "ring-wanda": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/wanda/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/wanda/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/wanda/yellow_2.jpg"
+  },
+  "ring-wendy": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/wendy/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/wendy/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/wendy/yellow_2.jpg"
+  },
+  "ring-willow": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/willow/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/willow/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/willow/yellow_2.jpg"
+  },
+  "ring-winnie": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/winnie/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/winnie/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/winnie/yellow_2.jpg"
+  },
+  "ring-yasmine": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/yasmine/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/yasmine/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/yasmine/yellow_2.jpg"
+  },
+  "ring-zara": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/zara/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/zara/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/zara/yellow_2.jpg"
+  },
+  "ring-zariyah": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/zariyah/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/zariyah/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/zariyah/yellow_2.jpg"
+  },
+  "ring-zelda": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/zelda/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/zelda/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/zelda/yellow_2.jpg"
+  },
+  "ring-zoe": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/zoe/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/zoe/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/zoe/yellow_2.jpg"
+  },
+  "ring-zya": {
+    "rose": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/zya/rose_2.jpg",
+    "white": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/zya/white_2.jpg",
+    "yellow": "https://ttiwmcrfahbczzehmyds.supabase.co/storage/v1/object/public/engagement-rings/rings/zya/yellow_2.jpg"
+  }
+}
