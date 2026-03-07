@@ -117,6 +117,65 @@ const ringRelations = `
   engagement_ring_specs!ring_id(*)
 `
 
+const ringListingFields = `
+  slug,
+  name,
+  title,
+  base_price_usd,
+  currency,
+  shape,
+  setting_style,
+  band_type,
+  setting_profile,
+  engagement_ring_images(image_url, _order)
+`
+
+export interface RingListingItem {
+  id: string
+  slug: string
+  name: string
+  title: string
+  basePrice: number
+  currency: string
+  shape: Ring['shape']
+  settingStyle: Ring['settingStyle']
+  bandType: Ring['bandType']
+  settingProfile: Ring['settingProfile']
+  thumbnail: string
+  hoverImage: string
+}
+
+export interface PaginatedRings {
+  rings: RingListingItem[]
+  total: number
+  page: number
+  pageSize: number
+  hasMore: boolean
+}
+
+function mapToListingItem(row: any): RingListingItem {
+  const images: { image_url: string; _order: number | null }[] = row.engagement_ring_images ?? []
+  const sorted = [...images].sort((a, b) => (a._order ?? 0) - (b._order ?? 0))
+  const urls = dedupeImageUrls(sorted.map(i => i.image_url))
+  const thumbnail = urls[0] ?? ''
+  const hoverImage = urls[1] ?? thumbnail
+
+  return {
+    id: row.slug,
+    slug: row.slug,
+    name: row.name,
+    title: row.title,
+    basePrice: Number(row.base_price_usd),
+    currency: row.currency ?? 'USD',
+    shape: row.shape,
+    settingStyle: row.setting_style,
+    bandType: row.band_type,
+    settingProfile: row.setting_profile,
+    thumbnail,
+    hoverImage,
+  }
+}
+
 async function getSupabaseClient() {
   try {
     return await createClient()
@@ -126,6 +185,54 @@ async function getSupabaseClient() {
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
       { auth: { persistSession: false } }
     )
+  }
+}
+
+export async function fetchRingsPaginated(
+  page: number = 1,
+  pageSize: number = 24,
+  filters: {
+    shape?: string
+    settingStyle?: string
+    bandType?: string
+    settingProfile?: string
+    metalOption?: string
+    minPrice?: number
+    maxPrice?: number
+  } = {}
+): Promise<PaginatedRings> {
+  const supabase = await getSupabaseClient()
+
+  let query = supabase
+    .from('engagement_rings')
+    .select(ringListingFields, { count: 'exact' })
+    .eq('is_active', true)
+    .order('slug')
+
+  if (filters.shape) query = query.eq('shape', filters.shape)
+  if (filters.settingStyle) query = query.eq('setting_style', filters.settingStyle)
+  if (filters.bandType) query = query.eq('band_type', filters.bandType)
+  if (filters.settingProfile) query = query.eq('setting_profile', filters.settingProfile)
+  if (filters.minPrice) query = query.gte('base_price_usd', filters.minPrice)
+  if (filters.maxPrice) query = query.lte('base_price_usd', filters.maxPrice)
+
+  const from = (page - 1) * pageSize
+  const to = from + pageSize - 1
+  query = query.range(from, to)
+
+  const { data, error, count } = await query
+
+  if (error || !data) {
+    return { rings: [], total: 0, page, pageSize, hasMore: false }
+  }
+
+  const total = count ?? 0
+  return {
+    rings: data.map(mapToListingItem),
+    total,
+    page,
+    pageSize,
+    hasMore: from + data.length < total,
   }
 }
 

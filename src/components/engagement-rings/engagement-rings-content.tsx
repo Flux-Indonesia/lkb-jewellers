@@ -1,71 +1,98 @@
 'use client'
 
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
-import { X } from 'lucide-react'
+import { X, Loader2 } from 'lucide-react'
 import { FilterBar } from '@/components/engagement-rings/filter-bar'
-import { RingCard } from '@/components/engagement-rings/ring-card'
-import type { Ring } from '@/data/engagement-rings'
-import { filterRings, parseFiltersFromURL, filtersToURL, hasActiveFilters } from '@/lib/ring-filters'
+import { RingListingCard } from '@/components/engagement-rings/ring-listing-card'
+import type { PaginatedRings, RingListingItem } from '@/lib/supabase-rings'
+import { parseFiltersFromURL, filtersToURL, hasActiveFilters } from '@/lib/ring-filters'
 import type { ActiveFilters } from '@/lib/ring-filters'
 
-const PAGE_SIZE = 12
+const PAGE_SIZE = 24
 
 interface EngagementRingsContentProps {
-  rings: Ring[]
+  initialData: PaginatedRings
 }
 
-export function EngagementRingsContent({ rings }: EngagementRingsContentProps) {
+export function EngagementRingsContent({ initialData }: EngagementRingsContentProps) {
   const searchParams = useSearchParams()
   const router = useRouter()
 
-  // Parse initial filters from URL
-  const initialFilters = useMemo(
-    () => parseFiltersFromURL(searchParams),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  )
+  const initialFilters = useMemo(() => parseFiltersFromURL(searchParams), [])
 
   const [activeFilters, setActiveFilters] = useState<ActiveFilters>(initialFilters)
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
   const [sortBy, setSortBy] = useState<'recommended' | 'price_asc' | 'price_desc'>('recommended')
+  const [rings, setRings] = useState<RingListingItem[]>(initialData.rings)
+  const [total, setTotal] = useState(initialData.total)
+  const [page, setPage] = useState(1)
+  const [hasMore, setHasMore] = useState(initialData.hasMore)
+  const [loadingMore, setLoadingMore] = useState(false)
+  const [filtering, setFiltering] = useState(false)
+  const filterVersion = useRef(0)
 
-  // Filter rings
-  const filteredRings = useMemo(
-    () => filterRings(rings, activeFilters),
-    [rings, activeFilters]
-  )
-
-  // Sort rings
-  const sortedRings = useMemo(() => {
-    const sorted = [...filteredRings]
-    if (sortBy === 'price_asc') sorted.sort((a, b) => a.basePrice - b.basePrice)
-    if (sortBy === 'price_desc') sorted.sort((a, b) => b.basePrice - a.basePrice)
-    return sorted
-  }, [filteredRings, sortBy])
-
-  const visibleRings = sortedRings.slice(0, visibleCount)
-  const hasMore = visibleCount < filteredRings.length
+  const buildQuery = useCallback((filters: ActiveFilters, p: number) => {
+    const params = new URLSearchParams()
+    params.set('page', String(p))
+    params.set('limit', String(PAGE_SIZE))
+    if (filters.shape) params.set('shape', filters.shape)
+    if (filters.settingStyle) params.set('settingStyle', filters.settingStyle)
+    if (filters.bandType) params.set('bandType', filters.bandType)
+    if (filters.settingProfile) params.set('settingProfile', filters.settingProfile)
+    return `/api/rings/listing?${params.toString()}`
+  }, [])
 
   const handleFilterChange = useCallback((filters: ActiveFilters) => {
     setActiveFilters(filters)
-    setVisibleCount(PAGE_SIZE)
-    // Update URL (two-way sync)
+    setPage(1)
+    setFiltering(true)
+    filterVersion.current += 1
+    const version = filterVersion.current
+
     const url = `/engagement-rings${filtersToURL(filters)}`
     router.push(url, { scroll: false })
-  }, [router])
 
-  const handleClearFilters = useCallback(() => {
-    handleFilterChange({})
-  }, [handleFilterChange])
+    fetch(buildQuery(filters, 1))
+      .then(r => r.json())
+      .then((data: PaginatedRings) => {
+        if (filterVersion.current !== version) return
+        setRings(data.rings)
+        setTotal(data.total)
+        setHasMore(data.hasMore)
+        setFiltering(false)
+      })
+      .catch(() => setFiltering(false))
+  }, [router, buildQuery])
 
   const handleLoadMore = useCallback(() => {
-    setVisibleCount(prev => prev + PAGE_SIZE)
-  }, [])
+    if (loadingMore || !hasMore) return
+    const nextPage = page + 1
+    setLoadingMore(true)
+
+    fetch(buildQuery(activeFilters, nextPage))
+      .then(r => r.json())
+      .then((data: PaginatedRings) => {
+        setRings(prev => {
+          const existingSlugs = new Set(prev.map(r => r.slug))
+          const fresh = data.rings.filter(r => !existingSlugs.has(r.slug))
+          return [...prev, ...fresh]
+        })
+        setPage(nextPage)
+        setHasMore(data.hasMore)
+        setLoadingMore(false)
+      })
+      .catch(() => setLoadingMore(false))
+  }, [loadingMore, hasMore, page, activeFilters, buildQuery])
+
+  const sortedRings = useMemo(() => {
+    const sorted = [...rings]
+    if (sortBy === 'price_asc') sorted.sort((a, b) => a.basePrice - b.basePrice)
+    if (sortBy === 'price_desc') sorted.sort((a, b) => b.basePrice - a.basePrice)
+    return sorted
+  }, [rings, sortBy])
 
   return (
     <div className="min-h-screen bg-black">
-      {/* Hero section */}
       <div className="relative w-full bg-zinc-950 border-b border-zinc-800 overflow-hidden">
         <div className="container mx-auto px-4 py-12 md:py-16">
           <p className="text-gray-500 text-xs font-medium tracking-widest uppercase mb-3">
@@ -82,19 +109,14 @@ export function EngagementRingsContent({ rings }: EngagementRingsContentProps) {
         </div>
       </div>
 
-      {/* Filter bar */}
-      <FilterBar
-        activeFilters={activeFilters}
-        onFilterChange={handleFilterChange}
-      />
+      <FilterBar activeFilters={activeFilters} onFilterChange={handleFilterChange} />
 
-      {/* Active filter chips */}
       {hasActiveFilters(activeFilters) && (
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-gray-500 text-xs">Active filters:</span>
-            {Object.entries(activeFilters).map(([key, value]) => (
-              value && (
+            {Object.entries(activeFilters).map(([key, value]) =>
+              value ? (
                 <button
                   key={key}
                   onClick={() => {
@@ -107,10 +129,10 @@ export function EngagementRingsContent({ rings }: EngagementRingsContentProps) {
                   <span className="capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}: {value}</span>
                   <X size={10} />
                 </button>
-              )
-            ))}
+              ) : null
+            )}
             <button
-              onClick={handleClearFilters}
+              onClick={() => handleFilterChange({})}
               className="text-[#D4AF37] text-xs hover:underline ml-2"
             >
               Clear all
@@ -119,21 +141,15 @@ export function EngagementRingsContent({ rings }: EngagementRingsContentProps) {
         </div>
       )}
 
-      {/* Ring grid */}
       <div className="container mx-auto px-4 py-6">
-        {filteredRings.length === 0 ? (
-          /* Empty state */
+        {filtering ? (
+          <div className="flex justify-center items-center py-24">
+            <Loader2 size={32} className="animate-spin text-[#D4AF37]" />
+          </div>
+        ) : sortedRings.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-center">
             <div className="w-16 h-16 rounded-full bg-zinc-900 flex items-center justify-center mb-6">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1"
-                className="text-zinc-600"
-              >
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-zinc-600">
                 <circle cx="12" cy="12" r="8" />
                 <circle cx="12" cy="12" r="4" />
               </svg>
@@ -143,7 +159,7 @@ export function EngagementRingsContent({ rings }: EngagementRingsContentProps) {
               Try adjusting or clearing your filters to see more results.
             </p>
             <button
-              onClick={handleClearFilters}
+              onClick={() => handleFilterChange({})}
               className="px-6 py-2.5 border border-[#D4AF37] text-[#D4AF37] text-sm font-medium tracking-wide hover:bg-[#D4AF37] hover:text-black transition-all duration-200 rounded"
             >
               Clear All Filters
@@ -151,10 +167,9 @@ export function EngagementRingsContent({ rings }: EngagementRingsContentProps) {
           </div>
         ) : (
           <>
-            {/* Sort bar */}
             <div className="flex items-center justify-between mb-6">
               <p className="text-gray-600 text-xs">
-                {filteredRings.length} settings available
+                {rings.length} of {total} settings
               </p>
               <div className="flex items-center gap-2">
                 <span className="text-gray-500 text-xs">Sort:</span>
@@ -170,26 +185,31 @@ export function EngagementRingsContent({ rings }: EngagementRingsContentProps) {
               </div>
             </div>
 
-            {/* Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-              {visibleRings.map((ring, index) => (
-                <RingCard key={ring.id} ring={ring} priority={index < 8} />
+              {sortedRings.map((ring, index) => (
+                <RingListingCard key={ring.slug} ring={ring} priority={index < 8} />
               ))}
             </div>
 
-            {/* Load more */}
             {hasMore && (
               <div className="flex justify-center mt-12">
                 <button
                   onClick={handleLoadMore}
-                  className="px-8 py-3 border border-zinc-700 hover:border-[#D4AF37] text-gray-300 hover:text-[#D4AF37] text-sm font-medium tracking-widest uppercase transition-all duration-200"
+                  disabled={loadingMore}
+                  className="flex items-center gap-2 px-8 py-3 border border-zinc-700 hover:border-[#D4AF37] text-gray-300 hover:text-[#D4AF37] text-sm font-medium tracking-widest uppercase transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Load More ({filteredRings.length - visibleCount} remaining)
+                  {loadingMore ? (
+                    <>
+                      <Loader2 size={14} className="animate-spin" />
+                      Loading...
+                    </>
+                  ) : (
+                    `Load More (${total - rings.length} remaining)`
+                  )}
                 </button>
               </div>
             )}
 
-            {/* SEO section */}
             <div className="mt-16 pt-12 border-t border-zinc-800">
               <h3 className="font-heading text-white text-xl font-light tracking-wide mb-4">
                 Engagement Rings — Timeless, Forever.

@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import { EngagementRingsContent } from '@/components/engagement-rings/engagement-rings-content'
 import ShowroomSection from '@/components/showroom-section'
-import { fetchAllRings } from '@/lib/supabase-rings'
+import { fetchRingsPaginated } from '@/lib/supabase-rings'
 
 export const metadata: Metadata = {
   title: 'Engagement Rings | LKB Jewellers',
@@ -12,9 +12,7 @@ export const metadata: Metadata = {
 function LoadingSkeleton() {
   return (
     <div className="min-h-screen bg-black">
-      {/* Filter bar skeleton */}
       <div className="w-full bg-zinc-950 border-b border-zinc-800 h-32 animate-pulse" />
-      {/* Grid skeleton */}
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {Array.from({ length: 12 }).map((_, i) => (
@@ -34,12 +32,12 @@ function LoadingSkeleton() {
 }
 
 export default async function EngagementRingsPage() {
-  const rings = await fetchAllRings()
+  const initialData = await fetchRingsPaginated(1, 24)
 
   return (
     <>
       <Suspense fallback={<LoadingSkeleton />}>
-        <EngagementRingsContent rings={rings} />
+        <EngagementRingsContent initialData={initialData} />
       </Suspense>
       <ShowroomSection />
     </>
