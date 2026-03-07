@@ -68,13 +68,23 @@ export function EngagementRingsContent() {
   }, [])
 
   const handleFilterChange = useCallback((filters: ActiveFilters) => {
+    const prev = activeFilters
     setActiveFilters(filters)
+    router.push(`/engagement-rings${filtersToURL(filters)}`, { scroll: false })
+
+    const onlyMetalChanged =
+      prev.shape === filters.shape &&
+      prev.settingStyle === filters.settingStyle &&
+      prev.bandType === filters.bandType &&
+      prev.settingProfile === filters.settingProfile &&
+      prev.metal !== filters.metal
+
+    if (onlyMetalChanged) return
+
     setPage(1)
     setLoading(true)
     filterVersion.current += 1
     const version = filterVersion.current
-
-    router.push(`/engagement-rings${filtersToURL(filters)}`, { scroll: false })
 
     fetch(buildQuery(filters, 1, sortBy))
       .then(r => r.json())
@@ -86,7 +96,7 @@ export function EngagementRingsContent() {
         setLoading(false)
       })
       .catch(() => setLoading(false))
-  }, [router, buildQuery, sortBy])
+  }, [router, buildQuery, sortBy, activeFilters])
 
   const handleSortChange = useCallback((newSort: typeof sortBy) => {
     setSortBy(newSort)
