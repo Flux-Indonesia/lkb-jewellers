@@ -11,11 +11,7 @@ import type { ActiveFilters } from '@/lib/ring-filters'
 
 const PAGE_SIZE = 24
 
-interface EngagementRingsContentProps {
-  initialData: PaginatedRings
-}
-
-export function EngagementRingsContent({ initialData }: EngagementRingsContentProps) {
+export function EngagementRingsContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
 
@@ -23,12 +19,12 @@ export function EngagementRingsContent({ initialData }: EngagementRingsContentPr
 
   const [activeFilters, setActiveFilters] = useState<ActiveFilters>(initialFilters)
   const [sortBy, setSortBy] = useState<'recommended' | 'price_asc' | 'price_desc'>('recommended')
-  const [rings, setRings] = useState<RingListingItem[]>(initialData.rings)
-  const [total, setTotal] = useState(initialData.total)
+  const [rings, setRings] = useState<RingListingItem[]>([])
+  const [total, setTotal] = useState(0)
   const [page, setPage] = useState(1)
-  const [hasMore, setHasMore] = useState(initialData.hasMore)
+  const [hasMore, setHasMore] = useState(false)
   const [loadingMore, setLoadingMore] = useState(false)
-  const [filtering, setFiltering] = useState(false)
+  const [loading, setLoading] = useState(true)
   const filterVersion = useRef(0)
 
   const buildQuery = useCallback((filters: ActiveFilters, p: number) => {
@@ -42,15 +38,32 @@ export function EngagementRingsContent({ initialData }: EngagementRingsContentPr
     return `/api/rings/listing?${params.toString()}`
   }, [])
 
+  useEffect(() => {
+    filterVersion.current += 1
+    const version = filterVersion.current
+    setLoading(true)
+
+    fetch(buildQuery(activeFilters, 1))
+      .then(r => r.json())
+      .then((data: PaginatedRings) => {
+        if (filterVersion.current !== version) return
+        setRings(data.rings)
+        setTotal(data.total)
+        setHasMore(data.hasMore)
+        setPage(1)
+        setLoading(false)
+      })
+      .catch(() => setLoading(false))
+  }, [])
+
   const handleFilterChange = useCallback((filters: ActiveFilters) => {
     setActiveFilters(filters)
     setPage(1)
-    setFiltering(true)
+    setLoading(true)
     filterVersion.current += 1
     const version = filterVersion.current
 
-    const url = `/engagement-rings${filtersToURL(filters)}`
-    router.push(url, { scroll: false })
+    router.push(`/engagement-rings${filtersToURL(filters)}`, { scroll: false })
 
     fetch(buildQuery(filters, 1))
       .then(r => r.json())
@@ -59,9 +72,9 @@ export function EngagementRingsContent({ initialData }: EngagementRingsContentPr
         setRings(data.rings)
         setTotal(data.total)
         setHasMore(data.hasMore)
-        setFiltering(false)
+        setLoading(false)
       })
-      .catch(() => setFiltering(false))
+      .catch(() => setLoading(false))
   }, [router, buildQuery])
 
   const handleLoadMore = useCallback(() => {
@@ -73,9 +86,8 @@ export function EngagementRingsContent({ initialData }: EngagementRingsContentPr
       .then(r => r.json())
       .then((data: PaginatedRings) => {
         setRings(prev => {
-          const existingSlugs = new Set(prev.map(r => r.slug))
-          const fresh = data.rings.filter(r => !existingSlugs.has(r.slug))
-          return [...prev, ...fresh]
+          const seen = new Set(prev.map(r => r.slug))
+          return [...prev, ...data.rings.filter(r => !seen.has(r.slug))]
         })
         setPage(nextPage)
         setHasMore(data.hasMore)
@@ -131,10 +143,7 @@ export function EngagementRingsContent({ initialData }: EngagementRingsContentPr
                 </button>
               ) : null
             )}
-            <button
-              onClick={() => handleFilterChange({})}
-              className="text-[#D4AF37] text-xs hover:underline ml-2"
-            >
+            <button onClick={() => handleFilterChange({})} className="text-[#D4AF37] text-xs hover:underline ml-2">
               Clear all
             </button>
           </div>
@@ -142,9 +151,17 @@ export function EngagementRingsContent({ initialData }: EngagementRingsContentPr
       )}
 
       <div className="container mx-auto px-4 py-6">
-        {filtering ? (
-          <div className="flex justify-center items-center py-24">
-            <Loader2 size={32} className="animate-spin text-[#D4AF37]" />
+        {loading ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div key={i} className="rounded-lg bg-zinc-900 animate-pulse">
+                <div className="aspect-square bg-zinc-800 rounded-t-lg" />
+                <div className="p-3 space-y-2">
+                  <div className="h-4 bg-zinc-800 rounded w-3/4" />
+                  <div className="h-3 bg-zinc-800 rounded w-1/2" />
+                </div>
+              </div>
+            ))}
           </div>
         ) : sortedRings.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-center">
@@ -155,9 +172,7 @@ export function EngagementRingsContent({ initialData }: EngagementRingsContentPr
               </svg>
             </div>
             <h2 className="font-heading text-white text-xl mb-2">No rings match your filters</h2>
-            <p className="text-gray-500 text-sm mb-6 max-w-sm">
-              Try adjusting or clearing your filters to see more results.
-            </p>
+            <p className="text-gray-500 text-sm mb-6 max-w-sm">Try adjusting or clearing your filters to see more results.</p>
             <button
               onClick={() => handleFilterChange({})}
               className="px-6 py-2.5 border border-[#D4AF37] text-[#D4AF37] text-sm font-medium tracking-wide hover:bg-[#D4AF37] hover:text-black transition-all duration-200 rounded"
@@ -168,9 +183,7 @@ export function EngagementRingsContent({ initialData }: EngagementRingsContentPr
         ) : (
           <>
             <div className="flex items-center justify-between mb-6">
-              <p className="text-gray-600 text-xs">
-                {rings.length} of {total} settings
-              </p>
+              <p className="text-gray-600 text-xs">{rings.length} of {total} settings</p>
               <div className="flex items-center gap-2">
                 <span className="text-gray-500 text-xs">Sort:</span>
                 <select
@@ -198,29 +211,16 @@ export function EngagementRingsContent({ initialData }: EngagementRingsContentPr
                   disabled={loadingMore}
                   className="flex items-center gap-2 px-8 py-3 border border-zinc-700 hover:border-[#D4AF37] text-gray-300 hover:text-[#D4AF37] text-sm font-medium tracking-widest uppercase transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {loadingMore ? (
-                    <>
-                      <Loader2 size={14} className="animate-spin" />
-                      Loading...
-                    </>
-                  ) : (
-                    `Load More (${total - rings.length} remaining)`
-                  )}
+                  {loadingMore ? <><Loader2 size={14} className="animate-spin" /> Loading...</> : `Load More (${total - rings.length} remaining)`}
                 </button>
               </div>
             )}
 
             <div className="mt-16 pt-12 border-t border-zinc-800">
-              <h3 className="font-heading text-white text-xl font-light tracking-wide mb-4">
-                Engagement Rings — Timeless, Forever.
-              </h3>
+              <h3 className="font-heading text-white text-xl font-light tracking-wide mb-4">Engagement Rings — Timeless, Forever.</h3>
               <div className="max-w-3xl space-y-4 text-gray-500 text-sm leading-relaxed">
-                <p>
-                  Timeless, brilliant and universally adored — an engagement ring is a style icon perfect for those who treasure elegant, enduring beauty. Each ring is handcrafted using premium materials and lab grown gemstones.
-                </p>
-                <p>
-                  At LKB Jewellers, every ring is handcrafted using premium materials and ethically sourced gemstones. Explore the collection online or begin your journey in one of our showrooms.
-                </p>
+                <p>Timeless, brilliant and universally adored — an engagement ring is a style icon perfect for those who treasure elegant, enduring beauty. Each ring is handcrafted using premium materials and lab grown gemstones.</p>
+                <p>At LKB Jewellers, every ring is handcrafted using premium materials and ethically sourced gemstones. Explore the collection online or begin your journey in one of our showrooms.</p>
               </div>
             </div>
           </>
