@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import { EngagementRingsContent } from '@/components/engagement-rings/engagement-rings-content'
 import ShowroomSection from '@/components/showroom-section'
@@ -10,7 +11,9 @@ export const metadata: Metadata = {
 export default function EngagementRingsPage() {
   return (
     <>
-      <EngagementRingsContent />
+      <Suspense>
+        <EngagementRingsContent />
+      </Suspense>
       <ShowroomSection />
     </>
   )
