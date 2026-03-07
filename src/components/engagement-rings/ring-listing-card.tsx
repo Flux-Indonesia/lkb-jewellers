@@ -41,10 +41,28 @@ export function RingListingCard({ ring, priority = false, selectedMetal }: RingL
   const [isHovered, setIsHovered] = useState(false)
   const [imgError, setImgError] = useState(false)
   const [hoverLoaded, setHoverLoaded] = useState(false)
+  const [thumbSwapFailed, setThumbSwapFailed] = useState(false)
+  const [hoverSwapFailed, setHoverSwapFailed] = useState(false)
   const preloadRef = useRef<{ img: HTMLImageElement; timeout: number } | null>(null)
 
-  const thumbnail = selectedMetal ? swapMetalInUrl(ring.thumbnail, selectedMetal) : ring.thumbnail
-  const hoverImage = selectedMetal ? swapMetalInUrl(ring.hoverImage, selectedMetal) : ring.hoverImage
+  // Reset swap failure state ketika metal berubah
+  const prevMetalRef = useRef(selectedMetal)
+  if (prevMetalRef.current !== selectedMetal) {
+    prevMetalRef.current = selectedMetal
+    setThumbSwapFailed(false)
+    setHoverSwapFailed(false)
+    setImgError(false)
+    setHoverLoaded(false)
+  }
+
+  const thumbnail =
+    selectedMetal && !thumbSwapFailed
+      ? swapMetalInUrl(ring.thumbnail, selectedMetal)
+      : ring.thumbnail
+  const hoverImage =
+    selectedMetal && !hoverSwapFailed
+      ? swapMetalInUrl(ring.hoverImage, selectedMetal)
+      : ring.hoverImage
 
   const hasHover = Boolean(hoverImage && hoverImage !== thumbnail)
 
@@ -57,8 +75,15 @@ export function RingListingCard({ ring, priority = false, selectedMetal }: RingL
     preloadRef.current = { img, timeout }
     img.src = hoverImage
     img.onload = () => { window.clearTimeout(timeout); setHoverLoaded(true) }
-    img.onerror = () => { window.clearTimeout(timeout); setHoverLoaded(true) }
-  }, [hasHover, hoverLoaded, ring.hoverImage])
+    img.onerror = () => {
+      window.clearTimeout(timeout)
+      if (selectedMetal && !hoverSwapFailed) {
+        setHoverSwapFailed(true)
+      } else {
+        setHoverLoaded(true)
+      }
+    }
+  }, [hasHover, hoverLoaded, hoverImage, selectedMetal, hoverSwapFailed])
 
   const handleMouseLeave = useCallback(() => {
     setIsHovered(false)
@@ -106,7 +131,13 @@ export function RingListingCard({ ring, priority = false, selectedMetal }: RingL
                 className={`object-cover absolute inset-0 z-10 transition-opacity duration-200 ${isHovered && hoverLoaded && hasHover ? 'opacity-0' : 'opacity-100'}`}
                 placeholder="blur"
                 blurDataURL={BLUR_PLACEHOLDER}
-                onError={() => setImgError(true)}
+                onError={() => {
+                  if (selectedMetal && !thumbSwapFailed) {
+                    setThumbSwapFailed(true)
+                  } else {
+                    setImgError(true)
+                  }
+                }}
                 priority={priority}
               />
             </>
