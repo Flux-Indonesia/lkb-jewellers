@@ -16,6 +16,7 @@ import {
 interface FilterBarProps {
   activeFilters: ActiveFilters
   onFilterChange: (filters: ActiveFilters) => void
+  disabled?: boolean
 }
 
 // ─── SVG Icon Components ──────────────────────────────────────────────────────
@@ -128,17 +129,25 @@ interface FilterButtonProps {
   children: React.ReactNode
   title?: string
   filterKey: string
+  disabled?: boolean
 }
 
-function FilterButton({ isActive, onClick, children, title, filterKey }: FilterButtonProps) {
+function FilterButton({ isActive, onClick, children, title, filterKey, disabled }: FilterButtonProps) {
   return (
     <motion.button
       onClick={onClick}
       title={title}
-      whileTap={{ scale: 0.95 }}
+      disabled={disabled}
+      aria-pressed={isActive}
+      whileTap={disabled ? undefined : { scale: 0.95 }}
       className={`
         relative flex flex-col items-center gap-1 px-2.5 py-2 rounded-lg border
-        transition-all duration-200 cursor-pointer min-w-[56px]
+        transition-all duration-200 min-w-[56px]
+        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] focus-visible:ring-offset-2 focus-visible:ring-offset-black
+        ${disabled
+          ? 'opacity-50 cursor-not-allowed'
+          : 'cursor-pointer'
+        }
         ${isActive
           ? 'border-[#D4AF37] text-[#D4AF37] bg-[#D4AF37]/5'
           : 'border-zinc-800 text-gray-500 hover:border-zinc-600 hover:text-gray-300'
@@ -163,7 +172,7 @@ function FilterButton({ isActive, onClick, children, title, filterKey }: FilterB
 const SHAPE_DEFAULT_COUNT = 7
 const SETTING_STYLE_DEFAULT_COUNT = 4
 
-export function FilterBar({ activeFilters, onFilterChange }: FilterBarProps) {
+export function FilterBar({ activeFilters, onFilterChange, disabled = false }: FilterBarProps) {
   const [showAllShapes, setShowAllShapes] = useState(false)
   const [showAllSettingStyles, setShowAllSettingStyles] = useState(false)
 
@@ -225,6 +234,7 @@ export function FilterBar({ activeFilters, onFilterChange }: FilterBarProps) {
                   onClick={() => toggleFilter('shape', opt.value)}
                   title={opt.description}
                   filterKey="shape"
+                  disabled={disabled}
                 >
                   <ShapeIcon svgPath={opt.svgPath} label={opt.label} />
                   <span className="text-[10px] font-medium tracking-wide whitespace-nowrap">
@@ -249,6 +259,7 @@ export function FilterBar({ activeFilters, onFilterChange }: FilterBarProps) {
                   onClick={() => toggleFilter('metal', opt.value)}
                   title={opt.description}
                   filterKey="metal"
+                  disabled={disabled}
                 >
                   <div className="relative w-7 h-7 rounded-full border border-zinc-600 overflow-hidden flex-shrink-0">
                     <div
@@ -303,6 +314,7 @@ export function FilterBar({ activeFilters, onFilterChange }: FilterBarProps) {
                   onClick={() => toggleFilter('settingStyle', opt.value)}
                   title={opt.description}
                   filterKey="settingStyle"
+                  disabled={disabled}
                 >
                   {opt.svgPath && (
                     <FilterIcon svgPath={opt.svgPath} label={opt.label} />
@@ -329,6 +341,7 @@ export function FilterBar({ activeFilters, onFilterChange }: FilterBarProps) {
                   onClick={() => toggleFilter('bandType', opt.value)}
                   title={opt.description}
                   filterKey="bandType"
+                  disabled={disabled}
                 >
                   {opt.svgPath && (
                     <FilterIcon svgPath={opt.svgPath} label={opt.label} />
@@ -355,6 +368,7 @@ export function FilterBar({ activeFilters, onFilterChange }: FilterBarProps) {
                   onClick={() => toggleFilter('settingProfile', opt.value)}
                   title={opt.description}
                   filterKey="settingProfile"
+                  disabled={disabled}
                 >
                   {opt.svgPath && (
                     <FilterIcon svgPath={opt.svgPath} label={opt.label} />

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { RingListingItem } from '@/lib/supabase-rings'
@@ -28,21 +28,25 @@ export function RingListingCard({ ring, priority = false }: RingListingCardProps
   const [isHovered, setIsHovered] = useState(false)
   const [imgError, setImgError] = useState(false)
   const [hoverLoaded, setHoverLoaded] = useState(false)
+  const preloadRef = useRef<{ img: HTMLImageElement; timeout: number } | null>(null)
 
   const hasHover = Boolean(ring.hoverImage && ring.hoverImage !== ring.thumbnail)
 
-  useEffect(() => {
-    if (!hasHover) {
-      setHoverLoaded(true)
-      return
-    }
+  const handleMouseEnter = useCallback(() => {
+    setIsHovered(true)
+    if (!hasHover || hoverLoaded) return
+
     const img = new window.Image()
     const timeout = window.setTimeout(() => setHoverLoaded(true), 1200)
+    preloadRef.current = { img, timeout }
     img.src = ring.hoverImage
     img.onload = () => { window.clearTimeout(timeout); setHoverLoaded(true) }
     img.onerror = () => { window.clearTimeout(timeout); setHoverLoaded(true) }
-    return () => { window.clearTimeout(timeout); img.onload = null; img.onerror = null }
-  }, [ring.hoverImage, hasHover])
+  }, [hasHover, hoverLoaded, ring.hoverImage])
+
+  const handleMouseLeave = useCallback(() => {
+    setIsHovered(false)
+  }, [])
 
   return (
     <Link
@@ -52,8 +56,8 @@ export function RingListingCard({ ring, priority = false }: RingListingCardProps
     >
       <div
         className="relative overflow-hidden rounded-lg bg-zinc-950 border border-zinc-800 hover:border-zinc-600 transition-all duration-300"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         <div className="relative aspect-square overflow-hidden bg-zinc-900">
           {imgError ? (
@@ -93,7 +97,7 @@ export function RingListingCard({ ring, priority = false }: RingListingCardProps
           )}
 
           {ring.settingStyle && (
-            <div className="absolute bottom-0 left-0 bg-black/60 backdrop-blur-sm px-2 py-1 text-[9px] font-medium tracking-widest uppercase text-gray-300 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            <div className="absolute bottom-0 left-0 bg-black/60 backdrop-blur-sm px-2 py-1 text-[9px] font-medium tracking-widest uppercase text-gray-300 z-10 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-200">
               {ring.settingStyle.replace(/_/g, ' ')}
             </div>
           )}

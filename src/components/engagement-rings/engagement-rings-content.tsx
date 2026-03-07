@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
-import { X, Loader2 } from 'lucide-react'
+import { X, Loader2, ChevronDown } from 'lucide-react'
 import { FilterBar } from '@/components/engagement-rings/filter-bar'
 import { RingListingCard } from '@/components/engagement-rings/ring-listing-card'
 import type { PaginatedRings, RingListingItem } from '@/lib/supabase-rings'
@@ -10,6 +10,14 @@ import { parseFiltersFromURL, filtersToURL, hasActiveFilters } from '@/lib/ring-
 import type { ActiveFilters } from '@/lib/ring-filters'
 
 const PAGE_SIZE = 24
+
+function formatFilterLabel(key: string, value: string): string {
+  const label = key
+    .replace(/([A-Z])/g, ' $1')
+    .trim()
+    .replace(/^(.)/, c => c.toUpperCase())
+  return `${label}: ${value}`
+}
 
 export function EngagementRingsContent() {
   const searchParams = useSearchParams()
@@ -27,14 +35,17 @@ export function EngagementRingsContent() {
   const [loading, setLoading] = useState(true)
   const filterVersion = useRef(0)
 
-  const buildQuery = useCallback((filters: ActiveFilters, p: number) => {
+  const buildQuery = useCallback((filters: ActiveFilters, p: number, sort: typeof sortBy) => {
     const params = new URLSearchParams()
     params.set('page', String(p))
     params.set('limit', String(PAGE_SIZE))
     if (filters.shape) params.set('shape', filters.shape)
+    if (filters.metal) params.set('metalOption', filters.metal)
     if (filters.settingStyle) params.set('settingStyle', filters.settingStyle)
     if (filters.bandType) params.set('bandType', filters.bandType)
     if (filters.settingProfile) params.set('settingProfile', filters.settingProfile)
+    if (sort === 'price_asc') params.set('sort', 'price_asc')
+    if (sort === 'price_desc') params.set('sort', 'price_desc')
     return `/api/rings/listing?${params.toString()}`
   }, [])
 
@@ -43,7 +54,7 @@ export function EngagementRingsContent() {
     const version = filterVersion.current
     setLoading(true)
 
-    fetch(buildQuery(activeFilters, 1))
+    fetch(buildQuery(activeFilters, 1, sortBy))
       .then(r => r.json())
       .then((data: PaginatedRings) => {
         if (filterVersion.current !== version) return
@@ -65,7 +76,7 @@ export function EngagementRingsContent() {
 
     router.push(`/engagement-rings${filtersToURL(filters)}`, { scroll: false })
 
-    fetch(buildQuery(filters, 1))
+    fetch(buildQuery(filters, 1, sortBy))
       .then(r => r.json())
       .then((data: PaginatedRings) => {
         if (filterVersion.current !== version) return
@@ -75,14 +86,33 @@ export function EngagementRingsContent() {
         setLoading(false)
       })
       .catch(() => setLoading(false))
-  }, [router, buildQuery])
+  }, [router, buildQuery, sortBy])
+
+  const handleSortChange = useCallback((newSort: typeof sortBy) => {
+    setSortBy(newSort)
+    setPage(1)
+    setLoading(true)
+    filterVersion.current += 1
+    const version = filterVersion.current
+
+    fetch(buildQuery(activeFilters, 1, newSort))
+      .then(r => r.json())
+      .then((data: PaginatedRings) => {
+        if (filterVersion.current !== version) return
+        setRings(data.rings)
+        setTotal(data.total)
+        setHasMore(data.hasMore)
+        setLoading(false)
+      })
+      .catch(() => setLoading(false))
+  }, [buildQuery, activeFilters])
 
   const handleLoadMore = useCallback(() => {
     if (loadingMore || !hasMore) return
     const nextPage = page + 1
     setLoadingMore(true)
 
-    fetch(buildQuery(activeFilters, nextPage))
+    fetch(buildQuery(activeFilters, nextPage, sortBy))
       .then(r => r.json())
       .then((data: PaginatedRings) => {
         setRings(prev => {
@@ -94,14 +124,7 @@ export function EngagementRingsContent() {
         setLoadingMore(false)
       })
       .catch(() => setLoadingMore(false))
-  }, [loadingMore, hasMore, page, activeFilters, buildQuery])
-
-  const sortedRings = useMemo(() => {
-    const sorted = [...rings]
-    if (sortBy === 'price_asc') sorted.sort((a, b) => a.basePrice - b.basePrice)
-    if (sortBy === 'price_desc') sorted.sort((a, b) => b.basePrice - a.basePrice)
-    return sorted
-  }, [rings, sortBy])
+  }, [loadingMore, hasMore, page, activeFilters, buildQuery, sortBy])
 
   return (
     <div className="min-h-screen bg-black">
@@ -121,7 +144,7 @@ export function EngagementRingsContent() {
         </div>
       </div>
 
-      <FilterBar activeFilters={activeFilters} onFilterChange={handleFilterChange} />
+      <FilterBar activeFilters={activeFilters} onFilterChange={handleFilterChange} disabled={loading} />
 
       {hasActiveFilters(activeFilters) && (
         <div className="container mx-auto px-4 py-4">
@@ -138,7 +161,7 @@ export function EngagementRingsContent() {
                   }}
                   className="flex items-center gap-1.5 bg-zinc-900 border border-zinc-700 hover:border-[#D4AF37] text-gray-300 text-xs px-3 py-1.5 rounded-full transition-colors duration-200"
                 >
-                  <span className="capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}: {value}</span>
+                  <span>{formatFilterLabel(key, value)}</span>
                   <X size={10} />
                 </button>
               ) : null
@@ -163,7 +186,7 @@ export function EngagementRingsContent() {
               </div>
             ))}
           </div>
-        ) : sortedRings.length === 0 ? (
+        ) : rings.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-center">
             <div className="w-16 h-16 rounded-full bg-zinc-900 flex items-center justify-center mb-6">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="text-zinc-600">
@@ -186,20 +209,24 @@ export function EngagementRingsContent() {
               <p className="text-gray-600 text-xs">{rings.length} of {total} settings</p>
               <div className="flex items-center gap-2">
                 <span className="text-gray-500 text-xs">Sort:</span>
-                <select
-                  value={sortBy}
-                  onChange={e => setSortBy(e.target.value as typeof sortBy)}
-                  className="bg-zinc-900 border border-zinc-700 text-white text-xs px-3 py-1.5 rounded appearance-none cursor-pointer hover:border-zinc-500 focus:outline-none focus:border-[#D4AF37]"
-                >
-                  <option value="recommended">Recommended</option>
-                  <option value="price_asc">Price: Low to High</option>
-                  <option value="price_desc">Price: High to Low</option>
-                </select>
+                <div className="relative">
+                  <select
+                    value={sortBy}
+                    onChange={e => handleSortChange(e.target.value as typeof sortBy)}
+                    className="bg-zinc-900 border border-zinc-700 text-white text-xs pl-3 pr-8 py-1.5 rounded appearance-none cursor-pointer hover:border-zinc-500 focus:outline-none focus:border-[#D4AF37]"
+                  >
+                    <option value="recommended">Recommended</option>
+                    <option value="price_asc">Price: Low to High</option>
+                    <option value="price_desc">Price: High to Low</option>
+                  </select>
+                  <ChevronDown size={12} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none" />
+                </div>
               </div>
             </div>
 
+            <h2 className="sr-only">Ring Settings</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-              {sortedRings.map((ring, index) => (
+              {rings.map((ring, index) => (
                 <RingListingCard key={ring.slug} ring={ring} priority={index < 8} />
               ))}
             </div>
