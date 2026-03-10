@@ -69,9 +69,24 @@ export const stoneTypes: StoneTypeOption[] = [
 
 export const clarityOptions: ClarityOption[] = [
   {
-    value: 'IF',
-    label: 'IF',
-    description: 'Internally Flawless — no inclusions visible under 10x magnification',
+    value: 'SI1',
+    label: 'SI1',
+    description: 'Slightly Included 1 — inclusions noticeable under 10x magnification',
+  },
+  {
+    value: 'SI2',
+    label: 'SI2',
+    description: 'Slightly Included 2 — inclusions easily noticeable under 10x magnification',
+  },
+  {
+    value: 'VS1',
+    label: 'VS1',
+    description: 'Very Slightly Included 1 — minor inclusions, difficult to see under 10x',
+  },
+  {
+    value: 'VS2',
+    label: 'VS2',
+    description: 'Very Slightly Included 2 — minor inclusions, somewhat easy to see under 10x',
   },
   {
     value: 'VVS1',
@@ -84,14 +99,14 @@ export const clarityOptions: ClarityOption[] = [
     description: 'Very Very Slightly Included 2 — minute inclusions, very difficult to see',
   },
   {
-    value: 'VS1',
-    label: 'VS1',
-    description: 'Very Slightly Included 1 — minor inclusions, difficult to see under 10x',
+    value: 'IF',
+    label: 'IF',
+    description: 'Internally Flawless — no inclusions visible under 10x magnification',
   },
   {
-    value: 'VS2',
-    label: 'VS2',
-    description: 'Very Slightly Included 2 — minor inclusions, somewhat easy to see under 10x',
+    value: 'FL',
+    label: 'FL',
+    description: 'Flawless — no inclusions or blemishes visible under 10x magnification',
   },
 ]
 
@@ -102,7 +117,9 @@ export const caratRanges: CaratRangeOption[] = [
   { value: '2.00-2.24', label: '2.00 – 2.24ct', minCarat: 2.00, maxCarat: 2.24 },
   { value: '2.25-2.49', label: '2.25 – 2.49ct', minCarat: 2.25, maxCarat: 2.49 },
   { value: '2.50-2.99', label: '2.50 – 2.99ct', minCarat: 2.50, maxCarat: 2.99 },
-  { value: '3.00+', label: '3.00ct+', minCarat: 3.00, maxCarat: 99 },
+  { value: '3.00-3.99', label: '3.00 – 3.99ct', minCarat: 3.00, maxCarat: 3.99 },
+  { value: '4.00-4.99', label: '4.00 – 4.99ct', minCarat: 4.00, maxCarat: 4.99 },
+  { value: '5.00+', label: '5.00ct+', minCarat: 5.00, maxCarat: 99 },
 ]
 
 export const colourOptions: ColourOption[] = [

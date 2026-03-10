@@ -2,7 +2,7 @@
 // Matches Cullen Jewellery filter categories
 
 export type ShapeValue = 'round' | 'oval' | 'emerald' | 'radiant' | 'pear' | 'cushion' | 'elongated_cushion' | 'elongated_hexagon' | 'marquise' | 'princess' | 'asscher'
-export type MetalValue = 'platinum' | 'yellow_gold' | 'rose_gold' | 'white_gold'
+export type MetalValue = 'platinum' | 'yellow_gold' | 'rose_gold' | 'white_gold' | '9k_yellow_gold' | '9k_white_gold' | '9k_rose_gold' | 'palladium'
 export type SettingStyleValue = 'trilogy' | 'solitaire' | 'halo' | 'toi_et_moi' | 'bezel' | 'east_west'
 export type BandTypeValue = 'plain' | 'pave' | 'accents'
 export type SettingProfileValue = 'high_set' | 'low_set'
@@ -100,6 +100,12 @@ export const metalOptions: MetalOption[] = [
     color: '#E8E8E8',
   },
   {
+    value: 'palladium',
+    label: 'Palladium',
+    description: 'Lightweight, hypoallergenic white metal',
+    color: '#CED0CE',
+  },
+  {
     value: 'yellow_gold',
     label: '18K Yellow Gold',
     description: 'Classic warm gold in 18k purity',
@@ -116,6 +122,24 @@ export const metalOptions: MetalOption[] = [
     label: '18K White Gold',
     description: 'Bright white 18k gold with rhodium plating',
     color: '#D0D0D0',
+  },
+  {
+    value: '9k_yellow_gold',
+    label: '9K Yellow Gold',
+    description: 'Classic warm gold in 9k purity',
+    color: '#D4AF37',
+  },
+  {
+    value: '9k_white_gold',
+    label: '9K White Gold',
+    description: 'Bright white 9k gold',
+    color: '#D0D0D0',
+  },
+  {
+    value: '9k_rose_gold',
+    label: '9K Rose Gold',
+    description: 'Romantic blush-toned 9k gold',
+    color: '#B76E79',
   },
 ]
 

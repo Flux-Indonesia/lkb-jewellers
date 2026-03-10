@@ -30,22 +30,26 @@ export interface Ring {
 
 export const RING_METAL_OPTIONS = [
   'Platinum',
+  'Palladium',
   '18k Yellow Gold',
   '18k Rose Gold',
   '18k White Gold',
+  '9k Yellow Gold',
+  '9k Rose Gold',
+  '9k White Gold',
 ] as const
 
 export const RING_SETTING_OPTIONS = ['High Setting', 'Low Setting'] as const
 
 export const RING_SIDE_STONE_OPTIONS = [
   'Lab Grown Diamond',
-  'Moissanite',
   'Natural Diamond',
 ] as const
 
 export const RING_SIZES = [
-  'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
-  'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+  'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+  'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
+  'V', 'W', 'X', 'Y', 'Z',
 ] as const
 
 export const engagementRings: Ring[] = [
@@ -184,7 +188,7 @@ export const engagementRings: Ring[] = [
       "estimatedWeight": "2.8g",
       "resizing": "Complimentary"
     },
-    "shape": "round",
+    "shape": "pear",
     "settingStyle": "halo",
     "bandType": "plain",
     "settingProfile": "high_set"
@@ -1388,7 +1392,7 @@ export const engagementRings: Ring[] = [
       "estimatedWeight": "2.8g",
       "resizing": "Complimentary"
     },
-    "shape": "round",
+    "shape": "pear",
     "settingStyle": "solitaire",
     "bandType": "plain",
     "settingProfile": "high_set"
@@ -1416,7 +1420,7 @@ export const engagementRings: Ring[] = [
       "estimatedWeight": "2.8g",
       "resizing": "Complimentary"
     },
-    "shape": "round",
+    "shape": "princess",
     "settingStyle": "halo",
     "bandType": "pave",
     "settingProfile": "high_set"
@@ -3206,7 +3210,7 @@ export const engagementRings: Ring[] = [
       "estimatedWeight": "2.8g",
       "resizing": "Complimentary"
     },
-    "shape": "round",
+    "shape": "pear",
     "settingStyle": "solitaire",
     "bandType": "accents",
     "settingProfile": "high_set"
@@ -3710,7 +3714,7 @@ export const engagementRings: Ring[] = [
       "estimatedWeight": "2.8g",
       "resizing": "Complimentary"
     },
-    "shape": "round",
+    "shape": "radiant",
     "settingStyle": "halo",
     "bandType": "accents",
     "settingProfile": "high_set"
@@ -4354,7 +4358,7 @@ export const engagementRings: Ring[] = [
       "estimatedWeight": "2.8g",
       "resizing": "Complimentary"
     },
-    "shape": "round",
+    "shape": "emerald",
     "settingStyle": "halo",
     "bandType": "plain",
     "settingProfile": "high_set"
@@ -4830,7 +4834,7 @@ export const engagementRings: Ring[] = [
       "estimatedWeight": "2.8g",
       "resizing": "Complimentary"
     },
-    "shape": "round",
+    "shape": "emerald",
     "settingStyle": "solitaire",
     "bandType": "accents",
     "settingProfile": "high_set"
@@ -4942,7 +4946,7 @@ export const engagementRings: Ring[] = [
       "estimatedWeight": "2.8g",
       "resizing": "Complimentary"
     },
-    "shape": "round",
+    "shape": "pear",
     "settingStyle": "solitaire",
     "bandType": "plain",
     "settingProfile": "high_set"
@@ -5026,7 +5030,7 @@ export const engagementRings: Ring[] = [
       "estimatedWeight": "2.8g",
       "resizing": "Complimentary"
     },
-    "shape": "round",
+    "shape": "emerald",
     "settingStyle": "solitaire",
     "bandType": "accents",
     "settingProfile": "high_set"
@@ -6146,7 +6150,7 @@ export const engagementRings: Ring[] = [
       "estimatedWeight": "2.8g",
       "resizing": "Complimentary"
     },
-    "shape": "round",
+    "shape": "radiant",
     "settingStyle": "solitaire",
     "bandType": "plain",
     "settingProfile": "high_set"

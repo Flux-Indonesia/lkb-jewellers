@@ -9,9 +9,13 @@ import type { RingColorPreference } from '@/lib/ring-preferences'
 
 const METAL_COLOR_PREFIX: Record<MetalValue, string> = {
   platinum: 'white',
+  palladium: 'white',
   yellow_gold: 'yellow',
   rose_gold: 'rose',
   white_gold: 'white',
+  '9k_yellow_gold': 'yellow',
+  '9k_white_gold': 'white',
+  '9k_rose_gold': 'rose',
 }
 
 function swapMetalInUrl(url: string, metal: MetalValue): string {
