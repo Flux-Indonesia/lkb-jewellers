@@ -240,7 +240,7 @@ export default function FloatingButtons() {
             style={{
               boxShadow:
                 "0 0 40px rgba(0,0,0,0.8), 0 0 20px rgba(212,175,55,0.06)",
-              maxHeight: "min(600px, 85vh)",
+              height: "min(600px, 85vh)",
             }}
           >
             {/* Header */}
