@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Phone, ChevronRight, ChevronLeft, ChevronUp } from "lucide-react";
+import { Phone, ChevronRight, ChevronLeft, ChevronUp, MessageCircle, X, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Script from "next/script";
 
@@ -9,16 +9,38 @@ declare global {
   namespace JSX {
     interface IntrinsicElements {
       "elevenlabs-convai": React.DetailedHTMLProps<
-        React.HTMLAttributes<HTMLElement> & { "agent-id": string },
+        React.HTMLAttributes<HTMLElement> & {
+          "agent-id": string;
+          "dynamic-variables"?: string;
+          "avatar-orb-color-1"?: string;
+          "avatar-orb-color-2"?: string;
+          "override-first-message"?: string;
+          "markdown-link-allowed-hosts"?: string;
+        },
         HTMLElement
       >;
     }
   }
 }
 
+interface VisitorData {
+  name: string;
+  email: string;
+  address: string;
+  phone: string;
+}
+
 export default function FloatingButtons() {
   const [expanded, setExpanded] = useState(true);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [visitorData, setVisitorData] = useState<VisitorData | null>(null);
+  const [formData, setFormData] = useState<VisitorData>({
+    name: "",
+    email: "",
+    address: "",
+    phone: "",
+  });
 
   useEffect(() => {
     const onScroll = () => {
@@ -32,16 +54,20 @@ export default function FloatingButtons() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setVisitorData(formData);
+  };
+
   return (
     <>
-      {/* Uncle G — ElevenLabs Chatbot */}
+      {/* ElevenLabs widget script */}
       <Script
         src="https://elevenlabs.io/convai-widget/index.js"
         strategy="lazyOnload"
       />
-      <elevenlabs-convai agent-id="agent_7601kkk0btpde10tf5y7szdyhr93" />
 
-      {/* Right side - Phone + WhatsApp */}
+      {/* Right side - Phone + WhatsApp + Uncle G */}
       <div className="fixed bottom-8 right-8 z-50 flex items-center gap-3">
         {/* Toggle button */}
         <Button
@@ -64,6 +90,21 @@ export default function FloatingButtons() {
               : "opacity-0 translate-x-20 pointer-events-none"
           }`}
         >
+          {/* Uncle G Chat */}
+          <div className="relative group">
+            <button
+              onClick={() => setChatOpen(true)}
+              className="bg-black text-white border-2 border-[#D4AF37] p-3 rounded-full shadow-2xl hover:bg-[#D4AF37] hover:border-[#D4AF37] transition-all duration-300 hover:scale-110 flex items-center justify-center animate-float"
+              aria-label="Chat with Uncle G"
+              style={{ animationDelay: "0.6s" }}
+            >
+              <MessageCircle className="w-5 h-5 text-[#D4AF37] group-hover:text-black transition-colors duration-300" />
+            </button>
+            <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 bg-black border border-[#D4AF37]/40 text-white text-xs px-2 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+              Chat with Uncle G
+            </span>
+          </div>
+
           <a
             href="tel:+442033365303"
             className="bg-black text-white border-2 border-gray-700 p-3 rounded-full shadow-2xl hover:bg-[#D4AF37] hover:border-[#D4AF37] transition-all duration-300 hover:scale-110 flex items-center justify-center group animate-float"
@@ -95,6 +136,176 @@ export default function FloatingButtons() {
           </a>
         </div>
       </div>
+
+      {/* Uncle G Chat Modal */}
+      {chatOpen && (
+        <div className="fixed inset-0 z-[60] flex items-end justify-end p-4 md:p-8 pointer-events-none">
+          <div
+            className="pointer-events-auto w-full max-w-sm bg-[#0a0a0a] border border-gray-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+            style={{
+              boxShadow:
+                "0 0 40px rgba(0,0,0,0.8), 0 0 20px rgba(212,175,55,0.06)",
+              maxHeight: "min(600px, 85vh)",
+            }}
+          >
+            {/* Header */}
+            <div
+              className="flex items-center justify-between px-4 py-3 border-b border-gray-800 flex-shrink-0"
+              style={{
+                background:
+                  "linear-gradient(90deg, #0a0a0a 0%, #130e00 100%)",
+              }}
+            >
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-full border border-[#D4AF37]/50 bg-[#D4AF37]/10 flex items-center justify-center">
+                  <span className="text-[#D4AF37] text-sm">✦</span>
+                </div>
+                <div>
+                  <p className="text-white text-sm font-bold leading-tight">
+                    Uncle G
+                  </p>
+                  <p
+                    className="text-[#D4AF37] text-xs"
+                    style={{
+                      fontFamily: "ui-sans-serif, system-ui, sans-serif",
+                    }}
+                  >
+                    Your Jewellery Expert
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setChatOpen(false)}
+                className="text-gray-500 hover:text-white transition-colors p-1"
+                aria-label="Close chat"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Body — pre-chat form or ElevenLabs widget */}
+            <div className="flex-1 overflow-y-auto min-h-0">
+              {!visitorData ? (
+                <form
+                  onSubmit={handleFormSubmit}
+                  className="p-5 flex flex-col gap-4"
+                >
+                  <p
+                    className="text-gray-300 text-sm leading-relaxed"
+                    style={{
+                      fontFamily:
+                        '"Mona Sans", "Mona Sans Fallback", ui-sans-serif, system-ui, sans-serif',
+                    }}
+                  >
+                    Welcome to LKB Jewellers. Before we begin, may I take a few
+                    details so our team can assist you personally?
+                  </p>
+
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[#D4AF37] text-xs font-medium tracking-wide uppercase">
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          name: e.target.value,
+                        }))
+                      }
+                      placeholder="Your full name"
+                      className="bg-black border border-gray-700 rounded-lg px-3 py-2 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-[#D4AF37]/50 transition-colors"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[#D4AF37] text-xs font-medium tracking-wide uppercase">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          email: e.target.value,
+                        }))
+                      }
+                      placeholder="your@email.com"
+                      className="bg-black border border-gray-700 rounded-lg px-3 py-2 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-[#D4AF37]/50 transition-colors"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[#D4AF37] text-xs font-medium tracking-wide uppercase">
+                      Address
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.address}
+                      onChange={(e) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          address: e.target.value,
+                        }))
+                      }
+                      placeholder="Your address"
+                      className="bg-black border border-gray-700 rounded-lg px-3 py-2 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-[#D4AF37]/50 transition-colors"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-1">
+                    <label className="text-[#D4AF37] text-xs font-medium tracking-wide uppercase">
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      value={formData.phone}
+                      onChange={(e) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          phone: e.target.value,
+                        }))
+                      }
+                      placeholder="+44 7000 000000"
+                      className="bg-black border border-gray-700 rounded-lg px-3 py-2 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-[#D4AF37]/50 transition-colors"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="mt-1 bg-[#D4AF37] text-black font-semibold py-2.5 rounded-lg hover:bg-[#c4a030] transition-colors text-sm flex items-center justify-center gap-2"
+                  >
+                    <Send className="w-3.5 h-3.5" />
+                    Start Chat with Uncle G
+                  </button>
+                </form>
+              ) : (
+                <div className="h-[450px] w-full">
+                  <elevenlabs-convai
+                    agent-id="agent_7601kkk0btpde10tf5y7szdyhr93"
+                    dynamic-variables={JSON.stringify({
+                      customer_name: visitorData.name,
+                      customer_email: visitorData.email,
+                      customer_address: visitorData.address,
+                      customer_phone: visitorData.phone,
+                    })}
+                    avatar-orb-color-1="#D4AF37"
+                    avatar-orb-color-2="#8B7420"
+                    override-first-message={`Welcome to LKB Jewellers, ${visitorData.name}. I'm Uncle G — how can I help you today?`}
+                    markdown-link-allowed-hosts="lkb-jewellers.vercel.app,www.lkbjewellers.com"
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Left side - Back to Top */}
       <div
