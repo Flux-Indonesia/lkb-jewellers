@@ -203,7 +203,7 @@ export const videoSections = [
   {
     id: "accessories",
     title: "MERCHANDISE",
-    videoUrl: "/DoorOpenVideo.mp4",
+    videoUrl: "/hat/Hatselectionreel.mp4",
     link: "/accessories",
   },
 ];
