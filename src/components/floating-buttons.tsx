@@ -1,24 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Phone, ChevronRight, ChevronLeft, ChevronUp, MessageCircle, X, Send } from "lucide-react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import {
+  Phone,
+  ChevronRight,
+  ChevronLeft,
+  ChevronUp,
+  MessageCircle,
+  X,
+  Send,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Script from "next/script";
-
-declare module "react" {
-  namespace JSX {
-    interface IntrinsicElements {
-      "elevenlabs-convai": {
-        "agent-id": string;
-        "dynamic-variables"?: string;
-        "avatar-orb-color-1"?: string;
-        "avatar-orb-color-2"?: string;
-        "override-first-message"?: string;
-        "markdown-link-allowed-hosts"?: string;
-      };
-    }
-  }
-}
+import { useConversation } from "@elevenlabs/react";
 
 interface VisitorData {
   name: string;
@@ -26,6 +19,13 @@ interface VisitorData {
   address: string;
   phone: string;
 }
+
+interface ChatMessage {
+  role: "user" | "assistant";
+  content: string;
+}
+
+const AGENT_ID = "agent_7601kkk0btpde10tf5y7szdyhr93";
 
 export default function FloatingButtons() {
   const [expanded, setExpanded] = useState(true);
@@ -38,35 +38,105 @@ export default function FloatingButtons() {
     address: "",
     phone: "",
   });
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [textInput, setTextInput] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const chatBottomRef = useRef<HTMLDivElement>(null);
+  const hasStartedRef = useRef(false);
+
+  const conversation = useConversation({
+    onMessage: (message) => {
+      if (message.message) {
+        setIsTyping(false);
+        if (message.source === "ai") {
+          setMessages((prev) => [
+            ...prev,
+            { role: "assistant", content: message.message },
+          ]);
+        }
+      }
+    },
+    onError: (error) => {
+      console.error("Uncle G error:", error);
+      setIsTyping(false);
+    },
+  });
 
   useEffect(() => {
-    const onScroll = () => {
-      setShowBackToTop(window.scrollY > 300);
-    };
+    const onScroll = () => setShowBackToTop(window.scrollY > 300);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    chatBottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isTyping]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const startConversation = useCallback(
+    async (visitor: VisitorData) => {
+      if (hasStartedRef.current) return;
+      hasStartedRef.current = true;
+
+      try {
+        await conversation.startSession({
+          agentId: AGENT_ID,
+          connectionType: "websocket",
+          overrides: {
+            conversation: { textOnly: true },
+            agent: {
+              firstMessage: `Welcome to LKB Jewellers, ${visitor.name}. I'm Uncle G — how can I help you today?`,
+            },
+          },
+          dynamicVariables: {
+            customer_name: visitor.name,
+            customer_email: visitor.email,
+            customer_address: visitor.address,
+            customer_phone: visitor.phone,
+          },
+        });
+      } catch (error) {
+        console.error("Failed to start conversation:", error);
+        hasStartedRef.current = false;
+      }
+    },
+    [conversation]
+  );
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setVisitorData(formData);
+    await startConversation(formData);
   };
+
+  const handleSend = useCallback(() => {
+    const trimmed = textInput.trim();
+    if (!trimmed || isTyping) return;
+
+    setMessages((prev) => [...prev, { role: "user", content: trimmed }]);
+    setTextInput("");
+    setIsTyping(true);
+    conversation.sendUserMessage(trimmed);
+  }, [textInput, isTyping, conversation]);
+
+  const handleClose = useCallback(() => {
+    setChatOpen(false);
+    if (conversation.status === "connected") {
+      conversation.endSession();
+    }
+    hasStartedRef.current = false;
+    setVisitorData(null);
+    setMessages([]);
+    setFormData({ name: "", email: "", address: "", phone: "" });
+  }, [conversation]);
 
   return (
     <>
-      {/* ElevenLabs widget script */}
-      <Script
-        src="https://elevenlabs.io/convai-widget/index.js"
-        strategy="lazyOnload"
-      />
-
       {/* Right side - Phone + WhatsApp + Uncle G */}
       <div className="fixed bottom-8 right-8 z-50 flex items-center gap-3">
-        {/* Toggle button */}
         <Button
           onClick={() => setExpanded(!expanded)}
           className="bg-white text-black p-3 rounded-full shadow-2xl hover:bg-gray-100 hover:scale-110 active:scale-95 h-auto w-auto transition-all duration-300"
@@ -79,7 +149,6 @@ export default function FloatingButtons() {
           )}
         </Button>
 
-        {/* Expandable buttons */}
         <div
           className={`flex flex-col gap-3 transition-all duration-500 ease-in-out ${
             expanded
@@ -87,7 +156,6 @@ export default function FloatingButtons() {
               : "opacity-0 translate-x-20 pointer-events-none"
           }`}
         >
-          {/* Uncle G Chat */}
           <div className="relative group">
             <button
               onClick={() => setChatOpen(true)}
@@ -111,7 +179,6 @@ export default function FloatingButtons() {
             <Phone className="w-5 h-5 text-white group-hover:text-black" />
           </a>
 
-          {/* WhatsApp */}
           <a
             href="https://wa.me/447802323652"
             target="_blank"
@@ -172,7 +239,7 @@ export default function FloatingButtons() {
                 </div>
               </div>
               <button
-                onClick={() => setChatOpen(false)}
+                onClick={handleClose}
                 className="text-gray-500 hover:text-white transition-colors p-1"
                 aria-label="Close chat"
               >
@@ -180,9 +247,10 @@ export default function FloatingButtons() {
               </button>
             </div>
 
-            {/* Body — pre-chat form or ElevenLabs widget */}
+            {/* Body */}
             <div className="flex-1 overflow-y-auto min-h-0">
               {!visitorData ? (
+                /* Pre-chat form */
                 <form
                   onSubmit={handleFormSubmit}
                   className="p-5 flex flex-col gap-4"
@@ -283,23 +351,80 @@ export default function FloatingButtons() {
                   </button>
                 </form>
               ) : (
-                <div className="h-[450px] w-full">
-                  <elevenlabs-convai
-                    agent-id="agent_7601kkk0btpde10tf5y7szdyhr93"
-                    dynamic-variables={JSON.stringify({
-                      customer_name: visitorData.name,
-                      customer_email: visitorData.email,
-                      customer_address: visitorData.address,
-                      customer_phone: visitorData.phone,
-                    })}
-                    avatar-orb-color-1="#D4AF37"
-                    avatar-orb-color-2="#8B7420"
-                    override-first-message={`Welcome to LKB Jewellers, ${visitorData.name}. I'm Uncle G — how can I help you today?`}
-                    markdown-link-allowed-hosts="lkb-jewellers.vercel.app,www.lkbjewellers.com"
-                  />
+                /* Chat messages */
+                <div className="p-4 flex flex-col gap-3">
+                  {messages.map((msg, i) => (
+                    <div
+                      key={i}
+                      className={`flex ${
+                        msg.role === "user" ? "justify-end" : "justify-start"
+                      }`}
+                    >
+                      <div
+                        className={`max-w-[80%] px-3 py-2 rounded-xl text-sm leading-relaxed ${
+                          msg.role === "assistant"
+                            ? "bg-[#1a1400] border border-[#D4AF37]/20 text-gray-200 rounded-tl-none"
+                            : "bg-white text-black rounded-tr-none"
+                        }`}
+                        style={{
+                          fontFamily:
+                            '"Mona Sans", "Mona Sans Fallback", ui-sans-serif, system-ui, sans-serif',
+                        }}
+                      >
+                        {msg.content}
+                      </div>
+                    </div>
+                  ))}
+                  {isTyping && (
+                    <div className="flex justify-start">
+                      <div className="bg-[#1a1400] border border-[#D4AF37]/20 px-3 py-2 rounded-xl rounded-tl-none flex items-center gap-1.5">
+                        <span
+                          className="w-1.5 h-1.5 bg-[#D4AF37]/60 rounded-full animate-bounce"
+                          style={{ animationDelay: "0ms" }}
+                        />
+                        <span
+                          className="w-1.5 h-1.5 bg-[#D4AF37]/60 rounded-full animate-bounce"
+                          style={{ animationDelay: "150ms" }}
+                        />
+                        <span
+                          className="w-1.5 h-1.5 bg-[#D4AF37]/60 rounded-full animate-bounce"
+                          style={{ animationDelay: "300ms" }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                  <div ref={chatBottomRef} />
                 </div>
               )}
             </div>
+
+            {/* Text input (only after form) */}
+            {visitorData && (
+              <div className="flex items-center gap-2 px-3 py-3 border-t border-gray-800 flex-shrink-0">
+                <input
+                  type="text"
+                  value={textInput}
+                  onChange={(e) => setTextInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleSend();
+                  }}
+                  placeholder="Ask me anything..."
+                  className="flex-1 bg-black border border-gray-700 rounded-full px-4 py-2 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-[#D4AF37]/50 transition-colors"
+                  style={{
+                    fontFamily:
+                      '"Mona Sans", "Mona Sans Fallback", ui-sans-serif, system-ui, sans-serif',
+                  }}
+                />
+                <button
+                  onClick={handleSend}
+                  disabled={!textInput.trim() || isTyping}
+                  className="w-8 h-8 flex-shrink-0 rounded-full bg-[#D4AF37] flex items-center justify-center hover:bg-[#c4a030] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                  aria-label="Send message"
+                >
+                  <Send className="w-3.5 h-3.5 text-black" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}

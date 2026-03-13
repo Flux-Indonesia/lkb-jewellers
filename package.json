@@ -14,6 +14,7 @@
     "scrape:all": "node asset-scraper.js && node extract.js"
   },
   "dependencies": {
+    "@elevenlabs/react": "^0.14.2",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.97.0",
     "class-variance-authority": "^0.7.1",
