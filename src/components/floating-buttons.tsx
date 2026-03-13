@@ -44,16 +44,35 @@ export default function FloatingButtons() {
   const chatBottomRef = useRef<HTMLDivElement>(null);
   const hasStartedRef = useRef(false);
 
+  const pendingResponseRef = useRef("");
+
   const conversation = useConversation({
     onMessage: (message) => {
-      if (message.message) {
+      if (message.message && message.source === "ai") {
         setIsTyping(false);
-        if (message.source === "ai") {
-          setMessages((prev) => [
-            ...prev,
-            { role: "assistant", content: message.message },
-          ]);
-        }
+        setMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: message.message },
+        ]);
+        pendingResponseRef.current = "";
+      }
+    },
+    onAgentChatResponsePart: (part: unknown) => {
+      const event = part as { text_response_part?: { text?: string; type?: string } };
+      const chunk = event?.text_response_part;
+      if (!chunk) return;
+
+      if (chunk.type === "start") {
+        pendingResponseRef.current = "";
+      } else if (chunk.type === "delta" && chunk.text) {
+        pendingResponseRef.current += chunk.text;
+      } else if (chunk.type === "stop" && pendingResponseRef.current) {
+        setIsTyping(false);
+        setMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: pendingResponseRef.current },
+        ]);
+        pendingResponseRef.current = "";
       }
     },
     onError: (error) => {
