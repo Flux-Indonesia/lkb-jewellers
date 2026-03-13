@@ -191,13 +191,13 @@ export const videoSections = [
   {
     id: "watches",
     title: "EXCLUSIVE TIMEPIECES",
-    videoUrl: "/jewleryGlorify2.mp4",
+    videoUrl: "/lkb-commercial-1.mp4",
     link: "/watches",
   },
   {
     id: "jewellery",
     title: "PREMIUM JEWELLERY",
-    videoUrl: "/jewlerryGlorify1.mp4",
+    videoUrl: "/THE GENTLEMAN_3.mp4",
     link: "/jewellery",
   },
   {
