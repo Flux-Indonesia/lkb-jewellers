@@ -1,12 +1,34 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Phone, ChevronRight, ChevronLeft, ChevronUp } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Phone, ChevronRight, ChevronLeft, ChevronUp, MessageCircle, X, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+interface ChatMessage {
+  from: "uncle-g" | "user";
+  text: string;
+}
+
+const UNCLE_G_REPLIES = [
+  "Great question! I'd love to help. Please describe your style preferences and budget, and I'll guide you to the perfect piece. ✦",
+  "Our team will reach out to you shortly with personalised recommendations. Would you like to book a consultation? → /contact",
+  "Please visit our contact page or WhatsApp us for more tailored assistance.",
+];
 
 export default function FloatingButtons() {
   const [expanded, setExpanded] = useState(true);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [uncleGOpen, setUncleGOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
+    {
+      from: "uncle-g",
+      text: "Hi! I'm Uncle G 👋 I'm here to help you find the perfect piece. What are you looking for today?",
+    },
+  ]);
+  const [chatInput, setChatInput] = useState("");
+  const [isUncleGTyping, setIsUncleGTyping] = useState(false);
+  const [userMessageCount, setUserMessageCount] = useState(0);
+  const chatBottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => {
@@ -18,6 +40,30 @@ export default function FloatingButtons() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    chatBottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatMessages, isUncleGTyping]);
+
+  const handleUncleGSend = () => {
+    const trimmed = chatInput.trim();
+    if (!trimmed || isUncleGTyping) return;
+
+    const updatedCount = userMessageCount + 1;
+    setUserMessageCount(updatedCount);
+    setChatMessages((prev) => [...prev, { from: "user", text: trimmed }]);
+    setChatInput("");
+    setIsUncleGTyping(true);
+
+    const replyIndex = Math.min(updatedCount - 1, UNCLE_G_REPLIES.length - 1);
+    setTimeout(() => {
+      setIsUncleGTyping(false);
+      setChatMessages((prev) => [
+        ...prev,
+        { from: "uncle-g", text: UNCLE_G_REPLIES[replyIndex] },
+      ]);
+    }, 1000);
   };
 
   return (
@@ -45,7 +91,20 @@ export default function FloatingButtons() {
               : "opacity-0 translate-x-20 pointer-events-none"
           }`}
         >
-          {/* Phone Call */}
+          <div className="relative group">
+            <button
+              onClick={() => setUncleGOpen(true)}
+              className="bg-black text-white border-2 border-[#D4AF37] p-3 rounded-full shadow-2xl hover:bg-[#D4AF37] hover:border-[#D4AF37] transition-all duration-300 hover:scale-110 flex items-center justify-center animate-float"
+              aria-label="Chat with Uncle G"
+              style={{ animationDelay: "0.6s" }}
+            >
+              <MessageCircle className="w-5 h-5 text-[#D4AF37] group-hover:text-black transition-colors duration-300" />
+            </button>
+            <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 bg-black border border-[#D4AF37]/40 text-white text-xs px-2 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+              Chat with Uncle G
+            </span>
+          </div>
+
           <a
             href="tel:+442033365303"
             className="bg-black text-white border-2 border-gray-700 p-3 rounded-full shadow-2xl hover:bg-[#D4AF37] hover:border-[#D4AF37] transition-all duration-300 hover:scale-110 flex items-center justify-center group animate-float"
@@ -77,6 +136,96 @@ export default function FloatingButtons() {
           </a>
         </div>
       </div>
+
+      {uncleGOpen && (
+        <div className="fixed inset-0 z-[60] flex items-end justify-end p-4 md:p-8 pointer-events-none">
+          <div
+            className="pointer-events-auto w-full max-w-sm bg-[#0a0a0a] border border-gray-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+            style={{
+              boxShadow: "0 0 40px rgba(0,0,0,0.8), 0 0 20px rgba(212,175,55,0.06)",
+              maxHeight: "min(520px, 80vh)",
+            }}
+          >
+            <div
+              className="flex items-center justify-between px-4 py-3 border-b border-gray-800 flex-shrink-0"
+              style={{
+                background: "linear-gradient(90deg, #0a0a0a 0%, #130e00 100%)",
+              }}
+            >
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-full border border-[#D4AF37]/50 bg-[#D4AF37]/10 flex items-center justify-center">
+                  <span className="text-[#D4AF37] text-sm">✦</span>
+                </div>
+                <div>
+                  <p className="text-white text-sm font-bold leading-tight">Uncle G</p>
+                  <p className="text-[#D4AF37] text-xs" style={{ fontFamily: "ui-sans-serif, system-ui, sans-serif" }}>
+                    Your Jewellery Expert
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setUncleGOpen(false)}
+                className="text-gray-500 hover:text-white transition-colors p-1"
+                aria-label="Close chat"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-3 min-h-0">
+              {chatMessages.map((msg, i) => (
+                <div
+                  key={i}
+                  className={`flex ${msg.from === "user" ? "justify-end" : "justify-start"}`}
+                >
+                  <div
+                    className={`max-w-[80%] px-3 py-2 rounded-xl text-sm leading-relaxed ${
+                      msg.from === "uncle-g"
+                        ? "bg-[#1a1400] border border-[#D4AF37]/20 text-gray-200 rounded-tl-none"
+                        : "bg-white text-black rounded-tr-none"
+                    }`}
+                    style={{ fontFamily: '"Mona Sans", "Mona Sans Fallback", ui-sans-serif, system-ui, sans-serif' }}
+                  >
+                    {msg.text}
+                  </div>
+                </div>
+              ))}
+              {isUncleGTyping && (
+                <div className="flex justify-start">
+                  <div className="bg-[#1a1400] border border-[#D4AF37]/20 px-3 py-2 rounded-xl rounded-tl-none flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 bg-[#D4AF37]/60 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                    <span className="w-1.5 h-1.5 bg-[#D4AF37]/60 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                    <span className="w-1.5 h-1.5 bg-[#D4AF37]/60 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                  </div>
+                </div>
+              )}
+              <div ref={chatBottomRef} />
+            </div>
+
+            <div className="flex items-center gap-2 px-3 py-3 border-t border-gray-800 flex-shrink-0">
+              <input
+                type="text"
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleUncleGSend();
+                }}
+                placeholder="Ask me anything..."
+                className="flex-1 bg-black border border-gray-700 rounded-full text-white text-sm placeholder-gray-600 focus:outline-none focus:border-[#D4AF37]/50 transition-colors"
+                style={{ fontFamily: '"Mona Sans", "Mona Sans Fallback", ui-sans-serif, system-ui, sans-serif' }}
+              />
+              <button
+                onClick={handleUncleGSend}
+                disabled={!chatInput.trim() || isUncleGTyping}
+                className="w-8 h-8 flex-shrink-0 rounded-full bg-[#D4AF37] flex items-center justify-center hover:bg-[#c4a030] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                aria-label="Send message"
+              >
+                <Send className="w-3.5 h-3.5 text-black" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Left side - Back to Top */}
       <div

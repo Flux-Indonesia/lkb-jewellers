@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Wand2 } from "lucide-react";
 import ThreeDCarousel from "@/components/three-d-carousel";
 import ShowroomSection from "@/components/showroom-section";
 
@@ -125,6 +126,41 @@ export default function BespokePage() {
 				<p className="text-gray-300 text-base md:text-lg leading-relaxed font-normal px-4" style={{ fontFamily: '"Mona Sans", "Mona Sans Fallback", ui-sans-serif, system-ui, sans-serif' }}>
 					We mark life&apos;s significant moments with pieces of exceptional beauty, rarity, and quality. Whether you&apos;re celebrating an engagement, a wedding, or simply want to indulge yourself, we&apos;ll create a piece of jewelry you&apos;ll cherish for years to come.
 				</p>
+			</div>
+
+			<div className="container mx-auto px-4 md:px-6 my-10 md:my-12">
+				<div
+					className="relative overflow-hidden rounded-2xl border border-[#D4AF37]/30 p-6 md:p-10 flex flex-col md:flex-row items-center gap-6 md:gap-10"
+					style={{
+						background: "linear-gradient(135deg, #0a0a0a 0%, #120e00 50%, #0a0a0a 100%)",
+						boxShadow: "0 0 60px rgba(212,175,55,0.08), inset 0 0 60px rgba(212,175,55,0.03)",
+					}}
+				>
+					<div
+						className="absolute inset-0 pointer-events-none"
+						style={{
+							background:
+								"radial-gradient(ellipse at 20% 50%, rgba(212,175,55,0.07) 0%, transparent 60%)",
+						}}
+					/>
+					<div className="relative z-10 flex-shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-full border border-[#D4AF37]/40 flex items-center justify-center bg-[#D4AF37]/10">
+						<Wand2 className="w-6 h-6 md:w-7 md:h-7 text-[#D4AF37]" />
+					</div>
+					<div className="relative z-10 flex-1 text-center md:text-left">
+						<h3 className="text-xl md:text-2xl text-white mb-2 font-heading">Design Your Jewellery with AI</h3>
+						<p className="text-gray-400 text-sm md:text-base leading-relaxed" style={{ fontFamily: '"Mona Sans", "Mona Sans Fallback", ui-sans-serif, system-ui, sans-serif' }}>
+							Describe your vision and watch it come to life. Tell us what you&apos;re dreaming of.
+						</p>
+					</div>
+					<div className="relative z-10 flex-shrink-0">
+						<Link
+							href="/bespoke/design"
+							className="inline-flex items-center gap-2 bg-[#D4AF37] text-black px-6 md:px-8 py-3 md:py-3.5 font-bold tracking-widest text-xs md:text-sm hover:bg-[#c4a030] transition-colors whitespace-nowrap"
+						>
+							Try AI Design Generator →
+						</Link>
+					</div>
+				</div>
 			</div>
 
 			{/* ===== THE ART OF PERFECTION ===== */}
