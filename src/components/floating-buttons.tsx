@@ -66,7 +66,7 @@ export default function FloatingButtons() {
       </div>
 
       <div
-        className={`fixed bottom-44 right-8 z-[60] transition-all duration-500 transform ${
+        className={`fixed bottom-64 right-8 z-[60] transition-all duration-500 transform ${
           showBackToTop
             ? "translate-y-0 opacity-100 pointer-events-auto"
             : "translate-y-16 opacity-0 pointer-events-none"
