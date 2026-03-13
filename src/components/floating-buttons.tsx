@@ -11,7 +11,6 @@ import {
   Send,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useConversation } from "@elevenlabs/react";
 
 interface VisitorData {
   name: string;
@@ -26,6 +25,7 @@ interface ChatMessage {
 }
 
 const AGENT_ID = "agent_7601kkk0btpde10tf5y7szdyhr93";
+const WS_URL = `wss://api.elevenlabs.io/v1/convai/conversation?agent_id=${AGENT_ID}`;
 
 export default function FloatingButtons() {
   const [expanded, setExpanded] = useState(true);
@@ -41,45 +41,10 @@ export default function FloatingButtons() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [textInput, setTextInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [connected, setConnected] = useState(false);
   const chatBottomRef = useRef<HTMLDivElement>(null);
-  const hasStartedRef = useRef(false);
-
-  const pendingResponseRef = useRef("");
-
-  const conversation = useConversation({
-    onMessage: (message) => {
-      if (message.message && message.source === "ai") {
-        setIsTyping(false);
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: message.message },
-        ]);
-        pendingResponseRef.current = "";
-      }
-    },
-    onAgentChatResponsePart: (part: unknown) => {
-      const event = part as { text_response_part?: { text?: string; type?: string } };
-      const chunk = event?.text_response_part;
-      if (!chunk) return;
-
-      if (chunk.type === "start") {
-        pendingResponseRef.current = "";
-      } else if (chunk.type === "delta" && chunk.text) {
-        pendingResponseRef.current += chunk.text;
-      } else if (chunk.type === "stop" && pendingResponseRef.current) {
-        setIsTyping(false);
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: pendingResponseRef.current },
-        ]);
-        pendingResponseRef.current = "";
-      }
-    },
-    onError: (error) => {
-      console.error("Uncle G error:", error);
-      setIsTyping(false);
-    },
-  });
+  const wsRef = useRef<WebSocket | null>(null);
+  const pendingRef = useRef("");
 
   useEffect(() => {
     const onScroll = () => setShowBackToTop(window.scrollY > 300);
@@ -95,62 +60,109 @@ export default function FloatingButtons() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const startConversation = useCallback(
-    async (visitor: VisitorData) => {
-      if (hasStartedRef.current) return;
-      hasStartedRef.current = true;
+  const handleWsMessage = useCallback((event: MessageEvent) => {
+    try {
+      const data = JSON.parse(event.data);
 
-      try {
-        await conversation.startSession({
-          agentId: AGENT_ID,
-          connectionType: "websocket",
-          overrides: {
-            conversation: { textOnly: true },
-            agent: {
-              firstMessage: `Welcome to LKB Jewellers, ${visitor.name}. I'm Uncle G — how can I help you today?`,
-            },
-          },
-          dynamicVariables: {
-            customer_name: visitor.name,
-            customer_email: visitor.email,
-            customer_address: visitor.address,
-            customer_phone: visitor.phone,
-          },
-        });
-      } catch (error) {
-        console.error("Failed to start conversation:", error);
-        hasStartedRef.current = false;
+      if (data.type === "agent_response") {
+        const text = data.agent_response_event?.agent_response;
+        if (text) {
+          pendingRef.current = "";
+          setIsTyping(false);
+          setMessages((prev) => [
+            ...prev,
+            { role: "assistant", content: text },
+          ]);
+        }
+      } else if (data.type === "agent_chat_response_part") {
+        const chunk = data.text_response_part;
+        if (!chunk) return;
+        if (chunk.type === "start") {
+          pendingRef.current = "";
+        } else if (chunk.type === "delta" && chunk.text) {
+          pendingRef.current += chunk.text;
+        }
+      } else if (data.type === "conversation_initiation_metadata") {
+        setConnected(true);
       }
+    } catch {
+      // ignore non-JSON (binary audio frames)
+    }
+  }, []);
+
+  const connectWebSocket = useCallback(
+    (visitor: VisitorData) => {
+      if (wsRef.current) return;
+
+      const ws = new WebSocket(WS_URL);
+      wsRef.current = ws;
+
+      ws.onopen = () => {
+        ws.send(
+          JSON.stringify({
+            type: "conversation_initiation_client_data",
+            conversation_config_override: {
+              conversation: { text_only: true },
+              agent: {
+                first_message: `Welcome to LKB Jewellers, ${visitor.name}. I'm Uncle G — how can I help you today?`,
+              },
+            },
+            dynamic_variables: {
+              customer_name: visitor.name,
+              customer_email: visitor.email,
+              customer_address: visitor.address,
+              customer_phone: visitor.phone,
+            },
+          })
+        );
+      };
+
+      ws.onmessage = handleWsMessage;
+
+      ws.onerror = () => {
+        setIsTyping(false);
+        setConnected(false);
+      };
+
+      ws.onclose = () => {
+        wsRef.current = null;
+        setConnected(false);
+      };
     },
-    [conversation]
+    [handleWsMessage]
   );
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
+  const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setVisitorData(formData);
-    await startConversation(formData);
+    connectWebSocket(formData);
   };
 
   const handleSend = useCallback(() => {
     const trimmed = textInput.trim();
-    if (!trimmed || isTyping) return;
+    if (!trimmed || isTyping || !wsRef.current) return;
 
     setMessages((prev) => [...prev, { role: "user", content: trimmed }]);
     setTextInput("");
     setIsTyping(true);
-    conversation.sendUserMessage(trimmed);
-  }, [textInput, isTyping, conversation]);
+
+    wsRef.current.send(
+      JSON.stringify({ type: "user_message", text: trimmed })
+    );
+  }, [textInput, isTyping]);
 
   const handleClose = useCallback(() => {
     setChatOpen(false);
-    if (conversation.status === "connected") {
-      conversation.endSession();
+    if (wsRef.current) {
+      wsRef.current.close();
+      wsRef.current = null;
     }
-    hasStartedRef.current = false;
+    setConnected(false);
     setVisitorData(null);
     setMessages([]);
     setFormData({ name: "", email: "", address: "", phone: "" });
-  }, [conversation]);
+    pendingRef.current = "";
+  }, []);
 
   return (
     <>
@@ -269,7 +281,6 @@ export default function FloatingButtons() {
             {/* Body */}
             <div className="flex-1 overflow-y-auto min-h-0">
               {!visitorData ? (
-                /* Pre-chat form */
                 <form
                   onSubmit={handleFormSubmit}
                   className="p-5 flex flex-col gap-4"
@@ -370,7 +381,6 @@ export default function FloatingButtons() {
                   </button>
                 </form>
               ) : (
-                /* Chat messages */
                 <div className="p-4 flex flex-col gap-3">
                   {messages.map((msg, i) => (
                     <div
@@ -417,7 +427,7 @@ export default function FloatingButtons() {
               )}
             </div>
 
-            {/* Text input (only after form) */}
+            {/* Text input */}
             {visitorData && (
               <div className="flex items-center gap-2 px-3 py-3 border-t border-gray-800 flex-shrink-0">
                 <input
