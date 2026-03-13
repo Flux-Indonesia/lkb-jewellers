@@ -5,20 +5,17 @@ import { Phone, ChevronRight, ChevronLeft, ChevronUp, MessageCircle, X, Send } f
 import { Button } from "@/components/ui/button";
 import Script from "next/script";
 
-declare global {
+declare module "react" {
   namespace JSX {
     interface IntrinsicElements {
-      "elevenlabs-convai": React.DetailedHTMLProps<
-        React.HTMLAttributes<HTMLElement> & {
-          "agent-id": string;
-          "dynamic-variables"?: string;
-          "avatar-orb-color-1"?: string;
-          "avatar-orb-color-2"?: string;
-          "override-first-message"?: string;
-          "markdown-link-allowed-hosts"?: string;
-        },
-        HTMLElement
-      >;
+      "elevenlabs-convai": {
+        "agent-id": string;
+        "dynamic-variables"?: string;
+        "avatar-orb-color-1"?: string;
+        "avatar-orb-color-2"?: string;
+        "override-first-message"?: string;
+        "markdown-link-allowed-hosts"?: string;
+      };
     }
   }
 }
