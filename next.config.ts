@@ -1,6 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      // Redirect non-www to www (fixes duplicate canonical issue)
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "lkbjewellers.com" }],
+        destination: "https://www.lkbjewellers.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     minimumCacheTTL: 31536000, // 1 year — engagement ring images rarely change
     formats: ['image/avif', 'image/webp'], // serve smallest format supported by browser

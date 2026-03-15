@@ -11,12 +11,28 @@ import { Toaster } from "@/components/ui/sonner";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title:
-    "LKB Jewellers - Luxury Jewelry & Watches | Hatton Garden London | Premium Timepieces",
+  metadataBase: new URL("https://www.lkbjewellers.com"),
+  title: {
+    default: "LKB Jewellers - Luxury Jewelry & Watches | Hatton Garden London",
+    template: "%s | LKB Jewellers",
+  },
   description:
     "Discover luxury watches, bespoke jewelry & diamond pieces at LKB Jewellers, Hatton Garden London's premier specialists. Exclusive timepieces & custom jewelry. Rolex, Patek Philippe, Richard Mille dealer.",
   keywords:
     "LKB Jewellers, Local Kettle Brothers UK, Hatton Garden jewellers, luxury watches London, bespoke jewelry London",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    url: "https://www.lkbjewellers.com",
+    siteName: "LKB Jewellers",
+    title: "LKB Jewellers - Luxury Jewelry & Watches | Hatton Garden London",
+    description:
+      "Discover luxury watches, bespoke jewelry & diamond pieces at LKB Jewellers, Hatton Garden London's premier specialists.",
+  },
 };
 
 export default function RootLayout({
