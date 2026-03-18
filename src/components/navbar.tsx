@@ -31,9 +31,9 @@ const navLinks: { label: string; key: MenuKey | null; href: string }[] = [
 	{ label: "RINGS", key: null, href: "/engagement-rings" },
 ];
 
-const rightLinks: { label: string; key: MenuKey }[] = [
-	{ label: "OTHER SERVICES", key: "services" },
-	{ label: "ABOUT US", key: "contact" },
+const rightLinks: { label: string; key: MenuKey; href: string }[] = [
+	{ label: "OTHER SERVICES", key: "services", href: "/services" },
+	{ label: "ABOUT US", key: "contact", href: "/about" },
 ];
 
 function getMenuItems(key: MenuKey): MenuItem[] {
@@ -112,16 +112,16 @@ export default function Navbar() {
 					{/* Right nav links + icons - desktop */}
 					<div className="hidden xl:flex items-center justify-end w-5/12 pr-8">
 						<div className="flex gap-8 items-center">
-							{rightLinks.map((item, i) => (
-								<Fragment key={item.label}>
-									{i > 0 && <div className="h-7 w-px bg-gradient-to-b from-white via-gray-400 to-white opacity-50" />}
-									<div className="relative h-full flex items-center">
-										<span className="text-white text-sm font-semibold tracking-[0.2em] hover:text-gray-300 transition-colors py-6 cursor-pointer font-display" onMouseEnter={() => handleMenuEnter(item.key)}>
-											{item.label}
-										</span>
-									</div>
-								</Fragment>
-							))}
+						{rightLinks.map((item, i) => (
+							<Fragment key={item.label}>
+								{i > 0 && <div className="h-7 w-px bg-gradient-to-b from-white via-gray-400 to-white opacity-50" />}
+								<div className="relative h-full flex items-center">
+									<Link href={item.href} className="text-white text-sm font-semibold tracking-[0.2em] hover:text-gray-300 transition-colors py-6 font-display" onMouseEnter={() => handleMenuEnter(item.key)}>
+										{item.label}
+									</Link>
+								</div>
+							</Fragment>
+						))}
 						</div>
 
 						{/* Icons */}
