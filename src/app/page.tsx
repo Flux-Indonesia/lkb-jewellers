@@ -248,14 +248,8 @@ export default function HomePage() {
 				</div>
 			</section>
 
-			{/* ===== NEWSLETTER ===== */}
-			<section className="relative py-12 md:py-16 bg-black overflow-hidden">
-				<div className="absolute inset-0 opacity-10 overflow-hidden">
-					<div className="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full blur-[150px] animate-pulse" />
-					<div className="absolute bottom-0 right-1/4 w-96 h-96 bg-white rounded-full blur-[150px] animate-pulse" style={{ animationDelay: "1.5s" }} />
-				</div>
-				<div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-				<div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+		{/* ===== NEWSLETTER ===== */}
+		<section className="relative py-12 md:py-16 bg-black overflow-hidden">
 
 				<div className="container mx-auto px-4 md:px-6 relative z-10">
 					<div className="max-w-4xl mx-auto">
@@ -269,9 +263,8 @@ export default function HomePage() {
 							<p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-display">Subscribe to receive exclusive updates on new collections, private sales, and insider access to the world of LKB Jewellers.</p>
 						</div>
 
-						<div className="relative px-4">
-							<div className="absolute -inset-1 bg-gradient-to-r from-white/20 via-white/40 to-white/20 rounded-2xl blur-lg opacity-50" />
-							<div className="relative bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-xl border border-white/20 rounded-2xl p-6 md:p-8 lg:p-12">
+					<div className="relative px-4">
+						<div className="relative bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-xl border border-white/20 rounded-2xl p-6 md:p-8 lg:p-12">
 								<form onSubmit={handleSubscribe} className="flex flex-col md:flex-row gap-3 md:gap-4">
 									<div className="flex-1 relative group">
 										<Input type="email" placeholder="Enter your email address" value={email} onChange={(e) => setEmail(e.target.value)} disabled={loading} className="w-full px-4 md:px-6 py-3 md:py-4 h-auto bg-black/50 border-gray-700 rounded-lg text-white placeholder:text-gray-500 text-base focus-visible:border-white focus-visible:ring-white/20" style={{ fontSize: "16px" }} required />
@@ -285,18 +278,13 @@ export default function HomePage() {
 										<div className="absolute inset-0 bg-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 									</Button>
 								</form>
-								<p className="text-gray-500 text-[0.65rem] md:text-xs text-center mt-4 md:mt-6 px-2">
-									By subscribing, you agree to our{" "}
-									<Link href="/privacy-policy" className="text-white hover:underline">
-										Privacy Policy
-									</Link>
-									. Unsubscribe anytime.
-								</p>
-								{/* Corner decorations */}
-								<div className="absolute top-3 left-3 md:top-4 md:left-4 w-12 h-12 md:w-16 md:h-16 border-t border-l border-white/20 rounded-tl-xl" />
-								<div className="absolute top-3 right-3 md:top-4 md:right-4 w-12 h-12 md:w-16 md:h-16 border-t border-r border-white/20 rounded-tr-xl" />
-								<div className="absolute bottom-3 left-3 md:bottom-4 md:left-4 w-12 h-12 md:w-16 md:h-16 border-b border-l border-white/20 rounded-bl-xl" />
-								<div className="absolute bottom-3 right-3 md:bottom-4 md:right-4 w-12 h-12 md:w-16 md:h-16 border-b border-r border-white/20 rounded-br-xl" />
+							<p className="text-gray-500 text-[0.65rem] md:text-xs text-center mt-4 md:mt-6 px-2">
+								By subscribing, you agree to our{" "}
+								<Link href="/privacy-policy" className="text-white hover:underline">
+									Privacy Policy
+								</Link>
+								. Unsubscribe anytime.
+							</p>
 							</div>
 						</div>
 
