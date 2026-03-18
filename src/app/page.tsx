@@ -235,14 +235,13 @@ export default function HomePage() {
 							<Link key={cat.title} href={cat.href} className={`group relative h-[250px] md:h-[280px] lg:h-[300px] overflow-hidden block rounded-lg ${cat.extraClass || ""}`}>
 								<div className="absolute inset-0 overflow-hidden">
 									<Image src={cat.img} alt={cat.alt} fill className="object-cover transition-transform duration-500 ease-out group-hover:scale-110" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" />
-									<div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-500" />
 								</div>
 								<div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
 								<div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-8">
 									<h3 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-[0.15em] md:tracking-[0.2em] text-white mb-1 md:mb-2 font-heading">{cat.title}</h3>
 									<p className="text-gray-300 text-xs md:text-sm tracking-[0.15em] md:tracking-[0.2em] uppercase">{cat.sub}</p>
 								</div>
-								<div className="absolute inset-0 border-2 border-gray-800 group-hover:border-white/50 transition-all duration-500 pointer-events-none rounded-lg" />
+								<div className="absolute inset-0 border border-white/10 group-hover:border-white/30 transition-all duration-500 pointer-events-none rounded-lg" />
 							</Link>
 						))}
 					</div>
