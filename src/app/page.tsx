@@ -46,7 +46,7 @@ export default function HomePage() {
 				</video>
 				<div className="absolute inset-0 bg-black/40" />
 				<div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
-					<h2 className="text-white tracking-[0.3em] text-sm md:text-2xl mb-6 animate-slide-up" style={{ fontFamily: "ui-sans-serif, system-ui, sans-serif" }}>
+					<h2 className="text-white tracking-[0.3em] text-sm md:text-2xl mb-6 animate-slide-up font-display">
 						TIMELESS ELEGANCE
 					</h2>
 					<h1 className="text-7xl md:text-9xl lg:text-[12rem] text-white mb-8 animate-fade-in font-normal font-heading" style={{ lineHeight: "normal" }}>
@@ -54,13 +54,10 @@ export default function HomePage() {
 						<br />
 						PASSION
 					</h1>
-					<p
-						className="max-w-xl text-gray-200 text-base md:text-lg mb-10 leading-relaxed animate-slide-up"
-						style={{
-							animationDelay: "0.2s",
-							fontFamily: '"Mona Sans", "Mona Sans Fallback", ui-sans-serif, system-ui, sans-serif',
-						}}
-					>
+				<p
+					className="max-w-xl text-gray-200 text-base md:text-lg mb-10 leading-relaxed animate-slide-up"
+					style={{ animationDelay: "0.2s" }}
+				>
 						LKB Jewellers brings you exceptional pieces that tell your story. Each creation is a testament to our commitment to quality and artistry.
 					</p>
 					<Link href="/shop" className="border border-white text-white px-10 py-4 text-sm tracking-widest hover:bg-white hover:text-black transition-all duration-300 animate-slide-up" style={{ animationDelay: "0.4s" }}>
