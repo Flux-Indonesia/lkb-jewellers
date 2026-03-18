@@ -134,84 +134,6 @@ export default function HomePage() {
 				</div>
 			</section>
 
-			{/* ===== CRAFTSMANSHIP ===== */}
-			<section className="relative py-16 md:py-20 lg:py-28 bg-black overflow-hidden">
-				<div className="absolute inset-0">
-					<div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/5 via-transparent to-white/5" />
-					<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/10 rounded-full blur-[150px] animate-pulse" />
-				</div>
-				<div className="absolute inset-0 overflow-hidden pointer-events-none">
-					<div className="absolute top-20 left-10 w-32 h-32 border border-white/20 rounded-full animate-float" />
-					<div className="absolute bottom-20 right-10 w-48 h-48 border border-white/10 rounded-full animate-float" style={{ animationDelay: "1s" }} />
-				</div>
-
-				<div className="container mx-auto px-4 md:px-6 relative z-10 max-w-7xl">
-					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-20 items-center">
-						<div className="flex flex-col justify-center space-y-6 md:space-y-8 max-w-xl mx-auto lg:mx-0 py-8 md:py-12">
-							<div className="flex items-center gap-4">
-								<div className="h-px w-16 bg-gradient-to-r from-transparent to-white" />
-								<span className="text-white uppercase tracking-[0.3em] text-xs font-light">Bespoke Craftsmanship</span>
-							</div>
-							<h2 className="text-4xl md:text-5xl lg:text-6xl leading-tight font-heading">
-								<span className="text-white block mb-2 font-bold tracking-[0.2em]">CRAFTING MOMENTS</span>
-								<span className="text-white block mb-2 font-bold tracking-[0.2em]">THAT</span>
-								<span className="block text-white font-bold tracking-[0.2em]">LAST A LIFETIME</span>
-							</h2>
-							<div className="relative pl-6 border-l-2 border-white/30">
-								<p className="text-gray-300 text-base leading-relaxed">We design more than jewellery. We create heirlooms that capture memories and emotions with uncompromising craftsmanship.</p>
-							</div>
-							<div className="flex flex-wrap gap-4 pt-4">
-								<Button asChild className="group relative px-6 py-3 h-auto bg-white text-black font-bold tracking-widest text-sm overflow-hidden hover:shadow-2xl hover:shadow-white/50 rounded-none hover:bg-white active:scale-95 transition-all duration-300">
-									<Link href="/bespoke">
-										<span className="relative z-10">LEARN MORE</span>
-										<div className="absolute inset-0 bg-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-									</Link>
-								</Button>
-								<Button variant="outline" asChild className="group px-6 py-3 h-auto border-2 border-white text-white bg-transparent font-bold tracking-widest text-sm hover:bg-white hover:text-black rounded-none active:scale-95 transition-all duration-300">
-									<Link href="/shop">
-										DISCOVER
-										<ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-									</Link>
-								</Button>
-							</div>
-						</div>
-
-						<div className="flex items-center justify-center px-4 md:px-0">
-							<div className="relative max-w-xl w-full">
-								<div className="absolute -inset-4 bg-gradient-to-r from-white via-gray-400 to-white opacity-20 animate-pulse" />
-								<div className="absolute -top-6 -left-6 w-24 h-24 border-t-2 border-l-2 border-white" />
-								<div className="absolute -bottom-6 -right-6 w-24 h-24 border-b-2 border-r-2 border-white" />
-								{/* Sparkles */}
-								<div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white rounded-full animate-sparkle" />
-								<div className="absolute top-1/3 right-1/3 w-1.5 h-1.5 bg-gray-300 rounded-full animate-sparkle" style={{ animationDelay: "0.5s" }} />
-								<div className="absolute bottom-1/4 left-1/3 w-2 h-2 bg-white rounded-full animate-sparkle" style={{ animationDelay: "1s" }} />
-								<div className="absolute top-1/4 right-1/4 text-white text-2xl animate-sparkle opacity-80" style={{ animationDelay: "0.3s" }}>
-									✦
-								</div>
-								<div className="absolute bottom-1/4 right-1/3 text-gray-300 text-xl animate-sparkle opacity-70" style={{ animationDelay: "1.2s" }}>
-									✦
-								</div>
-
-								<div className="relative aspect-square max-h-[500px] overflow-visible rounded-lg group w-full">
-									<div className="absolute -inset-24 bg-white/20 rounded-full blur-[140px] opacity-90 animate-pulse" style={{ animationDuration: "3s" }} />
-									<div className="absolute -inset-12 bg-white/15 rounded-full blur-[80px] opacity-95 animate-pulse group-hover:opacity-100 transition-opacity duration-1000" style={{ animationDuration: "6s", animationDelay: "1.5s" }} />
-									<div className="relative w-full h-full overflow-hidden rounded-lg shadow-[0_0_80px_rgba(255,255,255,0.6)]">
-										<Image src="/images/static/home-mini-pendant.jpg" alt="Exclusive bespoke pendant craftsmanship" fill className="object-contain transform group-hover:scale-105 transition-transform duration-700 relative z-10" sizes="(max-width: 1024px) 100vw, 50vw" />
-										<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
-										<div className="absolute top-6 right-6 bg-black/80 backdrop-blur-sm border border-white/50 px-4 py-2 rounded-full z-20">
-											<span className="text-white text-xs font-semibold tracking-wider">HANDCRAFTED</span>
-										</div>
-									</div>
-								</div>
-								<div className="absolute -top-8 -right-8 w-32 h-32 bg-white/10 rounded-full animate-pulse" />
-								<div className="absolute -bottom-8 -left-8 w-40 h-40 bg-white/5 rounded-full animate-pulse" style={{ animationDelay: "1s" }} />
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-			</section>
-
 			{/* ===== STICKY VIDEO SECTIONS ===== */}
 			<div className="relative w-full bg-black">
 				{videoSections.map((section, index) => (
@@ -266,16 +188,7 @@ export default function HomePage() {
 										<Image src={card.image} alt={card.title} fill className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
 									</div>
 									<div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500" />
-									<div className="absolute bottom-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#D4AF37] via-white to-[#D4AF37] scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left z-30" />
-									<div className="absolute top-6 right-6 z-30">
-										<div className="w-12 h-12 rounded-full border border-gray-700 group-hover:border-white bg-black/50 backdrop-blur-sm flex items-center justify-center transition-all duration-500 group-hover:scale-110">
-											<span className="text-white text-sm font-bold">0{index + 1}</span>
-										</div>
-									</div>
 									<div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 lg:p-8 z-20">
-										<div className="w-12 h-12 mb-4 rounded-full bg-white/10 border border-white/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transform -translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
-											<ArrowRight size={20} className="text-white rotate-[-45deg]" />
-										</div>
 										<h3 className="text-2xl md:text-3xl text-white mb-2 md:mb-3 transition-all duration-300 group-hover:text-white font-bold font-heading">{card.title}</h3>
 										<p className="text-gray-400 text-xs md:text-sm leading-relaxed opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-150">{card.description}</p>
 										<div className="flex items-center gap-2 text-white text-[0.65rem] md:text-xs tracking-widest uppercase mt-3 md:mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
