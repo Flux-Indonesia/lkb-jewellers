@@ -206,6 +206,12 @@ export const videoSections = [
     videoUrl: "/hat/Hatselectionreel.mp4",
     link: "/accessories",
   },
+  {
+    id: "rings",
+    title: "EXCLUSIVE RINGS",
+    videoUrl: "/rings-placeholder.mp4",
+    link: "/engagement-rings",
+  },
 ];
 
 export const serviceCards = [
