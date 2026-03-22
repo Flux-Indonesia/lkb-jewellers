@@ -46,7 +46,7 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <>
       <div className="group block cursor-pointer" onClick={handleCardClick}>
-        <div className="relative overflow-hidden bg-white aspect-square mb-4">
+        <div className="relative overflow-hidden bg-[#0a0a0a] aspect-square mb-4">
           {/* Image wrapper — scales on hover */}
           <div className="relative w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-700">
             <Image
@@ -117,14 +117,14 @@ export function ProductCard({ product }: { product: Product }) {
               {product.brand}
             </p>
           )}
-          <h3 className="text-lg mb-1 text-gray-800 group-hover:text-black transition-colors font-heading">
+          <h3 className="text-lg mb-1 text-white group-hover:text-gray-200 transition-colors font-heading">
             {product.name}
           </h3>
-          <p className="text-gray-500 text-xs uppercase tracking-widest mb-2 font-display">
+          <p className="text-gray-400 text-xs uppercase tracking-widest mb-2 font-display">
             {formatCategory(product.category)}
           </p>
           <div className="flex items-center justify-center gap-2">
-            <p className="text-black font-semibold text-base font-display">
+            <p className="text-white font-semibold text-base font-display">
               {product.price > 0
                 ? `£${product.price.toLocaleString("en-GB")}`
                 : "Price on request"}
