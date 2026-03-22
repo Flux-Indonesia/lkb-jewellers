@@ -1,13 +1,8 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Suspense } from "react";
 import ShopContent from "@/components/shop-content";
 import ShowroomSection from "@/components/showroom-section";
-
-export const metadata: Metadata = {
-  title: "Luxury Accessories | Premium Merchandise & Gifts",
-  description:
-    "Shop premium accessories and luxury merchandise at LKB Jewellers. Exclusive gifts, leather goods and more from Hatton Garden London.",
-};
 
 export default function AccessoriesPage() {
   return (

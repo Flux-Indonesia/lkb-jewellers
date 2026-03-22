@@ -8,7 +8,6 @@ import AppShell from "@/components/app-shell";
 import TopBanner from "@/components/top-banner";
 import FloatingButtons from "@/components/floating-buttons";
 import { Toaster } from "@/components/ui/sonner";
-import { LocalBusinessJsonLd } from "@/components/json-ld";
 import Script from "next/script";
 
 export const metadata: Metadata = {
@@ -25,9 +24,6 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  alternates: {
-    canonical: "./",
-  },
   openGraph: {
     type: "website",
     locale: "en_GB",
@@ -36,21 +32,6 @@ export const metadata: Metadata = {
     title: "LKB Jewellers - Luxury Jewelry & Watches | Hatton Garden London",
     description:
       "Discover luxury watches, bespoke jewelry & diamond pieces at LKB Jewellers, Hatton Garden London's premier specialists.",
-    images: [
-      {
-        url: "/white-logo.png",
-        width: 200,
-        height: 200,
-        alt: "LKB Jewellers Logo",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "LKB Jewellers - Luxury Jewelry & Watches | Hatton Garden London",
-    description:
-      "Discover luxury watches, bespoke jewelry & diamond pieces at LKB Jewellers, Hatton Garden London's premier specialists.",
-    images: ["/white-logo.png"],
   },
 };
 
@@ -62,7 +43,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <LocalBusinessJsonLd />
         <style>{`
           @font-face {
             font-family: 'Montserrat';

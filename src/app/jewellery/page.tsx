@@ -1,13 +1,8 @@
-import type { Metadata } from "next";
+"use client";
+
 import { Suspense } from "react";
 import ShopContent from "@/components/shop-content";
 import ShowroomSection from "@/components/showroom-section";
-
-export const metadata: Metadata = {
-  title: "Luxury Jewellery | Diamond Rings, Necklaces & Bracelets",
-  description:
-    "Explore our stunning collection of luxury jewellery. Handcrafted diamond rings, necklaces, bracelets and earrings at LKB Jewellers, Hatton Garden London.",
-};
 
 export default function JewelleryPage() {
   return (

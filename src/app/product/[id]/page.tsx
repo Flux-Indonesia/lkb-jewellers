@@ -10,7 +10,6 @@ import { getProductById } from "@/lib/products";
 import type { Product } from "@/data/products";
 import ShowroomSection from "@/components/showroom-section";
 import { EnquiryModal } from "@/components/enquiry-modal";
-import { ProductJsonLd } from "@/components/json-ld";
 
 const PLACEHOLDER_IMG =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect width='400' height='400' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-family='sans-serif' font-size='14'%3ENo Image%3C/text%3E%3C/svg%3E";
@@ -108,15 +107,6 @@ export default function ProductPage() {
 
   return (
     <div className="bg-white text-gray-900 pt-32 pb-24 min-h-screen">
-      <ProductJsonLd
-        name={product.name}
-        description={product.description || `${product.name} available at LKB Jewellers, Hatton Garden London.`}
-        image={product.image || ""}
-        price={product.price}
-        availability={isOutOfStock ? "OutOfStock" : "InStock"}
-        url={`https://www.lkbjewellers.com/product/${product.id}`}
-        brand={product.brand}
-      />
       <div className="container mx-auto px-6">
         {/* Back Button */}
         <button
