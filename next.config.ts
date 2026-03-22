@@ -10,6 +10,19 @@ const nextConfig: NextConfig = {
         destination: "https://www.lkbjewellers.com/:path*",
         permanent: true,
       },
+      // Strip WordPress legacy query params (add_to_wishlist, _wpnonce)
+      {
+        source: "/product/:slug",
+        has: [{ type: "query", key: "add_to_wishlist" }],
+        destination: "/product/:slug",
+        permanent: true,
+      },
+      {
+        source: "/product/:slug",
+        has: [{ type: "query", key: "_wpnonce" }],
+        destination: "/product/:slug",
+        permanent: true,
+      },
     ];
   },
   images: {
