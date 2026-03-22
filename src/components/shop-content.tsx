@@ -290,7 +290,7 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
 
   if (loading) {
     return (
-      <div className="bg-black min-h-screen flex items-center justify-center">
+      <div className="bg-white min-h-screen flex items-center justify-center">
         <div className="text-gray-400 text-xs tracking-widest uppercase animate-pulse">
           Loading collection...
         </div>
@@ -299,17 +299,17 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
   }
 
   return (
-    <div className="bg-black min-h-screen text-white">
+    <div className="bg-white min-h-screen text-gray-900">
       {/* Hero Section */}
-      <div className="bg-[#0a0a0a] border-b border-gray-800 pt-12 pb-16 px-6">
+      <div className="bg-gray-50 border-b border-gray-200 pt-12 pb-16 px-6">
         <div className="container mx-auto text-center">
           <h1
-            className="text-4xl md:text-6xl uppercase mb-4 text-white font-heading"
+            className="text-4xl md:text-6xl uppercase mb-4 text-gray-900 font-heading"
           >
             {getTitle()}
           </h1>
           <p
-            className="text-gray-400 tracking-widest text-sm max-w-2xl mx-auto"
+            className="text-gray-600 tracking-widest text-sm max-w-2xl mx-auto"
           >
             Discover our curated selection of exclusive items, verified by
             experts.
@@ -319,7 +319,7 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
 
       {/* Brand Carousel — watches only */}
       {isWatches && (
-        <div className="bg-black py-8 border-b border-gray-800 overflow-hidden">
+        <div className="bg-white py-8 border-b border-gray-200 overflow-hidden">
           <div className="relative">
             <div
               className="flex gap-8 shrink-0"
@@ -334,7 +334,7 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
                 <Link
                   key={i}
                   href={`/shop?brand=${brand.name.toLowerCase().replace(/ /g, "-")}`}
-                  className="relative w-48 h-32 bg-linear-to-br from-gray-800 to-gray-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group shrink-0 cursor-pointer"
+                  className="relative w-48 h-32 bg-linear-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group shrink-0 cursor-pointer"
                 >
                   <Image
                     src={brand.image}
@@ -375,7 +375,7 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
               <button
                 onClick={refresh}
                 disabled={refreshing}
-                className="flex items-center gap-2 text-sm text-white bg-transparent border border-gray-700 px-4 py-2 hover:bg-gray-800 transition-colors rounded disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center gap-2 text-sm text-gray-900 bg-white border border-gray-300 px-4 py-2 hover:bg-gray-50 transition-colors rounded disabled:opacity-50 disabled:cursor-not-allowed"
                 title="Refresh products to ensure all images load properly"
               >
                 <RefreshCw
@@ -385,7 +385,7 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
                 {refreshing ? "Refreshing..." : "Refresh"}
               </button>
               {/* Results count */}
-              <span className="text-gray-400 text-sm">
+              <span className="text-gray-600 text-sm">
                 Showing {filteredProducts.length} Results
               </span>
             </div>
@@ -394,7 +394,7 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
             <select
               value={sortOrder}
               onChange={(e) => setSortOrder(e.target.value)}
-              className="bg-[#0a0a0a] text-xs text-white outline-none cursor-pointer border border-gray-700 px-3 py-2 focus:border-gray-400 rounded w-full lg:w-auto"
+              className="bg-white text-xs text-gray-900 outline-none cursor-pointer border border-gray-300 px-3 py-2 focus:border-gray-900 rounded w-full lg:w-auto"
             >
               <option value="featured">Sort by: Featured</option>
               <option value="price-low">Price: Low to High</option>
@@ -405,12 +405,12 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
 
           {/* Filter Panel */}
           {showFilters && (
-            <div className="bg-[#0a0a0a] border border-gray-800 p-6 mb-6 rounded-lg shadow-sm">
+            <div className="bg-gray-50 border border-gray-200 p-6 mb-6 rounded-lg shadow-sm">
               <div className="flex flex-col lg:flex-row lg:flex-wrap gap-6">
                 {/* Category */}
                 <div className="w-full lg:flex-1 lg:min-w-37.5">
                   <h3
-                    className="text-sm font-bold tracking-wider uppercase mb-3 text-white font-heading"
+                    className="text-sm font-bold tracking-wider uppercase mb-3 text-gray-900 font-heading"
                   >
                     Category
                   </h3>
@@ -429,10 +429,10 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
                           setActiveCaseSize("all");
                           setActiveMaterial("all");
                         }}
-                        className={`block hover:text-white transition-colors ${
+                        className={`block hover:text-gray-900 transition-colors ${
                           activeCategory === value
-                            ? "text-white font-bold"
-                            : "text-gray-400"
+                            ? "text-gray-900 font-bold"
+                            : "text-gray-600"
                         }`}
                       >
                         {label}
@@ -445,17 +445,17 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
                 {isWatches && (
                   <div className="w-full lg:flex-1 lg:min-w-37.5">
                     <h3
-                      className="text-sm font-bold tracking-wider uppercase mb-3 text-white font-heading"
+                      className="text-sm font-bold tracking-wider uppercase mb-3 text-gray-900 font-heading"
                     >
                       Brand
                     </h3>
                     <div className="space-y-2 text-sm max-h-40 overflow-y-auto">
                       <button
                         onClick={() => setActiveBrand("all")}
-                        className={`block hover:text-white transition-colors ${
+                        className={`block hover:text-gray-900 transition-colors ${
                           activeBrand === "all"
-                            ? "text-white font-bold"
-                            : "text-gray-400"
+                            ? "text-gray-900 font-bold"
+                            : "text-gray-600"
                         }`}
                       >
                         All Brands
@@ -464,10 +464,10 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
                         <button
                           key={brand}
                           onClick={() => setActiveBrand(brand)}
-                          className={`block hover:text-white transition-colors ${
+                          className={`block hover:text-gray-900 transition-colors ${
                             activeBrand === brand
-                              ? "text-white font-bold"
-                              : "text-gray-400"
+                              ? "text-gray-900 font-bold"
+                              : "text-gray-600"
                           }`}
                         >
                           {titleCase(brand)}
@@ -481,17 +481,17 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
                 {isWatches && uniqueCaseSizes.length > 0 && (
                   <div className="w-full lg:flex-1 lg:min-w-37.5">
                     <h3
-                      className="text-sm font-bold tracking-wider uppercase mb-3 text-white font-heading"
+                      className="text-sm font-bold tracking-wider uppercase mb-3 text-gray-900 font-heading"
                     >
                       Case Size
                     </h3>
                     <div className="space-y-2 text-sm max-h-40 overflow-y-auto">
                       <button
                         onClick={() => setActiveCaseSize("all")}
-                        className={`block hover:text-white transition-colors ${
+                        className={`block hover:text-gray-900 transition-colors ${
                           activeCaseSize === "all"
-                            ? "text-white font-bold"
-                            : "text-gray-400"
+                            ? "text-gray-900 font-bold"
+                            : "text-gray-600"
                         }`}
                       >
                         All Sizes
@@ -500,10 +500,10 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
                         <button
                           key={size}
                           onClick={() => setActiveCaseSize(size)}
-                          className={`block hover:text-white transition-colors ${
+                          className={`block hover:text-gray-900 transition-colors ${
                             activeCaseSize === size
-                              ? "text-white font-bold"
-                              : "text-gray-400"
+                              ? "text-gray-900 font-bold"
+                              : "text-gray-600"
                           }`}
                         >
                           {titleCase(size)}
@@ -517,17 +517,17 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
                 {isWatches && uniqueMaterials.length > 0 && (
                   <div className="w-full lg:flex-1 lg:min-w-37.5">
                     <h3
-                      className="text-sm font-bold tracking-wider uppercase mb-3 text-white font-heading"
+                      className="text-sm font-bold tracking-wider uppercase mb-3 text-gray-900 font-heading"
                     >
                       Material
                     </h3>
                     <div className="space-y-2 text-sm max-h-40 overflow-y-auto">
                       <button
                         onClick={() => setActiveMaterial("all")}
-                        className={`block hover:text-white transition-colors ${
+                        className={`block hover:text-gray-900 transition-colors ${
                           activeMaterial === "all"
-                            ? "text-white font-bold"
-                            : "text-gray-400"
+                            ? "text-gray-900 font-bold"
+                            : "text-gray-600"
                         }`}
                       >
                         All Materials
@@ -536,10 +536,10 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
                         <button
                           key={mat}
                           onClick={() => setActiveMaterial(mat)}
-                          className={`block hover:text-white transition-colors ${
+                          className={`block hover:text-gray-900 transition-colors ${
                             activeMaterial === mat
-                              ? "text-white font-bold"
-                              : "text-gray-400"
+                              ? "text-gray-900 font-bold"
+                              : "text-gray-600"
                           }`}
                         >
                           {titleCase(mat)}
@@ -552,13 +552,13 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
                 {/* Price Range */}
                 <div className="w-full lg:flex-1 lg:min-w-37.5">
                   <h3
-                    className="text-sm font-bold tracking-wider uppercase mb-3 text-white font-heading"
+                    className="text-sm font-bold tracking-wider uppercase mb-3 text-gray-900 font-heading"
                   >
                     Price Range
                   </h3>
                   <div className="space-y-3">
                     <div>
-                      <label className="block text-xs text-gray-400 mb-1">
+                      <label className="block text-xs text-gray-600 mb-1">
                         Min Price (£)
                       </label>
                       <input
@@ -569,12 +569,12 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
                         onChange={(e) =>
                           setPriceMin(parseInt(e.target.value.replace(/\D/g, "")) || 0)
                         }
-                        className="w-full text-sm bg-black text-white border border-gray-700 px-3 py-2.5 rounded focus:border-gray-400 focus:outline-none placeholder:text-gray-600"
+                        className="w-full text-sm border border-gray-300 px-3 py-2.5 rounded focus:border-gray-900 focus:outline-none"
                         style={{ fontSize: "16px" }}
                       />
                     </div>
                     <div>
-                      <label className="block text-xs text-gray-400 mb-1">
+                      <label className="block text-xs text-gray-600 mb-1">
                         Max Price (£)
                       </label>
                       <input
@@ -585,11 +585,11 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
                         onChange={(e) =>
                           setPriceMax(parseInt(e.target.value.replace(/\D/g, "")) || 0)
                         }
-                        className="w-full text-sm bg-black text-white border border-gray-700 px-3 py-2.5 rounded focus:border-gray-400 focus:outline-none placeholder:text-gray-600"
+                        className="w-full text-sm border border-gray-300 px-3 py-2.5 rounded focus:border-gray-900 focus:outline-none"
                         style={{ fontSize: "16px" }}
                       />
                     </div>
-                    <div className="text-xs text-gray-400 pt-1">
+                    <div className="text-xs text-gray-500 pt-1">
                       {priceMin > 0 || priceMax > 0
                         ? `£${priceMin.toLocaleString()} - ${priceMax > 0 ? `£${priceMax.toLocaleString()}` : "No limit"}`
                         : "All prices"}
