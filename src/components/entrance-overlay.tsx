@@ -22,13 +22,18 @@ export default function EntranceOverlay({ onEnter }: EntranceOverlayProps) {
   const handleEnter = () => {
     setShowContent(false);
 
+    // Always set a fallback timeout
+    const fallback = setTimeout(dismissOverlay, 4000);
+
     if (videoRef.current) {
       videoRef.current.currentTime = 0;
-      videoRef.current.play();
-      videoRef.current.onended = dismissOverlay;
-    } else {
-      // Fallback if video can't play
-      setTimeout(dismissOverlay, 3000);
+      videoRef.current.play().catch(() => {
+        // Video play failed, fallback will handle it
+      });
+      videoRef.current.onended = () => {
+        clearTimeout(fallback);
+        dismissOverlay();
+      };
     }
   };
 

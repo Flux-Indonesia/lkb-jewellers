@@ -12,6 +12,7 @@ import {
   Layers,
   X,
   SearchX,
+  Pencil,
 } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -27,6 +28,7 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import RingImageManager from "./RingImageManager"
+import RingEditForm from "./RingEditForm"
 
 type RingListItem = {
   slug: string
@@ -48,6 +50,7 @@ export default function EngagementRingsTab() {
   const [error, setError] = useState<string | null>(null)
   const [search, setSearch] = useState("")
   const [expandedSlug, setExpandedSlug] = useState<string | null>(null)
+  const [editingSlug, setEditingSlug] = useState<string | null>(null)
 
   useEffect(() => {
     Promise.all([
@@ -323,6 +326,9 @@ export default function EngagementRingsTab() {
                   <TableHead className="text-zinc-500 text-xs uppercase tracking-wide font-medium w-20">
                     Photos
                   </TableHead>
+                  <TableHead className="text-zinc-500 text-xs uppercase tracking-wide font-medium w-16">
+                    Edit
+                  </TableHead>
                   <TableHead className="text-zinc-500 text-xs uppercase tracking-wide font-medium w-28">
                     Status
                   </TableHead>
@@ -395,6 +401,21 @@ export default function EngagementRingsTab() {
                         </TableCell>
 
                         <TableCell>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-7 w-7 text-zinc-500 hover:text-white hover:bg-zinc-800"
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              setEditingSlug(editingSlug === ring.slug ? null : ring.slug)
+                              if (expandedSlug !== ring.slug) setExpandedSlug(ring.slug)
+                            }}
+                          >
+                            <Pencil className="h-3.5 w-3.5" />
+                          </Button>
+                        </TableCell>
+
+                        <TableCell>
                           {hasPrefs ? (
                             <Badge
                               variant="outline"
@@ -418,12 +439,20 @@ export default function EngagementRingsTab() {
                           key={`${ring.slug}-expanded`}
                           className="hover:bg-transparent border-zinc-800"
                         >
-                          <TableCell colSpan={6} className="p-0">
+                          <TableCell colSpan={8} className="p-0">
                             <div className="border-t border-zinc-800 bg-zinc-950/50">
                               <RingImageManager
                                 slug={ring.slug}
                                 name={ring.name}
                               />
+                              {editingSlug === ring.slug && (
+                                <div className="border-t border-zinc-800">
+                                  <RingEditForm
+                                    slug={ring.slug}
+                                    onClose={() => setEditingSlug(null)}
+                                  />
+                                </div>
+                              )}
                             </div>
                           </TableCell>
                         </TableRow>

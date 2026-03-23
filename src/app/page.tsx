@@ -188,7 +188,7 @@ export default function HomePage() {
 								<div className="relative h-full transition-all duration-500 group-hover:-translate-y-4 group-hover:scale-105" style={{ transformStyle: "preserve-3d" }}>
 									<div className="absolute inset-0 border-2 border-gray-900 group-hover:border-white/50 transition-all duration-500 z-20 pointer-events-none" />
 									<div className="absolute inset-0 overflow-hidden">
-										<Image src={card.image} alt={card.title} fill className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+										<Image src={card.image} alt={card.title} fill className={"object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1 " + (card.hoverImage ? "group-hover:opacity-0" : "")} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />{card.hoverImage && <Image src={card.hoverImage} alt={card.title} fill className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1 opacity-0 group-hover:opacity-100" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />}
 									</div>
 									<div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500" />
 									<div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-8 z-20"><h3 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-[0.15em] md:tracking-[0.2em] text-white mb-1 md:mb-2 font-heading">{card.title}</h3><p className="text-gray-300 text-xs md:text-sm tracking-[0.15em] md:tracking-[0.2em] uppercase font-display">{card.description}</p></div>
