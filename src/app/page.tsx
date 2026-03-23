@@ -68,11 +68,7 @@ export default function HomePage() {
 
 			{/* ===== LATEST ARRIVALS ===== */}
 			<section className="py-12 md:py-16 bg-black relative overflow-hidden">
-				<div className="absolute inset-0 opacity-5">
-					<div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white rounded-full blur-[120px] animate-pulse" />
-					<div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-white rounded-full blur-[120px] animate-pulse" style={{ animationDelay: "2s" }} />
-				</div>
-				<div className="container mx-auto px-4 md:px-6 relative z-10">
+					<div className="container mx-auto px-4 md:px-6 relative z-10">
 					<div className="text-center mb-12">
 						<div className="inline-flex items-center gap-4 mb-6">
 							<div className="h-px w-16 bg-gradient-to-r from-transparent to-white" />
@@ -159,11 +155,7 @@ export default function HomePage() {
 
 			{/* ===== WHAT WE OFFER ===== */}
 			<section className="py-12 md:py-16 bg-gradient-to-b from-[#0a0a0a] to-black px-4 md:px-6 relative overflow-hidden">
-				<div className="absolute inset-0 opacity-5 overflow-hidden">
-					<div className="absolute top-0 left-1/4 w-96 h-96 bg-[#D4AF37] rounded-full blur-[120px] animate-pulse" />
-					<div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#D4AF37] rounded-full blur-[120px] animate-pulse" style={{ animationDelay: "2s" }} />
-				</div>
-				<div className="container mx-auto relative z-10">
+					<div className="container mx-auto relative z-10">
 					<div className="text-center mb-12">
 						<div className="inline-flex items-center gap-4 mb-6">
 							<div className="h-px w-16 bg-gradient-to-r from-transparent to-white" />
@@ -201,7 +193,7 @@ export default function HomePage() {
 
 					<div className="flex items-center justify-center gap-4 mt-12">
 						<div className="h-px w-24 bg-gradient-to-r from-transparent to-white/50" />
-						<div className="w-2 h-2 rounded-full bg-white animate-pulse" />
+						<div className="w-2 h-2 rounded-full bg-white " />
 						<div className="h-px w-24 bg-gradient-to-l from-transparent to-white/50" />
 					</div>
 				</div>

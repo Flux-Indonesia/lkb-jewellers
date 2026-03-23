@@ -7,7 +7,7 @@ import { Wand2 } from "lucide-react";
 import ThreeDCarousel from "@/components/three-d-carousel";
 import ShowroomSection from "@/components/showroom-section";
 
-const bespokeImages = ["/davido.jpg", "/jefe-cover-blogs.jpg", "/bespoke/tade-chain-12.jpg", "/tade-chain-13.jpg", "/bespoke/tade-chain-16.jpg", "/tade-cover.jpg", "/timeless-photos-1.jpg", "/timeless-photos-2.jpg", "/timeless-photos-3.jpg"];
+const bespokeImages = ["/davido.jpg", "/jefe-cover-blogs.jpg", "/bespoke/rnt.jpg", "/bespoke/rich.jpg", "/bespoke/tade-chain-16.jpg", "/tade-cover.jpg", "/bespoke/rich2.jpg", "/timeless-photos-2.jpg", "/timeless-photos-3.jpg"];
 
 const tabs = [
 	{
@@ -40,7 +40,7 @@ const tabs = [
 ];
 
 const galleryImages1 = [
-	{ src: "/tade-chain-13.jpg", alt: "Bespoke Jewellery 1" },
+	{ src: "/bespoke/rich.jpg", alt: "Bespoke Jewellery 1" },
 	{ src: "/bespoke/tade-chain-16.jpg", alt: "Bespoke Jewellery 2" },
 	{ src: "/tade-cover.jpg", alt: "Bespoke Jewellery 3" },
 ];
@@ -79,18 +79,18 @@ export default function BespokePage() {
 
 						{/* Right - 3D Carousel */}
 						<div className="relative h-[380px] sm:h-[420px] md:h-[500px] lg:h-[800px] flex items-center justify-center order-2">
-							{/* Gold glow circle behind carousel */}
+							{/* White glow circle behind carousel */}
 							<div className="absolute inset-0 flex items-center justify-center">
-								<div className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[350px] md:h-[350px] lg:w-[500px] lg:h-[500px] bg-[#D4AF37]/10 rounded-full blur-[50px] md:blur-[70px] lg:blur-[120px] animate-pulse" />
+								<div className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[350px] md:h-[350px] lg:w-[500px] lg:h-[500px] bg-white/10 rounded-full blur-[50px] md:blur-[70px] lg:blur-[120px] animate-pulse" />
 							</div>
 							{/* Carousel with drop-shadow filter */}
-							<div className="relative z-10 rounded-2xl scale-[0.65] sm:scale-[0.75] md:scale-[0.85] lg:scale-100" style={{ filter: "drop-shadow(0 20px 40px rgba(212, 175, 55, 0.2)) drop-shadow(0 30px 60px rgba(212, 175, 55, 0.3))" }}>
+							<div className="relative z-10 rounded-2xl scale-[0.65] sm:scale-[0.75] md:scale-[0.85] lg:scale-100" style={{ filter: "drop-shadow(0 20px 40px rgba(255, 255, 255, 0.1)) drop-shadow(0 30px 60px rgba(255, 255, 255, 0.15))" }}>
 								<ThreeDCarousel images={bespokeImages} radius={360} cardW={240} cardH={340} autoSpinSpeed={0.03} />
 							</div>
-							{/* Decorative gold dots */}
-							<div className="absolute top-10 right-10 w-2 md:w-3 h-2 md:h-3 bg-[#D4AF37] rounded-full animate-pulse opacity-60" />
-							<div className="absolute bottom-20 left-10 w-1.5 md:w-2 h-1.5 md:h-2 bg-[#D4AF37] rounded-full animate-pulse opacity-40" style={{ animationDelay: "1s" }} />
-							<div className="absolute top-1/3 left-20 w-1 h-1 bg-[#D4AF37] rounded-full animate-pulse opacity-50" style={{ animationDelay: "0.5s" }} />
+							{/* Decorative white dots */}
+							<div className="absolute top-10 right-10 w-2 md:w-3 h-2 md:h-3 bg-white rounded-full animate-pulse opacity-60" />
+							<div className="absolute bottom-20 left-10 w-1.5 md:w-2 h-1.5 md:h-2 bg-white rounded-full animate-pulse opacity-40" style={{ animationDelay: "1s" }} />
+							<div className="absolute top-1/3 left-20 w-1 h-1 bg-white rounded-full animate-pulse opacity-50" style={{ animationDelay: "0.5s" }} />
 						</div>
 					</div>
 				</div>
@@ -99,24 +99,24 @@ export default function BespokePage() {
 			{/* ===== BESPOKE JEWELLERY INTRO ===== */}
 			<div className="mx-auto px-4 md:px-6 text-center max-w-4xl my-12 md:my-16 relative">
 				<div className="absolute inset-0 overflow-hidden pointer-events-none">
-					<div className="absolute w-1 h-1 bg-gold rounded-full animate-sparkle" style={{ left: "55.8135%", top: "73.9739%", animationDelay: "2.63476s", animationDuration: "3.42336s", opacity: 0.810061 }} />
-					<div className="absolute w-1 h-1 bg-gold rounded-full animate-sparkle" style={{ left: "84.3031%", top: "76.5577%", animationDelay: "2.72858s", animationDuration: "2.98425s", opacity: 0.559772 }} />
-					<div className="absolute w-1 h-1 bg-gold rounded-full animate-sparkle" style={{ left: "45.9747%", top: "33.2331%", animationDelay: "1.87834s", animationDuration: "2.30436s", opacity: 0.73225 }} />
-					<div className="absolute w-1 h-1 bg-gold rounded-full animate-sparkle" style={{ left: "15.2933%", top: "82.0598%", animationDelay: "0.163197s", animationDuration: "2.55954s", opacity: 0.751574 }} />
-					<div className="absolute w-1 h-1 bg-gold rounded-full animate-sparkle" style={{ left: "43.4577%", top: "49.5507%", animationDelay: "0.287795s", animationDuration: "3.08631s", opacity: 0.757974 }} />
-					<div className="absolute w-1 h-1 bg-gold rounded-full animate-sparkle" style={{ left: "78.5185%", top: "6.41371%", animationDelay: "0.904114s", animationDuration: "3.61924s", opacity: 0.695006 }} />
-					<div className="absolute w-1 h-1 bg-gold rounded-full animate-sparkle" style={{ left: "37.1695%", top: "21.6541%", animationDelay: "1.08309s", animationDuration: "2.69894s", opacity: 0.572262 }} />
-					<div className="absolute w-1 h-1 bg-gold rounded-full animate-sparkle" style={{ left: "18.8139%", top: "16.5647%", animationDelay: "2.44818s", animationDuration: "2.27164s", opacity: 0.971967 }} />
-					<div className="absolute w-1 h-1 bg-gold rounded-full animate-sparkle" style={{ left: "28.4972%", top: "89.6973%", animationDelay: "1.68733s", animationDuration: "3.61344s", opacity: 0.768388 }} />
-					<div className="absolute w-1 h-1 bg-gold rounded-full animate-sparkle" style={{ left: "39.7637%", top: "65.8443%", animationDelay: "0.496274s", animationDuration: "3.01708s", opacity: 0.591293 }} />
-					<div className="absolute w-1 h-1 bg-gold rounded-full animate-sparkle" style={{ left: "50.8881%", top: "10.8658%", animationDelay: "1.39868s", animationDuration: "2.81652s", opacity: 0.99909 }} />
-					<div className="absolute w-1 h-1 bg-gold rounded-full animate-sparkle" style={{ left: "72.8409%", top: "78.1251%", animationDelay: "0.220552s", animationDuration: "2.48981s", opacity: 0.759028 }} />
-					<div className="absolute w-1 h-1 bg-gold rounded-full animate-sparkle" style={{ left: "47.5367%", top: "40.7652%", animationDelay: "0.261579s", animationDuration: "2.55087s", opacity: 0.590712 }} />
-					<div className="absolute w-1 h-1 bg-gold rounded-full animate-sparkle" style={{ left: "29.0815%", top: "79.225%", animationDelay: "0.688706s", animationDuration: "3.07498s", opacity: 0.77156 }} />
-					<div className="absolute w-1 h-1 bg-gold rounded-full animate-sparkle" style={{ left: "83.4321%", top: "45.8455%", animationDelay: "1.50202s", animationDuration: "2.82929s", opacity: 0.776874 }} />
+					<div className="absolute w-1 h-1 bg-white rounded-full animate-sparkle" style={{ left: "55.8135%", top: "73.9739%", animationDelay: "2.63476s", animationDuration: "3.42336s", opacity: 0.810061 }} />
+					<div className="absolute w-1 h-1 bg-white rounded-full animate-sparkle" style={{ left: "84.3031%", top: "76.5577%", animationDelay: "2.72858s", animationDuration: "2.98425s", opacity: 0.559772 }} />
+					<div className="absolute w-1 h-1 bg-white rounded-full animate-sparkle" style={{ left: "45.9747%", top: "33.2331%", animationDelay: "1.87834s", animationDuration: "2.30436s", opacity: 0.73225 }} />
+					<div className="absolute w-1 h-1 bg-white rounded-full animate-sparkle" style={{ left: "15.2933%", top: "82.0598%", animationDelay: "0.163197s", animationDuration: "2.55954s", opacity: 0.751574 }} />
+					<div className="absolute w-1 h-1 bg-white rounded-full animate-sparkle" style={{ left: "43.4577%", top: "49.5507%", animationDelay: "0.287795s", animationDuration: "3.08631s", opacity: 0.757974 }} />
+					<div className="absolute w-1 h-1 bg-white rounded-full animate-sparkle" style={{ left: "78.5185%", top: "6.41371%", animationDelay: "0.904114s", animationDuration: "3.61924s", opacity: 0.695006 }} />
+					<div className="absolute w-1 h-1 bg-white rounded-full animate-sparkle" style={{ left: "37.1695%", top: "21.6541%", animationDelay: "1.08309s", animationDuration: "2.69894s", opacity: 0.572262 }} />
+					<div className="absolute w-1 h-1 bg-white rounded-full animate-sparkle" style={{ left: "18.8139%", top: "16.5647%", animationDelay: "2.44818s", animationDuration: "2.27164s", opacity: 0.971967 }} />
+					<div className="absolute w-1 h-1 bg-white rounded-full animate-sparkle" style={{ left: "28.4972%", top: "89.6973%", animationDelay: "1.68733s", animationDuration: "3.61344s", opacity: 0.768388 }} />
+					<div className="absolute w-1 h-1 bg-white rounded-full animate-sparkle" style={{ left: "39.7637%", top: "65.8443%", animationDelay: "0.496274s", animationDuration: "3.01708s", opacity: 0.591293 }} />
+					<div className="absolute w-1 h-1 bg-white rounded-full animate-sparkle" style={{ left: "50.8881%", top: "10.8658%", animationDelay: "1.39868s", animationDuration: "2.81652s", opacity: 0.99909 }} />
+					<div className="absolute w-1 h-1 bg-white rounded-full animate-sparkle" style={{ left: "72.8409%", top: "78.1251%", animationDelay: "0.220552s", animationDuration: "2.48981s", opacity: 0.759028 }} />
+					<div className="absolute w-1 h-1 bg-white rounded-full animate-sparkle" style={{ left: "47.5367%", top: "40.7652%", animationDelay: "0.261579s", animationDuration: "2.55087s", opacity: 0.590712 }} />
+					<div className="absolute w-1 h-1 bg-white rounded-full animate-sparkle" style={{ left: "29.0815%", top: "79.225%", animationDelay: "0.688706s", animationDuration: "3.07498s", opacity: 0.77156 }} />
+					<div className="absolute w-1 h-1 bg-white rounded-full animate-sparkle" style={{ left: "83.4321%", top: "45.8455%", animationDelay: "1.50202s", animationDuration: "2.82929s", opacity: 0.776874 }} />
 				</div>
 				<h2 className="text-3xl sm:text-4xl md:text-5xl mb-6 md:mb-8 text-white font-bold px-4 font-heading">Bespoke Jewellery</h2>
-				<div className="w-16 md:w-24 h-0.5 bg-gold mx-auto mb-8 md:mb-10" />
+				<div className="w-16 md:w-24 h-0.5 bg-white mx-auto mb-8 md:mb-10" />
 				<p className="text-gray-300 text-base md:text-lg leading-relaxed mb-4 md:mb-6 font-normal px-4" style={{ fontFamily: '"Mona Sans", "Mona Sans Fallback", ui-sans-serif, system-ui, sans-serif' }}>
 					At the Local Kettle Brothers, we see bespoke jewellery as art. We create exquisite pieces that reflect our client&apos;s unique style and individuality. Our team of accredited creative designers and artist have years of experience bringing even the most complex visions to life.
 				</p>
@@ -130,21 +130,20 @@ export default function BespokePage() {
 
 			<div className="container mx-auto px-4 md:px-6 my-10 md:my-12">
 				<div
-					className="relative overflow-hidden rounded-2xl border border-[#D4AF37]/30 p-6 md:p-10 flex flex-col md:flex-row items-center gap-6 md:gap-10"
+					className="relative overflow-hidden rounded-2xl border border-white/30 p-6 md:p-10 flex flex-col md:flex-row items-center gap-6 md:gap-10"
 					style={{
 						background: "linear-gradient(135deg, #0a0a0a 0%, #120e00 50%, #0a0a0a 100%)",
-						boxShadow: "0 0 60px rgba(212,175,55,0.08), inset 0 0 60px rgba(212,175,55,0.03)",
+						boxShadow: "0 0 60px rgba(255, 255, 255,0.08), inset 0 0 60px rgba(255, 255, 255,0.03)",
 					}}
 				>
 					<div
 						className="absolute inset-0 pointer-events-none"
 						style={{
-							background:
-								"radial-gradient(ellipse at 20% 50%, rgba(212,175,55,0.07) 0%, transparent 60%)",
+							background: "radial-gradient(ellipse at 20% 50%, rgba(255, 255, 255,0.07) 0%, transparent 60%)",
 						}}
 					/>
-					<div className="relative z-10 flex-shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-full border border-[#D4AF37]/40 flex items-center justify-center bg-[#D4AF37]/10">
-						<Wand2 className="w-6 h-6 md:w-7 md:h-7 text-[#D4AF37]" />
+					<div className="relative z-10 flex-shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-full border border-white/40 flex items-center justify-center bg-white/10">
+						<Wand2 className="w-6 h-6 md:w-7 md:h-7 text-white" />
 					</div>
 					<div className="relative z-10 flex-1 text-center md:text-left">
 						<h3 className="text-xl md:text-2xl text-white mb-2 font-heading">Design Your Jewellery with AI</h3>
@@ -153,10 +152,7 @@ export default function BespokePage() {
 						</p>
 					</div>
 					<div className="relative z-10 flex-shrink-0">
-						<Link
-							href="/bespoke/design"
-							className="inline-flex items-center gap-2 bg-[#D4AF37] text-black px-6 md:px-8 py-3 md:py-3.5 font-bold tracking-widest text-xs md:text-sm hover:bg-[#c4a030] transition-colors whitespace-nowrap"
-						>
+						<Link href="/bespoke/design" className="inline-flex items-center gap-2 bg-white text-black px-6 md:px-8 py-3 md:py-3.5 font-bold tracking-widest text-xs md:text-sm hover:bg-gray-200 transition-colors whitespace-nowrap">
 							Try AI Design Generator →
 						</Link>
 					</div>
@@ -169,7 +165,7 @@ export default function BespokePage() {
 					<div
 						className="absolute top-0 left-0 w-full h-full"
 						style={{
-							backgroundImage: "radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.15) 0%, transparent 50%)",
+							backgroundImage: "radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%)",
 							backgroundSize: "100% 100%",
 						}}
 					/>
@@ -243,8 +239,8 @@ export default function BespokePage() {
 								<div className="p-4 md:p-5 lg:p-6 h-full flex flex-col gap-3">
 									<div className="flex flex-col h-full gap-3">
 										{/* Text Content */}
-										<div className="border-l-2 border-gold pl-3 mb-3">
-											<p className="text-gold text-xs tracking-[0.2em] uppercase mb-1" style={{ fontFamily: "ui-sans-serif, system-ui, sans-serif" }}>
+										<div className="border-l-2 border-white pl-3 mb-3">
+											<p className="text-white text-xs tracking-[0.2em] uppercase mb-1" style={{ fontFamily: "ui-sans-serif, system-ui, sans-serif" }}>
 												{current.subtitle}
 											</p>
 											<h3 className="text-lg md:text-xl text-white mb-2" style={{ fontFamily: "Times New Roman" }}>

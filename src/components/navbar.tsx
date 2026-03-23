@@ -99,11 +99,11 @@ export default function Navbar() {
 					{/* Center logo */}
 					<div className="absolute left-1/2 transform -translate-x-1/2 flex justify-center z-50 xl:w-2/12 pointer-events-none">
 						<Link href="/" className="group flex flex-col items-center py-2 pointer-events-auto">
-							<Image src="/white-logo.png" alt="LKB Official Logo" width={200} height={200} className="transition-all duration-500 hover:scale-110 cursor-pointer h-8 md:h-12 animate-logo-pop w-auto" priority />
-							<div className="text-white tracking-[0.15em] transition-all duration-500 whitespace-nowrap text-[9px] animate-logo-pop mt-1 font-heading hidden md:block">
+							<Image src="/white-logo.png" alt="LKB Official Logo" width={200} height={200} className="transition-all duration-500 hover:scale-110 cursor-pointer h-8 md:h-12 w-auto" priority />
+							<div className="text-white tracking-[0.15em] transition-all duration-500 whitespace-nowrap text-[9px] mt-1 font-heading hidden md:block">
 								LOCAL KETTLE BROTHERS UK
 							</div>
-							<div className="text-white tracking-[0.3em] transition-all duration-500 whitespace-nowrap text-[7px] animate-logo-pop font-heading hidden md:block">
+							<div className="text-white tracking-[0.3em] transition-all duration-500 whitespace-nowrap text-[7px] font-heading hidden md:block">
 								JEWELLERS
 							</div>
 						</Link>
