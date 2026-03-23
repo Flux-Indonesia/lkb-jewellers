@@ -138,8 +138,11 @@ export default function HomePage() {
 			<div className="relative w-full bg-black">
 				{videoSections.map((section, index) => (
 					<section key={section.id} className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center border-t border-white/10 bg-black" style={{ zIndex: index + 1 }}>
-						<video className="absolute inset-0 w-full h-full object-cover opacity-60" preload="metadata" playsInline autoPlay muted loop>
+						<video className="absolute inset-0 w-full h-full object-cover opacity-60 hidden md:block" preload="metadata" playsInline autoPlay muted loop>
 							<source src={section.videoUrl} type="video/mp4" />
+						</video>
+						<video className="absolute inset-0 w-full h-full object-cover opacity-60 md:hidden" preload="metadata" playsInline autoPlay muted loop>
+							<source src={section.mobileVideoUrl || section.videoUrl} type="video/mp4" />
 						</video>
 						<div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50" />
 						<div className="relative z-10 text-center max-w-4xl px-6">
@@ -188,14 +191,7 @@ export default function HomePage() {
 										<Image src={card.image} alt={card.title} fill className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
 									</div>
 									<div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500" />
-									<div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 lg:p-8 z-20">
-										<h3 className="text-2xl md:text-3xl text-white mb-2 md:mb-3 transition-all duration-300 group-hover:text-white font-bold font-heading">{card.title}</h3>
-										<p className="text-gray-400 text-xs md:text-sm leading-relaxed opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-150">{card.description}</p>
-										<div className="flex items-center gap-2 text-white text-[0.65rem] md:text-xs tracking-widest uppercase mt-3 md:mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
-											Learn More
-											<ArrowRight size={10} className="md:w-3 md:h-3 group-hover:translate-x-2 transition-transform" />
-										</div>
-									</div>
+									<div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-8 z-20"><h3 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-[0.15em] md:tracking-[0.2em] text-white mb-1 md:mb-2 font-heading">{card.title}</h3><p className="text-gray-300 text-xs md:text-sm tracking-[0.15em] md:tracking-[0.2em] uppercase font-display">{card.description}</p></div>
 									<div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
 								</div>
 								<div className="absolute inset-0 bg-black/50 blur-xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-8" />
@@ -228,9 +224,9 @@ export default function HomePage() {
 
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
 						{[
-							{ href: "/watches", img: "/images/static/cat-blue-gold.jpg", alt: "Exclusive Watches", title: "TIMEPIECES", sub: "Exclusive Watches" },
-							{ href: "/shop?category=luxury-jewellery", img: "/images/static/nav-chain.jpg", alt: "Fine Jewellery", title: "EXCLUSIVE JEWELLERY", sub: "Bespoke Creations" },
-							{ href: "/accessories", img: "/images/static/nav-caps.jpg", alt: "LKB Merchandise", title: "ACCESSORIES", sub: "Premium Accessories", extraClass: "md:col-span-2 lg:col-span-1" },
+							{ href: "/watches", img: "/shop-category/APRAINBOWFROSTED-3.jpg", alt: "Exclusive Watches", title: "TIMEPIECES", sub: "Exclusive Watches" },
+							{ href: "/shop?category=luxury-jewellery", img: "/shop-category/new chain2-3.jpg", alt: "Fine Jewellery", title: "EXCLUSIVE JEWELLERY", sub: "Bespoke Creations" },
+							{ href: "/accessories", img: "/shop-category/ACCESSORIES.jpg", alt: "LKB Merchandise", title: "ACCESSORIES", sub: "Premium Accessories", extraClass: "md:col-span-2 lg:col-span-1" },
 						].map((cat) => (
 							<Link key={cat.title} href={cat.href} className={`group relative h-[250px] md:h-[280px] lg:h-[300px] overflow-hidden block rounded-lg ${cat.extraClass || ""}`}>
 								<div className="absolute inset-0 overflow-hidden">
@@ -259,7 +255,7 @@ export default function HomePage() {
 								<span className="text-white text-xs tracking-[0.5em] uppercase">Stay Connected</span>
 								<div className="h-px w-12 bg-gradient-to-l from-transparent to-white" />
 							</div>
-							<h2 className="text-5xl md:text-6xl lg:text-7xl text-white mb-6 leading-tight font-normal font-heading">Join Our Circle</h2>
+							<h2 className="text-5xl md:text-6xl lg:text-7xl text-white mb-6 leading-tight font-normal font-heading uppercase">JOIN OUR CIRCLE</h2>
 							<p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-display">Subscribe to receive exclusive updates on new collections, private sales, and insider access to the world of LKB Jewellers.</p>
 						</div>
 
@@ -299,8 +295,8 @@ export default function HomePage() {
 									<div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 mx-auto mb-2 md:mb-3 lg:mb-4 rounded-full bg-white/10 border border-white/30 flex items-center justify-center">
 										<span className="text-white text-lg sm:text-xl md:text-2xl">{stat.icon}</span>
 									</div>
-									<h3 className="text-white font-semibold mb-1 md:mb-2 text-xs sm:text-sm md:text-base font-heading">{stat.title}</h3>
-									<p className="text-gray-500 text-[0.65rem] sm:text-xs md:text-sm">{stat.desc}</p>
+									<h3 className="text-white font-semibold mb-1 md:mb-2 text-xs sm:text-sm md:text-base font-heading uppercase">{stat.title}</h3>
+									<p className="text-gray-500 text-[0.65rem] sm:text-xs md:text-sm font-display">{stat.desc}</p>
 								</div>
 							))}
 						</div>

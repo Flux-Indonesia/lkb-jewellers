@@ -99,11 +99,11 @@ export default function Navbar() {
 					{/* Center logo */}
 					<div className="absolute left-1/2 transform -translate-x-1/2 flex justify-center z-50 xl:w-2/12 pointer-events-none">
 						<Link href="/" className="group flex flex-col items-center py-2 pointer-events-auto">
-							<Image src="/white-logo.png" alt="LKB Official Logo" width={200} height={200} className="transition-all duration-500 hover:scale-110 cursor-pointer h-12 animate-logo-pop w-auto" priority />
-							<div className="text-white tracking-[0.15em] transition-all duration-500 whitespace-nowrap text-[9px] animate-logo-pop mt-1 font-heading">
+							<Image src="/white-logo.png" alt="LKB Official Logo" width={200} height={200} className="transition-all duration-500 hover:scale-110 cursor-pointer h-8 md:h-12 animate-logo-pop w-auto" priority />
+							<div className="text-white tracking-[0.15em] transition-all duration-500 whitespace-nowrap text-[9px] animate-logo-pop mt-1 font-heading hidden md:block">
 								LOCAL KETTLE BROTHERS UK
 							</div>
-							<div className="text-white tracking-[0.3em] transition-all duration-500 whitespace-nowrap text-[7px] animate-logo-pop font-heading">
+							<div className="text-white tracking-[0.3em] transition-all duration-500 whitespace-nowrap text-[7px] animate-logo-pop font-heading hidden md:block">
 								JEWELLERS
 							</div>
 						</Link>
@@ -188,14 +188,18 @@ export default function Navbar() {
 								{/* Mobile menu items */}
 								<div className="overflow-y-auto h-[calc(100vh-80px)] pb-32">
 									<div className="flex flex-col">
-										{/* HOME */}
-										<Link href="/" className="text-white text-sm font-semibold tracking-[0.2em] font-body px-6 py-5 border-b border-gray-900 hover:bg-gray-900/50 transition-colors block" onClick={() => setMobileOpen(false)}>HOME</Link>
-
-										{/* ENGAGEMENT RINGS */}
-										<Link href="/engagement-rings" className="text-white text-sm font-semibold tracking-[0.2em] font-body px-6 py-5 border-b border-gray-900 hover:bg-gray-900/50 transition-colors block" onClick={() => setMobileOpen(false)}>ENGAGEMENT RINGS</Link>
-
 										{/* Accordion items */}
 										<Accordion type="single" collapsible className="w-full">
+											{/* HOME - no dropdown */}
+											<AccordionItem value="home" className="border-b border-gray-900">
+												<AccordionTrigger className="text-white text-sm font-semibold tracking-[0.2em] font-body px-6 py-5 hover:bg-gray-900/50 hover:no-underline [&>svg]:hidden" onClick={() => { router.push("/"); setMobileOpen(false); }}>HOME</AccordionTrigger>
+											</AccordionItem>
+
+											{/* ENGAGEMENT RINGS - no dropdown */}
+											<AccordionItem value="rings" className="border-b border-gray-900">
+												<AccordionTrigger className="text-white text-sm font-semibold tracking-[0.2em] font-body px-6 py-5 hover:bg-gray-900/50 hover:no-underline [&>svg]:hidden" onClick={() => { router.push("/engagement-rings"); setMobileOpen(false); }}>ENGAGEMENT RINGS</AccordionTrigger>
+											</AccordionItem>
+
 											{([
 												{ label: "WATCHES", key: "watches" as MenuKey },
 												{ label: "JEWELLERY", key: "jewellery" as MenuKey },
@@ -255,22 +259,22 @@ export default function Navbar() {
 						</Sheet>
 
 						{/* Mobile right icons */}
-						<div className="flex items-center gap-4">
+						<div className="flex items-center gap-10">
 							{user ? (
-								<Link href="/profile" className="text-white p-1">
-									<User size={18} />
+								<Link href="/profile" className="text-white shrink-0">
+									<User size={18} strokeWidth={2} />
 								</Link>
 							) : (
-								<Link href="/login" className="text-white p-1">
-									<User size={18} />
+								<Link href="/login" className="text-white shrink-0">
+									<User size={18} strokeWidth={2} />
 								</Link>
 							)}
-							<Link href="/checkout" className="relative text-white p-1">
-								<ShoppingBag size={18} />
-								{cartCount > 0 && <Badge className="absolute -top-2 -right-2 bg-white text-black text-[9px] font-bold w-4 h-4 p-0 flex items-center justify-center hover:bg-white">{cartCount}</Badge>}
+							<Link href="/checkout" className="relative text-white shrink-0">
+								<ShoppingBag size={18} strokeWidth={2} />
+								{cartCount > 0 && <Badge className="absolute -top-3 -right-3 bg-white text-black text-[9px] font-bold w-4 h-4 p-0 flex items-center justify-center hover:bg-white">{cartCount}</Badge>}
 							</Link>
-							<button className="text-white p-1" aria-label="Search">
-								<Search size={18} />
+							<button type="button" className="p-0! m-0! border-0! bg-transparent! outline-none! appearance-none! leading-none! text-white shrink-0 cursor-pointer" aria-label="Search">
+								<Search size={18} strokeWidth={2} />
 							</button>
 						</div>
 					</div>

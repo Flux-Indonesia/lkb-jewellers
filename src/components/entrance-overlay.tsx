@@ -12,21 +12,24 @@ export default function EntranceOverlay({ onEnter }: EntranceOverlayProps) {
   const [showContent, setShowContent] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  const dismissOverlay = () => {
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("lkb-entered", "true");
+    }
+    onEnter();
+  };
+
   const handleEnter = () => {
     setShowContent(false);
 
     if (videoRef.current) {
       videoRef.current.currentTime = 0;
       videoRef.current.play();
+      videoRef.current.onended = dismissOverlay;
+    } else {
+      // Fallback if video can't play
+      setTimeout(dismissOverlay, 3000);
     }
-
-    // After door opens, notify parent to dismiss
-    setTimeout(() => {
-      if (typeof window !== "undefined") {
-        sessionStorage.setItem("lkb-entered", "true");
-      }
-      onEnter();
-    }, 2500);
   };
 
   return (

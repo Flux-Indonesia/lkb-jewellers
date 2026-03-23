@@ -191,19 +191,22 @@ export const videoSections = [
   {
     id: "watches",
     title: "EXCLUSIVE TIMEPIECES",
-    videoUrl: "/lkb-commercial-1.mp4",
+    videoUrl: "/timepieces/desktop.mp4",
+    mobileVideoUrl: "/timepieces/mobile.mp4",
     link: "/watches",
   },
   {
     id: "jewellery",
     title: "PREMIUM JEWELLERY",
-    videoUrl: "/THE GENTLEMAN_3.mp4",
+    videoUrl: "/jewellery/desktop.mp4",
+    mobileVideoUrl: "/jewellery/mobile.mp4",
     link: "/jewellery",
   },
   {
     id: "accessories",
     title: "MERCHANDISE",
-    videoUrl: "/hat/Hatselectionreel.mp4",
+    videoUrl: "/merchandise/desktop.mp4",
+    mobileVideoUrl: "/merchandise/mobile.mp4",
     link: "/accessories",
   },
   {
@@ -219,28 +222,28 @@ export const serviceCards = [
     id: "buy",
     title: "WE BUY",
     image:
-      "/images/static/service-we-buy.jpg",
+      "/offer/WE BUY.JPG",
     description: "Competitive valuations for your exclusive timepieces.",
   },
   {
     id: "sell",
     title: "WE SELL",
     image:
-      "/images/static/service-we-sell.jpg",
+      "/offer/WE SELL.JPG",
     description: "Sourcing the rarest pieces from around the globe.",
   },
   {
     id: "service",
     title: "SERVICING",
     image:
-      "/images/static/service-servicing.jpg",
+      "/offer/servicing.jpg",
     description: "Expert restoration and maintenance for longevity.",
   },
   {
     id: "bespoke",
     title: "BESPOKE",
     image:
-      "/bespoke/bespoke.JPG",
+      "/offer/bespoke.jpg",
     description: "Custom designs crafted to your exact specifications.",
   },
 ];

@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(xargs grep -l \"form\\\\|Form\")",
-      "Bash(node -e \"try { require\\(''sharp''\\); console.log\\(''sharp available''\\); } catch\\(e\\) { console.log\\(''no sharp''\\); }\")"
+      "Bash(node -e \"try { require\\(''sharp''\\); console.log\\(''sharp available''\\); } catch\\(e\\) { console.log\\(''no sharp''\\); }\")",
+      "Bash(ffmpeg -version)"
     ],
     "additionalDirectories": [
       "d:\\Project\\Flux\\lkb-clone\\public"
