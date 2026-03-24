@@ -16,7 +16,7 @@ export default function ShowroomSection() {
       <div className="mx-auto px-6 max-w-7xl">
         <div className="flex flex-col md:flex-row items-center justify-center gap-0 md:gap-8 border border-gray-800 bg-[#050505] relative z-10 mx-auto max-w-6xl">
           {/* Left - Showroom Image */}
-          <div className="w-full md:w-1/2 h-[300px] md:h-[500px] relative transition-all duration-700 overflow-hidden group">
+          <div className="w-full md:w-1/2 h-[350px] md:h-[500px] relative transition-all duration-700 overflow-hidden group">
             <Image
               src={showroomTab === "london" ? "/images/static/showroom-entry.jpg" : "/images/static/showroom-entry-2.jpg"}
               alt={showroomTab === "london" ? "Hatton Garden Showroom" : "International Service"}

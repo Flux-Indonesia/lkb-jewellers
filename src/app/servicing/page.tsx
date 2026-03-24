@@ -7,9 +7,9 @@ import { Sparkles, Wrench, Clock, Droplet, Shield, Watch, CircleCheckBig } from 
 import ShowroomSection from "@/components/showroom-section";
 
 const servicingImages = [
-	"/about-us/srd-3.webp",
-	"/about-us/srd-3.webp",
-	"/about-us/srd-3.webp",
+	"/servicing/1.jpg",
+	"/servicing/2.jpg",
+	"/servicing/3.jpg",
 ];
 
 export default function ServicingPage() {
@@ -196,21 +196,6 @@ export default function ServicingPage() {
 				</div>
 			</section>
 
-			{/* ===== DIRECTOR QUOTE ===== */}
-			<div className="relative bg-gradient-to-b from-black via-gray-900 to-black py-16">
-				<div className="container mx-auto px-6">
-					<div className="max-w-4xl mx-auto text-center">
-						<div className="bg-gray-900/50 border border-white/30 rounded-lg p-8 md:p-12 backdrop-blur">
-							<div className="w-20 h-1 bg-white mx-auto mb-8" />
-							<p className="text-white italic text-xl md:text-2xl mb-6 leading-relaxed" style={{ fontFamily: '"Mona Sans", "Mona Sans Fallback", ui-sans-serif, system-ui, sans-serif' }}>
-								&ldquo;Meet Robert James Holt. Our appointed Director of our Service &amp; Warranty Department.&rdquo;
-							</p>
-							<div className="w-20 h-1 bg-white mx-auto mt-8" />
-						</div>
-					</div>
-				</div>
-			</div>
-
 			{/* ===== ABOUT SERVICING + IMAGE CAROUSEL ===== */}
 			<div className="container mx-auto px-6 py-16">
 				<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -240,7 +225,7 @@ export default function ServicingPage() {
 
 					{/* Right - Image Carousel */}
 					<div className="relative">
-						<div className="relative h-[480px] rounded-lg overflow-hidden shadow-2xl">
+						<div className="relative h-[300px] md:h-[480px] rounded-lg overflow-hidden shadow-2xl">
 							{servicingImages.map((img, i) => (
 								<Image
 									key={i}
@@ -262,9 +247,9 @@ export default function ServicingPage() {
 								<button
 									key={i}
 									onClick={() => setActiveImage(i)}
-									className={`relative h-12 rounded overflow-hidden border-2 transition-all duration-300 ${
+									className={`relative h-12 rounded cursor-pointer overflow-hidden border-2 transition-all duration-300 ${
 										activeImage === i
-											? "border-white scale-110 shadow-lg shadow-white/50"
+											? "border-white shadow-lg shadow-white/50"
 											: "border-gray-700 hover:border-gray-500 opacity-60 hover:opacity-100"
 									}`}
 								>

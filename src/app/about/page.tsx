@@ -306,7 +306,7 @@ export default function AboutPage() {
 								key={item.title}
 								className={`relative overflow-hidden group cursor-pointer ${
 									item.featured
-										? "lg:col-span-2 lg:row-span-2 h-[300px] lg:h-[612px]"
+										? "lg:col-span-2 lg:row-span-2 h-[250px] md:h-[300px] lg:h-[612px]"
 										: "h-[300px] hover:scale-105 transition-transform duration-300"
 								}`}
 							>

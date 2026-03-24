@@ -40,9 +40,9 @@ export default function HomePage() {
 	return (
 		<div className="bg-black">
 			{/* ===== HERO ===== */}
-			<section className="relative h-[70vh] md:h-[85vh] lg:h-screen w-full overflow-hidden bg-black">
+			<section className="relative h-[80vh] md:h-[85vh] lg:h-screen w-full overflow-hidden bg-black">
 				<video className="absolute top-0 left-0 w-full h-full object-cover opacity-80" preload="metadata" playsInline autoPlay muted loop style={{ willChange: "transform" }}>
-					<source src="/heroVideo.mp4" type="video/mp4" />
+					<source src="/hero-video.mp4" type="video/mp4" />
 				</video>
 				<div className="absolute inset-0 bg-black/40" />
 				<div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
@@ -176,7 +176,7 @@ export default function HomePage() {
 
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto">
 						{serviceCards.map((card, index) => (
-							<Link key={card.id} href={card.id === "buy" ? "/we-buy" : card.id === "sell" ? "/shop" : card.id === "service" ? "/servicing" : "/bespoke"} className="group relative h-[350px] md:h-[400px] lg:h-[450px] overflow-hidden cursor-pointer block" style={{ animationDelay: `${index * 100}ms` }}>
+							<Link key={card.id} href={card.id === "buy" ? "/we-buy" : card.id === "sell" ? "/shop" : card.id === "service" ? "/servicing" : "/bespoke"} className="group relative h-[380px] md:h-[420px] lg:h-[450px] overflow-hidden cursor-pointer block" style={{ animationDelay: `${index * 100}ms` }}>
 								<div className="relative h-full transition-all duration-500 group-hover:-translate-y-4 group-hover:scale-105" style={{ transformStyle: "preserve-3d" }}>
 									<div className="absolute inset-0 border-2 border-gray-900 group-hover:border-white/50 transition-all duration-500 z-20 pointer-events-none" />
 									<div className="absolute inset-0 overflow-hidden">
@@ -216,13 +216,13 @@ export default function HomePage() {
 
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
 						{[
-							{ href: "/watches", img: "/shop-category/APRAINBOWFROSTED-3.jpg", alt: "Exclusive Watches", title: "TIMEPIECES", sub: "Exclusive Watches" },
-							{ href: "/shop?category=luxury-jewellery", img: "/shop-category/new chain2-3.jpg", alt: "Fine Jewellery", title: "EXCLUSIVE JEWELLERY", sub: "Bespoke Creations" },
-							{ href: "/accessories", img: "/shop-category/ACCESSORIES.jpg", alt: "LKB Merchandise", title: "ACCESSORIES", sub: "Premium Accessories", extraClass: "md:col-span-2 lg:col-span-1" },
+							{ href: "/watches", img: "/shop-category/timepieces.jpg", alt: "Exclusive Watches", title: "TIMEPIECES", sub: "Exclusive Watches" },
+							{ href: "/shop?category=luxury-jewellery", img: "/shop-category/jewellery.jpg", alt: "Fine Jewellery", title: "EXCLUSIVE JEWELLERY", sub: "Bespoke Creations" },
+							{ href: "/accessories", img: "/shop-category/accessories.jpg", alt: "LKB Merchandise", title: "ACCESSORIES", sub: "Premium Accessories", extraClass: "md:col-span-2 lg:col-span-1" },
 						].map((cat) => (
-							<Link key={cat.title} href={cat.href} className={`group relative h-[250px] md:h-[280px] lg:h-[300px] overflow-hidden block rounded-lg ${cat.extraClass || ""}`}>
+							<Link key={cat.title} href={cat.href} className={`group relative h-[300px] md:h-[320px] lg:h-[350px] overflow-hidden block rounded-lg ${cat.extraClass || ""}`}>
 								<div className="absolute inset-0 overflow-hidden">
-									<Image src={cat.img} alt={cat.alt} fill className="object-cover transition-transform duration-500 ease-out group-hover:scale-110" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+									<Image src={cat.img} alt={cat.alt} fill className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-110" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" />
 								</div>
 								<div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
 								<div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-8">

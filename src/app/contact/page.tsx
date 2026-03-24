@@ -48,7 +48,7 @@ export default function ContactPage() {
 				{/* Left - Image */}
 				<div className="lg:w-1/2 bg-black relative overflow-hidden">
 					<Image
-						src="/contactPage.png"
+						src="/contact-page.png"
 						alt="LKB Jewellers Showroom"
 						fill
 						className="object-cover"

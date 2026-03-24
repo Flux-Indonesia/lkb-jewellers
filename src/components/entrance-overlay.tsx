@@ -41,7 +41,7 @@ export default function EntranceOverlay({ onEnter }: EntranceOverlayProps) {
     <div className="fixed inset-0 z-[100] bg-black">
       {/* Background image (door closed) */}
       <Image
-        src="/DoorClosedPicture.png"
+        src="/door-closed.png"
         alt=""
         fill
         className="object-cover"
@@ -61,7 +61,7 @@ export default function EntranceOverlay({ onEnter }: EntranceOverlayProps) {
         playsInline
         preload="auto"
       >
-        <source src="/DoorOpenVideo.mp4" type="video/mp4" />
+        <source src="/door-open.mp4" type="video/mp4" />
       </video>
 
       {/* Content overlay */}

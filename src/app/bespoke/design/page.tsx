@@ -112,6 +112,8 @@ export default function BespokeDesignPage() {
   const [showResult, setShowResult] = useState(false);
   const [resultPrompt, setResultPrompt] = useState("");
   const [resultTags, setResultTags] = useState<string[]>([]);
+  const [generatedImage, setGeneratedImage] = useState<string | null>(null);
+  const [generateError, setGenerateError] = useState<string | null>(null);
 
   const [step, setStep] = useState<1 | 2 | 3>(1);
 
@@ -173,25 +175,57 @@ export default function BespokeDesignPage() {
     }
   };
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
     const tags: string[] = [];
     if (selectedMetal) tags.push(selectedMetal);
     if (selectedStone) tags.push(selectedStone);
     if (selectedStyle) tags.push(selectedStyle);
 
-    setResultPrompt(
-      prompt.trim() ||
-        "A beautiful bespoke jewellery piece crafted to perfection"
-    );
+    const userPrompt = prompt.trim() || "A beautiful bespoke jewellery piece crafted to perfection";
+    setResultPrompt(userPrompt);
     setResultTags(tags);
     setIsGenerating(true);
     setShowResult(false);
+    setGeneratedImage(null);
+    setGenerateError(null);
     setStep(3);
 
-    setTimeout(() => {
+    try {
+      const res = await fetch("/api/design-generator/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          prompt: userPrompt,
+          metal: selectedMetal,
+          stone: selectedStone,
+          style: selectedStyle,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        setGenerateError(data.error || "Failed to generate design");
+        setIsGenerating(false);
+        setShowResult(true);
+        return;
+      }
+
+      if (data.refused) {
+        setGenerateError(data.description || "This request is not related to jewellery design.");
+        setIsGenerating(false);
+        setShowResult(true);
+        return;
+      }
+
+      setGeneratedImage(data.image);
       setIsGenerating(false);
       setShowResult(true);
-    }, 2000);
+    } catch {
+      setGenerateError("Network error. Please try again.");
+      setIsGenerating(false);
+      setShowResult(true);
+    }
   };
 
   const handleGenerateAnother = () => {

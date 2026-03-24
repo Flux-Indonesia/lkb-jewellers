@@ -222,16 +222,16 @@ export const serviceCards = [
     id: "buy",
     title: "WE BUY",
     image:
-      "/offer/WE BUY.JPG",
-    hoverImage: "/offer/WE BUY 2.JPG",
+      "/offer/we-buy.jpg",
+    hoverImage: "/offer/we-buy-2.jpg",
     description: "Competitive valuations for your exclusive timepieces.",
   },
   {
     id: "sell",
     title: "WE SELL",
     image:
-      "/offer/WE SELL.JPG",
-    hoverImage: "/offer/WE SELL 2.JPG",
+      "/offer/we-sell.jpg",
+    hoverImage: "/offer/we-sell-2.jpg",
     description: "Sourcing the rarest pieces from around the globe.",
   },
   {
@@ -239,7 +239,7 @@ export const serviceCards = [
     title: "SERVICING",
     image:
       "/offer/servicing.jpg",
-    hoverImage: "/offer/servicing 2.JPG",
+    hoverImage: "/offer/servicing-2.jpg",
     description: "Expert restoration and maintenance for longevity.",
   },
   {
@@ -247,7 +247,7 @@ export const serviceCards = [
     title: "BESPOKE",
     image:
       "/offer/bespoke.jpg",
-    hoverImage: "/offer/bespoke 2.jpg",
+    hoverImage: "/offer/bespoke-2.jpg",
     description: "Custom designs crafted to your exact specifications.",
   },
 ];
