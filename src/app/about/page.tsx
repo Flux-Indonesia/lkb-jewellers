@@ -139,7 +139,7 @@ export default function AboutPage() {
 							<div className="aspect-[3/4] border border-gray-800 p-4">
 								<div className="relative w-full h-full overflow-hidden">
 									<Image
-										src="/suspect-with-chain.webp"
+										src="/about-us/heritage.jpg"
 										alt="LKB Jewellers craftsmanship"
 										fill
 										className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
@@ -161,8 +161,8 @@ export default function AboutPage() {
 			{/* Excellence in Numbers */}
 			<section className="py-20 bg-[#0a0a0a] border-y border-gray-900 relative overflow-hidden">
 				<div className="absolute inset-0 opacity-5">
-					<div className="absolute top-1/2 left-1/4 w-96 h-96 bg-gold rounded-full blur-[120px] animate-pulse" />
-					<div className="absolute top-1/2 right-1/4 w-96 h-96 bg-white rounded-full blur-[120px] animate-pulse" />
+					<div className="absolute top-1/2 left-1/4 w-96 h-96 bg-gold rounded-full blur-[120px]" />
+					<div className="absolute top-1/2 right-1/4 w-96 h-96 bg-white rounded-full blur-[120px]" />
 				</div>
 
 				<div className="container mx-auto px-6 relative z-10">
@@ -277,8 +277,8 @@ export default function AboutPage() {
 			{/* Hall of Fame */}
 			<section className="py-12 bg-gradient-to-b from-black to-[#0a0a0a] relative overflow-hidden">
 				<div className="absolute inset-0 opacity-10">
-					<div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold rounded-full blur-[150px] animate-pulse" />
-					<div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gold rounded-full blur-[150px] animate-pulse" style={{ animationDelay: "2s" }} />
+					<div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold rounded-full blur-[150px]" />
+					<div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gold rounded-full blur-[150px]" style={{ animationDelay: "2s" }} />
 				</div>
 
 				<div className="container mx-auto px-6 relative z-10">

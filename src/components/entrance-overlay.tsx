@@ -108,11 +108,11 @@ export default function EntranceOverlay({ onEnter }: EntranceOverlayProps) {
 
         {/* Ambient glow effects */}
         <div
-          className="absolute top-1/4 left-1/4 w-64 h-64 bg-white rounded-full blur-[120px] opacity-10 animate-pulse -z-10 pointer-events-none"
+          className="absolute top-1/4 left-1/4 w-64 h-64 bg-white rounded-full blur-[120px] opacity-10 -z-10 pointer-events-none"
           style={{ animationDuration: "4s" }}
         />
         <div
-          className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-white rounded-full blur-[120px] opacity-10 animate-pulse -z-10 pointer-events-none"
+          className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-white rounded-full blur-[120px] opacity-10 -z-10 pointer-events-none"
           style={{ animationDuration: "6s", animationDelay: "1s" }}
         />
       </div>

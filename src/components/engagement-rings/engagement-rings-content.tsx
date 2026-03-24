@@ -217,7 +217,7 @@ export function EngagementRingsContent() {
         {loading ? (
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {Array.from({ length: 12 }).map((_, i) => (
-              <div key={i} className="rounded-lg bg-zinc-900 animate-pulse">
+              <div key={i} className="rounded-lg bg-zinc-900">
                 <div className="aspect-square bg-zinc-800 rounded-t-lg" />
                 <div className="p-3 space-y-2">
                   <div className="h-4 bg-zinc-800 rounded w-3/4" />

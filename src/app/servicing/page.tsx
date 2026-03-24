@@ -10,6 +10,8 @@ const servicingImages = [
 	"/servicing/1.jpg",
 	"/servicing/2.jpg",
 	"/servicing/3.jpg",
+	"/servicing/4.jpg",
+	"/servicing/5.jpg",
 ];
 
 export default function ServicingPage() {
@@ -27,13 +29,9 @@ export default function ServicingPage() {
 		<div className="bg-black min-h-screen text-white">
 			{/* ===== HERO ===== */}
 			<section className="relative pt-32 md:pt-40 pb-16 md:pb-24 overflow-hidden">
-				{/* Decorative blurred circles */}
-				<div className="absolute top-1/4 left-1/4 w-64 h-64 bg-white/10 rounded-full blur-[120px] animate-pulse" />
-				<div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-blue-500/5 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: "1s" }} />
-				<div className="absolute top-1/2 right-1/3 w-32 h-32 bg-purple-500/5 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: "2s" }} />
 
 				<div className="container mx-auto px-6 text-center relative z-10">
-					<Sparkles className="w-10 h-10 text-white mx-auto mb-6 animate-pulse" />
+					<Sparkles className="w-10 h-10 text-white mx-auto mb-6" />
 					<h1 className="text-4xl md:text-6xl lg:text-7xl text-white mb-6 font-heading">
 						Expert Watch Servicing
 					</h1>
@@ -69,7 +67,7 @@ export default function ServicingPage() {
 						</div>
 						{activeCard === 0 && (
 							<div className="absolute -top-1 -right-1">
-								<CircleCheckBig className="w-6 h-6 text-white animate-pulse" />
+								<CircleCheckBig className="w-6 h-6 text-white" />
 							</div>
 						)}
 					</div>
@@ -93,7 +91,7 @@ export default function ServicingPage() {
 						</div>
 						{activeCard === 1 && (
 							<div className="absolute -top-1 -right-1">
-								<CircleCheckBig className="w-6 h-6 text-white animate-pulse" />
+								<CircleCheckBig className="w-6 h-6 text-white" />
 							</div>
 						)}
 					</div>
@@ -117,7 +115,7 @@ export default function ServicingPage() {
 						</div>
 						{activeCard === 2 && (
 							<div className="absolute -top-1 -right-1">
-								<CircleCheckBig className="w-6 h-6 text-white animate-pulse" />
+								<CircleCheckBig className="w-6 h-6 text-white" />
 							</div>
 						)}
 					</div>
@@ -141,7 +139,7 @@ export default function ServicingPage() {
 						</div>
 						{activeCard === 3 && (
 							<div className="absolute -top-1 -right-1">
-								<CircleCheckBig className="w-6 h-6 text-white animate-pulse" />
+								<CircleCheckBig className="w-6 h-6 text-white" />
 							</div>
 						)}
 					</div>
@@ -165,7 +163,7 @@ export default function ServicingPage() {
 						</div>
 						{activeCard === 4 && (
 							<div className="absolute -top-1 -right-1">
-								<CircleCheckBig className="w-6 h-6 text-white animate-pulse" />
+								<CircleCheckBig className="w-6 h-6 text-white" />
 							</div>
 						)}
 					</div>
@@ -189,7 +187,7 @@ export default function ServicingPage() {
 						</div>
 						{activeCard === 5 && (
 							<div className="absolute -top-1 -right-1">
-								<CircleCheckBig className="w-6 h-6 text-white animate-pulse" />
+								<CircleCheckBig className="w-6 h-6 text-white" />
 							</div>
 						)}
 					</div>
@@ -257,20 +255,12 @@ export default function ServicingPage() {
 								</button>
 							))}
 						</div>
-						{/* Decorative blurs */}
-						<div className="absolute -top-6 -right-6 w-32 h-32 bg-white/20 rounded-full blur-3xl animate-pulse" />
-						<div className="absolute -bottom-6 -left-6 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
 					</div>
 				</div>
 			</div>
 
 			{/* ===== WARRANTY SECTION ===== */}
 			<div className="relative py-16 bg-gradient-to-b from-black via-gray-900 to-black overflow-hidden">
-				{/* Background decorative blurs */}
-				<div className="absolute inset-0 opacity-10">
-					<div className="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse" />
-					<div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1.5s" }} />
-				</div>
 				<div className="container mx-auto px-6 relative z-10">
 					<div className="max-w-3xl mx-auto text-center">
 						<div className="relative inline-block">

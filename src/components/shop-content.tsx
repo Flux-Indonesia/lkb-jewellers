@@ -291,7 +291,7 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
   if (loading) {
     return (
       <div className="bg-white min-h-screen flex items-center justify-center">
-        <div className="text-gray-400 text-xs tracking-widest uppercase animate-pulse">
+        <div className="text-gray-400 text-xs tracking-widest uppercase">
           Loading collection...
         </div>
       </div>

@@ -155,7 +155,7 @@ export default function HallOfFamePage() {
 							onTouchEnd={handleTouchEnd}
 						>
 							{/* Scroll hint */}
-							<div className="absolute top-4 right-4 z-20 text-xs text-gray-500 animate-pulse">
+							<div className="absolute top-4 right-4 z-20 text-xs text-gray-500">
 								<span className="hidden md:inline">🖱️ Scroll</span>
 								<span className="md:hidden">👆 Swipe</span>
 							</div>

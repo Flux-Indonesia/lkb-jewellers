@@ -12,6 +12,9 @@ export default function ContactPage() {
 		firstName: "", lastName: "", email: "", phone: "", interest: "", message: "",
 	});
 	const [loading, setLoading] = useState(false);
+	const [activeSlide, setActiveSlide] = useState(0);
+	const contactImages = ["/contact/1.avif", "/contact/2.avif", "/contact/3.avif", "/contact/4.avif"];
+
 	const [submitted, setSubmitted] = useState(false);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -46,22 +49,28 @@ export default function ContactPage() {
 		<div className="bg-black text-white min-h-screen pt-20" style={{ transform: "scale(0.9)", transformOrigin: "center top" }}>
 			<div className="flex flex-col lg:flex-row min-h-[calc(100vh-6rem)]">
 				{/* Left - Image */}
-				<div className="lg:w-1/2 bg-black relative overflow-hidden">
-					<Image
-						src="/contact-page.png"
-						alt="LKB Jewellers Showroom"
-						fill
-						className="object-cover"
-						sizes="(max-width: 1024px) 100vw, 50vw"
-						priority
-					/>
+				<div className="lg:w-1/2 bg-black relative overflow-hidden min-h-[300px] lg:min-h-0">
+					{contactImages.map((img, i) => (
+						<Image key={img} src={img} alt={`LKB Jewellers ${i + 1}`} fill className={`object-cover transition-opacity duration-1000 ${activeSlide === i ? "opacity-100" : "opacity-0"}`} sizes="(max-width: 1024px) 100vw, 50vw" priority={i === 0} />
+					))}
+					<div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+						{contactImages.map((img, i) => (
+							<button key={i} onClick={() => setActiveSlide(i)} className={`relative w-14 h-10 rounded overflow-hidden border-2 transition-all ${activeSlide === i ? "border-white shadow-lg shadow-white/50" : "border-gray-700 opacity-60 hover:opacity-100"}`}>
+								<Image src={img} alt={`Thumbnail ${i + 1}`} fill className="object-cover" sizes="56px" />
+							</button>
+						))}
+					</div>
 				</div>
 
 				{/* Right - Form + Get In Touch */}
 				<div className="lg:w-1/2 bg-black p-12 lg:p-24 flex flex-col justify-center">
-					<span className="text-white tracking-[0.3em] text-sm uppercase mb-4 block font-semibold">Contact Us</span>
-					<h2 className="text-4xl md:text-5xl mb-10 text-white" style={{ fontFamily: 'Prata, "Prata Fallback", serif' }}>
-						Let&apos;s Create Something Timeless
+					<div className="inline-flex items-center gap-4 mb-6">
+						<div className="h-px w-12 bg-gradient-to-r from-transparent to-white" />
+						<span className="text-white text-xs tracking-[0.5em] uppercase">Contact Us</span>
+						<div className="h-px w-12 bg-gradient-to-l from-transparent to-white" />
+					</div>
+					<h2 className="text-4xl md:text-5xl mb-10 text-white font-heading uppercase tracking-wide">
+						GET IN TOUCH
 					</h2>
 
 					{submitted ? (

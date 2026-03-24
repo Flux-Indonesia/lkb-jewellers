@@ -183,7 +183,7 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
   if (loading) {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center px-6">
-        <div className="text-white text-xs tracking-widest uppercase animate-pulse">Loading dashboard...</div>
+        <div className="text-white text-xs tracking-widest uppercase">Loading dashboard...</div>
       </div>
     );
   }

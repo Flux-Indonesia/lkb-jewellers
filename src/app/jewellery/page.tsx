@@ -15,7 +15,7 @@ export default function JewelleryPage() {
       <Suspense
         fallback={
           <div className="bg-black min-h-screen pt-32 pb-24 flex items-center justify-center">
-            <div className="text-white text-xs tracking-widest uppercase animate-pulse">
+            <div className="text-white text-xs tracking-widest uppercase">
               Loading jewellery...
             </div>
           </div>

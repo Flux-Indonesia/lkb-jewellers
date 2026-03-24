@@ -250,7 +250,7 @@ export function RingCard({ ring, priority = false, dbPreferences = null }: RingC
           )}
 
           {/* Loading skeleton overlay */}
-          <div className="absolute inset-0 bg-zinc-800 animate-pulse opacity-0 group-data-[loading]:opacity-100" />
+          <div className="absolute inset-0 bg-zinc-800 opacity-0 group-data-[loading]:opacity-100" />
 
           {/* Setting style overlay */}
           {ring.settingStyle && (

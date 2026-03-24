@@ -65,19 +65,19 @@ function StepIndicator({ currentStep }: { currentStep: 1 | 2 | 3 }) {
 function ShimmerLoader() {
   return (
     <div className="flex flex-col gap-5">
-      <div className="h-7 w-52 rounded bg-gray-800 animate-pulse" />
+      <div className="h-7 w-52 rounded bg-gray-800" />
       <div className="w-full h-64 rounded-lg relative overflow-hidden bg-gray-900">
         <div
-          className="absolute inset-0 animate-pulse"
+          className="absolute inset-0"
           style={{
             background:
               "linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.07) 50%, transparent 100%)",
           }}
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-          <span className="text-gray-700 text-5xl animate-pulse">✦</span>
+          <span className="text-gray-700 text-5xl">✦</span>
           <p
-            className="text-gray-600 text-xs tracking-[0.3em] uppercase animate-pulse"
+            className="text-gray-600 text-xs tracking-[0.3em] uppercase"
             style={{
               fontFamily:
                 '"Mona Sans", "Mona Sans Fallback", ui-sans-serif, system-ui, sans-serif',
@@ -87,9 +87,9 @@ function ShimmerLoader() {
           </p>
         </div>
       </div>
-      <div className="h-4 w-full rounded bg-gray-800 animate-pulse" />
-      <div className="h-4 w-3/4 rounded bg-gray-800 animate-pulse" />
-      <div className="h-4 w-1/2 rounded bg-gray-800 animate-pulse" />
+      <div className="h-4 w-full rounded bg-gray-800" />
+      <div className="h-4 w-3/4 rounded bg-gray-800" />
+      <div className="h-4 w-1/2 rounded bg-gray-800" />
     </div>
   );
 }

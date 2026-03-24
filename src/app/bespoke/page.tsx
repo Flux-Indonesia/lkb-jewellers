@@ -58,7 +58,7 @@ export default function BespokePage() {
 	return (
 		<div className="bg-black text-white min-h-screen">
 			{/* ===== HERO - Split Layout ===== */}
-			<section className="relative overflow-hidden bg-gradient-to-b from-black via-gray-900 to-black pt-32 pb-8 md:pt-36 md:pb-12 lg:h-screen lg:py-0">
+			<section className="relative overflow-hidden bg-black pt-32 pb-8 md:pt-36 md:pb-12 lg:h-screen lg:py-0">
 				<div className="container mx-auto px-4 md:px-6 h-full">
 					<div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 h-full lg:items-center">
 						{/* Left - Text */}
@@ -81,16 +81,16 @@ export default function BespokePage() {
 						<div className="relative h-[380px] sm:h-[420px] md:h-[500px] lg:h-[800px] flex items-center justify-center order-2">
 							{/* White glow circle behind carousel */}
 							<div className="absolute inset-0 flex items-center justify-center">
-								<div className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[350px] md:h-[350px] lg:w-[500px] lg:h-[500px] bg-white/10 rounded-full blur-[50px] md:blur-[70px] lg:blur-[120px] animate-pulse" />
+								<div className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[350px] md:h-[350px] lg:w-[500px] lg:h-[500px] bg-white/10 rounded-full blur-[50px] md:blur-[70px] lg:blur-[120px]" />
 							</div>
 							{/* Carousel with drop-shadow filter */}
 							<div className="relative z-10 rounded-2xl scale-[0.65] sm:scale-[0.75] md:scale-[0.85] lg:scale-100" style={{ filter: "drop-shadow(0 20px 40px rgba(255, 255, 255, 0.1)) drop-shadow(0 30px 60px rgba(255, 255, 255, 0.15))" }}>
 								<ThreeDCarousel images={bespokeImages} radius={360} cardW={240} cardH={340} autoSpinSpeed={0.03} />
 							</div>
 							{/* Decorative white dots */}
-							<div className="absolute top-10 right-10 w-2 md:w-3 h-2 md:h-3 bg-white rounded-full animate-pulse opacity-60" />
-							<div className="absolute bottom-20 left-10 w-1.5 md:w-2 h-1.5 md:h-2 bg-white rounded-full animate-pulse opacity-40" style={{ animationDelay: "1s" }} />
-							<div className="absolute top-1/3 left-20 w-1 h-1 bg-white rounded-full animate-pulse opacity-50" style={{ animationDelay: "0.5s" }} />
+							<div className="absolute top-10 right-10 w-2 md:w-3 h-2 md:h-3 bg-white rounded-full opacity-60" />
+							<div className="absolute bottom-20 left-10 w-1.5 md:w-2 h-1.5 md:h-2 bg-white rounded-full opacity-40" style={{ animationDelay: "1s" }} />
+							<div className="absolute top-1/3 left-20 w-1 h-1 bg-white rounded-full opacity-50" style={{ animationDelay: "0.5s" }} />
 						</div>
 					</div>
 				</div>
