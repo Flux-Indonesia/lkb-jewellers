@@ -62,7 +62,7 @@ export const navMenuData = {
   },
   jewellery: {
     title: "JEWELLERY",
-    defaultImage: "/images/static/nav-chain.jpg",
+    defaultImage: "/images/static/nav-jewellery.jpg",
     categories: [
       {
         name: "Chains",
@@ -211,7 +211,7 @@ export const videoSections = [
   },
   {
     id: "rings",
-    title: "EXCLUSIVE RINGS",
+    title: "ENGAGEMENT RINGS",
     videoUrl: "/rings-placeholder.mp4",
     link: "/engagement-rings",
   },

@@ -7,7 +7,7 @@ import { Wand2 } from "lucide-react";
 import ThreeDCarousel from "@/components/three-d-carousel";
 import ShowroomSection from "@/components/showroom-section";
 
-const bespokeImages = ["/jefe-cover-blogs.jpg", "/bespoke/rnt.jpg", "/bespoke/rich.jpg", "/bespoke/tade-chain-16.jpg", "/tade-cover.jpg", "/bespoke/rich2.jpg", "/timeless-photos-2.jpg"];
+const bespokeImages = ["/bespoke/jefe-cover-blogs.jpg", "/bespoke/rnt.jpg", "/bespoke/rich.jpg", "/bespoke/tade-chain-16.jpg", "/bespoke/tade-cover.jpg", "/bespoke/rich2.jpg", "/bespoke/timeless-photos-2.jpg"];
 
 const tabs = [
 	{
@@ -17,7 +17,7 @@ const tabs = [
 		subtitle: "The Pinnacle of Craftsmanship",
 		description:
 			"Each piece in our masterpiece collection represents hundreds of hours of meticulous work by our master artisans. Using only the finest materials and time-honored techniques passed down through generations, we create jewelry that transcends mere adornment to become treasured heirlooms. Every diamond is hand-selected for its exceptional brilliance, every setting is crafted with microscopic precision, and every detail is perfected to create pieces that will be cherished for lifetimes.",
-		videoUrl: "/jewellery-glorify-1.mp4",
+		videoUrl: "/videos/bespoke/jewellery-glorify-1.mp4",
 		stats: [
 			{ label: "Hours of Craftsmanship", value: "200+" },
 			{ label: "Master Artisans", value: "5" },
@@ -30,7 +30,7 @@ const tabs = [
 		title: "Iconic Excellence",
 		subtitle: "Where Art Meets Innovation",
 		description: "Our signature collection pushes the boundaries of traditional jewelry making, combining cutting-edge technology with centuries-old craftsmanship. Each design tells a unique story, from concept sketches to the final polished masterpiece. We use advanced 3D modeling alongside hand-finishing techniques to achieve levels of detail and precision that were previously impossible. The result is jewelry that is both contemporary and timeless, bold yet elegant.",
-		videoUrl: "/jewellery-glorify-2.mp4",
+		videoUrl: "/videos/bespoke/jewellery-glorify-2.mp4",
 		stats: [
 			{ label: "Design Process", value: "3-6 Months" },
 			{ label: "Unique Designs", value: "100+" },
@@ -42,13 +42,13 @@ const tabs = [
 const galleryImages1 = [
 	{ src: "/bespoke/rich.jpg", alt: "Bespoke Jewellery 1" },
 	{ src: "/bespoke/tade-chain-16.jpg", alt: "Bespoke Jewellery 2" },
-	{ src: "/tade-cover.jpg", alt: "Bespoke Jewellery 3" },
+	{ src: "/bespoke/tade-cover.jpg", alt: "Bespoke Jewellery 3" },
 ];
 
 const portfolioImages = [
-	{ src: "/timeless-photos-2.jpg", alt: "Bespoke Work 1" },
+	{ src: "/bespoke/timeless-photos-2.jpg", alt: "Bespoke Work 1" },
 	{ src: "/bespoke/bracelets-1.jpg", alt: "Bespoke Work 2" },
-	{ src: "/timeless-photos-3.jpg", alt: "Bespoke Work 3" },
+	{ src: "/bespoke/timeless-photos-3.jpg", alt: "Bespoke Work 3" },
 ];
 
 export default function BespokePage() {
@@ -313,13 +313,13 @@ export default function BespokePage() {
 				{/* Images Row */}
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 					<div className="relative h-72 sm:h-80 md:h-96 overflow-hidden">
-						<Image src="/davido.jpg" alt="Dedicated Client Advisors" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+						<Image src="/bespoke/davido.jpg" alt="Dedicated Client Advisors" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
 					</div>
 					<div className="relative h-72 sm:h-80 md:h-96 overflow-hidden">
 						<Image src="/bespoke/tade-chain-12.jpg" alt="Master Artisans" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
 					</div>
 					<div className="relative h-72 sm:h-80 md:h-96 overflow-hidden">
-						<Image src="/jefe-cover-blogs.jpg" alt="Celebrating Moments" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+						<Image src="/bespoke/jefe-cover-blogs.jpg" alt="Celebrating Moments" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
 					</div>
 				</div>
 			</div>
@@ -353,7 +353,7 @@ export default function BespokePage() {
 				<div className="relative overflow-hidden rounded-lg group">
 					<div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 z-10 pointer-events-none" />
 					<video className="w-full h-[400px] sm:h-[500px] md:h-[600px] object-cover" autoPlay muted loop playsInline>
-						<source src="/about-us-hero.mp4" type="video/mp4" />
+						<source src="/videos/bespoke/about-us-hero.mp4" type="video/mp4" />
 						Your browser does not support the video tag.
 					</video>
 				</div>

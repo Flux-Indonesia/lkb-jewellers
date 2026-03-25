@@ -88,7 +88,7 @@ export default function AboutPage() {
 				<div
 					className="absolute inset-0 bg-cover"
 					style={{
-						backgroundImage: "url('/hero-about.webp')",
+						backgroundImage: "url('/about-us/hero-about.webp')",
 						backgroundPosition: "center 60%",
 					}}
 				/>

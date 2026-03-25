@@ -9,7 +9,6 @@ import TopBanner from "@/components/top-banner";
 import FloatingButtons from "@/components/floating-buttons";
 import { Toaster } from "@/components/ui/sonner";
 import { LocalBusinessJsonLd } from "@/components/json-ld";
-import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.lkbjewellers.com"),
@@ -127,12 +126,6 @@ export default function RootLayout({
             <Toaster />
           </CartProvider>
         </AuthProvider>
-        <Script
-          src="https://widgets.leadconnectorhq.com/loader.js"
-          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-          data-widget-id="69a85d5705ceca41dc19bf48"
-          strategy="afterInteractive"
-        />
       </body>
     </html>
   );
