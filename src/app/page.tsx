@@ -216,9 +216,9 @@ export default function HomePage() {
 
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
 						{[
-							{ href: "/watches", img: "/shop-category/timepieces.jpg", alt: "Exclusive Watches", title: "TIMEPIECES", sub: "Exclusive Watches" },
-							{ href: "/shop?category=luxury-jewellery", img: "/shop-category/jewellery.jpg", alt: "Fine Jewellery", title: "EXCLUSIVE JEWELLERY", sub: "Bespoke Creations" },
-							{ href: "/accessories", img: "/shop-category/accessories.jpg", alt: "LKB Merchandise", title: "ACCESSORIES", sub: "Premium Accessories", extraClass: "md:col-span-2 lg:col-span-1" },
+							{ href: "/watches", img: "/shop-category/timepieces.jpg", alt: "Exclusive Timepieces", title: "EXCLUSIVE TIMEPIECES", sub: "Exclusive Watches" },
+							{ href: "/shop?category=luxury-jewellery", img: "/shop-category/jewellery.jpg", alt: "Fine Jewellery", title: "PREMIUM JEWELLERY", sub: "Bespoke Creations" },
+							{ href: "/accessories", img: "/shop-category/accessories.jpg", alt: "LKB Merchandise", title: "MERCHANDISE", sub: "Premium Accessories", extraClass: "md:col-span-2 lg:col-span-1" },
 						].map((cat) => (
 							<Link key={cat.title} href={cat.href} className={`group relative h-[300px] md:h-[320px] lg:h-[350px] overflow-hidden block rounded-lg ${cat.extraClass || ""}`}>
 								<div className="absolute inset-0 overflow-hidden">

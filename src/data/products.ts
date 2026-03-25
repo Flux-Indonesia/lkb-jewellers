@@ -180,7 +180,7 @@ export const siteConfig = {
   email: "info@lkbjewellers.com",
   instagram: "https://www.instagram.com/localkettlebrothersuk/",
   tiktok: "https://www.tiktok.com/@localkettlebrothersuk",
-  youtube: "https://youtube.com/@lkbjewellers",
+  youtube: "https://www.youtube.com/@lkbjewellers",
   facebook:
     "https://web.facebook.com/people/Local-Kettle-Brothers-UK/100086313849712/",
   twitter: "https://twitter.com/lkb_uk",

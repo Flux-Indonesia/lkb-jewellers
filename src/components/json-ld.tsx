@@ -32,9 +32,10 @@ export function LocalBusinessJsonLd() {
 		currenciesAccepted: "GBP",
 		paymentAccepted: "Cash, Credit Card, Bank Transfer",
 		sameAs: [
-			"https://www.instagram.com/lkbjewellers",
+			"https://www.instagram.com/localkettlebrothersuk/",
 			"https://www.facebook.com/lkbjewellers",
-			"https://www.tiktok.com/@lkbjewellers",
+			"https://www.tiktok.com/@localkettlebrothersuk",
+			"https://www.youtube.com/@lkbjewellers",
 		],
 	};
 
