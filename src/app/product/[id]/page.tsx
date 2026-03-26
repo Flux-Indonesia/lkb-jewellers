@@ -11,6 +11,7 @@ import type { Product } from "@/data/products";
 import ShowroomSection from "@/components/showroom-section";
 import { EnquiryModal } from "@/components/enquiry-modal";
 import { ProductJsonLd } from "@/components/json-ld";
+import { BLUR_DATA_URL } from '@/lib/utils'
 
 const PLACEHOLDER_IMG =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect width='400' height='400' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-family='sans-serif' font-size='14'%3ENo Image%3C/text%3E%3C/svg%3E";
@@ -385,7 +386,7 @@ export default function ProductPage() {
               <h3 className="text-3xl text-white mb-3 font-heading">Added to Cart!</h3>
               <div className="bg-gray-100 border border-gray-200 rounded-lg p-4 mb-6">
                 <div className="flex items-center gap-4">
-                  <Image src={product.image || PLACEHOLDER_IMG} alt={product.name} width={64} height={64} className="w-16 h-16 object-cover rounded" />
+                  <Image src={product.image || PLACEHOLDER_IMG} alt={product.name} width={64} height={64} className="w-16 h-16 object-cover rounded" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
                   <div className="flex-1 text-left">
                     <p className="text-gray-900 font-medium text-sm">{product.name}</p>
                     <p className="text-[#D4AF37] text-sm mt-1">£{product.price.toLocaleString()}</p>

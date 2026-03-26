@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { BLUR_DATA_URL } from '@/lib/utils'
 
 interface ImageGalleryProps {
   images: string[]
@@ -86,6 +87,7 @@ export function ImageGallery({ images, thumbnails, alt }: ImageGalleryProps) {
                 sizes="80px"
                 className="object-cover"
                 onError={() => setThumbErrors(prev => ({ ...prev, [i]: true }))}
+                placeholder="blur" blurDataURL={BLUR_DATA_URL}
               />
             )}
           </button>
@@ -114,6 +116,7 @@ export function ImageGallery({ images, thumbnails, alt }: ImageGalleryProps) {
                 className="object-cover"
                 onError={() => setMainImgError(true)}
                 priority={activeIndex === 0}
+                placeholder="blur" blurDataURL={BLUR_DATA_URL}
               />
             )}
           </motion.div>
@@ -124,17 +127,17 @@ export function ImageGallery({ images, thumbnails, alt }: ImageGalleryProps) {
           <>
             <button
               onClick={goPrev}
-              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 flex items-center justify-center transition-all duration-200 backdrop-blur-sm border border-white/10"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 flex items-center justify-center transition-all duration-200 backdrop-blur-sm border border-white/20"
               aria-label="Previous image"
             >
-              <ChevronLeft size={22} className="text-white" />
+              <ChevronLeft className="text-white drop-shadow-md w-5.5 h-5.5 shrink-0" />
             </button>
             <button
               onClick={goNext}
-              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 flex items-center justify-center transition-all duration-200 backdrop-blur-sm border border-white/10"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 flex items-center justify-center transition-all duration-200 backdrop-blur-sm border border-white/20"
               aria-label="Next image"
             >
-              <ChevronRight size={22} className="text-white" />
+              <ChevronRight className="text-white drop-shadow-md w-5.5 h-5.5 shrink-0" />
             </button>
           </>
         )}

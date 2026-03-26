@@ -183,6 +183,7 @@ export default function ServicingPage() {
 							</h3>
 							<p className="text-xs text-gray-400" style={{ fontFamily: '"Mona Sans", "Mona Sans Fallback", ui-sans-serif, system-ui, sans-serif' }}>
 								Starting from £150
+import { BLUR_DATA_URL } from '@/lib/utils'
 							</p>
 						</div>
 						{activeCard === 5 && (
@@ -231,7 +232,7 @@ export default function ServicingPage() {
 									alt={`Watch servicing ${i + 1}`}
 									fill
 									className={`object-cover transition-opacity duration-1000 ${activeImage === i ? "opacity-100" : "opacity-0"}`}
-									sizes="(max-width: 1024px) 100vw, 50vw"
+									sizes="(max-width: 1024px) 100vw, 50vw" placeholder="blur" blurDataURL={BLUR_DATA_URL}
 								/>
 							))}
 							<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -251,7 +252,7 @@ export default function ServicingPage() {
 											: "border-gray-700 hover:border-gray-500 opacity-60 hover:opacity-100"
 									}`}
 								>
-									<Image src={img} alt={`Thumbnail ${i + 1}`} fill className="object-cover" sizes="80px" />
+									<Image src={img} alt={`Thumbnail ${i + 1}`} fill className="object-cover" sizes="80px" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
 								</button>
 							))}
 						</div>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, Clock, Phone, ArrowRight } from "lucide-react";
+import { BLUR_DATA_URL } from '@/lib/utils'
 
 export default function ShowroomSection() {
   const [showroomTab, setShowroomTab] = useState<"london" | "international">("london");
@@ -22,7 +23,7 @@ export default function ShowroomSection() {
               alt={showroomTab === "london" ? "Hatton Garden Showroom" : "International Service"}
               fill
               className="object-cover transform group-hover:scale-105 transition-transform duration-700"
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes="(max-width: 768px) 100vw, 50vw" placeholder="blur" blurDataURL={BLUR_DATA_URL}
             />
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
             {/* Location Tabs */}

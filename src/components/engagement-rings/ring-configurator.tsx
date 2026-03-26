@@ -11,6 +11,7 @@ import { stoneTypes, clarityOptions, caratRanges, colourOptions, recommendedGems
 import type { RecommendedGemstone } from '@/data/gemstone-options'
 import { filterGemstones, formatGemstonePrice, getStoneTypeLabel } from '@/lib/gemstone-utils'
 import type { GemstoneFilter } from '@/lib/gemstone-utils'
+import { BLUR_DATA_URL } from '@/lib/utils'
 
 const CERTIFICATES = ['GIA', 'IGI', 'AGS', 'SDC'] as const
 
@@ -353,6 +354,7 @@ export function RingConfigurator({ ring, gemstones, selectedMetal, onMetalChange
                       sizes="(max-width: 640px) 50vw, 200px"
                       className="object-cover"
                       onError={() => {}}
+                      placeholder="blur" blurDataURL={BLUR_DATA_URL}
                     />
                     {gem.badge && (
                       <div className="absolute top-2 left-2 bg-emerald-950/80 border border-emerald-800/50 rounded-full px-2 py-0.5">

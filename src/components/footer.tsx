@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { MapPin } from "lucide-react";
 import { siteConfig } from "@/data/products";
+import { BLUR_DATA_URL } from '@/lib/utils'
 
 export default function Footer() {
   const [logoVisible, setLogoVisible] = useState(false);
@@ -51,7 +52,7 @@ export default function Footer() {
                 alt={siteConfig.businessName}
                 width={64}
                 height={64}
-                className={`h-16 w-auto mb-3 transition-all duration-500 hover:scale-110 hover:drop-shadow-[0_0_20px_rgba(212,175,55,0.8)] cursor-pointer ${logoVisible ? "opacity-100" : "opacity-0"}`}
+                className={`h-16 w-auto mb-3 transition-all duration-500 hover:scale-110 hover:drop-shadow-[0_0_20px_rgba(212,175,55,0.8)] cursor-pointer ${logoVisible ? "opacity-100" : "opacity-0"}`} placeholder="blur" blurDataURL={BLUR_DATA_URL}
               />
               <p className="text-white tracking-[0.15em] text-xs whitespace-nowrap mb-1 text-center font-heading">
                 LOCAL KETTLE BROTHERS UK

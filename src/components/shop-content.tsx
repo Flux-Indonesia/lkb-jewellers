@@ -8,6 +8,7 @@ import { SlidersHorizontal, RefreshCw } from "lucide-react";
 import { getProducts } from "@/lib/products";
 import type { Product } from "@/data/products";
 import { ProductCard } from "@/components/product-card";
+import { BLUR_DATA_URL } from '@/lib/utils'
 
 function titleCase(str: string): string {
   return str
@@ -341,7 +342,7 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
                     alt={brand.name}
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    sizes="192px"
+                    sizes="192px" placeholder="blur" blurDataURL={BLUR_DATA_URL}
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-3 left-3">
