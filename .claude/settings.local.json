@@ -3,7 +3,8 @@
     "allow": [
       "Bash(xargs grep -l \"form\\\\|Form\")",
       "Bash(node -e \"try { require\\(''sharp''\\); console.log\\(''sharp available''\\); } catch\\(e\\) { console.log\\(''no sharp''\\); }\")",
-      "Bash(ffmpeg -version)"
+      "Bash(ffmpeg -version)",
+      "Bash(sort -k6,7 -r)"
     ],
     "additionalDirectories": [
       "d:\\Project\\Flux\\lkb-clone\\public"

@@ -212,7 +212,8 @@ export const videoSections = [
   {
     id: "rings",
     title: "ENGAGEMENT RINGS",
-    videoUrl: "/rings-placeholder.mp4",
+    videoUrl: "/rings/desktop.mp4",
+    mobileVideoUrl: "/rings/mobile.mp4",
     link: "/engagement-rings",
   },
 ];

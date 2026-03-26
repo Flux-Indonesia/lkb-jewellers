@@ -19,7 +19,6 @@ export default function HomePage() {
 	const [loading, setLoading] = useState(false);
 	const [products, setProducts] = useState<Product[]>([]);
 
-
 	useEffect(() => {
 		getProducts().then((data) => setProducts(data));
 	}, []);
@@ -46,18 +45,13 @@ export default function HomePage() {
 				</video>
 				<div className="absolute inset-0 bg-black/40" />
 				<div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
-					<h2 className="text-white tracking-[0.3em] text-sm md:text-2xl mb-6 animate-slide-up font-display">
-						TIMELESS ELEGANCE
-					</h2>
+					<h2 className="text-white tracking-[0.3em] text-sm md:text-2xl mb-6 animate-slide-up font-display">TIMELESS ELEGANCE</h2>
 					<h1 className="text-7xl md:text-9xl lg:text-[12rem] text-white mb-8 animate-fade-in font-normal font-heading" style={{ lineHeight: "normal" }}>
 						CRAFTED WITH
 						<br />
 						PASSION
 					</h1>
-				<p
-					className="max-w-xl text-gray-200 text-base md:text-lg mb-10 leading-relaxed animate-slide-up"
-					style={{ animationDelay: "0.2s" }}
-				>
+					<p className="max-w-xl text-gray-200 text-base md:text-lg mb-10 leading-relaxed animate-slide-up" style={{ animationDelay: "0.2s" }}>
 						LKB Jewellers brings you exceptional pieces that tell your story. Each creation is a testament to our commitment to quality and artistry.
 					</p>
 					<Link href="/shop" className="border border-white text-white px-10 py-4 text-sm tracking-widest hover:bg-white hover:text-black transition-all duration-300 animate-slide-up" style={{ animationDelay: "0.4s" }}>
@@ -68,7 +62,7 @@ export default function HomePage() {
 
 			{/* ===== LATEST ARRIVALS ===== */}
 			<section className="py-12 md:py-16 bg-black relative overflow-hidden">
-					<div className="container mx-auto px-4 md:px-6 relative z-10">
+				<div className="container mx-auto px-4 md:px-6 relative z-10">
 					<div className="text-center mb-12">
 						<div className="inline-flex items-center gap-4 mb-6">
 							<div className="h-px w-16 bg-gradient-to-r from-transparent to-white" />
@@ -155,7 +149,7 @@ export default function HomePage() {
 
 			{/* ===== WHAT WE OFFER ===== */}
 			<section className="py-12 md:py-16 bg-gradient-to-b from-[#0a0a0a] to-black px-4 md:px-6 relative overflow-hidden">
-					<div className="container mx-auto relative z-10">
+				<div className="container mx-auto relative z-10">
 					<div className="text-center mb-12">
 						<div className="inline-flex items-center gap-4 mb-6">
 							<div className="h-px w-16 bg-gradient-to-r from-transparent to-white" />
@@ -180,10 +174,14 @@ export default function HomePage() {
 								<div className="relative h-full transition-all duration-500 group-hover:-translate-y-4 group-hover:scale-105" style={{ transformStyle: "preserve-3d" }}>
 									<div className="absolute inset-0 border-2 border-gray-900 group-hover:border-white/50 transition-all duration-500 z-20 pointer-events-none" />
 									<div className="absolute inset-0 overflow-hidden">
-										<Image src={card.image} alt={card.title} fill className={"object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1 " + (card.hoverImage ? "group-hover:opacity-0" : "")} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />{card.hoverImage && <Image src={card.hoverImage} alt={card.title} fill className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1 opacity-0 group-hover:opacity-100" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />}
+										<Image src={card.image} alt={card.title} fill className={"object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1 " + (card.hoverImage ? "group-hover:opacity-0" : "")} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+										{card.hoverImage && <Image src={card.hoverImage} alt={card.title} fill className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1 opacity-0 group-hover:opacity-100" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />}
 									</div>
 									<div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500" />
-									<div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-8 z-20"><h3 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-[0.15em] md:tracking-[0.2em] text-white mb-1 md:mb-2 font-heading">{card.title}</h3><p className="text-gray-300 text-xs md:text-sm tracking-[0.15em] md:tracking-[0.2em] uppercase font-display">{card.description}</p></div>
+									<div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-8 z-20">
+										<h3 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-[0.15em] md:tracking-[0.2em] text-white mb-1 md:mb-2 font-heading">{card.title}</h3>
+										<p className="text-gray-300 text-xs md:text-sm tracking-[0.15em] md:tracking-[0.2em] uppercase font-display">{card.description}</p>
+									</div>
 									<div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
 								</div>
 								<div className="absolute inset-0 bg-black/50 blur-xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-y-8" />
@@ -237,9 +235,8 @@ export default function HomePage() {
 				</div>
 			</section>
 
-		{/* ===== NEWSLETTER ===== */}
-		<section className="relative py-12 md:py-16 bg-black overflow-hidden">
-
+			{/* ===== NEWSLETTER ===== */}
+			<section className="relative py-12 md:py-16 bg-black overflow-hidden">
 				<div className="container mx-auto px-4 md:px-6 relative z-10">
 					<div className="max-w-4xl mx-auto">
 						<div className="text-center mb-12">
@@ -252,8 +249,8 @@ export default function HomePage() {
 							<p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-display">Subscribe to receive exclusive updates on new collections, private sales, and insider access to the world of LKB Jewellers.</p>
 						</div>
 
-					<div className="relative px-4">
-						<div className="relative bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-xl border border-white/20 rounded-2xl p-6 md:p-8 lg:p-12">
+						<div className="relative px-4">
+							<div className="relative bg-gradient-to-br from-gray-900/90 to-black/90 backdrop-blur-xl border border-white/20 rounded-2xl p-6 md:p-8 lg:p-12">
 								<form onSubmit={handleSubscribe} className="flex flex-col md:flex-row gap-3 md:gap-4">
 									<div className="flex-1 relative group">
 										<Input type="email" placeholder="Enter your email address" value={email} onChange={(e) => setEmail(e.target.value)} disabled={loading} className="w-full px-4 md:px-6 py-3 md:py-4 h-auto bg-black/50 border-gray-700 rounded-lg text-white placeholder:text-gray-500 text-base focus-visible:border-white focus-visible:ring-white/20" style={{ fontSize: "16px" }} required />
@@ -267,13 +264,13 @@ export default function HomePage() {
 										<div className="absolute inset-0 bg-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 									</Button>
 								</form>
-							<p className="text-gray-500 text-[0.65rem] md:text-xs text-center mt-4 md:mt-6 px-2">
-								By subscribing, you agree to our{" "}
-								<Link href="/privacy-policy" className="text-white hover:underline">
-									Privacy Policy
-								</Link>
-								. Unsubscribe anytime.
-							</p>
+								<p className="text-gray-500 text-[0.65rem] md:text-xs text-center mt-4 md:mt-6 px-2">
+									By subscribing, you agree to our{" "}
+									<Link href="/privacy-policy" className="text-white hover:underline">
+										Privacy Policy
+									</Link>
+									. Unsubscribe anytime.
+								</p>
 							</div>
 						</div>
 
