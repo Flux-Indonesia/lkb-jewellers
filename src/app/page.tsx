@@ -219,7 +219,7 @@ export default function HomePage() {
 							{ href: "/watches", img: "/shop-category/timepieces.jpg", alt: "Exclusive Timepieces", title: "EXCLUSIVE TIMEPIECES", sub: "Exclusive Watches" },
 							{ href: "/shop?category=luxury-jewellery", img: "/shop-category/jewellery.jpg", alt: "Fine Jewellery", title: "PREMIUM JEWELLERY", sub: "Bespoke Creations" },
 							{ href: "/accessories", img: "/shop-category/accessories.jpg", alt: "LKB Merchandise", title: "MERCHANDISE", sub: "Premium Accessories" },
-							{ href: "/engagement-rings", img: "/images/static/nav-ring.jpg", alt: "Engagement Rings", title: "ENGAGEMENT RINGS", sub: "Diamond Rings" },
+							{ href: "/engagement-rings", img: "/shop-category/engagement-rings.jpg", alt: "Engagement Rings", title: "ENGAGEMENT RINGS", sub: "Diamond Rings" },
 						].map((cat) => (
 							<Link key={cat.title} href={cat.href} className="group relative h-[300px] md:h-[320px] lg:h-[350px] overflow-hidden block rounded-lg">
 								<div className="absolute inset-0 overflow-hidden">

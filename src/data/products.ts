@@ -80,7 +80,7 @@ export const navMenuData = {
         name: "Rings",
         desc: "Signet rings & diamond band masterpieces",
         link: "/shop?category=rings",
-        image: "/images/static/nav-ring.jpg",
+        image: "/shop-category/engagement-rings.jpg",
       },
       {
         name: "Pendants",
