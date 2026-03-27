@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { BLUR_DATA_URL } from '@/lib/utils'
+
 
 interface ImageGalleryProps {
   images: string[]
@@ -87,7 +87,7 @@ export function ImageGallery({ images, thumbnails, alt }: ImageGalleryProps) {
                 sizes="80px"
                 className="object-cover"
                 onError={() => setThumbErrors(prev => ({ ...prev, [i]: true }))}
-                placeholder="blur" blurDataURL={BLUR_DATA_URL}
+               
               />
             )}
           </button>
@@ -116,7 +116,7 @@ export function ImageGallery({ images, thumbnails, alt }: ImageGalleryProps) {
                 className="object-cover"
                 onError={() => setMainImgError(true)}
                 priority={activeIndex === 0}
-                placeholder="blur" blurDataURL={BLUR_DATA_URL}
+               
               />
             )}
           </motion.div>

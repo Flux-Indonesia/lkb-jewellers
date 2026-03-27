@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ShowroomSection from "@/components/showroom-section";
-import { BLUR_DATA_URL } from '@/lib/utils'
 
 const hallOfFameItems = [
 	{
@@ -131,7 +130,7 @@ export default function AboutPage() {
 								alt="LKB Logo"
 								width={64}
 								height={64}
-								className="h-16 w-auto opacity-50" placeholder="blur" blurDataURL={BLUR_DATA_URL}
+								className="h-16 w-auto opacity-50"
 							/>
 						</div>
 
@@ -144,7 +143,7 @@ export default function AboutPage() {
 										alt="LKB Jewellers craftsmanship"
 										fill
 										className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
-										sizes="(max-width: 1024px) 100vw, 50vw" placeholder="blur" blurDataURL={BLUR_DATA_URL}
+										sizes="(max-width: 1024px) 100vw, 50vw"
 									/>
 								</div>
 							</div>
@@ -316,7 +315,7 @@ export default function AboutPage() {
 									alt={item.title}
 									fill
 									className="object-cover transition-all duration-700 group-hover:scale-110"
-									sizes={item.featured ? "50vw" : "25vw"} placeholder="blur" blurDataURL={BLUR_DATA_URL}
+									sizes={item.featured ? "50vw" : "25vw"}
 								/>
 								<div
 									className={`absolute inset-0 ${

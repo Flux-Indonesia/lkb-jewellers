@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Product } from "@/data/products";
 import { EnquiryModal } from "@/components/enquiry-modal";
-import { BLUR_DATA_URL } from '@/lib/utils'
 
 const PLACEHOLDER_IMG =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect width='400' height='400' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-family='sans-serif' font-size='14'%3ENo Image%3C/text%3E%3C/svg%3E";
@@ -57,7 +56,7 @@ export function ProductCard({ product }: { product: Product }) {
               className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-700 opacity-100 transition-opacity duration-300"
               sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
               onError={(e) => { (e.target as HTMLImageElement).srcset = ""; (e.target as HTMLImageElement).src = PLACEHOLDER_IMG; }}
-              placeholder="blur" blurDataURL={BLUR_DATA_URL}
+             
             />
           </div>
 

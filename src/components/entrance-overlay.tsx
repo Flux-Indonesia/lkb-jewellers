@@ -3,7 +3,6 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { BLUR_DATA_URL } from '@/lib/utils'
 
 interface EntranceOverlayProps {
   onEnter: () => void;
@@ -46,7 +45,7 @@ export default function EntranceOverlay({ onEnter }: EntranceOverlayProps) {
         alt=""
         fill
         className="object-cover"
-        priority placeholder="blur" blurDataURL={BLUR_DATA_URL}
+        priority
       />
 
       {/* Door open video */}

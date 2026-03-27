@@ -5,7 +5,6 @@ import Image from "next/image";
 import { FileText, Clock, MapPin, Wallet, Upload } from "lucide-react";
 import { toast } from "sonner";
 import ShowroomSection from "@/components/showroom-section";
-import { BLUR_DATA_URL } from '@/lib/utils'
 
 export default function WeBuyPage() {
 	const [formData, setFormData] = useState({
@@ -251,7 +250,7 @@ export default function WeBuyPage() {
 										<div className="flex gap-2 mt-3">
 											{images.map((img, i) => (
 												<div key={i} className="relative w-16 h-16 rounded overflow-hidden border border-gray-800">
-													<Image src={img} alt={`Upload ${i + 1}`} fill className="object-cover" sizes="64px" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+													<Image src={img} alt={`Upload ${i + 1}`} fill className="object-cover" sizes="64px" />
 												</div>
 											))}
 										</div>

@@ -52,7 +52,6 @@ const pieces = [
 		id: 8, name: "SUBMARINER DATE", year: "2023", piece: "Professional Dive Watch",
 		image: "/images/static/hof-serial-009.jpg",
 		description: "Refined elegance that seamlessly transitions from sea to land. An embodiment of the spirit of exploration.",
-import { BLUR_DATA_URL } from '@/lib/utils'
 		category: "Exclusive Jewellery", status: "Custom Piece",
 	},
 	{
@@ -259,7 +258,7 @@ export default function HallOfFamePage() {
 									alt={current.name}
 									fill
 									className="object-contain transition-all duration-500 group-hover:scale-105"
-									sizes="(max-width: 1024px) 100vw, 60vw" placeholder="blur" blurDataURL={BLUR_DATA_URL}
+									sizes="(max-width: 1024px) 100vw, 60vw"
 								/>
 								<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 								<div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 z-10">

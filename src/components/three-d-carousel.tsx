@@ -2,7 +2,6 @@
 
 import { useRef, useEffect } from "react";
 import Image from "next/image";
-import { BLUR_DATA_URL } from '@/lib/utils'
 
 interface ThreeDCarouselProps {
   images: string[];
@@ -134,7 +133,7 @@ export default function ThreeDCarousel({
                   fill
                   className="w-full h-full object-cover"
                   sizes={`${cardW}px`}
-                  draggable={false} placeholder="blur" blurDataURL={BLUR_DATA_URL}
+                  draggable={false}
                 />
               </div>
             </div>

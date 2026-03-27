@@ -314,13 +314,13 @@ export default function BespokePage() {
 				{/* Images Row */}
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 					<div className="relative h-72 sm:h-80 md:h-96 overflow-hidden">
-						<Image src="/bespoke/davido.jpg" alt="Dedicated Client Advisors" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+						<Image src="/bespoke/davido.jpg" alt="Dedicated Client Advisors" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
 					</div>
 					<div className="relative h-72 sm:h-80 md:h-96 overflow-hidden">
-						<Image src="/bespoke/tade-chain-12.jpg" alt="Master Artisans" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+						<Image src="/bespoke/tade-chain-12.jpg" alt="Master Artisans" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
 					</div>
 					<div className="relative h-72 sm:h-80 md:h-96 overflow-hidden">
-						<Image src="/bespoke/jefe-cover-blogs.jpg" alt="Celebrating Moments" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+						<Image src="/bespoke/jefe-cover-blogs.jpg" alt="Celebrating Moments" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
 					</div>
 				</div>
 			</div>
@@ -367,10 +367,10 @@ export default function BespokePage() {
 					<div className="relative bg-gray-900 h-64 sm:h-80 md:h-96">
 						<div className="grid grid-cols-2 h-full">
 							<div className="relative overflow-hidden">
-								<Image src="/bespoke/about1.jpg" alt="Bespoke Jewellery Detail" fill className="object-cover" sizes="25vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+								<Image src="/bespoke/about1.jpg" alt="Bespoke Jewellery Detail" fill className="object-cover" sizes="25vw" />
 							</div>
 							<div className="relative overflow-hidden">
-								<Image src="/bespoke/about2.jpg" alt="Bespoke Craftsmanship" fill className="object-cover" sizes="25vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+								<Image src="/bespoke/about2.jpg" alt="Bespoke Craftsmanship" fill className="object-cover" sizes="25vw" />
 							</div>
 						</div>
 					</div>
@@ -410,7 +410,7 @@ export default function BespokePage() {
 				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
 					{portfolioImages.map((img, i) => (
 						<div key={i} className={`overflow-hidden rounded-lg group relative h-72 sm:h-80 md:h-96 ${i === 2 ? "sm:col-span-2 md:col-span-1" : ""}`}>
-							<Image src={img.src} alt={img.alt} fill className="object-cover hover:scale-110 transition-transform duration-700 group-hover:brightness-110" sizes="(max-width: 768px) 100vw, 33vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+							<Image src={img.src} alt={img.alt} fill className="object-cover hover:scale-110 transition-transform duration-700 group-hover:brightness-110" sizes="(max-width: 768px) 100vw, 33vw" />
 						</div>
 					))}
 				</div>
@@ -422,10 +422,10 @@ export default function BespokePage() {
 					<div className="relative bg-gray-900 h-64 sm:h-80 md:h-96">
 						<div className="grid grid-cols-2 h-full">
 							<div className="relative overflow-hidden">
-								<Image src="/bespoke/team1.jpg" alt="Bespoke Team" fill className="object-cover" sizes="25vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+								<Image src="/bespoke/team1.jpg" alt="Bespoke Team" fill className="object-cover" sizes="25vw" />
 							</div>
 							<div className="relative overflow-hidden">
-								<Image src="/bespoke/team2.jpg" alt="Innovative Designers" fill className="object-cover" sizes="25vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+								<Image src="/bespoke/team2.jpg" alt="Innovative Designers" fill className="object-cover" sizes="25vw" />
 							</div>
 						</div>
 					</div>
@@ -437,7 +437,6 @@ export default function BespokePage() {
 							<h2 className="text-2xl sm:text-3xl md:text-4xl text-white mb-4 md:mb-6 leading-tight font-bold font-heading">The power behind us</h2>
 							<p className="text-gray-400 text-sm md:text-base leading-relaxed mb-6 md:mb-8" style={{ fontFamily: '"Mona Sans", "Mona Sans Fallback", ui-sans-serif, system-ui, sans-serif' }}>
 								At the heart of every exquisite creation that emerges from Bespoke Jewellery is an exceptional team of dedicated individuals who breathe life into dreams and turn them into wearable works of art. Our team is more than just a group of artisans; they are the architects of emotion, the custodians of craftsmanship, and the conduits through which personal stories are transformed into cherished pieces of jewellery.
-import { BLUR_DATA_URL } from '@/lib/utils'
 							</p>
 							<div className="border-l-2 border-white pl-4 md:pl-6">
 								<h3 className="text-white font-semibold text-base md:text-lg mb-2 md:mb-3 font-bold font-heading">Innovative Designers:</h3>

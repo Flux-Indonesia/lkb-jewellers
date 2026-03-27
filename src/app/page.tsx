@@ -13,7 +13,6 @@ import type { Product } from "@/data/products";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { BLUR_DATA_URL } from '@/lib/utils'
 
 export default function HomePage() {
 	const [email, setEmail] = useState("");
@@ -82,7 +81,7 @@ export default function HomePage() {
 						{latestProducts.map((product) => (
 							<Link key={product.id} href={`/product/${product.id}`} className="group/card relative flex-shrink-0 w-[180px] sm:w-[210px] md:w-[240px]">
 								<div className="relative aspect-[3/4] overflow-hidden bg-black rounded-lg">
-									<Image src={product.image} alt={product.name} fill className="object-cover transition-all duration-700 group-hover/card:scale-110" sizes="(max-width: 640px) 180px, (max-width: 768px) 210px, 240px" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+									<Image src={product.image} alt={product.name} fill className="object-cover transition-all duration-700 group-hover/card:scale-110" sizes="(max-width: 640px) 180px, (max-width: 768px) 210px, 240px" />
 									<div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80 group-hover/card:opacity-60 transition-opacity duration-500" />
 									<div className="absolute inset-0 rounded-lg transition-all duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.4)] group-hover/card:ring-1 group-hover/card:ring-white/20" />
 
@@ -178,8 +177,8 @@ export default function HomePage() {
 								<div className="relative h-full transition-all duration-500 group-hover:-translate-y-4 group-hover:scale-105" style={{ transformStyle: "preserve-3d" }}>
 									<div className="absolute inset-0 border-2 border-gray-900 group-hover:border-white/50 transition-all duration-500 z-20 pointer-events-none" />
 									<div className="absolute inset-0 overflow-hidden">
-										<Image src={card.image} alt={card.title} fill className={"object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1 " + (card.hoverImage ? "group-hover:opacity-0" : "")} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
-										{card.hoverImage && <Image src={card.hoverImage} alt={card.title} fill className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1 opacity-0 group-hover:opacity-100" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />}
+										<Image src={card.image} alt={card.title} fill className={"object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1 " + (card.hoverImage ? "group-hover:opacity-0" : "")} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
+										{card.hoverImage && <Image src={card.hoverImage} alt={card.title} fill className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1 opacity-0 group-hover:opacity-100" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />}
 									</div>
 									<div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500" />
 									<div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-8 z-20">
@@ -225,7 +224,7 @@ export default function HomePage() {
 						].map((cat) => (
 							<Link key={cat.title} href={cat.href} className="group relative h-[300px] md:h-[320px] lg:h-[350px] overflow-hidden block rounded-lg">
 								<div className="absolute inset-0 overflow-hidden">
-									<Image src={cat.img} alt={cat.alt} fill className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-110" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+									<Image src={cat.img} alt={cat.alt} fill className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-110" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" />
 								</div>
 								<div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
 								<div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-8">

@@ -6,7 +6,6 @@ import { Phone, Mail, MapPin, Clock, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { createContact } from "@/lib/contacts";
 import ShowroomSection from "@/components/showroom-section";
-import { BLUR_DATA_URL } from '@/lib/utils'
 
 export default function ContactPage() {
 	const [formData, setFormData] = useState({
@@ -52,12 +51,12 @@ export default function ContactPage() {
 				{/* Left - Image */}
 				<div className="lg:w-1/2 bg-black relative overflow-hidden min-h-[400px] lg:min-h-0">
 					{contactImages.map((img, i) => (
-						<Image key={img} src={img} alt={`LKB Jewellers ${i + 1}`} fill className={`object-contain lg:object-cover transition-opacity duration-1000 ${activeSlide === i ? "opacity-100" : "opacity-0"}`} sizes="(max-width: 1024px) 100vw, 50vw" priority={i === 0} placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+						<Image key={img} src={img} alt={`LKB Jewellers ${i + 1}`} fill className={`object-contain lg:object-cover transition-opacity duration-1000 ${activeSlide === i ? "opacity-100" : "opacity-0"}`} sizes="(max-width: 1024px) 100vw, 50vw" priority={i === 0} />
 					))}
 					<div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
 						{contactImages.map((img, i) => (
 							<button key={i} onClick={() => setActiveSlide(i)} className={`relative w-14 h-10 rounded overflow-hidden border-2 transition-all ${activeSlide === i ? "border-white shadow-lg shadow-white/50" : "border-gray-700 opacity-60 hover:opacity-100"}`}>
-								<Image src={img} alt={`Thumbnail ${i + 1}`} fill className="object-cover" sizes="56px" placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+								<Image src={img} alt={`Thumbnail ${i + 1}`} fill className="object-cover" sizes="56px" />
 							</button>
 						))}
 					</div>
