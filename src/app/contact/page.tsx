@@ -14,7 +14,7 @@ export default function ContactPage() {
 	});
 	const [loading, setLoading] = useState(false);
 	const [activeSlide, setActiveSlide] = useState(0);
-	const contactImages = ["/contact/1.avif", "/contact/2.avif", "/contact/3.avif", "/contact/4.avif"];
+	const contactImages = ["/contact/1.jpg", "/contact/2.jpg", "/contact/3.jpg", "/contact/4.jpg"];
 
 	const [submitted, setSubmitted] = useState(false);
 
@@ -50,9 +50,9 @@ export default function ContactPage() {
 		<div className="bg-black text-white min-h-screen pt-20" style={{ transform: "scale(0.9)", transformOrigin: "center top" }}>
 			<div className="flex flex-col lg:flex-row min-h-[calc(100vh-6rem)]">
 				{/* Left - Image */}
-				<div className="lg:w-1/2 bg-black relative overflow-hidden min-h-[300px] lg:min-h-0">
+				<div className="lg:w-1/2 bg-black relative overflow-hidden min-h-[400px] lg:min-h-0">
 					{contactImages.map((img, i) => (
-						<Image key={img} src={img} alt={`LKB Jewellers ${i + 1}`} fill className={`object-cover transition-opacity duration-1000 ${activeSlide === i ? "opacity-100" : "opacity-0"}`} sizes="(max-width: 1024px) 100vw, 50vw" priority={i === 0} placeholder="blur" blurDataURL={BLUR_DATA_URL} />
+						<Image key={img} src={img} alt={`LKB Jewellers ${i + 1}`} fill className={`object-contain lg:object-cover transition-opacity duration-1000 ${activeSlide === i ? "opacity-100" : "opacity-0"}`} sizes="(max-width: 1024px) 100vw, 50vw" priority={i === 0} placeholder="blur" blurDataURL={BLUR_DATA_URL} />
 					))}
 					<div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
 						{contactImages.map((img, i) => (
