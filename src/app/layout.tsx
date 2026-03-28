@@ -9,6 +9,7 @@ import TopBanner from "@/components/top-banner";
 import FloatingButtons from "@/components/floating-buttons";
 import { Toaster } from "@/components/ui/sonner";
 import { LocalBusinessJsonLd } from "@/components/json-ld";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.lkbjewellers.com"),
@@ -126,6 +127,16 @@ export default function RootLayout({
             <Toaster />
           </CartProvider>
         </AuthProvider>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-RLDND22WJM"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-RLDND22WJM');`}
+        </Script>
       </body>
     </html>
   );
