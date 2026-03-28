@@ -142,12 +142,13 @@ export const navMenuData = {
     title: "ABOUT US",
     defaultImage: "/about-us/crown-jewels.webp",
     links: [
-      {
-        name: "Hall of Fame",
-        desc: "Our distinguished clientele & their pieces",
-        link: "/hall-of-fame",
-        image: "/about-us/hall-of-fame.jpg",
-      },
+      // Hall of Fame - temporarily hidden
+      // {
+      //   name: "Hall of Fame",
+      //   desc: "Our distinguished clientele & their pieces",
+      //   link: "/hall-of-fame",
+      //   image: "/about-us/hall-of-fame.jpg",
+      // },
       {
         name: "LKB Foundation",
         desc: "Our commitment to giving back",

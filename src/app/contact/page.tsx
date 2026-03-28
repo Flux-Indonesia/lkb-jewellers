@@ -13,7 +13,7 @@ export default function ContactPage() {
 	});
 	const [loading, setLoading] = useState(false);
 	const [activeSlide, setActiveSlide] = useState(0);
-	const contactImages = ["/contact/1.jpg", "/contact/2.jpg", "/contact/3.jpg", "/contact/4.jpg"];
+	const contactImages = ["/contact/1.jpg", "/contact/4.jpg"];
 
 	const [submitted, setSubmitted] = useState(false);
 

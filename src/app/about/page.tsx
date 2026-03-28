@@ -104,9 +104,9 @@ export default function AboutPage() {
 			</section>
 
 			{/* Hatton Garden Heritage */}
-			<section className="py-24 px-6">
+			<section className="py-12 md:py-24 px-6">
 				<div className="container mx-auto">
-					<div className="flex flex-col lg:flex-row gap-16 items-center">
+					<div className="flex flex-col lg:flex-row gap-8 md:gap-16 items-center">
 						{/* Left - Text */}
 						<div className="lg:w-1/2">
 							<h2 className="text-4xl mb-8 text-gold font-heading">
@@ -135,8 +135,8 @@ export default function AboutPage() {
 						</div>
 
 						{/* Right - Image with Quote */}
-						<div className="lg:w-1/2 relative">
-							<div className="aspect-[3/4] border border-gray-800 p-4">
+						<div className="w-full lg:w-1/2 relative pb-8">
+							<div className="relative aspect-3/4 border border-gray-800 p-2 md:p-4">
 								<div className="relative w-full h-full overflow-hidden">
 									<Image
 										src="/about-us/heritage.jpg"
@@ -148,8 +148,8 @@ export default function AboutPage() {
 								</div>
 							</div>
 							{/* Floating Quote */}
-							<div className="absolute -bottom-10 -left-10 bg-[#0a0a0a] p-8 border border-gray-800 max-w-xs hidden lg:block">
-								<p className="text-xl italic text-gold font-heading">
+							<div className="absolute -bottom-4 left-1/2 -translate-x-1/2 md:translate-x-0 md:-bottom-6 md:-left-6 lg:-bottom-10 lg:-left-10 bg-[#0a0a0a] p-4 md:p-6 lg:p-8 border border-gray-800 max-w-[70%] md:max-w-xs">
+								<p className="text-sm md:text-lg lg:text-xl italic text-gold font-heading text-center md:text-left">
 									&ldquo;We don&apos;t just sell gold. We forge legacy.&rdquo;
 								</p>
 							</div>
@@ -160,10 +160,6 @@ export default function AboutPage() {
 
 			{/* Excellence in Numbers */}
 			<section className="py-20 bg-[#0a0a0a] border-y border-gray-900 relative overflow-hidden">
-				<div className="absolute inset-0 opacity-5">
-					<div className="absolute top-1/2 left-1/4 w-96 h-96 bg-gold rounded-full blur-[120px]" />
-					<div className="absolute top-1/2 right-1/4 w-96 h-96 bg-white rounded-full blur-[120px]" />
-				</div>
 
 				<div className="container mx-auto px-6 relative z-10">
 					{/* Section Header */}
@@ -274,8 +270,8 @@ export default function AboutPage() {
 				</div>
 			</section>
 
-			{/* Hall of Fame */}
-			<section className="py-12 bg-gradient-to-b from-black to-[#0a0a0a] relative overflow-hidden">
+			{/* Hall of Fame - temporarily hidden */}
+			{false && <section className="py-12 bg-gradient-to-b from-black to-[#0a0a0a] relative overflow-hidden">
 				<div className="absolute inset-0 opacity-10">
 					<div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold rounded-full blur-[150px]" />
 					<div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gold rounded-full blur-[150px]" style={{ animationDelay: "2s" }} />
@@ -366,7 +362,7 @@ export default function AboutPage() {
 						</Link>
 					</div>
 				</div>
-			</section>
+			</section>}
 
 			{/* Start Your Journey CTA */}
 			<section className="py-32 text-center px-6">
