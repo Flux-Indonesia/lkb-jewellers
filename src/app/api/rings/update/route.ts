@@ -1,10 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server"
+import { isAuthenticated } from "@/lib/admin-auth";
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
-function isAuthenticated(request: NextRequest): boolean {
-	const cookieHeader = request.headers.get("cookie") || "";
-	return cookieHeader.includes("admin_session=authenticated");
-}
+
 
 function createServiceClient() {
 	return createSupabaseClient(
