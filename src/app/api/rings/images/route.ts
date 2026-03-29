@@ -28,14 +28,14 @@ function extractImageNumber(imageUrl: string, color: string): number {
 
 function createStorageClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const serviceRoleKey = process.env.SUPABASE_SECRET_KEY
+  const serviceRoleKey = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY
 
   if (!url) {
     throw new Error('NEXT_PUBLIC_SUPABASE_URL is not configured')
   }
 
   if (!serviceRoleKey) {
-    throw new Error('SUPABASE_SECRET_KEY is required for storage operations')
+    throw new Error('SUPABASE_SECRET_KEY or SUPABASE_SERVICE_ROLE_KEY is required')
   }
 
   return createSupabaseClient(url, serviceRoleKey)

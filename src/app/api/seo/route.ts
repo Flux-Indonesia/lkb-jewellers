@@ -6,10 +6,16 @@ function isAuthenticated(request: NextRequest): boolean {
 	return cookieHeader.includes("admin_session=authenticated");
 }
 
+function getServiceKey() {
+	return process.env.SUPABASE_SECRET_KEY
+		|| process.env.SUPABASE_SERVICE_ROLE_KEY
+		|| "";
+}
+
 function createServiceClient() {
 	return createSupabaseClient(
 		process.env.NEXT_PUBLIC_SUPABASE_URL!,
-		process.env.SUPABASE_SECRET_KEY!
+		getServiceKey()
 	);
 }
 
@@ -31,21 +37,8 @@ export async function GET(request: NextRequest) {
 			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 		}
 
-		const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-		const key = process.env.SUPABASE_SECRET_KEY;
-
-		if (!url || !key) {
-			const supabaseEnvKeys = Object.keys(process.env).filter(k => k.includes("SUPABASE") || k.includes("SECRET") || k.includes("SERVICE"));
-			return NextResponse.json({
-				error: "Missing env vars",
-				hasUrl: !!url,
-				hasKey: !!key,
-				availableKeys: supabaseEnvKeys,
-			}, { status: 500 });
-		}
-
 		const type = request.nextUrl.searchParams.get("type") || "product";
-		const supabase = createSupabaseClient(url, key);
+		const supabase = createServiceClient();
 
 		if (type === "ring") {
 			const { data, error } = await supabase
