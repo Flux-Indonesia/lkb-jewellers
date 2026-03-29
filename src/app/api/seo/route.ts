@@ -6,16 +6,13 @@ function isAuthenticated(request: NextRequest): boolean {
 	return cookieHeader.includes("admin_session=authenticated");
 }
 
-function getServiceKey() {
-	return process.env.SUPABASE_SECRET_KEY
-		|| process.env.SUPABASE_SERVICE_ROLE_KEY
-		|| "";
-}
-
 function createServiceClient() {
+	const key = process.env.SUPABASE_SECRET_KEY
+		|| process.env.SUPABASE_SERVICE_ROLE_KEY
+		|| process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 	return createSupabaseClient(
 		process.env.NEXT_PUBLIC_SUPABASE_URL!,
-		getServiceKey()
+		key
 	);
 }
 
