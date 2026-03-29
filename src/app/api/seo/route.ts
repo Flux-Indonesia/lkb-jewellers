@@ -35,10 +35,12 @@ export async function GET(request: NextRequest) {
 		const key = process.env.SUPABASE_SECRET_KEY;
 
 		if (!url || !key) {
+			const supabaseEnvKeys = Object.keys(process.env).filter(k => k.includes("SUPABASE") || k.includes("SECRET") || k.includes("SERVICE"));
 			return NextResponse.json({
 				error: "Missing env vars",
 				hasUrl: !!url,
 				hasKey: !!key,
+				availableKeys: supabaseEnvKeys,
 			}, { status: 500 });
 		}
 
