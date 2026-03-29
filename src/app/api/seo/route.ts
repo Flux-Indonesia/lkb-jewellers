@@ -7,12 +7,9 @@ function isAuthenticated(request: NextRequest): boolean {
 }
 
 function createServiceClient() {
-	const key = process.env.SUPABASE_SECRET_KEY
-		|| process.env.SUPABASE_SERVICE_ROLE_KEY
-		|| process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 	return createSupabaseClient(
 		process.env.NEXT_PUBLIC_SUPABASE_URL!,
-		key
+		process.env.SUPABASE_SERVICE_ROLE_KEY!
 	);
 }
 
@@ -29,51 +26,39 @@ const RING_SEO_FIELDS = [
 ];
 
 export async function GET(request: NextRequest) {
-	try {
-		if (!isAuthenticated(request)) {
-			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-		}
+	if (!isAuthenticated(request)) {
+		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+	}
 
-		const type = request.nextUrl.searchParams.get("type") || "product";
-		const supabase = createServiceClient();
+	const type = request.nextUrl.searchParams.get("type") || "product";
+	const supabase = createServiceClient();
 
-		if (type === "ring") {
-			const { data, error } = await supabase
-				.from("engagement_rings")
-				.select(`id, slug, name, title, meta_title, meta_description, meta_keywords, canonical_url, og_title, og_description, og_image, h1_override, noindex, nofollow, is_active`)
-				.order("name", { ascending: true });
-
-			if (error) {
-				return NextResponse.json({ error: "Ring fetch failed", detail: error.message, code: error.code }, { status: 500 });
-			}
-			return NextResponse.json({ data });
-		}
-
+	if (type === "ring") {
 		const { data, error } = await supabase
-			.from("products")
-			.select(`id, name, category, brand, image, slug, meta_title, meta_description, meta_keywords, canonical_url, og_title, og_description, og_image, h1_override, noindex, nofollow, image_alt_text`)
+			.from("engagement_rings")
+			.select(`id, slug, name, title, meta_title, meta_description, meta_keywords, canonical_url, og_title, og_description, og_image, h1_override, noindex, nofollow, is_active`)
 			.order("name", { ascending: true });
 
-		if (error) {
-			return NextResponse.json({ error: "Product fetch failed", detail: error.message, code: error.code }, { status: 500 });
-		}
+		if (error) return NextResponse.json({ error: "Failed to fetch ring SEO data" }, { status: 500 });
 		return NextResponse.json({ data });
-	} catch (err) {
-		return NextResponse.json({
-			error: "Unhandled error",
-			message: err instanceof Error ? err.message : String(err),
-		}, { status: 500 });
 	}
+
+	const { data, error } = await supabase
+		.from("products")
+		.select(`id, name, category, brand, image, slug, meta_title, meta_description, meta_keywords, canonical_url, og_title, og_description, og_image, h1_override, noindex, nofollow, image_alt_text`)
+		.order("name", { ascending: true });
+
+	if (error) return NextResponse.json({ error: "Failed to fetch product SEO data" }, { status: 500 });
+	return NextResponse.json({ data });
 }
 
 export async function PATCH(request: NextRequest) {
-	try {
-		if (!isAuthenticated(request)) {
-			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-		}
+	if (!isAuthenticated(request)) {
+		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+	}
 
-		const body = await request.json();
-		const { type, identifier, ...seoData } = body;
+	const body = await request.json();
+	const { type, identifier, ...seoData } = body;
 
 	if (!identifier) {
 		return NextResponse.json({ error: "identifier is required" }, { status: 400 });
@@ -108,13 +93,6 @@ export async function PATCH(request: NextRequest) {
 		.update(updateData)
 		.eq("id", identifier);
 
-	if (error) {
-		console.error("[SEO API] Product update error:", error.message);
-		return NextResponse.json({ error: "Failed to update product SEO" }, { status: 500 });
-	}
+	if (error) return NextResponse.json({ error: "Failed to update product SEO" }, { status: 500 });
 	return NextResponse.json({ success: true });
-	} catch (err) {
-		console.error("[SEO API] PATCH unhandled error:", err);
-		return NextResponse.json({ error: "Internal server error" }, { status: 500 });
-	}
 }
