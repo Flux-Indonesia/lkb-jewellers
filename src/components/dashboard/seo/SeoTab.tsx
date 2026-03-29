@@ -186,16 +186,20 @@ function ToggleSwitch({
   return (
     <button
       type="button"
-      onClick={() => onChange(!value)}
-      className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors focus:outline-none ${
+      onClick={(e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        onChange(!value)
+      }}
+      className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border transition-all duration-200 focus:outline-none ${
         value
-          ? "bg-red-500/30 border border-red-500/50"
-          : "bg-zinc-700 border border-zinc-600"
+          ? "bg-red-500/30 border-red-500/50"
+          : "bg-zinc-700 border-zinc-600"
       }`}
     >
       <span
-        className={`inline-block h-4 w-4 transform rounded-full transition-transform ${
-          value ? "translate-x-6 bg-red-400" : "translate-x-1 bg-zinc-400"
+        className={`pointer-events-none inline-block h-4 w-4 rounded-full transition-all duration-200 ${
+          value ? "translate-x-[22px] bg-red-400" : "translate-x-[3px] bg-zinc-400"
         }`}
       />
     </button>
@@ -334,7 +338,7 @@ function PrimarySeoEditor() {
         <div>
           <h3 className="text-white font-semibold text-sm">Primary SEO — Root Website</h3>
           <p className="text-gray-500 text-xs mt-0.5">
-            Metadata utama untuk https://www.lkbjewellers.com/
+            Root metadata for https://www.lkbjewellers.com/
           </p>
         </div>
         <div className="flex items-center gap-2">
