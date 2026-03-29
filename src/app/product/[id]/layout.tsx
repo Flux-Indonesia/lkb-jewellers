@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase-server";
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
@@ -45,6 +46,20 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 	};
 }
 
-export default function ProductLayout({ children }: { children: React.ReactNode }) {
+export default async function ProductLayout({
+	children,
+	params,
+}: {
+	children: React.ReactNode;
+	params: Promise<{ id: string }>;
+}) {
+	const { id } = await params;
+	const supabase = await createClient();
+	const { data } = await supabase.from("products").select("id").eq("id", id).single();
+
+	if (!data) {
+		notFound();
+	}
+
 	return children;
 }
