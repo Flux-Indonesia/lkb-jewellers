@@ -31,8 +31,19 @@ export async function GET(request: NextRequest) {
 			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 		}
 
+		const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+		const key = process.env.SUPABASE_SECRET_KEY;
+
+		if (!url || !key) {
+			return NextResponse.json({
+				error: "Missing env vars",
+				hasUrl: !!url,
+				hasKey: !!key,
+			}, { status: 500 });
+		}
+
 		const type = request.nextUrl.searchParams.get("type") || "product";
-		const supabase = createServiceClient();
+		const supabase = createSupabaseClient(url, key);
 
 		if (type === "ring") {
 			const { data, error } = await supabase
@@ -41,8 +52,7 @@ export async function GET(request: NextRequest) {
 				.order("name", { ascending: true });
 
 			if (error) {
-				console.error("[SEO API] Ring fetch error:", error.message);
-				return NextResponse.json({ error: "Failed to fetch ring SEO data" }, { status: 500 });
+				return NextResponse.json({ error: "Ring fetch failed", detail: error.message, code: error.code }, { status: 500 });
 			}
 			return NextResponse.json({ data });
 		}
@@ -53,13 +63,14 @@ export async function GET(request: NextRequest) {
 			.order("name", { ascending: true });
 
 		if (error) {
-			console.error("[SEO API] Product fetch error:", error.message);
-			return NextResponse.json({ error: "Failed to fetch product SEO data" }, { status: 500 });
+			return NextResponse.json({ error: "Product fetch failed", detail: error.message, code: error.code }, { status: 500 });
 		}
 		return NextResponse.json({ data });
 	} catch (err) {
-		console.error("[SEO API] Unhandled error:", err);
-		return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+		return NextResponse.json({
+			error: "Unhandled error",
+			message: err instanceof Error ? err.message : String(err),
+		}, { status: 500 });
 	}
 }
 
