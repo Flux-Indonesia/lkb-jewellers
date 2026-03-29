@@ -1,6 +1,7 @@
 "use client";
 
 import EngagementRingsTab from "@/components/dashboard/engagement-rings/EngagementRingsTab";
+import SeoTab from "@/components/dashboard/seo/SeoTab";
 import { useState, useMemo, useEffect, useCallback } from "react";
 import Link from "next/link";
 import {
@@ -53,7 +54,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 
-type TabType = "add" | "watches" | "jewellery" | "merchandise" | "orders" | "contacts" | "sell" | "newsletter" | "engagement-rings";
+type TabType = "add" | "watches" | "jewellery" | "merchandise" | "orders" | "contacts" | "sell" | "newsletter" | "engagement-rings" | "seo";
 
 interface FormData {
   id: string;
@@ -694,11 +695,12 @@ function DashboardContent() {
       case "sell": return <DollarSign size={20} className={cls} />;
       case "newsletter": return <Users size={20} className={cls} />;
       case "engagement-rings": return <Gem size={20} className={cls} />;
+      case "seo": return <Search size={20} className={cls} />;
     }
   };
 
   const tabLabel = (tab: TabType) => {
-    const labels: Record<TabType, string> = { add: "Add Product", watches: "Watches", jewellery: "Jewellery", merchandise: "Merchandise", orders: "Orders", contacts: "Contact Inquiries", sell: "Sell Submissions", newsletter: "Newsletter", "engagement-rings": "Engagement Rings" };
+    const labels: Record<TabType, string> = { add: "Add Product", watches: "Watches", jewellery: "Jewellery", merchandise: "Merchandise", orders: "Orders", contacts: "Contact Inquiries", sell: "Sell Submissions", newsletter: "Newsletter", "engagement-rings": "Engagement Rings", seo: "SEO Settings" };
     return labels[tab];
   };
 
@@ -713,6 +715,7 @@ function DashboardContent() {
       sell: { icon: <DollarSign size={36} className="text-white" />, title: "Sell Submissions", desc: "Manage watch sell submissions and offers" },
       newsletter: { icon: <Users size={36} className="text-white" />, title: "Newsletter Subscribers", desc: "View collected newsletter emails" },
       "engagement-rings": { icon: <Gem size={36} className="text-white" />, title: "Engagement Rings", desc: "Manage ring images, thumbnails, and hover photos" },
+      seo: { icon: <Search size={36} className="text-white" />, title: "SEO Settings", desc: "Manage meta tags, OG tags, indexing, and structured data" },
     };
     return map[activeTab];
   };
@@ -727,6 +730,7 @@ function DashboardContent() {
     { tab: "sell", badge: sellSubmissions.filter((s: SellSubmission) => s.status === "new").length || undefined },
     { tab: "newsletter", badge: newsletters.length || undefined },
     { tab: "engagement-rings", dividerBefore: true },
+    { tab: "seo", dividerBefore: true },
   ];
 
   const header = headerTitle();
@@ -1363,6 +1367,13 @@ function DashboardContent() {
           {activeTab === "engagement-rings" && (
             <div className="space-y-6">
               <EngagementRingsTab />
+            </div>
+          )}
+
+          {/* SEO Settings Tab */}
+          {activeTab === "seo" && (
+            <div className="space-y-6">
+              <SeoTab />
             </div>
           )}
         </div>

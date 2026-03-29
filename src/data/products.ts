@@ -1,3 +1,18 @@
+export interface ProductSeo {
+  metaTitle: string;
+  metaDescription: string;
+  metaKeywords: string;
+  slug: string;
+  canonicalUrl: string;
+  ogTitle: string;
+  ogDescription: string;
+  ogImage: string;
+  h1Override: string;
+  noindex: boolean;
+  nofollow: boolean;
+  imageAltText: string;
+}
+
 export interface Product {
   _id: string;
   id: string;
@@ -16,6 +31,8 @@ export interface Product {
   caseMaterial: string;
   dialColor: string;
   yearOfProduction: number;
+  // SEO fields
+  seo?: ProductSeo;
 }
 
 export const navMenuData = {

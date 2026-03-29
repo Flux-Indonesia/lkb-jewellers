@@ -5,6 +5,7 @@ export default function robots(): MetadataRoute.Robots {
 		rules: {
 			userAgent: "*",
 			allow: "/",
+			disallow: ["/dashboard", "/api/", "/login", "/signup", "/profile", "/checkout", "/cart"],
 		},
 		sitemap: "https://www.lkbjewellers.com/sitemap.xml",
 	};

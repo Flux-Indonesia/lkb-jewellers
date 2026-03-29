@@ -56,6 +56,8 @@ export function ProductJsonLd({
 	availability,
 	url,
 	brand,
+	sku,
+	category,
 }: {
 	name: string;
 	description: string;
@@ -65,8 +67,10 @@ export function ProductJsonLd({
 	availability: "InStock" | "OutOfStock";
 	url: string;
 	brand?: string;
+	sku?: string;
+	category?: string;
 }) {
-	const schema = {
+	const schema: Record<string, unknown> = {
 		"@context": "https://schema.org",
 		"@type": "Product",
 		name,
@@ -81,11 +85,59 @@ export function ProductJsonLd({
 			price,
 			priceCurrency: currency,
 			availability: `https://schema.org/${availability}`,
+			url,
 			seller: {
 				"@type": "Organization",
 				name: "LKB Jewellers",
 			},
 		},
+	};
+
+	if (sku) schema.sku = sku;
+	if (category) schema.category = category;
+
+	return (
+		<script
+			type="application/ld+json"
+			dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+		/>
+	);
+}
+
+export function BreadcrumbJsonLd({ items }: { items: { name: string; url: string }[] }) {
+	const schema = {
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: items.map((item, i) => ({
+			"@type": "ListItem",
+			position: i + 1,
+			name: item.name,
+			item: item.url,
+		})),
+	};
+
+	return (
+		<script
+			type="application/ld+json"
+			dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+		/>
+	);
+}
+
+export function FaqJsonLd({ items }: { items: { question: string; answer: string }[] }) {
+	if (items.length === 0) return null;
+
+	const schema = {
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		mainEntity: items.map((item) => ({
+			"@type": "Question",
+			name: item.question,
+			acceptedAnswer: {
+				"@type": "Answer",
+				text: item.answer,
+			},
+		})),
 	};
 
 	return (

@@ -10,10 +10,26 @@ import { getProductById } from "@/lib/products";
 import type { Product } from "@/data/products";
 import ShowroomSection from "@/components/showroom-section";
 import { EnquiryModal } from "@/components/enquiry-modal";
-import { ProductJsonLd } from "@/components/json-ld";
+import { ProductJsonLd, BreadcrumbJsonLd } from "@/components/json-ld";
+import { Breadcrumb } from "@/components/breadcrumb";
+import { RelatedProducts } from "@/components/related-products";
 
 const PLACEHOLDER_IMG =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect width='400' height='400' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-family='sans-serif' font-size='14'%3ENo Image%3C/text%3E%3C/svg%3E";
+
+const CATEGORY_URL_MAP: Record<string, string> = {
+  "watch": "watches",
+  "luxury-jewellery": "jewellery",
+  "merchandise": "accessories",
+};
+
+function categoryToPath(category: string) {
+  return CATEGORY_URL_MAP[category] || category;
+}
+
+function formatCategory(category: string) {
+  return category.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+}
 
 export default function ProductPage() {
   const params = useParams();
@@ -109,16 +125,27 @@ export default function ProductPage() {
   return (
     <div className="bg-white text-gray-900 pt-32 pb-24 min-h-screen">
       <ProductJsonLd
-        name={product.name}
-        description={product.description || `${product.name} available at LKB Jewellers, Hatton Garden London.`}
+        name={product.seo?.h1Override || product.name}
+        description={product.seo?.metaDescription || product.description || `${product.name} available at LKB Jewellers, Hatton Garden London.`}
         image={product.image || ""}
         price={product.price}
         availability={isOutOfStock ? "OutOfStock" : "InStock"}
         url={`https://www.lkbjewellers.com/product/${product.id}`}
         brand={product.brand}
+        sku={product.id}
+        category={formatCategory(product.category)}
       />
+      <BreadcrumbJsonLd items={[
+        { name: "Home", url: "https://www.lkbjewellers.com" },
+        { name: formatCategory(product.category), url: `https://www.lkbjewellers.com/${categoryToPath(product.category)}` },
+        { name: product.name, url: `https://www.lkbjewellers.com/product/${product.id}` },
+      ]} />
       <div className="container mx-auto px-6">
-        {/* Back Button */}
+        <Breadcrumb items={[
+          { label: "Home", href: "/" },
+          { label: formatCategory(product.category), href: `/${categoryToPath(product.category)}` },
+          { label: product.name },
+        ]} />
         <button
           type="button"
           onClick={() => router.push("/shop")}
@@ -138,7 +165,7 @@ export default function ProductPage() {
             >
               <Image
                 src={images[activeImage] || PLACEHOLDER_IMG}
-                alt={`${product.name} - Image ${activeImage + 1}`}
+                alt={product.seo?.imageAltText ?? `${product.name} - Image ${activeImage + 1}`}
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -220,7 +247,7 @@ export default function ProductPage() {
             <h1
               className="text-4xl md:text-5xl mb-6 text-black font-bold leading-tight font-heading"
             >
-              {product.name}
+              {product.seo?.h1Override || product.name}
             </h1>
 
             {/* Price */}
@@ -451,6 +478,11 @@ export default function ProductPage() {
           </div>
         </div>
       )}
+      <RelatedProducts
+        currentProductId={product.id}
+        category={product.category}
+        brand={product.brand}
+      />
       <ShowroomSection />
     </div>
   );

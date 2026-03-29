@@ -56,6 +56,8 @@ export async function PATCH(request: NextRequest) {
 	const allowedFields = [
 		"name", "title", "description", "base_price_usd", "currency",
 		"shape", "setting_style", "band_type", "setting_profile", "is_active",
+		"meta_title", "meta_description", "meta_keywords", "canonical_url",
+		"og_title", "og_description", "og_image", "h1_override", "noindex", "nofollow",
 	];
 
 	const updateData: Record<string, unknown> = {};
