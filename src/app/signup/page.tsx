@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Eye, EyeOff, Mail, Lock, User, ArrowRight, CheckCircle } from "lucide-react";
 
 export default function SignupPage() {
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect") || "";
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -57,7 +60,7 @@ export default function SignupPage() {
             Please check your email to verify your account, then sign in.
           </p>
           <Link
-            href="/login"
+            href={redirect ? `/login?redirect=${encodeURIComponent(redirect)}` : "/login"}
             className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 text-sm font-bold tracking-[0.2em] uppercase hover:bg-gray-200 transition-all"
           >
             Sign In <ArrowRight size={16} />
@@ -172,7 +175,7 @@ export default function SignupPage() {
         <div className="mt-8 text-center">
           <p className="text-gray-500 text-sm">
             Already have an account?{" "}
-            <Link href="/login" className="text-white hover:underline transition-colors tracking-wider">
+            <Link href={redirect ? `/login?redirect=${encodeURIComponent(redirect)}` : "/login"} className="text-white hover:underline transition-colors tracking-wider">
               Sign In
             </Link>
           </p>

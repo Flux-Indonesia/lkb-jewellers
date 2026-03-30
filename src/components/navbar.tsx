@@ -136,7 +136,7 @@ export default function Navbar() {
 									</div>
 									<div className="py-2">
 										<button onClick={() => router.push("/profile")} className="w-full text-left px-4 py-2 text-white hover:bg-white/10 transition-colors">My Profile</button>
-										<button onClick={() => router.push("/dashboard")} className="w-full text-left px-4 py-2 text-white hover:bg-white/10 transition-colors">My Orders</button>
+										<button onClick={() => router.push("/orders")} className="w-full text-left px-4 py-2 text-white hover:bg-white/10 transition-colors">My Orders</button>
 									</div>
 								</div>
 							</div>
@@ -239,7 +239,7 @@ export default function Navbar() {
 													<Link href="/profile" className="w-full py-3 border border-white text-white text-sm font-semibold tracking-[0.2em] text-center hover:bg-white hover:text-black transition-colors block">MY PROFILE</Link>
 												</SheetClose>
 												<SheetClose asChild>
-													<Link href="/dashboard" className="w-full py-3 border border-gray-800 text-gray-300 text-sm font-semibold tracking-[0.2em] text-center hover:bg-gray-900 transition-colors block">MY ORDERS</Link>
+													<Link href="/orders" className="w-full py-3 border border-gray-800 text-gray-300 text-sm font-semibold tracking-[0.2em] text-center hover:bg-gray-900 transition-colors block">MY ORDERS</Link>
 												</SheetClose>
 											</>
 										) : (

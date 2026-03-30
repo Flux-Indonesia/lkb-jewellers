@@ -124,11 +124,25 @@ export async function POST(req: NextRequest) {
     const baseUrl =
       process.env.NEXT_PUBLIC_BASE_URL || "https://www.lkbjewellers.com";
 
+    // Build order items metadata for saving after payment
+    const orderItems = items.map((item: CartItem) => {
+      const product = productMap.get(item.id);
+      return {
+        id: item.id,
+        name: product?.name || item.id,
+        price: Number(product?.price) || 0,
+        quantity: item.quantity,
+      };
+    });
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items,
       shipping_address_collection: {
         allowed_countries: ["GB", "US", "AE", "SA", "QA", "KW", "BH", "OM"],
+      },
+      metadata: {
+        order_items: JSON.stringify(orderItems),
       },
       success_url: `${baseUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}/checkout`,
