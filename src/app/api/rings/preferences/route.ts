@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { isAuthenticated } from "@/lib/admin-auth"
 import { createClient } from '@/lib/supabase'
 import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 
@@ -9,10 +10,7 @@ type PreferenceRow = {
   hover_url: string | null
 }
 
-function isAuthenticated(request: NextRequest): boolean {
-  const cookieHeader = request.headers.get('cookie') || ''
-  return cookieHeader.includes('admin_session=authenticated')
-}
+
 
 /** Service-role client for write operations (RLS bypass) */
 function createServiceClient() {

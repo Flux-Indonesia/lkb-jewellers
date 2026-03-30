@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { isAuthenticated } from "@/lib/admin-auth"
 import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 
 type RingRow = {
@@ -13,10 +14,7 @@ const ALLOWED_CONTENT_TYPES: Record<string, string> = {
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024
 
-function isAuthenticated(request: NextRequest): boolean {
-  const cookieHeader = request.headers.get('cookie') || ''
-  return cookieHeader.includes('admin_session=authenticated')
-}
+
 
 function extractImageNumber(imageUrl: string, color: string): number {
   const escapedColor = color.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')

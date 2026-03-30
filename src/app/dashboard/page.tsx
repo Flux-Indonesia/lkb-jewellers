@@ -120,7 +120,6 @@ function AdminLoginForm() {
       });
 
       if (res.ok) {
-        document.cookie = `admin_session=authenticated; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Lax`;
         window.location.reload();
       } else {
         setError("Incorrect password");

@@ -5,16 +5,13 @@ import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase";
 
 interface AuthContextType {
-  // Admin (cookie-based)
   isAdmin: boolean;
   adminSignOut: () => void;
-  // User (Supabase Auth)
   user: User | null;
   userLoading: boolean;
   userSignOut: () => Promise<void>;
   refreshUser: () => Promise<void>;
   loading: boolean;
-  // Legacy alias
   signOut: () => void;
 }
 
@@ -26,13 +23,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [adminLoading, setAdminLoading] = useState(true);
   const [userLoading, setUserLoading] = useState(true);
 
-  // Check admin session (cookie)
+  // Check admin session via server-side verification
   useEffect(() => {
-    const hasSession = document.cookie
-      .split("; ")
-      .some((c) => c.startsWith("admin_session="));
-    setIsAdmin(hasSession);
-    setAdminLoading(false);
+    fetch("/api/auth/check")
+      .then((r) => r.json())
+      .then((data) => setIsAdmin(data.admin === true))
+      .catch(() => setIsAdmin(false))
+      .finally(() => setAdminLoading(false));
   }, []);
 
   // Check Supabase user session
@@ -53,9 +50,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const adminSignOut = () => {
-    document.cookie = "admin_session=; path=/; max-age=0";
-    setIsAdmin(false);
-    window.location.href = "/dashboard";
+    // Clear httpOnly cookie via server
+    fetch("/api/auth/logout", { method: "POST" }).then(() => {
+      setIsAdmin(false);
+      window.location.href = "/dashboard";
+    });
   };
 
   const userSignOut = async () => {

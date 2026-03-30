@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { isAuthenticated } from "@/lib/admin-auth"
 import { createClient } from '@/lib/supabase'
 
 type RingImage = {
@@ -12,10 +13,7 @@ type RingRecord = {
   engagement_ring_images: RingImage[] | null
 }
 
-function isAuthenticated(request: NextRequest): boolean {
-  const cookieHeader = request.headers.get('cookie') || ''
-  return cookieHeader.includes('admin_session=authenticated')
-}
+
 
 function extractColorFromImageUrl(url: string): string | null {
   const match = url.match(/\/([a-z]+)_\d+\.jpg(?:\?|$)/i)
