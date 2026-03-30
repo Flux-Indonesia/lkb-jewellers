@@ -186,16 +186,20 @@ function ToggleSwitch({
   return (
     <button
       type="button"
-      onClick={() => onChange(!value)}
-      className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors focus:outline-none ${
+      onClick={(e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        onChange(!value)
+      }}
+      className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border transition-all duration-200 focus:outline-none ${
         value
-          ? "bg-red-500/30 border border-red-500/50"
-          : "bg-zinc-700 border border-zinc-600"
+          ? "bg-red-500/30 border-red-500/50"
+          : "bg-zinc-700 border-zinc-600"
       }`}
     >
       <span
-        className={`inline-block h-4 w-4 transform rounded-full transition-transform ${
-          value ? "translate-x-6 bg-red-400" : "translate-x-1 bg-zinc-400"
+        className={`pointer-events-none inline-block h-4 w-4 rounded-full transition-all duration-200 ${
+          value ? "translate-x-[22px] bg-red-400" : "translate-x-[3px] bg-zinc-400"
         }`}
       />
     </button>
@@ -204,11 +208,255 @@ function ToggleSwitch({
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 
+// ─── Primary SEO Component ────────────────────────────────────────────────────
+
+interface PrimarySeoData {
+  meta_title: string
+  meta_title_template: string
+  meta_description: string
+  meta_keywords: string
+  og_title: string
+  og_description: string
+  og_image: string
+  twitter_title: string
+  twitter_description: string
+  twitter_image: string
+  canonical_url: string
+  noindex: boolean
+  nofollow: boolean
+}
+
+function PrimarySeoEditor() {
+  const [data, setData] = useState<PrimarySeoData | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [saving, setSaving] = useState(false)
+  const [dirty, setDirty] = useState(false)
+  const [saveResult, setSaveResult] = useState<SaveResult | null>(null)
+
+  useEffect(() => {
+    fetch("/api/seo/primary")
+      .then(async (res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        const json = await res.json()
+        setData(json.data)
+      })
+      .catch((err: unknown) =>
+        setError(err instanceof Error ? err.message : "Failed to load")
+      )
+      .finally(() => setLoading(false))
+  }, [])
+
+  function updateField(field: keyof PrimarySeoData, value: string | boolean) {
+    if (!data) return
+    setData({ ...data, [field]: value })
+    setDirty(true)
+    setSaveResult(null)
+  }
+
+  async function handleSave() {
+    if (!data || !dirty) return
+    setSaving(true)
+    try {
+      const res = await fetch("/api/seo/primary", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      setDirty(false)
+      setSaveResult({ type: "success", text: "Saved!" })
+    } catch {
+      setSaveResult({ type: "error", text: "Failed to save" })
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="space-y-3 p-6">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="h-10 bg-gray-800 rounded animate-pulse" />
+        ))}
+      </div>
+    )
+  }
+
+  if (error || !data) {
+    return (
+      <div className="rounded-lg border border-red-900/50 bg-red-950/30 p-4 text-red-400 text-sm flex items-center gap-2">
+        <AlertTriangle size={16} />
+        {error || "No data"}
+      </div>
+    )
+  }
+
+  const fieldRow = (
+    label: string,
+    field: keyof PrimarySeoData,
+    opts?: { maxLen?: number; textarea?: boolean; placeholder?: string }
+  ) => (
+    <div className="space-y-1.5">
+      <div className="flex items-center justify-between">
+        <label className="text-xs font-medium text-gray-400">{label}</label>
+        {opts?.maxLen && (
+          <span
+            className={`text-[10px] tabular-nums ${
+              String(data[field]).length > opts.maxLen
+                ? "text-red-400"
+                : "text-gray-500"
+            }`}
+          >
+            {String(data[field]).length}/{opts.maxLen}
+          </span>
+        )}
+      </div>
+      {opts?.textarea ? (
+        <textarea
+          value={String(data[field])}
+          onChange={(e) => updateField(field, e.target.value)}
+          placeholder={opts?.placeholder}
+          rows={3}
+          className="w-full bg-gray-900 border border-gray-700 rounded-md px-3 py-2 text-sm text-white placeholder:text-gray-600 focus:border-gray-500 focus:outline-none resize-none"
+        />
+      ) : (
+        <input
+          type="text"
+          value={String(data[field])}
+          onChange={(e) => updateField(field, e.target.value)}
+          placeholder={opts?.placeholder}
+          className="w-full bg-gray-900 border border-gray-700 rounded-md px-3 py-2 text-sm text-white placeholder:text-gray-600 focus:border-gray-500 focus:outline-none"
+        />
+      )}
+    </div>
+  )
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h3 className="text-white font-semibold text-sm">Primary SEO — Root Website</h3>
+          <p className="text-gray-500 text-xs mt-0.5">
+            Root metadata for https://www.lkbjewellers.com/
+          </p>
+        </div>
+        <div className="flex items-center gap-2">
+          {saveResult && (
+            <span
+              className={`text-xs ${
+                saveResult.type === "success"
+                  ? "text-green-400"
+                  : "text-red-400"
+              }`}
+            >
+              {saveResult.text}
+            </span>
+          )}
+          <button
+            onClick={handleSave}
+            disabled={!dirty || saving}
+            className="inline-flex items-center gap-1.5 rounded-md bg-white px-3 py-1.5 text-xs font-medium text-black hover:bg-gray-200 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          >
+            <Save size={12} />
+            {saving ? "Saving..." : "Save"}
+          </button>
+        </div>
+      </div>
+
+      {/* Basic SEO */}
+      <Card className="bg-[#0a0a0a] border-gray-800">
+        <CardContent className="p-5 space-y-4">
+          <h4 className="text-xs font-semibold text-gray-300 uppercase tracking-wider flex items-center gap-2">
+            <Globe size={14} /> Basic SEO
+          </h4>
+          {fieldRow("Page Title (Meta Title)", "meta_title", { maxLen: 60 })}
+          {fieldRow("Title Template (use %s for page name)", "meta_title_template", {
+            placeholder: "%s | LKB Jewellers",
+          })}
+          {fieldRow("Meta Description", "meta_description", {
+            maxLen: 160,
+            textarea: true,
+          })}
+          {fieldRow("Meta Keywords", "meta_keywords", {
+            placeholder: "keyword1, keyword2, keyword3",
+          })}
+          {fieldRow("Canonical URL", "canonical_url", {
+            placeholder: "https://www.lkbjewellers.com",
+          })}
+          <div className="flex items-center gap-6 pt-2">
+            <div className="flex items-center gap-2">
+              <ToggleSwitch
+                value={data.noindex}
+                onChange={(v) => updateField("noindex", v)}
+              />
+              <span className="text-xs text-gray-400">Noindex</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <ToggleSwitch
+                value={data.nofollow}
+                onChange={(v) => updateField("nofollow", v)}
+              />
+              <span className="text-xs text-gray-400">Nofollow</span>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Open Graph */}
+      <Card className="bg-[#0a0a0a] border-gray-800">
+        <CardContent className="p-5 space-y-4">
+          <h4 className="text-xs font-semibold text-gray-300 uppercase tracking-wider flex items-center gap-2">
+            <Globe size={14} /> Open Graph (Social Sharing)
+          </h4>
+          {fieldRow("OG Title", "og_title", { maxLen: 60 })}
+          {fieldRow("OG Description", "og_description", { maxLen: 160, textarea: true })}
+          {fieldRow("OG Image URL", "og_image", { placeholder: "/white-logo.png" })}
+          {data.og_image && data.og_image.startsWith("http") && (
+            <div className="mt-2">
+              <img
+                src={data.og_image}
+                alt="OG preview"
+                className="h-20 rounded border border-gray-700 object-cover"
+              />
+            </div>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Twitter */}
+      <Card className="bg-[#0a0a0a] border-gray-800">
+        <CardContent className="p-5 space-y-4">
+          <h4 className="text-xs font-semibold text-gray-300 uppercase tracking-wider flex items-center gap-2">
+            <Globe size={14} /> Twitter Card
+          </h4>
+          {fieldRow("Twitter Title", "twitter_title", { maxLen: 60 })}
+          {fieldRow("Twitter Description", "twitter_description", {
+            maxLen: 160,
+            textarea: true,
+          })}
+          {fieldRow("Twitter Image URL", "twitter_image", {
+            placeholder: "/white-logo.png",
+          })}
+        </CardContent>
+      </Card>
+
+      {dirty && (
+        <p className="text-yellow-500 text-xs flex items-center gap-1">
+          <AlertTriangle size={12} /> Unsaved changes
+        </p>
+      )}
+    </div>
+  )
+}
+
+// ─── Main Component ───────────────────────────────────────────────────────────
+
 export default function SeoTab() {
   // Sub-tab
-  const [activeSubTab, setActiveSubTab] = useState<"products" | "rings">(
-    "products"
-  )
+  const [activeSubTab, setActiveSubTab] = useState<
+    "primary" | "products" | "rings"
+  >("primary")
 
   // Data
   const [products, setProducts] = useState<ProductSeoItem[]>([])
@@ -1197,14 +1445,30 @@ export default function SeoTab() {
         <Globe className="w-5 h-5 text-zinc-400" />
         <h2 className="text-lg font-semibold text-white">SEO Settings</h2>
         <Badge variant="outline" className="text-zinc-400 border-zinc-700 text-xs">
-          {activeSubTab === "products"
-            ? `${products.length} products`
-            : `${rings.length} rings`}
+          {activeSubTab === "primary"
+            ? "Root"
+            : activeSubTab === "products"
+              ? `${products.length} products`
+              : `${rings.length} rings`}
         </Badge>
       </div>
 
-      {/* Sub-tab toggle */}
       <div className="flex gap-1 p-1 bg-zinc-900 border border-zinc-800 rounded-lg w-fit">
+        <button
+          type="button"
+          onClick={() => {
+            setActiveSubTab("primary")
+            setExpandedId(null)
+            handleSearchChange("")
+          }}
+          className={`px-4 py-1.5 rounded-md text-xs font-medium transition-colors ${
+            activeSubTab === "primary"
+              ? "bg-white text-black"
+              : "text-zinc-400 hover:text-white"
+          }`}
+        >
+          Primary SEO
+        </button>
         <button
           type="button"
           onClick={() => {
@@ -1237,8 +1501,9 @@ export default function SeoTab() {
         </button>
       </div>
 
-      {/* Main content */}
-      {isLoading ? (
+      {activeSubTab === "primary" ? (
+        <PrimarySeoEditor />
+      ) : isLoading ? (
         renderSkeleton()
       ) : currentError ? (
         <div className="flex items-center gap-3 p-4 bg-red-950/40 border border-red-800/50 rounded-lg text-red-400 text-sm">
