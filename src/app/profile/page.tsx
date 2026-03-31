@@ -1,110 +1,97 @@
 "use client";
 
 import Link from "next/link";
-import { User, Package, Heart, Settings, LogOut } from "lucide-react";
+import { User, Package, Heart, LogOut, Mail, Phone } from "lucide-react";
+import { useAuth } from "@/context/auth-context";
 
 export default function ProfilePage() {
+  const { user, userSignOut } = useAuth();
+
+  const firstName = user?.user_metadata?.first_name || "";
+  const lastName = user?.user_metadata?.last_name || "";
+  const fullName = [firstName, lastName].filter(Boolean).join(" ") || "Guest";
+  const email = user?.email || "";
+  const phone = user?.user_metadata?.phone || user?.phone || "";
+
   return (
     <div className="bg-black min-h-screen pt-32 pb-24 px-4 md:px-6">
-      <div className="container mx-auto max-w-6xl">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="w-20 h-20 mx-auto rounded-full bg-gray-900 border-2 border-gray-700 flex items-center justify-center mb-6">
-            <User className="w-8 h-8 text-gray-400" />
+      <div className="container mx-auto max-w-4xl">
+        {/* Profile Header with Details */}
+        <div className="mb-10">
+          <div className="flex flex-col items-center md:flex-row md:items-start gap-6 mb-8">
+            <div className="w-20 h-20 rounded-full bg-gray-900 border-2 border-gray-700 flex items-center justify-center shrink-0">
+              <User className="w-8 h-8 text-gray-400" />
+            </div>
+            <div className="text-center md:text-left flex-1">
+              <h1 className="text-3xl md:text-4xl text-white mb-2 font-heading">{fullName}</h1>
+              <div className="flex flex-col gap-1.5 text-gray-400 text-sm">
+                {email && (
+                  <div className="flex items-center justify-center md:justify-start gap-2">
+                    <Mail size={14} className="text-gray-500" />
+                    <span>{email}</span>
+                  </div>
+                )}
+                {phone && (
+                  <div className="flex items-center justify-center md:justify-start gap-2">
+                    <Phone size={14} className="text-gray-500" />
+                    <span>{phone}</span>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
-          <h1
-            className="text-4xl md:text-5xl text-white mb-4 font-normal font-heading"
-          >
-            My Account
-          </h1>
-          <p className="text-gray-400">
-            Manage your profile, orders, and preferences
-          </p>
         </div>
 
-        {/* Account Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        {/* Quick Links */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
           <Link
-            href="/profile"
-            className="bg-gray-900/50 p-8 rounded-lg border border-gray-800 hover:border-[#D4AF37]/30 transition-all duration-500 group block"
+            href="/orders"
+            className="bg-gray-900/50 p-6 md:p-8 border border-gray-800 hover:border-white/30 transition-all duration-300 group flex items-center gap-5"
           >
-            <User className="w-8 h-8 text-[#D4AF37] mb-4 group-hover:scale-110 transition-transform" />
-            <h3
-              className="text-lg text-white mb-2 font-normal font-heading"
-            >
-              Personal Details
-            </h3>
-            <p className="text-gray-500 text-sm">
-              Update your name, email, and contact information
-            </p>
+            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors">
+              <Package className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h3 className="text-white font-heading text-lg mb-0.5">Order History</h3>
+              <p className="text-gray-500 text-sm">View past orders & track deliveries</p>
+            </div>
           </Link>
 
           <Link
             href="/profile"
-            className="bg-gray-900/50 p-8 rounded-lg border border-gray-800 hover:border-[#D4AF37]/30 transition-all duration-500 group block"
+            className="bg-gray-900/50 p-6 md:p-8 border border-gray-800 hover:border-white/30 transition-all duration-300 group flex items-center gap-5"
           >
-            <Package className="w-8 h-8 text-[#D4AF37] mb-4 group-hover:scale-110 transition-transform" />
-            <h3
-              className="text-lg text-white mb-2 font-normal font-heading"
-            >
-              Order History
-            </h3>
-            <p className="text-gray-500 text-sm">
-              View your past orders and track current deliveries
-            </p>
+            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-white/20 transition-colors">
+              <Heart className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h3 className="text-white font-heading text-lg mb-0.5">Wishlist</h3>
+              <p className="text-gray-500 text-sm">Your saved favourite pieces</p>
+            </div>
           </Link>
-
-          <Link
-            href="/profile"
-            className="bg-gray-900/50 p-8 rounded-lg border border-gray-800 hover:border-[#D4AF37]/30 transition-all duration-500 group block"
-          >
-            <Heart className="w-8 h-8 text-[#D4AF37] mb-4 group-hover:scale-110 transition-transform" />
-            <h3
-              className="text-lg text-white mb-2 font-normal font-heading"
-            >
-              Wishlist
-            </h3>
-            <p className="text-gray-500 text-sm">
-              Browse and manage your saved favourite pieces
-            </p>
-          </Link>
-
-          <Link
-            href="/profile"
-            className="bg-gray-900/50 p-8 rounded-lg border border-gray-800 hover:border-[#D4AF37]/30 transition-all duration-500 group block"
-          >
-            <Settings className="w-8 h-8 text-[#D4AF37] mb-4 group-hover:scale-110 transition-transform" />
-            <h3
-              className="text-lg text-white mb-2 font-normal font-heading"
-            >
-              Account Settings
-            </h3>
-            <p className="text-gray-500 text-sm">
-              Manage your password and notification preferences
-            </p>
-          </Link>
-
-          <button className="bg-gray-900/50 p-8 rounded-lg border border-gray-800 hover:border-red-500/30 transition-all duration-500 group text-left">
-            <LogOut className="w-8 h-8 text-gray-500 mb-4 group-hover:text-red-400 group-hover:scale-110 transition-all" />
-            <h3
-              className="text-lg text-white mb-2 font-normal group-hover:text-red-400 transition-colors font-heading"
-            >
-              Sign Out
-            </h3>
-            <p className="text-gray-500 text-sm">
-              Log out of your LKB Jewellers account
-            </p>
-          </button>
         </div>
 
-        {/* Placeholder Notice */}
-        <div className="mt-12 text-center">
+        {/* Sign Out */}
+        <button
+          onClick={() => userSignOut()}
+          className="w-full bg-gray-900/50 p-6 border border-gray-800 hover:border-red-500/30 transition-all duration-300 group flex items-center gap-5"
+        >
+          <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-red-500/20 transition-colors">
+            <LogOut className="w-5 h-5 text-gray-400 group-hover:text-red-400 transition-colors" />
+          </div>
+          <div className="text-left">
+            <h3 className="text-white font-heading text-lg mb-0.5 group-hover:text-red-400 transition-colors">Sign Out</h3>
+            <p className="text-gray-500 text-sm">Log out of your account</p>
+          </div>
+        </button>
+
+        {/* Notice */}
+        <div className="mt-10 text-center">
           <p className="text-gray-600 text-sm">
-            Account features are coming soon. Please{" "}
-            <Link href="/contact" className="text-[#D4AF37] hover:underline">
-              contact us
-            </Link>{" "}
-            for any account-related enquiries.
+            Need help?{" "}
+            <Link href="/contact" className="text-white hover:underline">
+              Contact us
+            </Link>
           </p>
         </div>
       </div>

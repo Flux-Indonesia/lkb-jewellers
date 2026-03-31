@@ -1,10 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase";
-
-function isAuthenticated(request: NextRequest): boolean {
-	const cookieHeader = request.headers.get("cookie") || "";
-	return cookieHeader.includes("admin_session=authenticated");
-}
+import { isAuthenticated } from "@/lib/admin-auth";
 
 export async function GET(request: NextRequest) {
 	try {

@@ -56,7 +56,6 @@ export default function Navbar() {
 	const [activeMenu, setActiveMenu] = useState<MenuKey | null>(null);
 	const [hoveredImage, setHoveredImage] = useState<string | null>(null);
 	const [mobileOpen, setMobileOpen] = useState(false);
-	const [mobileUserMenuOpen, setMobileUserMenuOpen] = useState(false);
 	const { cartCount } = useCart();
 	const { user } = useAuth();
 
@@ -82,230 +81,182 @@ export default function Navbar() {
 		<>
 			<nav className={`fixed left-0 w-full z-50 transition-all duration-500 bg-black border-b border-white ${scrolled ? "top-0" : "top-12"}`} onMouseLeave={handleNavLeave}>
 				{/* Main bar */}
-				<div className="w-full mx-auto h-20 flex justify-between items-center relative z-50">
-					{/* Left nav links - desktop */}
-					<div className="hidden xl:flex gap-8 items-center w-5/12 justify-start pl-16">
-						{navLinks.map((item, i) => (
-							<Fragment key={item.label}>
-								{i > 0 && <div className="h-7 w-px bg-gradient-to-b from-white via-gray-400 to-white opacity-50" />}
-								<div className="relative h-full flex items-center">
-									<Link href={item.href} className="text-white text-sm font-semibold tracking-[0.2em] hover:text-gray-300 transition-colors py-6 font-display" onMouseEnter={() => handleMenuEnter(item.key)}>
+				<div className="h-20 flex items-center justify-between px-4 xl:px-16 relative z-50">
+
+					{/* Left: hamburger (mobile) / nav links (desktop) */}
+					<div className="flex items-center gap-8 flex-1 min-w-0">
+						{/* Mobile hamburger */}
+						<div className="xl:hidden">
+							<Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+								<SheetTrigger asChild>
+									<Button variant="ghost" size="icon" className="text-white hover:bg-transparent h-auto w-auto p-2" aria-label="Open menu">
+										<Menu size={22} />
+									</Button>
+								</SheetTrigger>
+								<SheetContent side="left" showCloseButton={false} className="w-full sm:max-w-full bg-black border-none p-0 top-12">
+									<SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+									{/* Mobile header */}
+									<div className="flex items-center justify-between h-20 px-4 border-b border-gray-800">
+										<SheetClose asChild>
+											<Link href="/" className="flex items-center">
+												<Image src="/white-logo.png" alt="LKB Official Logo" width={100} height={40} className="h-10 w-auto" />
+											</Link>
+										</SheetClose>
+										<SheetClose asChild>
+											<Button variant="ghost" size="icon" className="text-white hover:bg-transparent h-auto w-auto p-1" aria-label="Close menu">
+												<X size={24} />
+											</Button>
+										</SheetClose>
+									</div>
+
+									{/* Mobile menu items */}
+									<div className="overflow-y-auto h-[calc(100vh-80px)] pb-32">
+										{/* Search */}
+										<div className="px-6 py-4 border-b border-gray-900">
+											<button type="button" className="w-full flex items-center gap-3 text-white text-sm font-semibold tracking-[0.2em] py-3 px-6 border border-gray-800 hover:border-white hover:bg-gray-900/50 transition-colors">
+												<Search size={18} strokeWidth={2} />
+												SEARCH
+											</button>
+										</div>
+
+										<div className="flex flex-col">
+											<Accordion type="single" collapsible className="w-full">
+												<AccordionItem value="home" className="border-b border-gray-900">
+													<AccordionTrigger className="text-white text-sm font-semibold tracking-[0.2em] font-body px-6 py-5 hover:bg-gray-900/50 hover:no-underline [&>svg]:hidden" onClick={() => { router.push("/"); setMobileOpen(false); }}>HOME</AccordionTrigger>
+												</AccordionItem>
+
+												<AccordionItem value="rings" className="border-b border-gray-900">
+													<AccordionTrigger className="text-white text-sm font-semibold tracking-[0.2em] font-body px-6 py-5 hover:bg-gray-900/50 hover:no-underline [&>svg]:hidden" onClick={() => { router.push("/engagement-rings"); setMobileOpen(false); }}>ENGAGEMENT RINGS</AccordionTrigger>
+												</AccordionItem>
+
+												{([
+													{ label: "WATCHES", key: "watches" as MenuKey },
+													{ label: "JEWELLERY", key: "jewellery" as MenuKey },
+													{ label: "ACCESSORIES", key: "accessories" as MenuKey },
+													{ label: "OTHER SERVICES", key: "services" as MenuKey },
+													{ label: "ABOUT US", key: "contact" as MenuKey },
+												] as const).map((section) => (
+													<AccordionItem key={section.key} value={section.key} className="border-b border-gray-900">
+														<AccordionTrigger className="text-white text-sm font-semibold tracking-[0.2em] font-body px-6 py-5 hover:bg-gray-900/50 hover:no-underline [&>svg]:text-gray-400">{section.label}</AccordionTrigger>
+														<AccordionContent>
+															{getMenuItems(section.key).map((item) => {
+																const isExternal = "external" in item && item.external;
+																if (isExternal) {
+																	return (
+																		<SheetClose key={item.name} asChild>
+																			<a href={item.link} target="_blank" rel="noopener noreferrer" className="block px-10 py-3 text-gray-400 text-sm tracking-wide hover:text-white hover:bg-gray-900/30 transition-colors">{item.name}</a>
+																		</SheetClose>
+																	);
+																}
+																return (
+																	<SheetClose key={item.name} asChild>
+																		<Link href={item.link} className="block px-10 py-3 text-gray-400 text-sm tracking-wide hover:text-white hover:bg-gray-900/30 transition-colors">{item.name}</Link>
+																	</SheetClose>
+																);
+															})}
+														</AccordionContent>
+													</AccordionItem>
+												))}
+											</Accordion>
+										</div>
+
+										{/* Bottom: Login/Profile */}
+										<div className="px-6 py-8 flex flex-col gap-3">
+											{user ? (
+												<>
+													<SheetClose asChild>
+														<Link href="/profile" className="w-full py-3 border border-gray-800 text-white text-sm font-semibold tracking-[0.2em] text-center hover:border-white hover:bg-white hover:text-black transition-colors block">MY PROFILE</Link>
+													</SheetClose>
+													<SheetClose asChild>
+														<Link href="/orders" className="w-full py-3 border border-gray-800 text-white text-sm font-semibold tracking-[0.2em] text-center hover:border-white hover:bg-white hover:text-black transition-colors block">MY ORDERS</Link>
+													</SheetClose>
+												</>
+											) : (
+												<SheetClose asChild>
+													<Link href="/login" className="w-full py-3 border border-gray-800 text-white text-sm font-semibold tracking-[0.2em] text-center hover:border-white hover:bg-white hover:text-black transition-colors block">LOGIN</Link>
+												</SheetClose>
+											)}
+										</div>
+									</div>
+								</SheetContent>
+							</Sheet>
+						</div>
+
+						{/* Desktop nav links */}
+						<div className="hidden xl:flex items-center gap-8">
+							{navLinks.map((item, i) => (
+								<Fragment key={item.label}>
+									{i > 0 && <div className="h-7 w-px bg-gradient-to-b from-white via-gray-400 to-white opacity-50" />}
+									<Link href={item.href} className="text-white text-sm font-semibold tracking-[0.2em] hover:text-gray-300 transition-colors py-6 whitespace-nowrap font-display" onMouseEnter={() => handleMenuEnter(item.key)}>
 										{item.label}
 									</Link>
-								</div>
-							</Fragment>
-						))}
+								</Fragment>
+							))}
+						</div>
 					</div>
 
 					{/* Center logo */}
-					<div className="absolute left-1/2 transform -translate-x-1/2 flex justify-center z-50 xl:w-2/12 pointer-events-none">
-						<Link href="/" className="group flex flex-col items-center py-2 pointer-events-auto">
+					<div className="absolute left-1/2 -translate-x-1/2 xl:static xl:translate-x-0 xl:shrink-0 xl:px-4">
+						<Link href="/" className="flex items-center">
 							<Image src="/white-logo.png" alt="LKB Official Logo" width={200} height={200} className="transition-all duration-500 hover:scale-110 cursor-pointer h-10 xl:h-12 w-auto" priority />
 						</Link>
 					</div>
 
-					{/* Right nav links + icons - desktop */}
-					<div className="hidden xl:flex items-center justify-end w-5/12 pr-8">
-						<div className="flex gap-8 items-center">
-						{rightLinks.map((item, i) => (
-							<Fragment key={item.label}>
-								{i > 0 && <div className="h-7 w-px bg-gradient-to-b from-white via-gray-400 to-white opacity-50" />}
-								<div className="relative h-full flex items-center">
-									<Link href={item.href} className="text-white text-sm font-semibold tracking-[0.2em] hover:text-gray-300 transition-colors py-6 font-display" onMouseEnter={() => handleMenuEnter(item.key)}>
+					{/* Right: nav links (desktop) + icons */}
+					<div className="flex items-center gap-8 flex-1 min-w-0 justify-end">
+						{/* Desktop right links */}
+						<div className="hidden xl:flex items-center gap-8">
+							{rightLinks.map((item, i) => (
+								<Fragment key={item.label}>
+									{i > 0 && <div className="h-7 w-px bg-gradient-to-b from-white via-gray-400 to-white opacity-50" />}
+									<Link href={item.href} className="text-white text-sm font-semibold tracking-[0.2em] hover:text-gray-300 transition-colors py-6 whitespace-nowrap font-display" onMouseEnter={() => handleMenuEnter(item.key)}>
 										{item.label}
 									</Link>
-								</div>
-							</Fragment>
-						))}
+								</Fragment>
+							))}
 						</div>
 
 						{/* Icons */}
-						<div className="flex items-center gap-6 ml-6">
+						<div className="flex items-center gap-6">
+							{/* User icon - desktop only */}
 							{user ? (
-							<div className="relative shrink-0 group">
-								<button className="text-white hover:text-white transition-colors focus:outline-none" aria-label="Account">
-									<User size={18} strokeWidth={2} />
-								</button>
-								<div className="absolute right-0 top-full pt-2 w-56 z-50 invisible opacity-0 pointer-events-none group-hover:visible group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200">
-									<div className="bg-black border border-white/30 rounded-lg shadow-2xl">
-									<div className="p-4 border-b border-gray-800 flex items-center gap-3">
-										<div className="w-10 h-10 rounded-full bg-gradient-to-br from-white to-gray-400 flex items-center justify-center overflow-hidden shrink-0">
-											<User size={20} className="text-black" />
-										</div>
-										<div className="flex-1 min-w-0">
-											<p className="text-white font-medium truncate">{user.email}</p>
-										</div>
-									</div>
-									<div className="py-2">
-										<button onClick={() => router.push("/profile")} className="w-full text-left px-4 py-2 text-white hover:bg-white/10 transition-colors">My Profile</button>
-										<button onClick={() => router.push("/orders")} className="w-full text-left px-4 py-2 text-white hover:bg-white/10 transition-colors">My Orders</button>
-									</div>
-									</div>
-								</div>
-							</div>
-						) : (
-							<button onClick={() => router.push("/login")} className="text-white hover:text-white transition-colors focus:outline-none shrink-0" aria-label="Login">
-								<User size={18} strokeWidth={2} />
-							</button>
-						)}
-							<Link href="/checkout" className="relative group shrink-0">
-								<ShoppingBag size={18} strokeWidth={2} className="text-white group-hover:text-gray-300 transition-colors" />
-								{cartCount > 0 && <Badge className="absolute -top-3 -right-3 bg-white text-black text-[9px] font-bold w-4 h-4 p-0 flex items-center justify-center hover:bg-white">{cartCount}</Badge>}
-							</Link>
-							<button className="text-white hover:text-gray-300 cursor-pointer transition-colors focus:outline-none shrink-0" aria-label="Search">
-								<Search size={18} strokeWidth={2} />
-							</button>
-						</div>
-					</div>
-
-					{/* Mobile section */}
-					<div className="xl:hidden flex items-center justify-between w-full px-4">
-						<Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-							<SheetTrigger asChild>
-								<Button variant="ghost" size="icon" className="text-white hover:bg-transparent h-auto w-auto p-2" aria-label="Open menu">
-									<Menu size={22} />
-								</Button>
-							</SheetTrigger>
-							<SheetContent side="left" showCloseButton={false} className="w-full sm:max-w-full bg-black border-none p-0">
-								<SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-								{/* Mobile header */}
-								<div className="flex items-center justify-between h-20 px-4 border-b border-gray-800">
-									<SheetClose asChild>
-										<Link href="/" className="flex items-center">
-											<Image src="/white-logo.png" alt="LKB Official Logo" width={100} height={40} className="h-10 w-auto" />
-										</Link>
-									</SheetClose>
-									<SheetClose asChild>
-										<Button variant="ghost" size="icon" className="text-white hover:bg-transparent h-auto w-auto p-1" aria-label="Close menu">
-											<X size={24} />
-										</Button>
-									</SheetClose>
-								</div>
-
-								{/* Mobile menu items */}
-								<div className="overflow-y-auto h-[calc(100vh-80px)] pb-32">
-									<div className="flex flex-col">
-										{/* Accordion items */}
-										<Accordion type="single" collapsible className="w-full">
-											{/* HOME - no dropdown */}
-											<AccordionItem value="home" className="border-b border-gray-900">
-												<AccordionTrigger className="text-white text-sm font-semibold tracking-[0.2em] font-body px-6 py-5 hover:bg-gray-900/50 hover:no-underline [&>svg]:hidden" onClick={() => { router.push("/"); setMobileOpen(false); }}>HOME</AccordionTrigger>
-											</AccordionItem>
-
-											{/* ENGAGEMENT RINGS - no dropdown */}
-											<AccordionItem value="rings" className="border-b border-gray-900">
-												<AccordionTrigger className="text-white text-sm font-semibold tracking-[0.2em] font-body px-6 py-5 hover:bg-gray-900/50 hover:no-underline [&>svg]:hidden" onClick={() => { router.push("/engagement-rings"); setMobileOpen(false); }}>ENGAGEMENT RINGS</AccordionTrigger>
-											</AccordionItem>
-
-											{([
-												{ label: "WATCHES", key: "watches" as MenuKey },
-												{ label: "JEWELLERY", key: "jewellery" as MenuKey },
-												{ label: "ACCESSORIES", key: "accessories" as MenuKey },
-												{ label: "OTHER SERVICES", key: "services" as MenuKey },
-												{ label: "ABOUT US", key: "contact" as MenuKey },
-											] as const).map((section) => (
-												<AccordionItem key={section.key} value={section.key} className="border-b border-gray-900">
-													<AccordionTrigger className="text-white text-sm font-semibold tracking-[0.2em] font-body px-6 py-5 hover:bg-gray-900/50 hover:no-underline [&>svg]:text-gray-400">{section.label}</AccordionTrigger>
-													<AccordionContent>
-														{getMenuItems(section.key).map((item) => {
-															const isExternal = "external" in item && item.external;
-															if (isExternal) {
-																return (
-																	<SheetClose key={item.name} asChild>
-																		<a href={item.link} target="_blank" rel="noopener noreferrer" className="block px-10 py-3 text-gray-400 text-sm tracking-wide hover:text-white hover:bg-gray-900/30 transition-colors">{item.name}</a>
-																	</SheetClose>
-																);
-															}
-															return (
-																<SheetClose key={item.name} asChild>
-																	<Link href={item.link} className="block px-10 py-3 text-gray-400 text-sm tracking-wide hover:text-white hover:bg-gray-900/30 transition-colors">{item.name}</Link>
-																</SheetClose>
-															);
-														})}
-													</AccordionContent>
-												</AccordionItem>
-											))}
-										</Accordion>
-									</div>
-
-									{/* Bottom: Login/Profile */}
-									<div className="px-6 py-8 mt-4 flex flex-col gap-3">
-										{user ? (
-											<>
-												<div className="flex items-center gap-3 mb-4">
-													<div className="w-10 h-10 rounded-full bg-gradient-to-br from-white to-gray-400 flex items-center justify-center shrink-0">
-														<User size={20} className="text-black" />
-													</div>
-													<p className="text-white text-sm truncate">{user.email}</p>
-												</div>
-												<SheetClose asChild>
-													<Link href="/profile" className="w-full py-3 border border-white text-white text-sm font-semibold tracking-[0.2em] text-center hover:bg-white hover:text-black transition-colors block">MY PROFILE</Link>
-												</SheetClose>
-												<SheetClose asChild>
-													<Link href="/orders" className="w-full py-3 border border-gray-800 text-gray-300 text-sm font-semibold tracking-[0.2em] text-center hover:bg-gray-900 transition-colors block">MY ORDERS</Link>
-												</SheetClose>
-											</>
-										) : (
-											<SheetClose asChild>
-												<Link href="/login" className="w-full py-3 border border-white text-white text-sm font-semibold tracking-[0.2em] text-center hover:bg-white hover:text-black transition-colors block">LOGIN</Link>
-											</SheetClose>
-										)}
-									</div>
-								</div>
-							</SheetContent>
-						</Sheet>
-
-						{/* Mobile right icons */}
-						<div className="relative flex items-center gap-10">
-							{user ? (
-								<div className="relative shrink-0">
+								<div className="relative shrink-0 group hidden xl:block">
 									<button
 										type="button"
-										onClick={() => setMobileUserMenuOpen((open) => !open)}
-										className="text-white shrink-0"
+										className="text-white hover:text-gray-300 transition-colors focus:outline-none"
 										aria-label="Account"
-										aria-expanded={mobileUserMenuOpen}
 									>
 										<User size={18} strokeWidth={2} />
 									</button>
-									<div className={`absolute right-0 top-full mt-3 w-48 bg-black border border-white/20 rounded-lg shadow-2xl transition-all duration-200 ${mobileUserMenuOpen ? "visible opacity-100 pointer-events-auto" : "invisible opacity-0 pointer-events-none"}`}>
-										<div className="px-4 py-3 border-b border-gray-800">
-											<p className="text-white text-xs truncate">{user.email}</p>
-										</div>
-										<div className="py-2">
-											<button
-												type="button"
-												onClick={() => {
-													setMobileUserMenuOpen(false);
-													router.push("/profile");
-												}}
-												className="w-full text-left px-4 py-2 text-white hover:bg-white/10 transition-colors"
-											>
-												My Profile
-											</button>
-											<button
-												type="button"
-												onClick={() => {
-													setMobileUserMenuOpen(false);
-													router.push("/orders");
-												}}
-												className="w-full text-left px-4 py-2 text-white hover:bg-white/10 transition-colors"
-											>
-												My Orders
-											</button>
+									<div className="absolute right-0 top-full pt-2 w-56 z-50 invisible opacity-0 pointer-events-none group-hover:visible group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200">
+										<div className="bg-black border border-white/30 rounded-lg shadow-2xl">
+											<div className="p-4 border-b border-gray-800 flex items-center gap-3">
+												<div className="w-10 h-10 rounded-full bg-gradient-to-br from-white to-gray-400 flex items-center justify-center overflow-hidden shrink-0">
+													<User size={20} className="text-black" />
+												</div>
+												<div className="flex-1 min-w-0">
+													<p className="text-white font-medium truncate">{user.email}</p>
+												</div>
+											</div>
+											<div className="py-2">
+												<button onClick={() => router.push("/profile")} className="w-full text-left px-4 py-2 text-white hover:bg-white/10 transition-colors">My Profile</button>
+												<button onClick={() => router.push("/orders")} className="w-full text-left px-4 py-2 text-white hover:bg-white/10 transition-colors">My Orders</button>
+											</div>
 										</div>
 									</div>
 								</div>
 							) : (
-								<Link href="/login" className="text-white shrink-0">
+								<Link href="/login" className="hidden xl:block text-white hover:text-gray-300 transition-colors shrink-0" aria-label="Login">
 									<User size={18} strokeWidth={2} />
 								</Link>
 							)}
-							<Link href="/checkout" className="relative text-white shrink-0">
-								<ShoppingBag size={18} strokeWidth={2} />
+							{/* Cart icon */}
+							<Link href="/checkout" className="relative group shrink-0">
+								<ShoppingBag size={22} strokeWidth={2} className="xl:size-[18px] text-white group-hover:text-gray-300 transition-colors" />
 								{cartCount > 0 && <Badge className="absolute -top-3 -right-3 bg-white text-black text-[9px] font-bold w-4 h-4 p-0 flex items-center justify-center hover:bg-white">{cartCount}</Badge>}
 							</Link>
-							<button type="button" className="p-0! m-0! border-0! bg-transparent! outline-none! appearance-none! leading-none! text-white shrink-0 cursor-pointer" aria-label="Search">
+							{/* Search icon - desktop only */}
+							<button type="button" className="hidden xl:block text-white hover:text-gray-300 transition-colors focus:outline-none shrink-0 cursor-pointer" aria-label="Search">
 								<Search size={18} strokeWidth={2} />
 							</button>
 						</div>
