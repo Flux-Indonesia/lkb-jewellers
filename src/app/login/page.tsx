@@ -4,6 +4,7 @@ import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Eye, EyeOff, Mail, Lock, ArrowRight } from "lucide-react";
+import { toast } from "sonner";
 import { createClient } from "@/lib/supabase";
 
 function LoginPageContent() {
@@ -30,13 +31,16 @@ function LoginPageContent() {
       });
 
       if (!error) {
+        toast.success("Welcome back!");
         router.refresh();
         router.push(redirect);
       } else {
+        toast.error(error.message || "Invalid credentials");
         setError(error.message || "Invalid credentials");
         setLoading(false);
       }
     } catch {
+      toast.error("Something went wrong. Please try again.");
       setError("Something went wrong. Please try again.");
       setLoading(false);
     }

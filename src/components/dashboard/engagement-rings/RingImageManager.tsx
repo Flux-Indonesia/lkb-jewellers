@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react"
 import Image from "next/image"
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -254,9 +255,11 @@ export default function RingImageManager({ slug, name }: RingImageManagerProps) 
         const err = await res.json().catch(() => ({}))
         throw new Error(err.error ?? `HTTP ${res.status}`)
       }
+      toast.success("Preferences saved!")
       setFeedback((prev) => ({ ...prev, [color]: "saved" }))
       setTimeout(() => setFeedback((prev) => ({ ...prev, [color]: null })), 2500)
     } catch (err) {
+      toast.error("Failed to save preferences")
       setFeedback((prev) => ({ ...prev, [color]: "error" }))
       setTimeout(() => setFeedback((prev) => ({ ...prev, [color]: null })), 3000)
       console.error("Save prefs error:", err)
@@ -268,7 +271,7 @@ export default function RingImageManager({ slug, name }: RingImageManagerProps) 
   async function deleteImage(url: string) {
     const path = extractStoragePath(url)
     if (!path) {
-      alert("Unable to determine file path.")
+      toast.error("Unable to determine file path.")
       return
     }
 
@@ -296,7 +299,7 @@ export default function RingImageManager({ slug, name }: RingImageManagerProps) 
       }))
     } catch (err) {
       console.error("Delete error:", err)
-      alert(`Delete failed: ${err instanceof Error ? err.message : String(err)}`)
+      toast.error(`Delete failed: ${err instanceof Error ? err.message : String(err)}`)
     } finally {
       setDeletingUrl(null)
     }

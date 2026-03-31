@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { MapPin } from "lucide-react";
+import { toast } from "sonner";
 import { siteConfig } from "@/data/products";
 
 export default function Footer() {
@@ -28,10 +29,12 @@ export default function Footer() {
         body: JSON.stringify({ email: newsletterEmail.trim() }),
       });
       if (!res.ok) throw new Error("Failed to subscribe");
+      toast.success("Subscribed to newsletter!");
       setNewsletterStatus("success");
       setNewsletterEmail("");
       setTimeout(() => setNewsletterStatus("idle"), 4000);
     } catch {
+      toast.error("Failed to subscribe. Please try again.");
       setNewsletterStatus("error");
       setTimeout(() => setNewsletterStatus("idle"), 4000);
     }

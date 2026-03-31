@@ -138,9 +138,11 @@ export async function POST(req: NextRequest) {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items,
+      billing_address_collection: "required",
       shipping_address_collection: {
         allowed_countries: ["GB", "US", "AE", "SA", "QA", "KW", "BH", "OM"],
       },
+      phone_number_collection: { enabled: true },
       metadata: {
         order_items: JSON.stringify(orderItems),
       },

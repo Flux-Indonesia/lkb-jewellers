@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useCallback, useEffect, useRef, ReactNode } from "react";
 import { useAuth } from "@/context/auth-context";
+import { toast } from "sonner";
 
 interface CartItem {
   id: string;
@@ -170,17 +171,26 @@ export function CartProvider({ children }: { children: ReactNode }) {
         ];
       });
       setIsCartOpen(true);
+      toast.success(`${product.name} added to cart`);
     },
     []
   );
 
   const removeFromCart = useCallback((productId: string) => {
-    setItems((prev) => prev.filter((item) => item.id !== productId));
+    setItems((prev) => {
+      const item = prev.find((i) => i.id === productId);
+      if (item) toast.success(`${item.name} removed from cart`);
+      return prev.filter((i) => i.id !== productId);
+    });
   }, []);
 
   const updateQuantity = useCallback((productId: string, qty: number) => {
     if (qty <= 0) {
-      setItems((prev) => prev.filter((item) => item.id !== productId));
+      setItems((prev) => {
+        const item = prev.find((i) => i.id === productId);
+        if (item) toast.success(`${item.name} removed from cart`);
+        return prev.filter((i) => i.id !== productId);
+      });
       return;
     }
 
@@ -193,6 +203,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const clearCart = useCallback(() => {
     setItems([]);
+    toast.success("Cart cleared");
 
     if (typeof window !== "undefined" && !user) {
       localStorage.removeItem(CART_KEY);

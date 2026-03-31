@@ -34,7 +34,7 @@ function formatCategory(category: string) {
 export default function ProductPage() {
   const params = useParams();
   const router = useRouter();
-  const { addToCart, setIsCartOpen } = useCart();
+  const { addToCart } = useCart();
   const id = (params?.id ?? "") as string;
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
@@ -409,15 +409,15 @@ export default function ProductPage() {
       {cartConfirm && product && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4" onClick={() => setCartConfirm(false)}>
           <div
-            className="bg-gradient-to-br from-gray-900 via-black to-gray-900 border-2 border-[#D4AF37] rounded-lg max-w-md w-full p-8 relative"
+            className="bg-gradient-to-br from-gray-900 via-black to-gray-900 border-2 border-white/30 rounded-lg max-w-md w-full p-8 relative"
             onClick={(e) => e.stopPropagation()}
           >
             <button onClick={() => setCartConfirm(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
               <X size={20} />
             </button>
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-[#D4AF37]/20 rounded-full mb-6 animate-bounce">
-                <BadgeCheck className="text-[#D4AF37]" size={40} />
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 rounded-full mb-6 animate-bounce">
+                <BadgeCheck className="text-white" size={40} />
               </div>
               <h3 className="text-3xl text-white mb-3 font-heading">Added to Cart!</h3>
               <div className="bg-gray-100 border border-gray-200 rounded-lg p-4 mb-6">
@@ -425,20 +425,20 @@ export default function ProductPage() {
                   <Image src={product.image || PLACEHOLDER_IMG} alt={product.name} width={64} height={64} className="w-16 h-16 object-cover rounded" />
                   <div className="flex-1 text-left">
                     <p className="text-gray-900 font-medium text-sm">{product.name}</p>
-                    <p className="text-[#D4AF37] text-sm mt-1">£{product.price.toLocaleString()}</p>
+                    <p className="text-gray-700 text-sm mt-1">£{product.price.toLocaleString()}</p>
                   </div>
                 </div>
               </div>
               <div className="space-y-3">
                 <button
-                  onClick={() => { setCartConfirm(false); setIsCartOpen(true); }}
-                  className="w-full bg-[#D4AF37] text-black py-4 font-bold tracking-widest hover:bg-[#D4AF37]/90 transition-colors rounded"
+                  onClick={() => { setCartConfirm(false); router.push('/checkout'); }}
+                  className="w-full bg-white text-black py-4 font-bold tracking-widest hover:bg-white/90 transition-colors rounded"
                 >
                   VIEW CART & CHECKOUT
                 </button>
                 <button
                   onClick={() => setCartConfirm(false)}
-                  className="w-full border-2 border-gray-700 text-white py-4 font-bold tracking-widest hover:border-[#D4AF37] hover:text-[#D4AF37] transition-colors rounded"
+                  className="w-full border-2 border-gray-700 text-white py-4 font-bold tracking-widest hover:border-white hover:text-white transition-colors rounded"
                 >
                   CONTINUE SHOPPING
                 </button>

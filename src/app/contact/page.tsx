@@ -35,6 +35,7 @@ export default function ContactPage() {
 				preferred_contact_method: "email",
 				status: "new",
 			});
+			toast.success("Message sent successfully!");
 			setSubmitted(true);
 			setFormData({ firstName: "", lastName: "", email: "", phone: "", interest: "", message: "" });
 		} catch (err) {

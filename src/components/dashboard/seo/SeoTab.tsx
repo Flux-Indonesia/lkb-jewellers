@@ -19,6 +19,7 @@ import {
   AlertTriangle,
   SearchX,
 } from "lucide-react"
+import { toast } from "sonner"
 import { Card, CardContent } from "@/components/ui/card"
 import {
   Table,
@@ -265,8 +266,10 @@ function PrimarySeoEditor() {
       })
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
       setDirty(false)
+      toast.success("SEO settings saved!")
       setSaveResult({ type: "success", text: "Saved!" })
     } catch {
+      toast.error("Failed to save SEO settings")
       setSaveResult({ type: "error", text: "Failed to save" })
     } finally {
       setSaving(false)
@@ -629,6 +632,7 @@ export default function SeoTab() {
         next.delete(id)
         return next
       })
+      toast.success("SEO saved!")
       setSaveResults((prev) => ({
         ...prev,
         [id]: { type: "success", text: "Saved" },
@@ -644,6 +648,7 @@ export default function SeoTab() {
         )
       }
     } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Save failed")
       setSaveResults((prev) => ({
         ...prev,
         [id]: {
@@ -711,12 +716,13 @@ export default function SeoTab() {
         ...prev,
         [id]: [...(prev[id] ?? []), json.data as FaqItem],
       }))
+      toast.success("FAQ added!")
       setNewFaqData((prev) => ({
         ...prev,
         [id]: { question: "", answer: "" },
       }))
     } catch {
-      // silent — user can retry
+      toast.error("Failed to add FAQ")
     } finally {
       setAddingFaq((prev) => {
         const next = new Set(prev)
@@ -734,12 +740,13 @@ export default function SeoTab() {
         { method: "DELETE" }
       )
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      toast.success("FAQ deleted!")
       setFaqs((prev) => ({
         ...prev,
         [itemId]: (prev[itemId] ?? []).filter((f) => f.id !== faqId),
       }))
     } catch {
-      // silent
+      toast.error("Failed to delete FAQ")
     } finally {
       setDeletingFaqIds((prev) => {
         const next = new Set(prev)

@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Loader2, Save, X } from "lucide-react"
+import { toast } from "sonner"
 
 const SHAPES = ["round", "oval", "emerald", "radiant", "pear", "cushion", "elongated_cushion", "elongated_hexagon", "marquise", "princess", "asscher"] as const
 const SETTING_STYLES = ["trilogy", "solitaire", "halo", "toi_et_moi"] as const
@@ -128,9 +129,11 @@ export default function RingEditForm({ slug, onClose }: { slug: string; onClose:
 				throw new Error(json.error || `HTTP ${res.status}`)
 			}
 
+			toast.success("Ring saved successfully!")
 			setSuccess(true)
 			setTimeout(() => setSuccess(false), 3000)
 		} catch (err: unknown) {
+			toast.error(err instanceof Error ? err.message : "Failed to save")
 			setError(err instanceof Error ? err.message : "Failed to save")
 		} finally {
 			setSaving(false)

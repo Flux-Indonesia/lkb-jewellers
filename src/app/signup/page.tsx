@@ -4,6 +4,7 @@ import { Suspense, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Eye, EyeOff, Mail, Lock, User, ArrowRight, CheckCircle } from "lucide-react";
+import { toast } from "sonner";
 
 function SignupPageContent() {
   const searchParams = useSearchParams();
@@ -37,12 +38,15 @@ function SignupPageContent() {
       const data = await res.json();
 
       if (res.ok) {
+        toast.success("Account created successfully!");
         setSuccess(true);
       } else {
+        toast.error(data.error || "Failed to create account");
         setError(data.error || "Failed to create account");
         setLoading(false);
       }
     } catch {
+      toast.error("Something went wrong. Please try again.");
       setError("Something went wrong. Please try again.");
       setLoading(false);
     }

@@ -41,6 +41,7 @@ export function EnquiryModal({ isOpen, onClose, product }: { isOpen: boolean; on
         }),
       });
       if (!res.ok) throw new Error("Failed to submit");
+      toast.success("Enquiry submitted successfully!");
       setSubmitted(true);
     } catch {
       toast.error("Failed to submit enquiry. Please try again.");

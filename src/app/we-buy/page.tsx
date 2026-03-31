@@ -78,6 +78,7 @@ export default function WeBuyPage() {
 				}),
 			});
 			if (!res.ok) throw new Error("Failed to submit");
+			toast.success("Submission sent successfully!");
 			setSubmitted(true);
 		} catch (err) {
 			console.error("Failed to submit:", err);

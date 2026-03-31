@@ -53,6 +53,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import { toast } from "sonner";
 
 type TabType = "add" | "watches" | "jewellery" | "merchandise" | "orders" | "contacts" | "sell" | "newsletter" | "engagement-rings" | "seo";
 
@@ -93,11 +94,6 @@ const defaultFormData: FormData = {
   dialColor: "",
   yearOfProduction: "",
 };
-
-interface Notification {
-  type: "success" | "error";
-  text: string;
-}
 
 // Auth Guard Component — uses admin cookie session
 function AdminLoginForm() {
@@ -455,7 +451,7 @@ function DashboardContent() {
   const [activeTab, setActiveTab] = useState<TabType>("add");
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [notification, setNotification] = useState<Notification | null>(null);
+
 
   // Form state
   const [formData, setFormData] = useState<FormData>(defaultFormData);
@@ -556,14 +552,12 @@ function DashboardContent() {
 
   const generateId = useCallback(() => {
     if (!formData.name.trim()) {
-      setNotification({ type: "error", text: "Please enter a product name first" });
-      setTimeout(() => setNotification(null), 3000);
+      toast.error("Please enter a product name first");
       return;
     }
     const id = formData.name.toLowerCase().replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-").trim();
     setFormData((prev) => ({ ...prev, id }));
-    setNotification({ type: "success", text: `Product ID generated: ${id}` });
-    setTimeout(() => setNotification(null), 3000);
+    toast.success(`Product ID generated: ${id}`);
   }, [formData.name]);
 
   const addImage = useCallback(() => {
@@ -603,12 +597,11 @@ function DashboardContent() {
           setFormData((prev) => ({ ...prev, images: [...prev.images, data.data.url], image: prev.image || data.data.url }));
         }
       }
-      setNotification({ type: "success", text: "Images uploaded successfully!" });
+      toast.success("Images uploaded successfully!");
     } catch {
-      setNotification({ type: "error", text: "Failed to upload images" });
+      toast.error("Failed to upload images");
     } finally {
       setUploadingImages(false);
-      setTimeout(() => setNotification(null), 3000);
     }
   }, []);
 
@@ -643,19 +636,18 @@ function DashboardContent() {
 
       if (isEditMode && editingProduct) {
         await apiUpdateProduct(editingProduct.id, productData);
-        setNotification({ type: "success", text: "Product updated successfully!" });
+        toast.success("Product updated successfully!");
         closeEditMode();
       } else {
         await apiCreateProduct(productData);
-        setNotification({ type: "success", text: "Product created successfully!" });
+        toast.success("Product created successfully!");
         setFormData(defaultFormData);
       }
       await refreshProducts();
     } catch (err) {
-      setNotification({ type: "error", text: `Failed to save product: ${err instanceof Error ? err.message : "Unknown error"}` });
+      toast.error(`Failed to save product: ${err instanceof Error ? err.message : "Unknown error"}`);
     } finally {
       setSaving(false);
-      setTimeout(() => setNotification(null), 4000);
     }
   }, [formData, isEditMode, editingProduct, closeEditMode, refreshProducts]);
 
@@ -827,14 +819,6 @@ function DashboardContent() {
             </div>
           )}
           </div>
-
-          {/* Notification */}
-          {notification && (
-            <div className={`mb-6 p-4 rounded-lg flex items-start gap-3 border ${notification.type === "success" ? "bg-green-900/20 border-green-800 text-green-400" : "bg-red-900/20 border-red-800 text-red-400"}`}>
-              <AlertTriangle size={20} />
-              <p>{notification.text}</p>
-            </div>
-          )}
 
           {/* Tab Content */}
           {activeTab === "add" && (
@@ -1031,9 +1015,8 @@ function DashboardContent() {
                                 try {
                                   await updateOrder(order.id, { status: e.target.value as Order["status"] });
                                   await refreshOrders();
-                                  setNotification({ type: "success", text: "Order status updated" });
-                                } catch { setNotification({ type: "error", text: "Failed to update order" }); }
-                                setTimeout(() => setNotification(null), 3000);
+                                  toast.success("Order status updated");
+                                } catch { toast.error("Failed to update order"); }
                               }} className="bg-[#0a0a0a] border border-gray-800 text-white rounded px-3 py-1.5 text-sm">
                                 <option value="pending">Pending</option>
                                 <option value="paid">Paid</option>
@@ -1047,9 +1030,8 @@ function DashboardContent() {
                             <td className="px-6 py-4">
                               <Button onClick={async () => {
                                 if (!confirm("Delete this order?")) return;
-                                try { await deleteOrder(order.id); await refreshOrders(); setNotification({ type: "success", text: "Order deleted" }); }
-                                catch { setNotification({ type: "error", text: "Failed to delete order" }); }
-                                setTimeout(() => setNotification(null), 3000);
+                                try { await deleteOrder(order.id); await refreshOrders(); toast.success("Order deleted"); }
+                                catch { toast.error("Failed to delete order"); }
                               }} className="text-red-400 hover:text-red-300 p-2 h-auto"><Trash2 size={16} /></Button>
                             </td>
                           </tr>
@@ -1134,9 +1116,8 @@ function DashboardContent() {
                             try {
                               await updateContact(contact.id, { status: e.target.value as Contact["status"] });
                               await refreshContacts();
-                              setNotification({ type: "success", text: "Status updated" });
-                            } catch { setNotification({ type: "error", text: "Failed to update" }); }
-                            setTimeout(() => setNotification(null), 3000);
+                              toast.success("Status updated");
+                            } catch { toast.error("Failed to update"); }
                           }} className="bg-[#0a0a0a] border border-gray-800 text-white rounded px-3 py-1.5 text-sm">
                             <option value="new">New</option>
                             <option value="read">Read</option>
@@ -1145,9 +1126,8 @@ function DashboardContent() {
                           </select>
                           <Button onClick={async () => {
                             if (!confirm("Delete this inquiry?")) return;
-                            try { await deleteContact(contact.id); await refreshContacts(); setNotification({ type: "success", text: "Inquiry deleted" }); }
-                            catch { setNotification({ type: "error", text: "Failed to delete" }); }
-                            setTimeout(() => setNotification(null), 3000);
+                            try { await deleteContact(contact.id); await refreshContacts(); toast.success("Inquiry deleted"); }
+                            catch { toast.error("Failed to delete"); }
                           }} className="text-red-400 hover:text-red-300 p-2 h-auto border border-red-800/30 rounded"><Trash2 size={14} /></Button>
                         </div>
                       </div>
@@ -1249,9 +1229,8 @@ function DashboardContent() {
                             try {
                               await updateSellSubmission(sub.id, { status: e.target.value as SellSubmission["status"] });
                               await refreshSellSubmissions();
-                              setNotification({ type: "success", text: "Status updated" });
-                            } catch { setNotification({ type: "error", text: "Failed to update" }); }
-                            setTimeout(() => setNotification(null), 3000);
+                              toast.success("Status updated");
+                            } catch { toast.error("Failed to update"); }
                           }} className="bg-[#0a0a0a] border border-gray-800 text-white rounded px-3 py-1.5 text-sm">
                             <option value="new">New</option>
                             <option value="reviewing">Reviewing</option>
@@ -1266,13 +1245,13 @@ function DashboardContent() {
                             try {
                               await updateSellSubmission(sub.id, { offer_amount: val });
                               await refreshSellSubmissions();
-                            } catch { setNotification({ type: "error", text: "Failed to update offer" }); setTimeout(() => setNotification(null), 3000); }
+                              toast.success("Offer updated");
+                            } catch { toast.error("Failed to update offer"); }
                           }} className="bg-[#0a0a0a] border border-gray-800 text-white rounded px-3 py-1.5 text-sm w-28 h-auto" />
                           <Button onClick={async () => {
                             if (!confirm("Delete this submission?")) return;
-                            try { await deleteSellSubmission(sub.id); await refreshSellSubmissions(); setNotification({ type: "success", text: "Submission deleted" }); }
-                            catch { setNotification({ type: "error", text: "Failed to delete" }); }
-                            setTimeout(() => setNotification(null), 3000);
+                            try { await deleteSellSubmission(sub.id); await refreshSellSubmissions(); toast.success("Submission deleted"); }
+                            catch { toast.error("Failed to delete"); }
                           }} className="text-red-400 hover:text-red-300 p-2 h-auto border border-red-800/30 rounded"><Trash2 size={14} /></Button>
                         </div>
                       </div>
@@ -1347,9 +1326,8 @@ function DashboardContent() {
                             <td className="px-6 py-4">
                               <Button onClick={async () => {
                                 if (!confirm(`Remove ${sub.email}?`)) return;
-                                try { await removeSubscriber(sub.id); await refreshNewsletters(); setNotification({ type: "success", text: "Subscriber removed" }); }
-                                catch { setNotification({ type: "error", text: "Failed to remove" }); }
-                                setTimeout(() => setNotification(null), 3000);
+                                try { await removeSubscriber(sub.id); await refreshNewsletters(); toast.success("Subscriber removed"); }
+                                catch { toast.error("Failed to remove"); }
                               }} className="text-red-400 hover:text-red-300 p-2 h-auto"><Trash2 size={14} /></Button>
                             </td>
                           </tr>
@@ -1391,12 +1369,6 @@ function DashboardContent() {
             </Button>
           </DialogHeader>
           <div className="p-6 max-h-[calc(100vh-200px)] overflow-y-auto">
-            {notification && (
-              <div className={`mb-6 p-4 rounded-lg flex items-start gap-3 border ${notification.type === "success" ? "bg-green-900/20 border-green-800 text-green-400" : "bg-red-900/20 border-red-800 text-red-400"}`}>
-                <AlertTriangle size={20} />
-                <p>{notification.text}</p>
-              </div>
-            )}
             <ProductForm formData={formData} setFormData={setFormData} imageInput={imageInput} setImageInput={setImageInput}
               uploadingImages={uploadingImages} loading={saving} handleSubmit={handleSubmit} handleInputChange={handleInputChange}
               handleImageUpload={handleImageUpload} addImage={addImage} removeImage={removeImage} moveImage={moveImage}
@@ -1436,12 +1408,11 @@ function DashboardContent() {
                 setDeleteModal({ show: false, productId: "", productName: "" });
                 try {
                   await apiDeleteProduct(pid);
-                  setNotification({ type: "success", text: "Product deleted successfully!" });
+                  toast.success("Product deleted successfully!");
                   await refreshProducts();
                 } catch (err) {
-                  setNotification({ type: "error", text: `Failed to delete: ${err instanceof Error ? err.message : "Unknown error"}` });
+                  toast.error(`Failed to delete: ${err instanceof Error ? err.message : "Unknown error"}`);
                 }
-                setTimeout(() => setNotification(null), 4000);
               }}
                 className="flex-1 px-5 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg font-bold hover:from-red-700 hover:to-red-800 transition-all flex items-center justify-center gap-2 hover:scale-105 h-auto">
                 <Trash2 size={18} /> Delete Forever

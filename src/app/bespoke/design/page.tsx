@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { toast } from "sonner";
 
 interface LeadData {
   name: string;
@@ -159,14 +160,16 @@ export default function BespokeDesignPage() {
       };
 
       if (!res.ok || data.error) {
-        setErrors({
-          form: data.error ?? "Something went wrong. Please try again.",
-        });
+        const msg = data.error ?? "Something went wrong. Please try again.";
+        toast.error(msg);
+        setErrors({ form: msg });
         return;
       }
 
+      toast.success("Details submitted successfully!");
       setStep(2);
     } catch {
+      toast.error("Network error. Please check your connection and try again.");
       setErrors({
         form: "Network error. Please check your connection and try again.",
       });
@@ -205,23 +208,29 @@ export default function BespokeDesignPage() {
       const data = await res.json();
 
       if (!res.ok || data.error) {
-        setGenerateError(data.error || "Failed to generate design");
+        const msg = data.error || "Failed to generate design";
+        toast.error(msg);
+        setGenerateError(msg);
         setIsGenerating(false);
         setShowResult(true);
         return;
       }
 
       if (data.refused) {
-        setGenerateError(data.description || "This request is not related to jewellery design.");
+        const msg = data.description || "This request is not related to jewellery design.";
+        toast.error(msg);
+        setGenerateError(msg);
         setIsGenerating(false);
         setShowResult(true);
         return;
       }
 
+      toast.success("Design generated successfully!");
       setGeneratedImage(data.image);
       setIsGenerating(false);
       setShowResult(true);
     } catch {
+      toast.error("Network error. Please try again.");
       setGenerateError("Network error. Please try again.");
       setIsGenerating(false);
       setShowResult(true);
