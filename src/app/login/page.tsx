@@ -70,7 +70,7 @@ function LoginPageContent() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email Address"
-              className="w-full bg-transparent border border-gray-800 text-white pl-12 pr-4 py-4 text-sm tracking-wider focus:outline-none focus:border-white transition-colors placeholder:text-gray-600"
+              className="w-full bg-transparent border border-gray-800 text-white pl-14 pr-4 py-4 text-sm tracking-wider focus:outline-none focus:border-white transition-colors placeholder:text-gray-600"
               disabled={loading}
               autoFocus
             />
@@ -84,7 +84,7 @@ function LoginPageContent() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
-              className="w-full bg-transparent border border-gray-800 text-white pl-12 pr-12 py-4 text-sm tracking-wider focus:outline-none focus:border-white transition-colors placeholder:text-gray-600"
+              className="w-full bg-transparent border border-gray-800 text-white pl-14 pr-12 py-4 text-sm tracking-wider focus:outline-none focus:border-white transition-colors placeholder:text-gray-600"
               disabled={loading}
             />
             <button

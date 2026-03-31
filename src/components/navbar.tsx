@@ -56,6 +56,7 @@ export default function Navbar() {
 	const [activeMenu, setActiveMenu] = useState<MenuKey | null>(null);
 	const [hoveredImage, setHoveredImage] = useState<string | null>(null);
 	const [mobileOpen, setMobileOpen] = useState(false);
+	const [mobileUserMenuOpen, setMobileUserMenuOpen] = useState(false);
 	const { cartCount } = useCart();
 	const { user } = useAuth();
 
@@ -255,11 +256,46 @@ export default function Navbar() {
 						</Sheet>
 
 						{/* Mobile right icons */}
-						<div className="flex items-center gap-10">
+						<div className="relative flex items-center gap-10">
 							{user ? (
-								<Link href="/profile" className="text-white shrink-0">
-									<User size={18} strokeWidth={2} />
-								</Link>
+								<div className="relative shrink-0">
+									<button
+										type="button"
+										onClick={() => setMobileUserMenuOpen((open) => !open)}
+										className="text-white shrink-0"
+										aria-label="Account"
+										aria-expanded={mobileUserMenuOpen}
+									>
+										<User size={18} strokeWidth={2} />
+									</button>
+									<div className={`absolute right-0 top-full mt-3 w-48 bg-black border border-white/20 rounded-lg shadow-2xl transition-all duration-200 ${mobileUserMenuOpen ? "visible opacity-100 pointer-events-auto" : "invisible opacity-0 pointer-events-none"}`}>
+										<div className="px-4 py-3 border-b border-gray-800">
+											<p className="text-white text-xs truncate">{user.email}</p>
+										</div>
+										<div className="py-2">
+											<button
+												type="button"
+												onClick={() => {
+													setMobileUserMenuOpen(false);
+													router.push("/profile");
+												}}
+												className="w-full text-left px-4 py-2 text-white hover:bg-white/10 transition-colors"
+											>
+												My Profile
+											</button>
+											<button
+												type="button"
+												onClick={() => {
+													setMobileUserMenuOpen(false);
+													router.push("/orders");
+												}}
+												className="w-full text-left px-4 py-2 text-white hover:bg-white/10 transition-colors"
+											>
+												My Orders
+											</button>
+										</div>
+									</div>
+								</div>
 							) : (
 								<Link href="/login" className="text-white shrink-0">
 									<User size={18} strokeWidth={2} />

@@ -99,7 +99,7 @@ function SignupPageContent() {
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 placeholder="First Name"
-                className="w-full bg-transparent border border-gray-800 text-white pl-12 pr-4 py-4 text-sm tracking-wider focus:outline-none focus:border-white transition-colors placeholder:text-gray-600"
+                className="w-full bg-transparent border border-gray-800 text-white pl-14 pr-4 py-4 text-sm tracking-wider focus:outline-none focus:border-white transition-colors placeholder:text-gray-600"
                 disabled={loading}
                 autoFocus
               />
@@ -124,7 +124,7 @@ function SignupPageContent() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email Address"
-              className="w-full bg-transparent border border-gray-800 text-white pl-12 pr-4 py-4 text-sm tracking-wider focus:outline-none focus:border-white transition-colors placeholder:text-gray-600"
+              className="w-full bg-transparent border border-gray-800 text-white pl-14 pr-4 py-4 text-sm tracking-wider focus:outline-none focus:border-white transition-colors placeholder:text-gray-600"
               disabled={loading}
               required
             />
@@ -138,7 +138,7 @@ function SignupPageContent() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password (min. 6 characters)"
-              className="w-full bg-transparent border border-gray-800 text-white pl-12 pr-12 py-4 text-sm tracking-wider focus:outline-none focus:border-white transition-colors placeholder:text-gray-600"
+              className="w-full bg-transparent border border-gray-800 text-white pl-14 pr-12 py-4 text-sm tracking-wider focus:outline-none focus:border-white transition-colors placeholder:text-gray-600"
               disabled={loading}
               required
               minLength={6}

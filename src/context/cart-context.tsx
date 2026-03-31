@@ -1,6 +1,7 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, useEffect, ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, useEffect, useRef, ReactNode } from "react";
+import { useAuth } from "@/context/auth-context";
 
 interface CartItem {
   id: string;
@@ -24,8 +25,9 @@ interface CartContextType {
 
 const CART_KEY = "lkb-cart";
 
-function loadCart(): CartItem[] {
+function loadLocalCart(): CartItem[] {
   if (typeof window === "undefined") return [];
+
   try {
     const stored = localStorage.getItem(CART_KEY);
     return stored ? JSON.parse(stored) : [];
@@ -34,28 +36,120 @@ function loadCart(): CartItem[] {
   }
 }
 
+function mergeCartItems(primary: CartItem[], secondary: CartItem[]): CartItem[] {
+  const merged = new Map<string, CartItem>();
+
+  for (const item of [...primary, ...secondary]) {
+    const existing = merged.get(item.id);
+
+    if (existing) {
+      merged.set(item.id, {
+        ...existing,
+        quantity: existing.quantity + item.quantity,
+      });
+      continue;
+    }
+
+    merged.set(item.id, { ...item });
+  }
+
+  return Array.from(merged.values());
+}
+
 const CartContext = createContext<CartContextType | null>(null);
 
 export function CartProvider({ children }: { children: ReactNode }) {
+  const { user, userLoading } = useAuth();
   const [items, setItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [ready, setReady] = useState(false);
+  const skipNextSyncRef = useRef(false);
 
-  // Load cart from localStorage on mount
   useEffect(() => {
-    setItems(loadCart());
-  }, []);
+    if (userLoading) return;
 
-  // Save cart to localStorage on change
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem(CART_KEY, JSON.stringify(items));
+    let cancelled = false;
+
+    async function hydrateCart() {
+      if (!user) {
+        skipNextSyncRef.current = true;
+        setItems(loadLocalCart());
+        setReady(true);
+        return;
+      }
+
+      try {
+        const guestItems = loadLocalCart();
+        const res = await fetch("/api/cart", { cache: "no-store" });
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || "Failed to load cart");
+        }
+
+        const serverItems = Array.isArray(data.items) ? data.items : [];
+        const mergedItems = mergeCartItems(serverItems, guestItems);
+
+        if (!cancelled) {
+          skipNextSyncRef.current = true;
+          setItems(mergedItems);
+          setReady(true);
+        }
+
+        if (guestItems.length > 0 || mergedItems.length !== serverItems.length) {
+          await fetch("/api/cart", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ items: mergedItems }),
+          });
+        }
+
+        if (typeof window !== "undefined") {
+          localStorage.removeItem(CART_KEY);
+        }
+      } catch {
+        if (!cancelled) {
+          skipNextSyncRef.current = true;
+          setItems([]);
+          setReady(true);
+        }
+      }
     }
-  }, [items]);
+
+    void hydrateCart();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [user, userLoading]);
+
+  useEffect(() => {
+    if (!ready || userLoading) return;
+
+    if (skipNextSyncRef.current) {
+      skipNextSyncRef.current = false;
+      return;
+    }
+
+    if (!user) {
+      if (typeof window !== "undefined") {
+        localStorage.setItem(CART_KEY, JSON.stringify(items));
+      }
+      return;
+    }
+
+    void fetch("/api/cart", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items }),
+    });
+  }, [items, ready, user, userLoading]);
 
   const addToCart = useCallback(
     (product: { id: string; name: string; price: number; image: string }, qty: number = 1) => {
       setItems((prev) => {
         const existing = prev.find((item) => item.id === product.id);
+
         if (existing) {
           return prev.map((item) =>
             item.id === product.id
@@ -63,6 +157,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
               : item
           );
         }
+
         return [
           ...prev,
           {
@@ -88,6 +183,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setItems((prev) => prev.filter((item) => item.id !== productId));
       return;
     }
+
     setItems((prev) =>
       prev.map((item) =>
         item.id === productId ? { ...item, quantity: qty } : item
@@ -97,10 +193,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const clearCart = useCallback(() => {
     setItems([]);
-    if (typeof window !== "undefined") {
+
+    if (typeof window !== "undefined" && !user) {
       localStorage.removeItem(CART_KEY);
     }
-  }, []);
+  }, [user]);
 
   const cartCount = items.reduce((sum, item) => sum + item.quantity, 0);
   const cartTotal = items.reduce(
