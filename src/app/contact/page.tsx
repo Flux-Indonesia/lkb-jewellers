@@ -4,7 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import { Phone, Mail, MapPin, Clock, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
-import { createContact } from "@/lib/contacts";
 import ShowroomSection from "@/components/showroom-section";
 
 export default function ContactPage() {
@@ -25,16 +24,12 @@ export default function ContactPage() {
 		e.preventDefault();
 		setLoading(true);
 		try {
-			await createContact({
-				first_name: formData.firstName,
-				last_name: formData.lastName,
-				email: formData.email,
-				phone: formData.phone,
-				interest: formData.interest,
-				message: formData.message,
-				preferred_contact_method: "email",
-				status: "new",
+			const res = await fetch("/api/contact", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(formData),
 			});
+			if (!res.ok) throw new Error("Failed to submit");
 			toast.success("Message sent successfully!");
 			setSubmitted(true);
 			setFormData({ firstName: "", lastName: "", email: "", phone: "", interest: "", message: "" });

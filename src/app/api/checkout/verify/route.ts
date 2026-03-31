@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
+import { sendOrderConfirmation, notifyAdminOrder } from "@/lib/email";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2026-03-25.dahlia",
@@ -50,14 +51,19 @@ export async function GET(req: NextRequest) {
       const shipping = (session as any).shipping_details as { address?: { line1?: string; line2?: string; city?: string; state?: string; postal_code?: string; country?: string } } | undefined;
       const customer = session.customer_details;
 
+      const amount = (session.amount_total || 0) / 100;
+      const currency = session.currency || "gbp";
+      const customerName = customer?.name || "";
+      const customerEmail = customer?.email || "";
+
       await supabase.from("orders").insert({
         payment_intent_id: sessionId,
-        amount: (session.amount_total || 0) / 100,
-        currency: session.currency || "gbp",
+        amount,
+        currency,
         status: "paid",
-        customer_email: customer?.email || "",
-        customer_first_name: customer?.name?.split(" ")[0] || "",
-        customer_last_name: customer?.name?.split(" ").slice(1).join(" ") || "",
+        customer_email: customerEmail,
+        customer_first_name: customerName.split(" ")[0] || "",
+        customer_last_name: customerName.split(" ").slice(1).join(" ") || "",
         customer_phone: customer?.phone || "",
         address_line1: shipping?.address?.line1 || "",
         address_line2: shipping?.address?.line2 || "",
@@ -67,6 +73,14 @@ export async function GET(req: NextRequest) {
         country: shipping?.address?.country || "",
         items,
       });
+
+      // Send emails (non-blocking)
+      if (customerEmail) {
+        Promise.allSettled([
+          sendOrderConfirmation(customerEmail, customerName, sessionId, amount, currency, items),
+          notifyAdminOrder(customerName, customerEmail, amount, currency),
+        ]).catch((err) => console.error("Order email error:", err));
+      }
     }
 
     return NextResponse.json({

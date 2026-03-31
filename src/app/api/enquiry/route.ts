@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase-server";
+import { sendEnquiryConfirmation, notifyAdminEnquiry } from "@/lib/email";
 
 export async function POST(request: NextRequest) {
 	try {
@@ -50,6 +51,12 @@ export async function POST(request: NextRequest) {
 				.upsert([{ email: email.trim().toLowerCase(), name: fullName }], { onConflict: "email" })
 				.select();
 		}
+
+		// Send emails (non-blocking)
+		Promise.allSettled([
+			sendEnquiryConfirmation(email.trim(), fullName, productName || "a product", productPrice || 0),
+			notifyAdminEnquiry(fullName, email.trim(), productName || "Unknown", productPrice || 0),
+		]).catch((err) => console.error("Enquiry email error:", err));
 
 		return NextResponse.json({ success: true, data });
 	} catch {

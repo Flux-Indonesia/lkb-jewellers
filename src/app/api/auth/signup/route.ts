@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase-server";
+import { sendSignupWelcome } from "@/lib/email";
 
 export async function POST(req: NextRequest) {
   const { email, password, firstName, lastName } = await req.json();
@@ -40,6 +41,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
 
+    // Send welcome email (non-blocking)
+    sendSignupWelcome(email, firstName || "").catch((err) => console.error("Signup email error:", err));
+
     return NextResponse.json({ success: true, user: data.user });
   }
 
@@ -58,6 +62,9 @@ export async function POST(req: NextRequest) {
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
+
+  // Send welcome email (non-blocking)
+  sendSignupWelcome(email, firstName || "").catch((err) => console.error("Signup email error:", err));
 
   return NextResponse.json({ success: true, user: data.user });
 }
