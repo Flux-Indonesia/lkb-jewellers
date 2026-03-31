@@ -4,8 +4,10 @@ import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Eye, EyeOff, Mail, Lock, ArrowRight } from "lucide-react";
+import { createClient } from "@/lib/supabase";
 
 function LoginPageContent() {
+  const supabase = createClient();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -22,18 +24,16 @@ function LoginPageContent() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
 
-      const data = await res.json();
-
-      if (res.ok) {
+      if (!error) {
+        router.refresh();
         router.push(redirect);
       } else {
-        setError(data.error || "Invalid credentials");
+        setError(error.message || "Invalid credentials");
         setLoading(false);
       }
     } catch {

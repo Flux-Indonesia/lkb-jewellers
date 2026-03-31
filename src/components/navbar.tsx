@@ -125,7 +125,8 @@ export default function Navbar() {
 								<button className="text-white hover:text-white transition-colors focus:outline-none" aria-label="Account">
 									<User size={18} strokeWidth={2} />
 								</button>
-								<div className="absolute right-0 top-full mt-2 w-56 bg-black border border-white/30 rounded-lg shadow-2xl z-50 invisible opacity-0 group-hover:visible group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200">
+								<div className="absolute right-0 top-full pt-2 w-56 z-50 invisible opacity-0 pointer-events-none group-hover:visible group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200">
+									<div className="bg-black border border-white/30 rounded-lg shadow-2xl">
 									<div className="p-4 border-b border-gray-800 flex items-center gap-3">
 										<div className="w-10 h-10 rounded-full bg-gradient-to-br from-white to-gray-400 flex items-center justify-center overflow-hidden shrink-0">
 											<User size={20} className="text-black" />
@@ -137,6 +138,7 @@ export default function Navbar() {
 									<div className="py-2">
 										<button onClick={() => router.push("/profile")} className="w-full text-left px-4 py-2 text-white hover:bg-white/10 transition-colors">My Profile</button>
 										<button onClick={() => router.push("/orders")} className="w-full text-left px-4 py-2 text-white hover:bg-white/10 transition-colors">My Orders</button>
+									</div>
 									</div>
 								</div>
 							</div>

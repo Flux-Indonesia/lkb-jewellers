@@ -57,7 +57,7 @@ function SignupPageContent() {
             ACCOUNT CREATED
           </h1>
           <p className="text-gray-400 text-sm mb-8 leading-relaxed">
-            Please check your email to verify your account, then sign in.
+            Your account is ready. You can sign in now.
           </p>
           <Link
             href={redirect ? `/login?redirect=${encodeURIComponent(redirect)}` : "/login"}
