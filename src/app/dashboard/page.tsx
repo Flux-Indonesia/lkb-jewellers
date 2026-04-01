@@ -447,8 +447,9 @@ function ProductForm({
 
 // Main Dashboard
 function DashboardContent() {
-  const { signOut } = useAuth();
-  const [activeTab, setActiveTab] = useState<TabType>("add");
+  const { signOut, adminRole } = useAuth();
+  const isSeoOnly = adminRole === "seo";
+  const [activeTab, setActiveTab] = useState<TabType>(isSeoOnly ? "seo" : "add");
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -711,7 +712,7 @@ function DashboardContent() {
     return map[activeTab];
   };
 
-  const sidebarTabs: { tab: TabType; dividerBefore?: boolean; badge?: number }[] = [
+  const allTabs: { tab: TabType; dividerBefore?: boolean; badge?: number }[] = [
     { tab: "add" },
     { tab: "watches" },
     { tab: "jewellery" },
@@ -723,6 +724,7 @@ function DashboardContent() {
     { tab: "engagement-rings", dividerBefore: true },
     { tab: "seo", dividerBefore: true },
   ];
+  const sidebarTabs = isSeoOnly ? allTabs.filter(({ tab }) => tab === "seo") : allTabs;
 
   const header = headerTitle();
 

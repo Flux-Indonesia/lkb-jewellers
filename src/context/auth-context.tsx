@@ -4,8 +4,11 @@ import { createContext, useContext, useState, useEffect, ReactNode } from "react
 import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase";
 
+type AdminRole = "admin" | "seo" | null;
+
 interface AuthContextType {
   isAdmin: boolean;
+  adminRole: AdminRole;
   adminSignOut: () => void;
   user: User | null;
   userLoading: boolean;
@@ -19,6 +22,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAdmin, setIsAdmin] = useState(false);
+  const [adminRole, setAdminRole] = useState<AdminRole>(null);
   const [user, setUser] = useState<User | null>(null);
   const [adminLoading, setAdminLoading] = useState(true);
   const [userLoading, setUserLoading] = useState(true);
@@ -27,8 +31,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     fetch("/api/auth/check")
       .then((r) => r.json())
-      .then((data) => setIsAdmin(data.admin === true))
-      .catch(() => setIsAdmin(false))
+      .then((data) => {
+        setIsAdmin(data.admin === true);
+        setAdminRole(data.role || null);
+      })
+      .catch(() => {
+        setIsAdmin(false);
+        setAdminRole(null);
+      })
       .finally(() => setAdminLoading(false));
   }, []);
 
@@ -53,6 +63,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // Clear httpOnly cookie via server
     fetch("/api/auth/logout", { method: "POST" }).then(() => {
       setIsAdmin(false);
+      setAdminRole(null);
       window.location.href = "/dashboard";
     });
   };
@@ -77,6 +88,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     <AuthContext.Provider
       value={{
         isAdmin,
+        adminRole,
         adminSignOut,
         user,
         userLoading,
