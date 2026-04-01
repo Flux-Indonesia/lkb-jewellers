@@ -286,22 +286,12 @@ export default function ProductPage() {
                   OUT OF STOCK
                 </button>
               ) : isEnquiryOnly ? (
-                <div className="flex flex-col gap-3">
-                  <div className="flex gap-4">
-                    <button
-                      onClick={handleAddToCart}
-                      className="flex-1 bg-black text-white py-4 font-bold tracking-widest hover:bg-gray-800 hover:shadow-xl transition-all duration-300 rounded-lg border-2 border-black hover:border-gray-800"
-                    >
-                      ADD TO CART
-                    </button>
-                    <button
-                      onClick={() => setEnquiryOpen(true)}
-                      className="flex-1 bg-gradient-to-r from-gold to-yellow-600 text-black py-4 font-bold tracking-widest hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 rounded-lg border-2 border-gold"
-                    >
-                      ENQUIRE NOW
-                    </button>
-                  </div>
-                </div>
+                <button
+                  onClick={() => setEnquiryOpen(true)}
+                  className="w-full bg-black text-white py-4 font-bold tracking-widest hover:bg-gray-800 hover:shadow-xl transition-all duration-300 rounded-lg border-2 border-black"
+                >
+                  ENQUIRE NOW
+                </button>
               ) : (
                 <div className="flex gap-4">
                   <button
