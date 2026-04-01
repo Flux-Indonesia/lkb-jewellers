@@ -36,6 +36,9 @@ export function middleware(request: NextRequest) {
     } else if (pathname === "/api/checkout") {
       limit = 10; // 10 checkout attempts per minute
       windowMs = 60_000;
+    } else if (pathname === "/api/checkout/verify") {
+      limit = 10; // 10 verify attempts per minute
+      windowMs = 60_000;
     } else if (pathname.startsWith("/api/design-generator")) {
       limit = 5; // 5 AI generations per minute
       windowMs = 60_000;

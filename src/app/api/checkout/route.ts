@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { createClient } from "@/lib/supabase";
+import { createClient as createServerClient } from "@/lib/supabase-server";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2026-03-25.dahlia",
@@ -25,6 +26,13 @@ export async function POST(req: NextRequest) {
   }
 
   try {
+    // Verify user is authenticated
+    const supabaseAuth = await createServerClient();
+    const { data: { user } } = await supabaseAuth.auth.getUser();
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const body = await req.json();
     const { items } = body as { items: CartItem[] };
 
@@ -91,6 +99,14 @@ export async function POST(req: NextRequest) {
       if (!price || price <= 0) {
         return NextResponse.json(
           { error: `${product.name} is not available for purchase` },
+          { status: 400 }
+        );
+      }
+
+      // Check stock availability
+      if (typeof product.stock === "number" && product.stock < item.quantity) {
+        return NextResponse.json(
+          { error: product.stock === 0 ? `${product.name} is out of stock` : `Only ${product.stock} of ${product.name} available` },
           { status: 400 }
         );
       }

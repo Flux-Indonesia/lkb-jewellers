@@ -33,7 +33,8 @@ function CheckoutSuccessPageContent() {
         }
       })
       .catch(() => setStatus("failed"));
-  }, [sessionId, clearCart]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionId]);
 
   if (status === "loading") {
     return (

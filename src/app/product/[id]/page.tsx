@@ -101,8 +101,8 @@ export default function ProductPage() {
     );
   }
 
-  const isWatchStrap = product.tags?.toLowerCase().includes("watch strap") || product.tags?.toLowerCase().includes("accessories > watch strap");
-  const isEnquiryOnly = (product.category === "watch" || product.category === "luxury-jewellery") && !isWatchStrap;
+
+  const isEnquiryOnly = product.category !== "merchandise";
   const isOutOfStock = (product.stock || 0) === 0;
   const hasSpecs = product.category === "watch" && (product.model || product.caseSize || product.caseMaterial || product.dialColor || product.yearOfProduction);
 

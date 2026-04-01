@@ -13,6 +13,16 @@ const transporter = nodemailer.createTransport({
 const FROM = `"LKB Jewellers" <${process.env.SMTP_USER || "noreply@lkbjewellers.com"}>`;
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || process.env.SMTP_USER || "noreply@lkbjewellers.com";
 
+/** Escape HTML to prevent XSS in email templates */
+function esc(str: string): string {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 function baseLayout(content: string): string {
   return `<!DOCTYPE html>
 <html>
@@ -58,7 +68,7 @@ export async function sendContactConfirmation(to: string, name: string) {
     to,
     subject: "We've received your message — LKB Jewellers",
     html: baseLayout(`
-      <h1 style="color:#fff;font-size:22px;margin:0 0 16px;text-align:center;">Thank you, ${name}</h1>
+      <h1 style="color:#fff;font-size:22px;margin:0 0 16px;text-align:center;">Thank you, ${esc(name)}</h1>
       <p style="color:#ccc;font-size:14px;line-height:1.6;margin:0 0 16px;text-align:center;">
         We've received your message and will get back to you within 24 hours.
       </p>
@@ -77,7 +87,7 @@ export async function sendEnquiryConfirmation(to: string, name: string, productN
     html: baseLayout(`
       <h1 style="color:#fff;font-size:22px;margin:0 0 16px;text-align:center;">Enquiry Received</h1>
       <p style="color:#ccc;font-size:14px;line-height:1.6;margin:0 0 16px;text-align:center;">
-        Hi ${name}, thank you for your interest in <strong style="color:#fff;">${productName}</strong> (£${productPrice.toLocaleString()}).
+        Hi ${esc(name)}, thank you for your interest in <strong style="color:#fff;">${esc(productName)}</strong> (£${productPrice.toLocaleString()}).
       </p>
       <p style="color:#ccc;font-size:14px;line-height:1.6;margin:0;text-align:center;">
         One of our specialists will be in touch shortly via your preferred contact method.
@@ -94,7 +104,7 @@ export async function sendSellSubmissionConfirmation(to: string, name: string, b
     html: baseLayout(`
       <h1 style="color:#fff;font-size:22px;margin:0 0 16px;text-align:center;">Submission Received</h1>
       <p style="color:#ccc;font-size:14px;line-height:1.6;margin:0 0 16px;text-align:center;">
-        Hi ${name}, we've received your submission for your <strong style="color:#fff;">${brand} ${model}</strong>.
+        Hi ${esc(name)}, we've received your submission for your <strong style="color:#fff;">${esc(brand)} ${esc(model)}</strong>.
       </p>
       <p style="color:#ccc;font-size:14px;line-height:1.6;margin:0;text-align:center;">
         Our team will review the details and come back to you with a valuation as soon as possible.
@@ -133,7 +143,7 @@ export async function sendOrderConfirmation(
     .map(
       (i) =>
         `<tr>
-          <td style="color:#ccc;font-size:13px;padding:8px 0;border-bottom:1px solid #222;">${i.name}</td>
+          <td style="color:#ccc;font-size:13px;padding:8px 0;border-bottom:1px solid #222;">${esc(i.name)}</td>
           <td style="color:#ccc;font-size:13px;padding:8px 0;border-bottom:1px solid #222;text-align:center;">${i.quantity}</td>
           <td style="color:#fff;font-size:13px;padding:8px 0;border-bottom:1px solid #222;text-align:right;">${symbol}${i.price.toLocaleString()}</td>
         </tr>`
@@ -147,7 +157,7 @@ export async function sendOrderConfirmation(
     html: baseLayout(`
       <h1 style="color:#fff;font-size:22px;margin:0 0 16px;text-align:center;">Order Confirmed</h1>
       <p style="color:#ccc;font-size:14px;line-height:1.6;margin:0 0 24px;text-align:center;">
-        Hi ${name}, thank you for your purchase. Your order has been confirmed.
+        Hi ${esc(name)}, thank you for your purchase. Your order has been confirmed.
       </p>
       <table style="width:100%;border-collapse:collapse;margin:0 0 24px;">
         <tr>
@@ -174,7 +184,7 @@ export async function sendSignupWelcome(to: string, name: string) {
     to,
     subject: "Welcome to LKB Jewellers",
     html: baseLayout(`
-      <h1 style="color:#fff;font-size:22px;margin:0 0 16px;text-align:center;">Welcome, ${name || "there"}</h1>
+      <h1 style="color:#fff;font-size:22px;margin:0 0 16px;text-align:center;">Welcome, ${esc(name || "there")}</h1>
       <p style="color:#ccc;font-size:14px;line-height:1.6;margin:0 0 16px;text-align:center;">
         Your LKB Jewellers account has been created successfully.
       </p>
@@ -196,10 +206,10 @@ export async function notifyAdminContact(name: string, email: string, interest: 
     html: baseLayout(`
       <h1 style="color:#fff;font-size:22px;margin:0 0 16px;text-align:center;">New Contact Inquiry</h1>
       <table style="width:100%;border-collapse:collapse;">
-        <tr><td style="color:#999;font-size:13px;padding:6px 0;width:100px;">Name</td><td style="color:#fff;font-size:13px;padding:6px 0;">${name}</td></tr>
-        <tr><td style="color:#999;font-size:13px;padding:6px 0;">Email</td><td style="color:#fff;font-size:13px;padding:6px 0;">${email}</td></tr>
-        <tr><td style="color:#999;font-size:13px;padding:6px 0;">Interest</td><td style="color:#fff;font-size:13px;padding:6px 0;">${interest}</td></tr>
-        <tr><td style="color:#999;font-size:13px;padding:6px 0;vertical-align:top;">Message</td><td style="color:#ccc;font-size:13px;padding:6px 0;">${message}</td></tr>
+        <tr><td style="color:#999;font-size:13px;padding:6px 0;width:100px;">Name</td><td style="color:#fff;font-size:13px;padding:6px 0;">${esc(name)}</td></tr>
+        <tr><td style="color:#999;font-size:13px;padding:6px 0;">Email</td><td style="color:#fff;font-size:13px;padding:6px 0;">${esc(email)}</td></tr>
+        <tr><td style="color:#999;font-size:13px;padding:6px 0;">Interest</td><td style="color:#fff;font-size:13px;padding:6px 0;">${esc(interest)}</td></tr>
+        <tr><td style="color:#999;font-size:13px;padding:6px 0;vertical-align:top;">Message</td><td style="color:#ccc;font-size:13px;padding:6px 0;">${esc(message)}</td></tr>
       </table>
     `),
   });
@@ -213,9 +223,9 @@ export async function notifyAdminEnquiry(name: string, email: string, productNam
     html: baseLayout(`
       <h1 style="color:#fff;font-size:22px;margin:0 0 16px;text-align:center;">New Product Enquiry</h1>
       <table style="width:100%;border-collapse:collapse;">
-        <tr><td style="color:#999;font-size:13px;padding:6px 0;width:100px;">Customer</td><td style="color:#fff;font-size:13px;padding:6px 0;">${name}</td></tr>
-        <tr><td style="color:#999;font-size:13px;padding:6px 0;">Email</td><td style="color:#fff;font-size:13px;padding:6px 0;">${email}</td></tr>
-        <tr><td style="color:#999;font-size:13px;padding:6px 0;">Product</td><td style="color:#fff;font-size:13px;padding:6px 0;">${productName}</td></tr>
+        <tr><td style="color:#999;font-size:13px;padding:6px 0;width:100px;">Customer</td><td style="color:#fff;font-size:13px;padding:6px 0;">${esc(name)}</td></tr>
+        <tr><td style="color:#999;font-size:13px;padding:6px 0;">Email</td><td style="color:#fff;font-size:13px;padding:6px 0;">${esc(email)}</td></tr>
+        <tr><td style="color:#999;font-size:13px;padding:6px 0;">Product</td><td style="color:#fff;font-size:13px;padding:6px 0;">${esc(productName)}</td></tr>
         <tr><td style="color:#999;font-size:13px;padding:6px 0;">Price</td><td style="color:#fff;font-size:13px;padding:6px 0;">£${productPrice.toLocaleString()}</td></tr>
       </table>
     `),
@@ -230,10 +240,10 @@ export async function notifyAdminSellSubmission(name: string, email: string, bra
     html: baseLayout(`
       <h1 style="color:#fff;font-size:22px;margin:0 0 16px;text-align:center;">New Sell Submission</h1>
       <table style="width:100%;border-collapse:collapse;">
-        <tr><td style="color:#999;font-size:13px;padding:6px 0;width:100px;">Customer</td><td style="color:#fff;font-size:13px;padding:6px 0;">${name}</td></tr>
-        <tr><td style="color:#999;font-size:13px;padding:6px 0;">Email</td><td style="color:#fff;font-size:13px;padding:6px 0;">${email}</td></tr>
-        <tr><td style="color:#999;font-size:13px;padding:6px 0;">Brand</td><td style="color:#fff;font-size:13px;padding:6px 0;">${brand}</td></tr>
-        <tr><td style="color:#999;font-size:13px;padding:6px 0;">Model</td><td style="color:#fff;font-size:13px;padding:6px 0;">${model}</td></tr>
+        <tr><td style="color:#999;font-size:13px;padding:6px 0;width:100px;">Customer</td><td style="color:#fff;font-size:13px;padding:6px 0;">${esc(name)}</td></tr>
+        <tr><td style="color:#999;font-size:13px;padding:6px 0;">Email</td><td style="color:#fff;font-size:13px;padding:6px 0;">${esc(email)}</td></tr>
+        <tr><td style="color:#999;font-size:13px;padding:6px 0;">Brand</td><td style="color:#fff;font-size:13px;padding:6px 0;">${esc(brand)}</td></tr>
+        <tr><td style="color:#999;font-size:13px;padding:6px 0;">Model</td><td style="color:#fff;font-size:13px;padding:6px 0;">${esc(model)}</td></tr>
       </table>
     `),
   });
@@ -248,8 +258,8 @@ export async function notifyAdminOrder(name: string, email: string, amount: numb
     html: baseLayout(`
       <h1 style="color:#fff;font-size:22px;margin:0 0 16px;text-align:center;">New Order Received</h1>
       <table style="width:100%;border-collapse:collapse;">
-        <tr><td style="color:#999;font-size:13px;padding:6px 0;width:100px;">Customer</td><td style="color:#fff;font-size:13px;padding:6px 0;">${name}</td></tr>
-        <tr><td style="color:#999;font-size:13px;padding:6px 0;">Email</td><td style="color:#fff;font-size:13px;padding:6px 0;">${email}</td></tr>
+        <tr><td style="color:#999;font-size:13px;padding:6px 0;width:100px;">Customer</td><td style="color:#fff;font-size:13px;padding:6px 0;">${esc(name)}</td></tr>
+        <tr><td style="color:#999;font-size:13px;padding:6px 0;">Email</td><td style="color:#fff;font-size:13px;padding:6px 0;">${esc(email)}</td></tr>
         <tr><td style="color:#999;font-size:13px;padding:6px 0;">Amount</td><td style="color:#fff;font-size:24px;font-weight:bold;padding:6px 0;">${symbol}${amount.toLocaleString()}</td></tr>
       </table>
     `),

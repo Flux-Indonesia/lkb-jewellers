@@ -6,7 +6,8 @@
       "Bash(ffmpeg -version)",
       "Bash(sort -k6,7 -r)",
       "Bash(node -e \":*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(node -e ':*)"
     ],
     "additionalDirectories": [
       "d:\\Project\\Flux\\lkb-clone\\public"
