@@ -467,6 +467,9 @@ function DashboardContent() {
   // Delete modal
   const [deleteModal, setDeleteModal] = useState({ show: false, productId: "", productName: "" });
 
+  // Image preview lightbox
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+
   // Products from Supabase
   const [products, setProducts] = useState<Product[]>([]);
   const [loadingProducts, setLoadingProducts] = useState(true);
@@ -1126,7 +1129,29 @@ function DashboardContent() {
                           <p className="text-gray-400 text-sm mb-1">{contact.email} {contact.phone && `• ${contact.phone}`}</p>
                           {contact.interest && <p className="text-white text-sm mb-2">{contact.interest}</p>}
                           {contact.product_name && (
-                            <Badge className="bg-purple-900/20 text-purple-400 border border-purple-800/30 text-xs mb-2">Product: {contact.product_name}</Badge>
+                            <div className="flex items-center gap-3 my-3 bg-purple-900/10 border border-purple-800/20 rounded-lg p-3">
+                              {contact.product_image && (
+                                <div className="w-14 h-14 relative rounded overflow-hidden border border-gray-700 flex-shrink-0">
+                                  <Image src={contact.product_image} alt={contact.product_name} fill className="object-cover" sizes="56px" />
+                                </div>
+                              )}
+                              <div className="min-w-0 flex-1">
+                                <p className="text-white text-sm font-medium truncate">{contact.product_name}</p>
+                                <div className="flex items-center gap-2 mt-0.5">
+                                  {contact.product_category && (
+                                    <Badge className="bg-purple-900/20 text-purple-400 border border-purple-800/30 text-xs capitalize">{contact.product_category.replace(/-/g, " ")}</Badge>
+                                  )}
+                                  {contact.product_price > 0 && (
+                                    <span className="text-gray-400 text-xs font-medium">£{contact.product_price.toLocaleString("en-GB")}</span>
+                                  )}
+                                </div>
+                              </div>
+                              {contact.product_id && (
+                                <Link href={`/product/${contact.product_id}`} target="_blank" className="text-gray-500 hover:text-white transition-colors flex-shrink-0">
+                                  <ChevronRight size={16} />
+                                </Link>
+                              )}
+                            </div>
                           )}
                           <p className="text-gray-300 text-sm mt-2">{contact.message}</p>
                           <p className="text-gray-600 text-xs mt-3">{new Date(contact.created_at).toLocaleString("en-GB")}</p>
@@ -1231,11 +1256,11 @@ function DashboardContent() {
                           </div>
                           {sub.additional_info && <p className="text-gray-300 text-sm">{sub.additional_info}</p>}
                           {sub.images && sub.images.length > 0 && (
-                            <div className="flex gap-2 mt-3">
+                            <div className="flex gap-2 mt-3 flex-wrap">
                               {sub.images.map((img, i) => (
-                                <div key={i} className="w-16 h-16 relative rounded overflow-hidden border border-gray-800">
-                                  <Image src={img} alt={`Item ${i+1}`} fill className="object-cover" sizes="64px" />
-                                </div>
+                                <button key={i} onClick={() => setPreviewImage(img)} className="w-20 h-20 relative rounded-lg overflow-hidden border border-gray-700 hover:border-white/50 transition-all hover:scale-105 cursor-pointer">
+                                  <Image src={img} alt={`Item ${i+1}`} fill className="object-cover" sizes="80px" />
+                                </button>
                               ))}
                             </div>
                           )}
@@ -1441,6 +1466,17 @@ function DashboardContent() {
           </div>
         </DialogContent>
       </Dialog>
+
+      {previewImage && (
+        <div className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setPreviewImage(null)}>
+          <Button onClick={() => setPreviewImage(null)} className="absolute top-6 right-6 text-white hover:text-gray-300 p-2 h-auto z-10">
+            <X size={28} />
+          </Button>
+          <div className="relative max-w-4xl max-h-[85vh] w-full h-full" onClick={(e) => e.stopPropagation()}>
+            <Image src={previewImage} alt="Full preview" fill className="object-contain" sizes="100vw" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
