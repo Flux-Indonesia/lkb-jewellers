@@ -998,6 +998,7 @@ function DashboardContent() {
                       <thead className="bg-black/50 border-b border-gray-800">
                         <tr>
                           <th className="px-6 py-4 text-xs font-medium text-gray-400 uppercase tracking-wider">Customer</th>
+                          <th className="px-6 py-4 text-xs font-medium text-gray-400 uppercase tracking-wider">Items Ordered</th>
                           <th className="px-6 py-4 text-xs font-medium text-gray-400 uppercase tracking-wider">Amount</th>
                           <th className="px-6 py-4 text-xs font-medium text-gray-400 uppercase tracking-wider">Status</th>
                           <th className="px-6 py-4 text-xs font-medium text-gray-400 uppercase tracking-wider">Date</th>
@@ -1010,6 +1011,23 @@ function DashboardContent() {
                             <td className="px-6 py-4">
                               <p className="text-white font-medium">{order.customer_first_name} {order.customer_last_name}</p>
                               <p className="text-gray-500 text-xs">{order.customer_email}</p>
+                            </td>
+                            <td className="px-6 py-4 max-w-xs">
+                              {(order.items || []).length > 0 ? (
+                                <ul className="space-y-1">
+                                  {(order.items || []).map((item, i) => (
+                                    <li key={i} className="text-sm text-gray-300">
+                                      <span className="text-gray-500">{item.quantity}×</span>{" "}
+                                      {item.name}
+                                      <span className="text-gray-600 text-xs ml-1">
+                                        £{(item.price).toLocaleString("en-GB")}
+                                      </span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              ) : (
+                                <span className="text-gray-600 text-sm">—</span>
+                              )}
                             </td>
                             <td className="px-6 py-4 text-white font-bold font-serif">£{(order.amount || 0).toLocaleString("en-GB")}</td>
                             <td className="px-6 py-4">
