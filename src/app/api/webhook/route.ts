@@ -31,7 +31,8 @@ export async function POST(req: NextRequest) {
       try {
         const session = await stripe.checkout.sessions.retrieve(eventSession.id);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const shipping = (session as any).shipping_details as { address?: { line1?: string; line2?: string; city?: string; state?: string; postal_code?: string; country?: string } } | undefined;
+        const s = session as any;
+        const shipping = s.collected_information?.shipping_details || s.shipping_details;
 
         await fulfillOrder({
           id: session.id,

@@ -24,7 +24,8 @@ export async function GET(req: NextRequest) {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const shipping = (session as any).shipping_details as { address?: { line1?: string; line2?: string; city?: string; state?: string; postal_code?: string; country?: string } } | undefined;
+    const s = session as any;
+    const shipping = s.collected_information?.shipping_details || s.shipping_details;
 
     await fulfillOrder({
       id: session.id,
