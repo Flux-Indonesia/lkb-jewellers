@@ -133,7 +133,7 @@ export const navMenuData = {
   },
   services: {
     title: "OTHER SERVICES",
-    defaultImage: "/about-us/srd-3.webp",
+    defaultImage: "/IMG_0005.jpg",
     offerings: [
       {
         name: "Bespoke Designs",
@@ -151,7 +151,7 @@ export const navMenuData = {
         name: "Watches/Jewellery Servicing",
         desc: "Expert restoration & maintenance services",
         link: "/servicing",
-        image: "/about-us/srd-3.webp",
+        image: "/IMG_0005.jpg",
       },
     ],
   },
@@ -183,7 +183,7 @@ export const navMenuData = {
         name: "Contact Us",
         desc: "Visit us at Hatton Garden, London",
         link: "/contact",
-        image: "/about-us/suspect-chain.webp",
+        image: "/IMG_5750.jpg",
       },
     ],
   },

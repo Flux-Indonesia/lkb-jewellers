@@ -167,7 +167,7 @@ export function EngagementRingsContent() {
   }, [loadingMore, hasMore, page, activeFilters, buildQuery, sortBy])
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black pt-24 md:pt-32">
       <div className="relative w-full bg-zinc-950 border-b border-zinc-800 overflow-hidden">
         <div className="container mx-auto px-4 py-12 md:py-16">
           <p className="text-gray-500 text-xs font-medium tracking-widest uppercase mb-3">

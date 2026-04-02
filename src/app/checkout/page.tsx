@@ -157,10 +157,6 @@ export default function CheckoutPage() {
                       <span className="text-gray-400">Shipping</span>
                       <span className="text-white">Free</span>
                     </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-400">Insurance</span>
-                      <span className="text-white">Included</span>
-                    </div>
                     <Separator className="bg-gray-800" />
                     <div className="pt-3">
                       <div className="flex justify-between">
