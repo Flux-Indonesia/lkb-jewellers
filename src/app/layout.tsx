@@ -143,51 +143,7 @@ export default function RootLayout({
           gtag('js', new Date());
           gtag('config', 'G-RLDND22WJM');`}
         </Script>
-        <Script id="lc-draggable" strategy="afterInteractive">{`
-          (function() {
-            function makeDraggable(el) {
-              var isDragging = false, hasMoved = false;
-              var startX = 0, startY = 0, curTX = 0, curTY = 0, baseTX = 0, baseTY = 0;
-              var overlay = document.createElement('div');
-              overlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:2147483646;display:none;cursor:grabbing;';
-              document.body.appendChild(overlay);
-              el.style.cursor = 'grab';
-              el.addEventListener('mousedown', function(e) {
-                isDragging = true;
-                hasMoved = false;
-                startX = e.clientX;
-                startY = e.clientY;
-                baseTX = curTX;
-                baseTY = curTY;
-              });
-              document.addEventListener('mousemove', function(e) {
-                if (!isDragging) return;
-                var dx = e.clientX - startX;
-                var dy = e.clientY - startY;
-                if (!hasMoved && Math.abs(dx) < 5 && Math.abs(dy) < 5) return;
-                if (!hasMoved) { hasMoved = true; overlay.style.display = 'block'; }
-                curTX = baseTX + dx;
-                curTY = baseTY + dy;
-                el.style.transform = 'translate(' + curTX + 'px,' + curTY + 'px)';
-              });
-              document.addEventListener('mouseup', function() {
-                isDragging = false;
-                overlay.style.display = 'none';
-                el.style.cursor = 'grab';
-              });
-            }
-            var attempts = 0;
-            var selectors = ['#lc-chat-widget-container','[id*="leadconnector"]','[id*="lc-chat"]','[class*="lc-chat"]'];
-            var interval = setInterval(function() {
-              attempts++;
-              for (var i = 0; i < selectors.length; i++) {
-                var el = document.querySelector(selectors[i]);
-                if (el) { makeDraggable(el); clearInterval(interval); return; }
-              }
-              if (attempts > 20) clearInterval(interval);
-            }, 500);
-          })();
-        `}</Script>
+
       </body>
     </html>
   );
