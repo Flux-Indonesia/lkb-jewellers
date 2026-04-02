@@ -22,12 +22,18 @@ interface Order {
   currency: string;
   status: string;
   customer_email: string;
+  customer_first_name: string;
+  customer_last_name: string;
+  customer_phone: string;
   items: OrderItem[];
   created_at: string;
   address_line1: string;
+  address_line2: string;
   city: string;
+  state: string;
   postal_code: string;
   country: string;
+  notes: string;
 }
 
 const STATUS_COLORS: Record<string, string> = {
@@ -149,11 +155,15 @@ export default function OrdersPage() {
                   ))}
                 </div>
 
-                {/* Shipping */}
+                {/* Shipping & Billing */}
                 {order.address_line1 && (
-                  <div className="mt-4 pt-4 border-t border-gray-800">
+                  <div className="mt-4 pt-4 border-t border-gray-800 space-y-1">
+                    <p className="text-gray-400 text-xs font-medium uppercase tracking-wider">Shipping Address</p>
                     <p className="text-gray-500 text-xs">
-                      Shipped to: {order.address_line1}, {order.city} {order.postal_code}, {order.country}
+                      {order.address_line1}{order.address_line2 ? `, ${order.address_line2}` : ""}
+                    </p>
+                    <p className="text-gray-500 text-xs">
+                      {[order.city, order.state, order.postal_code, order.country].filter(Boolean).join(", ")}
                     </p>
                   </div>
                 )}

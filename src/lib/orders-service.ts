@@ -21,11 +21,17 @@ interface OrderItems {
  */
 export async function fulfillOrder(session: {
   id: string;
+  payment_intent?: string | null;
   amount_total: number | null;
   currency: string | null;
   metadata: Record<string, string> | null;
-  customer_details: { name?: string | null; email?: string | null; phone?: string | null } | null;
-  shipping_details?: { address?: { line1?: string; line2?: string; city?: string; state?: string; postal_code?: string; country?: string } } | null;
+  customer_details: {
+    name?: string | null;
+    email?: string | null;
+    phone?: string | null;
+    address?: { line1?: string | null; line2?: string | null; city?: string | null; state?: string | null; postal_code?: string | null; country?: string | null } | null;
+  } | null;
+  shipping_details?: { name?: string | null; address?: { line1?: string; line2?: string; city?: string; state?: string; postal_code?: string; country?: string } } | null;
 }): Promise<boolean> {
   const supabase = createServiceClient();
 
@@ -38,6 +44,7 @@ export async function fulfillOrder(session: {
 
   const shipping = session.shipping_details;
   const customer = session.customer_details;
+  const billing = customer?.address;
 
   const amount = (session.amount_total || 0) / 100;
   const currency = session.currency || "gbp";
@@ -46,7 +53,7 @@ export async function fulfillOrder(session: {
 
   // Upsert prevents race condition — duplicate insert becomes a no-op
   const { data: order } = await supabase.from("orders").upsert({
-    payment_intent_id: session.id,
+    payment_intent_id: (session.payment_intent as string) || session.id,
     amount,
     currency,
     status: "paid",
@@ -54,12 +61,19 @@ export async function fulfillOrder(session: {
     customer_first_name: customerName.split(" ")[0] || "",
     customer_last_name: customerName.split(" ").slice(1).join(" ") || "",
     customer_phone: customer?.phone || "",
+    // Shipping address
     address_line1: shipping?.address?.line1 || "",
     address_line2: shipping?.address?.line2 || "",
     city: shipping?.address?.city || "",
     state: shipping?.address?.state || "",
     postal_code: shipping?.address?.postal_code || "",
     country: shipping?.address?.country || "",
+    // Billing address (stored in notes as JSON)
+    notes: JSON.stringify({
+      billing_name: customerName,
+      billing_address: billing ? `${billing.line1 || ""}${billing.line2 ? ", " + billing.line2 : ""}, ${billing.city || ""} ${billing.state || ""} ${billing.postal_code || ""}, ${billing.country || ""}`.trim() : "",
+      shipping_name: shipping?.name || customerName,
+    }),
     items,
   }, { onConflict: "payment_intent_id", ignoreDuplicates: true }).select("id, created_at").maybeSingle();
 

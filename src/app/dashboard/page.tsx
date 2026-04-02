@@ -1029,6 +1029,7 @@ function DashboardContent() {
                             <td className="px-6 py-4">
                               <p className="text-white font-medium">{order.customer_first_name} {order.customer_last_name}</p>
                               <p className="text-gray-500 text-xs">{order.customer_email}</p>
+                              {order.customer_phone && <p className="text-gray-500 text-xs">{order.customer_phone}</p>}
                             </td>
                             <td className="px-6 py-4 max-w-xs">
                               {(order.items || []).length > 0 ? (

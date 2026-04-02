@@ -29,6 +29,7 @@ export async function GET(req: NextRequest) {
 
     await fulfillOrder({
       id: session.id,
+      payment_intent: session.payment_intent as string,
       amount_total: session.amount_total,
       currency: session.currency,
       metadata: session.metadata,
