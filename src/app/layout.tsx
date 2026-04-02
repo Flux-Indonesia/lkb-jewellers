@@ -143,6 +143,48 @@ export default function RootLayout({
           gtag('js', new Date());
           gtag('config', 'G-RLDND22WJM');`}
         </Script>
+        <Script id="lc-draggable" strategy="afterInteractive">{`
+          (function() {
+            function makeDraggable(el) {
+              var isDragging = false, hasMoved = false;
+              var startX, startY, startLeft, startBottom;
+              el.style.cursor = 'grab';
+              el.addEventListener('mousedown', function(e) {
+                isDragging = true;
+                hasMoved = false;
+                startX = e.clientX;
+                startY = e.clientY;
+                var rect = el.getBoundingClientRect();
+                startLeft = rect.left;
+                startBottom = window.innerHeight - rect.bottom;
+              });
+              document.addEventListener('mousemove', function(e) {
+                if (!isDragging) return;
+                var dx = e.clientX - startX;
+                var dy = e.clientY - startY;
+                if (!hasMoved && Math.abs(dx) < 5 && Math.abs(dy) < 5) return;
+                hasMoved = true;
+                el.style.cursor = 'grabbing';
+                el.style.left = Math.max(0, Math.min(window.innerWidth - el.offsetWidth, startLeft + dx)) + 'px';
+                el.style.bottom = Math.max(0, Math.min(window.innerHeight - el.offsetHeight, startBottom - dy)) + 'px';
+                el.style.right = 'auto';
+                el.style.top = 'auto';
+              });
+              document.addEventListener('mouseup', function() {
+                if (hasMoved) isDragging = false;
+                isDragging = false;
+                el.style.cursor = 'grab';
+              });
+            }
+            var observer = new MutationObserver(function() {
+              var el = document.querySelector('#lc-chat-widget-container') ||
+                       document.querySelector('[id*="leadconnector"]') ||
+                       document.querySelector('[data-widget-id="69a85d5705ceca41dc19bf48"]');
+              if (el) { makeDraggable(el); observer.disconnect(); }
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+          })();
+        `}</Script>
       </body>
     </html>
   );
