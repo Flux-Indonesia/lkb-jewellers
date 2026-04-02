@@ -33,6 +33,7 @@ interface Order {
   state: string;
   postal_code: string;
   country: string;
+  delivery_type: string;
   notes: string;
 }
 
@@ -155,18 +156,38 @@ export default function OrdersPage() {
                   ))}
                 </div>
 
-                {/* Shipping & Billing */}
-                {order.address_line1 && (
-                  <div className="mt-4 pt-4 border-t border-gray-800 space-y-1">
-                    <p className="text-gray-400 text-xs font-medium uppercase tracking-wider">Shipping Address</p>
-                    <p className="text-gray-500 text-xs">
-                      {order.address_line1}{order.address_line2 ? `, ${order.address_line2}` : ""}
-                    </p>
-                    <p className="text-gray-500 text-xs">
-                      {[order.city, order.state, order.postal_code, order.country].filter(Boolean).join(", ")}
-                    </p>
-                  </div>
-                )}
+                {/* Customer & Shipping Details */}
+                {(() => {
+                  let extra: { shipping_name?: string; billing_name?: string; billing_address?: string } = {};
+                  try { extra = order.notes ? JSON.parse(order.notes) : {}; } catch { /* ignore */ }
+                  return (
+                    <div className="mt-4 pt-4 border-t border-gray-800">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {/* Billing / Card Holder */}
+                        <div className="space-y-1">
+                          <p className="text-gray-400 text-xs font-medium uppercase tracking-wider mb-2">Card Holder</p>
+                          <p className="text-gray-300 text-sm">{order.customer_first_name} {order.customer_last_name}</p>
+                          <p className="text-gray-500 text-xs">{order.customer_email}</p>
+                          {order.customer_phone && <p className="text-gray-500 text-xs">{order.customer_phone}</p>}
+                          {extra.billing_address && <p className="text-gray-500 text-xs">{extra.billing_address}</p>}
+                        </div>
+                        {/* Shipping */}
+                        {order.address_line1 && (
+                          <div className="space-y-1">
+                            <p className="text-gray-400 text-xs font-medium uppercase tracking-wider mb-2">Shipping</p>
+                            {extra.shipping_name && <p className="text-gray-300 text-sm">{extra.shipping_name}</p>}
+                            <p className="text-gray-500 text-xs">{order.address_line1}</p>
+                            {order.address_line2 && <p className="text-gray-500 text-xs">{order.address_line2}</p>}
+                            <p className="text-gray-500 text-xs">
+                              {[order.city, order.state, order.postal_code].filter(Boolean).join(", ")}
+                            </p>
+                            {order.country && <p className="text-gray-500 text-xs">{order.country}</p>}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })()}
               </div>
             ))}
           </div>

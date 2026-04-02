@@ -25,7 +25,8 @@ export async function GET(req: NextRequest) {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const s = session as any;
-    const shipping = s.collected_information?.shipping_details || s.shipping_details;
+    const collected = s.collected_information || {};
+    const shipping = collected.shipping_details || s.shipping_details;
 
     await fulfillOrder({
       id: session.id,

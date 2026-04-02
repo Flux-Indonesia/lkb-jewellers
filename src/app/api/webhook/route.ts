@@ -32,15 +32,18 @@ export async function POST(req: NextRequest) {
         const session = await stripe.checkout.sessions.retrieve(eventSession.id);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const s = session as any;
-        const shipping = s.collected_information?.shipping_details || s.shipping_details;
+        const collected = s.collected_information || {};
+        const shipping = collected.shipping_details || s.shipping_details;
+        // customer_details may be on session or in collected_information
+        const customer = session.customer_details || eventSession.customer_details;
 
         await fulfillOrder({
           id: session.id,
           payment_intent: session.payment_intent as string,
           amount_total: session.amount_total,
           currency: session.currency,
-          metadata: session.metadata,
-          customer_details: session.customer_details,
+          metadata: session.metadata || eventSession.metadata,
+          customer_details: customer,
           shipping_details: shipping,
         });
       } catch (err) {

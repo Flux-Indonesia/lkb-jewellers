@@ -48,8 +48,9 @@ export async function fulfillOrder(session: {
 
   const amount = (session.amount_total || 0) / 100;
   const currency = session.currency || "gbp";
-  const customerName = customer?.name || "";
+  const billingName = customer?.name || "";
   const customerEmail = customer?.email || "";
+  const shippingName = shipping?.name || billingName;
 
   // Upsert prevents race condition — duplicate insert becomes a no-op
   const { data: order } = await supabase.from("orders").upsert({
@@ -58,8 +59,9 @@ export async function fulfillOrder(session: {
     currency,
     status: "paid",
     customer_email: customerEmail,
-    customer_first_name: customerName.split(" ")[0] || "",
-    customer_last_name: customerName.split(" ").slice(1).join(" ") || "",
+    // Billing name (card holder)
+    customer_first_name: billingName.split(" ")[0] || "",
+    customer_last_name: billingName.split(" ").slice(1).join(" ") || "",
     customer_phone: customer?.phone || "",
     // Shipping address
     address_line1: shipping?.address?.line1 || "",
@@ -68,11 +70,13 @@ export async function fulfillOrder(session: {
     state: shipping?.address?.state || "",
     postal_code: shipping?.address?.postal_code || "",
     country: shipping?.address?.country || "",
-    // Billing address (stored in notes as JSON)
+    // Extra details: shipping name, billing address
     notes: JSON.stringify({
-      billing_name: customerName,
-      billing_address: billing ? `${billing.line1 || ""}${billing.line2 ? ", " + billing.line2 : ""}, ${billing.city || ""} ${billing.state || ""} ${billing.postal_code || ""}, ${billing.country || ""}`.trim() : "",
-      shipping_name: shipping?.name || customerName,
+      shipping_name: shippingName,
+      billing_name: billingName,
+      billing_address: billing
+        ? [billing.line1, billing.line2, billing.city, billing.state, billing.postal_code, billing.country].filter(Boolean).join(", ")
+        : "",
     }),
     items,
   }, { onConflict: "payment_intent_id", ignoreDuplicates: true }).select("id, created_at").maybeSingle();
@@ -84,8 +88,8 @@ export async function fulfillOrder(session: {
     // Send emails (non-blocking)
     if (customerEmail) {
       Promise.allSettled([
-        sendOrderConfirmation(customerEmail, customerName, session.id, amount, currency, items),
-        notifyAdminOrder(customerName, customerEmail, amount, currency),
+        sendOrderConfirmation(customerEmail, billingName, session.id, amount, currency, items),
+        notifyAdminOrder(billingName, customerEmail, amount, currency),
       ]).catch((err) => console.error("Order email error:", err));
     }
 

@@ -1050,12 +1050,19 @@ function DashboardContent() {
                             </td>
                             <td className="px-6 py-4 text-sm text-gray-300 max-w-xs">
                               {order.address_line1 ? (
-                                <>
-                                  <p>{order.address_line1}</p>
-                                  {order.address_line2 && <p>{order.address_line2}</p>}
-                                  <p>{[order.city, order.state, order.postal_code].filter(Boolean).join(", ")}</p>
-                                  {order.country && <p className="text-gray-500 text-xs">{order.country}</p>}
-                                </>
+                                (() => {
+                                  let extra: { shipping_name?: string } = {};
+                                  try { extra = order.notes ? JSON.parse(order.notes) : {}; } catch { /* ignore */ }
+                                  return (
+                                    <>
+                                      {extra.shipping_name && <p className="text-white font-medium">{extra.shipping_name}</p>}
+                                      <p>{order.address_line1}</p>
+                                      {order.address_line2 && <p>{order.address_line2}</p>}
+                                      <p>{[order.city, order.state, order.postal_code].filter(Boolean).join(", ")}</p>
+                                      {order.country && <p className="text-gray-500 text-xs">{order.country}</p>}
+                                    </>
+                                  );
+                                })()
                               ) : (
                                 <span className="text-gray-600">—</span>
                               )}
