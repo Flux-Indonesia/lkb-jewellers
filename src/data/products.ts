@@ -221,8 +221,8 @@ export const videoSections = [
   {
     id: "watches",
     title: "EXCLUSIVE TIMEPIECES",
-    videoUrl: "/timepieces/desktop.mp4",
-    mobileVideoUrl: "/timepieces/mobile.mp4",
+    videoUrl: "/timepieces/desktop-new.mp4",
+    mobileVideoUrl: "/timepieces/mobile-new.mp4",
     link: "/watches",
   },
   {

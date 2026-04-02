@@ -613,6 +613,15 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
             {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
+            {activeSubcategory === "ring" && (
+              <Link href="/engagement-rings" className="group relative aspect-[3/4] overflow-hidden rounded-lg bg-gray-900">
+                <Image src="/images/static/IMG_0026.jpg" alt="Engagement Rings" fill className="object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500" sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+                  <p className="text-white text-lg font-bold tracking-wider uppercase mb-2 font-heading">Engagement Rings</p>
+                  <span className="text-white text-xs tracking-widest uppercase border border-white px-4 py-2 group-hover:bg-white group-hover:text-black transition-all duration-300">View All</span>
+                </div>
+              </Link>
+            )}
           </div>
         )}
       </div>

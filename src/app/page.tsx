@@ -44,7 +44,6 @@ export default function HomePage() {
 					<source src="/hero-video.webm" type="video/webm" />
 					<source src="/hero-video.mp4" type="video/mp4" />
 				</video>
-				<div className="absolute inset-0 bg-black/40" />
 				<div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
 					<h2 className="text-white tracking-[0.3em] text-sm md:text-2xl mb-6 animate-slide-up font-display">TIMELESS ELEGANCE</h2>
 					<h1 className="text-7xl md:text-9xl lg:text-[12rem] text-white mb-8 animate-fade-in font-normal font-heading" style={{ lineHeight: "normal" }}>
@@ -134,7 +133,6 @@ export default function HomePage() {
 							<source src={section.videoUrl} type="video/mp4" />
 						</video>
 						<video className="absolute inset-0 w-full h-full object-cover opacity-60 md:hidden" preload="metadata" playsInline autoPlay muted loop>
-							<source src={(section.mobileVideoUrl || section.videoUrl).replace('.mp4', '.webm')} type="video/webm" />
 							<source src={section.mobileVideoUrl || section.videoUrl} type="video/mp4" />
 						</video>
 						<div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50" />
@@ -226,7 +224,6 @@ export default function HomePage() {
 								<div className="absolute inset-0 overflow-hidden">
 									<Image src={cat.img} alt={cat.alt} fill className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-110" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" />
 								</div>
-								<div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
 								<div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 md:px-8">
 									<h3 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-[0.15em] md:tracking-[0.2em] text-white mb-1 md:mb-2 font-heading">{cat.title}</h3>
 									<p className="text-gray-300 text-xs md:text-sm tracking-[0.15em] md:tracking-[0.2em] uppercase">{cat.sub}</p>
