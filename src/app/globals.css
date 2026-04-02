@@ -400,3 +400,11 @@ input, textarea, select { padding: 0.5rem 0.75rem !important; font-size: 0.875re
 /* Max-width overrides */
 .max-w-7xl { max-width: 90rem !important; }
 .max-w-6xl { max-width: 80rem !important; }
+
+#lc-chat-widget-container,
+[id*="leadconnector"],
+[class*="lc-launcher"],
+[class*="chat-widget-launcher"] {
+  left: 20px !important;
+  right: auto !important;
+}

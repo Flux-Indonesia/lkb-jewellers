@@ -128,6 +128,12 @@ export default function RootLayout({
           </CartProvider>
         </AuthProvider>
         <Script
+          src="https://widgets.leadconnectorhq.com/loader.js"
+          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+          data-widget-id="69a85d5705ceca41dc19bf48"
+          strategy="afterInteractive"
+        />
+        <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-RLDND22WJM"
           strategy="afterInteractive"
         />
