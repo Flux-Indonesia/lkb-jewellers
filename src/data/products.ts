@@ -228,8 +228,8 @@ export const videoSections = [
   {
     id: "jewellery",
     title: "PREMIUM JEWELLERY",
-    videoUrl: "/jewellery/desktop.mp4",
-    mobileVideoUrl: "/jewellery/mobile.mp4",
+    videoUrl: "/jewellery/desktop-new.mp4",
+    mobileVideoUrl: "/jewellery/mobile-new.mp4",
     link: "/jewellery",
   },
   {
@@ -242,8 +242,8 @@ export const videoSections = [
   {
     id: "rings",
     title: "ENGAGEMENT RINGS",
-    videoUrl: "/rings/desktop.mp4",
-    mobileVideoUrl: "/rings/mobile.mp4",
+    videoUrl: "/rings/desktop-new.mp4",
+    mobileVideoUrl: "/rings/mobile-new.mp4",
     link: "/engagement-rings",
   },
 ];

@@ -40,9 +40,11 @@ export default function HomePage() {
 		<div className="bg-black">
 			{/* ===== HERO ===== */}
 			<section className="relative h-[80vh] md:h-[85vh] lg:h-screen w-full overflow-hidden bg-black">
-				<video className="absolute top-0 left-0 w-full h-full object-cover opacity-80" preload="metadata" playsInline autoPlay muted loop style={{ willChange: "transform" }}>
-					<source src="/hero-video.webm" type="video/webm" />
-					<source src="/hero-video.mp4" type="video/mp4" />
+				<video className="absolute top-0 left-0 w-full h-full object-cover opacity-80 hidden md:block" preload="metadata" playsInline autoPlay muted loop style={{ willChange: "transform" }}>
+					<source src="/hero-video-new.mp4" type="video/mp4" />
+				</video>
+				<video className="absolute top-0 left-0 w-full h-full object-cover opacity-80 md:hidden" preload="metadata" playsInline autoPlay muted loop style={{ willChange: "transform" }}>
+					<source src="/hero-video-mobile.mp4" type="video/mp4" />
 				</video>
 				<div className="absolute inset-0 flex flex-col justify-center items-center text-center px-4">
 					<h2 className="text-white tracking-[0.3em] text-sm md:text-2xl mb-6 animate-slide-up font-display">TIMELESS ELEGANCE</h2>
