@@ -3,6 +3,7 @@
 import { createContext, useContext, useState, useCallback, useEffect, useRef, ReactNode } from "react";
 import { useAuth } from "@/context/auth-context";
 import { toast } from "sonner";
+import { createClient } from "@/lib/supabase";
 
 interface CartItem {
   id: string;
@@ -18,6 +19,7 @@ interface CartContextType {
   removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, qty: number) => void;
   clearCart: () => void;
+  syncPrices: () => void;
   cartCount: number;
   cartTotal: number;
   isCartOpen: boolean;
@@ -210,6 +212,28 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, [user]);
 
+  const syncPrices = useCallback(() => {
+    if (items.length === 0) return;
+    const supabase = createClient();
+    const ids = items.map((i) => i.id);
+    supabase.from("products").select("id, price").in("id", ids).then(({ data }) => {
+      if (!data) return;
+      const priceMap = new Map(data.map((p: { id: string; price: number }) => [p.id, Number(p.price)]));
+      setItems((prev) => {
+        let changed = false;
+        const updated = prev.map((item) => {
+          const dbPrice = priceMap.get(item.id);
+          if (dbPrice !== undefined && dbPrice !== item.price) {
+            changed = true;
+            return { ...item, price: dbPrice };
+          }
+          return item;
+        });
+        return changed ? updated : prev;
+      });
+    });
+  }, [items]);
+
   const cartCount = items.reduce((sum, item) => sum + item.quantity, 0);
   const cartTotal = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -224,6 +248,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         removeFromCart,
         updateQuantity,
         clearCart,
+        syncPrices,
         cartCount,
         cartTotal,
         isCartOpen,

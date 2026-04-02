@@ -61,7 +61,7 @@ export async function fulfillOrder(session: {
     postal_code: shipping?.address?.postal_code || "",
     country: shipping?.address?.country || "",
     items,
-  }, { onConflict: "payment_intent_id", ignoreDuplicates: true }).select("id, created_at").single();
+  }, { onConflict: "payment_intent_id", ignoreDuplicates: true }).select("id, created_at").maybeSingle();
 
   // Check if this is a newly created order (created within last 60 seconds)
   const isNewOrder = order && (Date.now() - new Date(order.created_at).getTime()) < 60_000;

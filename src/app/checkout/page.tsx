@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ShoppingBag, Lock, Trash2, User } from "lucide-react";
@@ -12,10 +12,18 @@ import { useCart } from "@/context/cart-context";
 import { useAuth } from "@/context/auth-context";
 
 export default function CheckoutPage() {
-  const { items, cartTotal, updateQuantity, removeFromCart } = useCart();
+  const { items, cartTotal, updateQuantity, removeFromCart, syncPrices } = useCart();
   const { user, userLoading } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const syncedRef = useRef(false);
+
+  // Sync cart prices with database on mount
+  useEffect(() => {
+    if (items.length === 0 || syncedRef.current) return;
+    syncedRef.current = true;
+    syncPrices();
+  }, [items, syncPrices]);
 
   const handleCheckout = async () => {
     if (items.length === 0) return;
