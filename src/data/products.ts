@@ -107,9 +107,21 @@ export const navMenuData = {
       },
     ],
   },
+  rings: {
+    title: "RINGS",
+    defaultImage: "/images/static/IMG_0026.jpg",
+    items: [
+      {
+        name: "Engagement Rings",
+        desc: "Find your perfect engagement ring",
+        link: "/engagement-rings",
+        image: "/images/static/IMG_0026.jpg",
+      },
+    ],
+  },
   accessories: {
     title: "ACCESSORIES",
-    defaultImage: "/images/static/nav-caps.jpg",
+    defaultImage: "/images/static/IMG_0025.jpg",
     items: [
       {
         name: "LKB Flagship Caps",
@@ -133,7 +145,7 @@ export const navMenuData = {
   },
   services: {
     title: "OTHER SERVICES",
-    defaultImage: "/IMG_0005.jpg",
+    defaultImage: "/about-us/IMG_0005.jpg",
     offerings: [
       {
         name: "Bespoke Designs",
@@ -151,7 +163,7 @@ export const navMenuData = {
         name: "Watches/Jewellery Servicing",
         desc: "Expert restoration & maintenance services",
         link: "/servicing",
-        image: "/IMG_0005.jpg",
+        image: "/about-us/IMG_0005.jpg",
       },
     ],
   },
@@ -183,7 +195,7 @@ export const navMenuData = {
         name: "Contact Us",
         desc: "Visit us at Hatton Garden, London",
         link: "/contact",
-        image: "/IMG_5750.jpg",
+        image: "/about-us/IMG_5750.jpg",
       },
     ],
   },

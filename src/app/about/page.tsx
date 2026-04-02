@@ -88,7 +88,7 @@ export default function AboutPage() {
 				<div
 					className="absolute inset-0 bg-cover"
 					style={{
-						backgroundImage: "url('/IMG_0007.jpg')",
+						backgroundImage: "url('/about-us/IMG_0007.jpg')",
 						backgroundPosition: "center 40%",
 					}}
 				/>

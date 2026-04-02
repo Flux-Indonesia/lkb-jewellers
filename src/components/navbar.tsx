@@ -13,7 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { Sheet, SheetTrigger, SheetContent, SheetClose, SheetTitle } from "@/components/ui/sheet";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
-type MenuKey = "watches" | "jewellery" | "accessories" | "services" | "contact";
+type MenuKey = "watches" | "jewellery" | "rings" | "accessories" | "services" | "contact";
 
 interface MenuItem {
 	name: string;
@@ -28,7 +28,7 @@ const navLinks: { label: string; key: MenuKey | null; href: string }[] = [
 	{ label: "WATCHES", key: "watches", href: "/shop?category=watch" },
 	{ label: "JEWELLERY", key: "jewellery", href: "/shop?category=luxury-jewellery" },
 	{ label: "ACCESSORIES", key: "accessories", href: "/shop?category=merchandise" },
-	{ label: "RINGS", key: null, href: "/engagement-rings" },
+	{ label: "RINGS", key: "rings", href: "/engagement-rings" },
 ];
 
 const rightLinks: { label: string; key: MenuKey; href: string }[] = [
@@ -125,13 +125,10 @@ export default function Navbar() {
 													<AccordionTrigger className="text-white text-sm font-semibold tracking-[0.2em] font-body px-6 py-5 hover:bg-gray-900/50 hover:no-underline [&>svg]:hidden" onClick={() => { router.push("/"); setMobileOpen(false); }}>HOME</AccordionTrigger>
 												</AccordionItem>
 
-												<AccordionItem value="rings" className="border-b border-gray-900">
-													<AccordionTrigger className="text-white text-sm font-semibold tracking-[0.2em] font-body px-6 py-5 hover:bg-gray-900/50 hover:no-underline [&>svg]:hidden" onClick={() => { router.push("/engagement-rings"); setMobileOpen(false); }}>ENGAGEMENT RINGS</AccordionTrigger>
-												</AccordionItem>
-
 												{([
 													{ label: "WATCHES", key: "watches" as MenuKey },
 													{ label: "JEWELLERY", key: "jewellery" as MenuKey },
+													{ label: "RINGS", key: "rings" as MenuKey },
 													{ label: "ACCESSORIES", key: "accessories" as MenuKey },
 													{ label: "OTHER SERVICES", key: "services" as MenuKey },
 													{ label: "ABOUT US", key: "contact" as MenuKey },

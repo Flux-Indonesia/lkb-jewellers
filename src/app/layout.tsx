@@ -62,6 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="google-site-verification" content="nAVWrhRlM6tORH0OR3pC3AAvtjo9EL85tRRLC6UFQfg" />
         <LocalBusinessJsonLd />
         <style>{`
           @font-face {
