@@ -26,13 +26,15 @@ export async function POST(req: NextRequest) {
   }
 
   if (event.type === "checkout.session.completed") {
-    const session = event.data.object as Stripe.Checkout.Session;
-
-    if (session.payment_status === "paid") {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const shipping = (session as any).shipping_details as { address?: { line1?: string; line2?: string; city?: string; state?: string; postal_code?: string; country?: string } } | undefined;
-
+    const eventSession = event.data.object as Stripe.Checkout.Session;
+    if (eventSession.payment_status === "paid") {
       try {
+        const session = await stripe.checkout.sessions.retrieve(eventSession.id, {
+          expand: ["shipping_details"],
+        });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const shipping = (session as any).shipping_details as { address?: { line1?: string; line2?: string; city?: string; state?: string; postal_code?: string; country?: string } } | undefined;
+
         await fulfillOrder({
           id: session.id,
           amount_total: session.amount_total,

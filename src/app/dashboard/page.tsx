@@ -53,6 +53,16 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
 
 type TabType = "add" | "watches" | "jewellery" | "merchandise" | "orders" | "contacts" | "sell" | "newsletter" | "engagement-rings" | "seo";
@@ -466,6 +476,10 @@ function DashboardContent() {
 
   // Delete modal
   const [deleteModal, setDeleteModal] = useState({ show: false, productId: "", productName: "" });
+
+  // Confirm dialog
+  const [confirmDialog, setConfirmDialog] = useState<{ open: boolean; title: string; description: string; onConfirm: () => void }>({ open: false, title: "", description: "", onConfirm: () => {} });
+  const showConfirm = (title: string, description: string, onConfirm: () => void) => setConfirmDialog({ open: true, title, description, onConfirm });
 
   // Image preview lightbox
   const [previewImage, setPreviewImage] = useState<string | null>(null);
@@ -1002,6 +1016,7 @@ function DashboardContent() {
                         <tr>
                           <th className="px-6 py-4 text-xs font-medium text-gray-400 uppercase tracking-wider">Customer</th>
                           <th className="px-6 py-4 text-xs font-medium text-gray-400 uppercase tracking-wider">Items Ordered</th>
+                          <th className="px-6 py-4 text-xs font-medium text-gray-400 uppercase tracking-wider">Address</th>
                           <th className="px-6 py-4 text-xs font-medium text-gray-400 uppercase tracking-wider">Amount</th>
                           <th className="px-6 py-4 text-xs font-medium text-gray-400 uppercase tracking-wider">Status</th>
                           <th className="px-6 py-4 text-xs font-medium text-gray-400 uppercase tracking-wider">Date</th>
@@ -1032,6 +1047,18 @@ function DashboardContent() {
                                 <span className="text-gray-600 text-sm">—</span>
                               )}
                             </td>
+                            <td className="px-6 py-4 text-sm text-gray-300 max-w-xs">
+                              {order.address_line1 ? (
+                                <>
+                                  <p>{order.address_line1}</p>
+                                  {order.address_line2 && <p>{order.address_line2}</p>}
+                                  <p>{[order.city, order.state, order.postal_code].filter(Boolean).join(", ")}</p>
+                                  {order.country && <p className="text-gray-500 text-xs">{order.country}</p>}
+                                </>
+                              ) : (
+                                <span className="text-gray-600">—</span>
+                              )}
+                            </td>
                             <td className="px-6 py-4 text-white font-bold font-serif">£{(order.amount || 0).toLocaleString("en-GB")}</td>
                             <td className="px-6 py-4">
                               <select value={order.status} onChange={async (e) => {
@@ -1051,11 +1078,10 @@ function DashboardContent() {
                             </td>
                             <td className="px-6 py-4 text-gray-400 text-sm">{new Date(order.created_at).toLocaleDateString("en-GB")}</td>
                             <td className="px-6 py-4">
-                              <Button onClick={async () => {
-                                if (!confirm("Delete this order?")) return;
+                              <Button onClick={() => showConfirm("Delete Order", "Are you sure you want to delete this order? This action cannot be undone.", async () => {
                                 try { await deleteOrder(order.id); await refreshOrders(); toast.success("Order deleted"); }
                                 catch { toast.error("Failed to delete order"); }
-                              }} className="text-red-400 hover:text-red-300 p-2 h-auto"><Trash2 size={16} /></Button>
+                              })} className="text-red-400 hover:text-red-300 p-2 h-auto"><Trash2 size={16} /></Button>
                             </td>
                           </tr>
                         ))}
@@ -1169,11 +1195,10 @@ function DashboardContent() {
                             <option value="contacted">Contacted</option>
                             <option value="closed">Closed</option>
                           </select>
-                          <Button onClick={async () => {
-                            if (!confirm("Delete this inquiry?")) return;
+                          <Button onClick={() => showConfirm("Delete Inquiry", "Are you sure you want to delete this inquiry? This action cannot be undone.", async () => {
                             try { await deleteContact(contact.id); await refreshContacts(); toast.success("Inquiry deleted"); }
                             catch { toast.error("Failed to delete"); }
-                          }} className="text-red-400 hover:text-red-300 p-2 h-auto border border-red-800/30 rounded"><Trash2 size={14} /></Button>
+                          })} className="text-red-400 hover:text-red-300 p-2 h-auto border border-red-800/30 rounded"><Trash2 size={14} /></Button>
                         </div>
                       </div>
                     </div>
@@ -1293,11 +1318,10 @@ function DashboardContent() {
                               toast.success("Offer updated");
                             } catch { toast.error("Failed to update offer"); }
                           }} className="bg-[#0a0a0a] border border-gray-800 text-white rounded px-3 py-1.5 text-sm w-28 h-auto" />
-                          <Button onClick={async () => {
-                            if (!confirm("Delete this submission?")) return;
+                          <Button onClick={() => showConfirm("Delete Submission", "Are you sure you want to delete this submission? This action cannot be undone.", async () => {
                             try { await deleteSellSubmission(sub.id); await refreshSellSubmissions(); toast.success("Submission deleted"); }
                             catch { toast.error("Failed to delete"); }
-                          }} className="text-red-400 hover:text-red-300 p-2 h-auto border border-red-800/30 rounded"><Trash2 size={14} /></Button>
+                          })} className="text-red-400 hover:text-red-300 p-2 h-auto border border-red-800/30 rounded"><Trash2 size={14} /></Button>
                         </div>
                       </div>
                     </div>
@@ -1369,11 +1393,10 @@ function DashboardContent() {
                             </td>
                             <td className="px-6 py-4 text-gray-400 text-sm">{new Date(sub.created_at).toLocaleDateString("en-GB")}</td>
                             <td className="px-6 py-4">
-                              <Button onClick={async () => {
-                                if (!confirm(`Remove ${sub.email}?`)) return;
+                              <Button onClick={() => showConfirm("Remove Subscriber", `Are you sure you want to remove ${sub.email}? This action cannot be undone.`, async () => {
                                 try { await removeSubscriber(sub.id); await refreshNewsletters(); toast.success("Subscriber removed"); }
                                 catch { toast.error("Failed to remove"); }
-                              }} className="text-red-400 hover:text-red-300 p-2 h-auto"><Trash2 size={14} /></Button>
+                              })} className="text-red-400 hover:text-red-300 p-2 h-auto"><Trash2 size={14} /></Button>
                             </td>
                           </tr>
                         ))}
@@ -1466,6 +1489,19 @@ function DashboardContent() {
           </div>
         </DialogContent>
       </Dialog>
+
+      <AlertDialog open={confirmDialog.open} onOpenChange={(open) => { if (!open) setConfirmDialog((prev) => ({ ...prev, open: false })); }}>
+        <AlertDialogContent className="bg-[#0a0a0a] border border-gray-800">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-white">{confirmDialog.title}</AlertDialogTitle>
+            <AlertDialogDescription className="text-gray-400">{confirmDialog.description}</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel className="bg-gray-900 text-white border-gray-700 hover:bg-gray-800 hover:text-white">Cancel</AlertDialogCancel>
+            <AlertDialogAction className="bg-red-600 text-white hover:bg-red-700" onClick={() => { confirmDialog.onConfirm(); }}>Delete</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
       {previewImage && (
         <div className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setPreviewImage(null)}>

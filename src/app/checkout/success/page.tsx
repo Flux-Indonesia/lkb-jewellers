@@ -63,7 +63,7 @@ function CheckoutSuccessPageContent() {
             <Button asChild className="bg-white text-black hover:bg-gray-200 tracking-widest text-sm px-8 py-3 h-auto">
               <Link href="/contact">CONTACT US</Link>
             </Button>
-            <Button asChild variant="outline" className="border-gray-700 text-white hover:bg-gray-900 tracking-widest text-sm px-8 py-3 h-auto">
+            <Button asChild className="bg-transparent text-white border border-white hover:bg-white hover:text-black tracking-widest text-sm px-8 py-3 h-auto">
               <Link href="/">GO HOME</Link>
             </Button>
           </div>
