@@ -44,8 +44,8 @@ export async function POST(req: NextRequest) {
           shipping_details: shipping,
         });
       } catch (err) {
-        console.error("Webhook fulfillOrder error:", err);
-        return NextResponse.json({ error: "Fulfillment failed" }, { status: 500 });
+        console.error("Webhook fulfillOrder error:", err instanceof Error ? err.message : err);
+        return NextResponse.json({ error: "Fulfillment failed", detail: err instanceof Error ? err.message : "Unknown error" }, { status: 500 });
       }
     }
   }
