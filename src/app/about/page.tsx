@@ -87,7 +87,7 @@ export default function AboutPage() {
 					className="absolute inset-0 bg-cover"
 					style={{
 						backgroundImage: "url('/about-us/IMG_0007.jpg')",
-						backgroundPosition: "center 40%",
+						backgroundPosition: "center 55%",
 					}}
 				/>
 				<div className="absolute inset-0 bg-black/60" />
@@ -361,6 +361,39 @@ export default function AboutPage() {
 					</div>
 				</div>
 			</section>}
+
+			{/* Our Boutique Teaser */}
+			<section className="py-20 md:py-28 px-6">
+				<div className="container mx-auto max-w-6xl">
+					<div className="relative overflow-hidden border border-gray-800 group">
+						<div className="absolute inset-0">
+							<Image
+								src="/images/static/showroom-entry.jpg"
+								alt="LKB Jewellers Boutique"
+								fill
+								className="object-cover opacity-40 group-hover:opacity-50 group-hover:scale-105 transition-all duration-700"
+								sizes="100vw"
+							/>
+							<div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/40" />
+						</div>
+						<div className="relative z-10 p-10 md:p-16 flex flex-col md:flex-row items-center md:items-end justify-between gap-8">
+							<div>
+								<span className="text-[#D4AF37] text-xs tracking-[0.4em] uppercase mb-4 block">Hatton Garden, London</span>
+								<h2 className="text-4xl md:text-5xl text-white font-heading mb-4">Our Boutique</h2>
+								<p className="text-gray-400 text-lg max-w-lg font-display">
+									A private sanctuary for luxury timepieces and bespoke jewellery. Visit us by appointment at the heart of London&apos;s jewellery quarter.
+								</p>
+							</div>
+							<Link
+								href="/about/our-boutique"
+								className="flex-shrink-0 inline-flex items-center gap-3 bg-white text-black px-8 py-4 text-sm font-bold tracking-widest hover:bg-[#D4AF37] transition-all duration-300 whitespace-nowrap"
+							>
+								EXPLORE BOUTIQUE <ArrowRight size={16} />
+							</Link>
+						</div>
+					</div>
+				</div>
+			</section>
 
 			{/* Start Your Journey CTA */}
 			<section className="py-32 text-center px-6">

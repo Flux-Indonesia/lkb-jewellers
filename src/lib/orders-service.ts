@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import { sendOrderConfirmation, notifyAdminOrder } from "@/lib/email";
+import { sendOrderConfirmation, notifyAdminOrder, sendGuestAccountCreated } from "@/lib/email";
 
 function createServiceClient() {
   return createClient(
@@ -85,6 +85,30 @@ export async function fulfillOrder(session: {
   const isNewOrder = order && (Date.now() - new Date(order.created_at).getTime()) < 60_000;
 
   if (isNewOrder) {
+    // Auto-create guest account if email not already registered
+    if (customerEmail) {
+      try {
+        const { data: existingUsers } = await supabase.auth.admin.listUsers();
+        const alreadyExists = existingUsers?.users?.some((u) => u.email === customerEmail);
+        if (!alreadyExists) {
+          const tempPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-4).toUpperCase();
+          const { error: createErr } = await supabase.auth.admin.createUser({
+            email: customerEmail,
+            password: tempPassword,
+            email_confirm: true,
+            user_metadata: { full_name: billingName },
+          });
+          if (!createErr) {
+            sendGuestAccountCreated(customerEmail, billingName, tempPassword).catch(
+              (err) => console.error("Guest account email error:", err)
+            );
+          }
+        }
+      } catch (err) {
+        console.error("Guest account creation error:", err);
+      }
+    }
+
     // Send emails (non-blocking)
     if (customerEmail) {
       Promise.allSettled([
