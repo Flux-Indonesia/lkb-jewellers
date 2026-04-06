@@ -52,9 +52,20 @@ export async function fulfillOrder(session: {
   const customerEmail = customer?.email || "";
   const shippingName = shipping?.name || billingName;
 
+  const paymentIntentId = (session.payment_intent as string) || session.id;
+
+  // Check if order already exists before upsert
+  const { data: existing } = await supabase
+    .from("orders")
+    .select("id")
+    .eq("payment_intent_id", paymentIntentId)
+    .maybeSingle();
+
+  const isNewOrder = !existing;
+
   // Upsert prevents race condition — duplicate insert becomes a no-op
-  const { data: order } = await supabase.from("orders").upsert({
-    payment_intent_id: (session.payment_intent as string) || session.id,
+  await supabase.from("orders").upsert({
+    payment_intent_id: paymentIntentId,
     amount,
     currency,
     status: "paid",
@@ -79,10 +90,7 @@ export async function fulfillOrder(session: {
         : "",
     }),
     items,
-  }, { onConflict: "payment_intent_id", ignoreDuplicates: true }).select("id, created_at").maybeSingle();
-
-  // Check if this is a newly created order (created within last 60 seconds)
-  const isNewOrder = order && (Date.now() - new Date(order.created_at).getTime()) < 60_000;
+  }, { onConflict: "payment_intent_id", ignoreDuplicates: true });
 
   if (isNewOrder) {
     // Auto-create guest account if email not already registered
@@ -107,7 +115,7 @@ export async function fulfillOrder(session: {
       }
     }
 
-    // Send emails
+    // Send order confirmation emails
     if (customerEmail) {
       await Promise.allSettled([
         sendOrderConfirmation(customerEmail, billingName, session.id, amount, currency, items),
@@ -131,5 +139,5 @@ export async function fulfillOrder(session: {
     }
   }
 
-  return !!isNewOrder;
+  return isNewOrder;
 }
