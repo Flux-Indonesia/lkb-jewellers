@@ -9,6 +9,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 const ALLOWED_ORIGINS = [
   "https://www.lkbjewellers.com",
   "https://lkbjewellers.com",
+  "https://lkb-jewellers.vercel.app",
   "http://localhost:3000",
 ];
 
