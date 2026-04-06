@@ -99,9 +99,7 @@ export async function fulfillOrder(session: {
             user_metadata: { full_name: billingName },
           });
           if (!createErr) {
-            sendGuestAccountCreated(customerEmail, billingName, tempPassword).catch(
-              (err) => console.error("Guest account email error:", err)
-            );
+            await sendGuestAccountCreated(customerEmail, billingName, tempPassword);
           }
         }
       } catch (err) {
@@ -109,12 +107,12 @@ export async function fulfillOrder(session: {
       }
     }
 
-    // Send emails (non-blocking)
+    // Send emails
     if (customerEmail) {
-      Promise.allSettled([
+      await Promise.allSettled([
         sendOrderConfirmation(customerEmail, billingName, session.id, amount, currency, items),
         notifyAdminOrder(billingName, customerEmail, amount, currency),
-      ]).catch((err) => console.error("Order email error:", err));
+      ]);
     }
 
     // Decrement stock
