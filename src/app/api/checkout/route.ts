@@ -11,6 +11,7 @@ const ALLOWED_ORIGINS = [
   "https://lkbjewellers.com",
   "https://lkb-jewellers.vercel.app",
   "http://localhost:3000",
+  "http://localhost:3001",
 ];
 
 interface CartItem {
@@ -21,7 +22,10 @@ interface CartItem {
 export async function POST(req: NextRequest) {
   // CSRF: check origin
   const origin = req.headers.get("origin");
-  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+  const isAllowed = !origin ||
+    ALLOWED_ORIGINS.includes(origin) ||
+    origin.endsWith(".vercel.app");
+  if (!isAllowed) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
