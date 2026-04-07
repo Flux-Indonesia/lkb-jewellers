@@ -7,7 +7,8 @@
       "Bash(sort -k6,7 -r)",
       "Bash(node -e \":*)",
       "Bash(npm install:*)",
-      "Bash(node -e ':*)"
+      "Bash(node -e ':*)",
+      "WebFetch(domain:57-jewellers.com)"
     ],
     "additionalDirectories": [
       "d:\\Project\\Flux\\lkb-clone\\public"
