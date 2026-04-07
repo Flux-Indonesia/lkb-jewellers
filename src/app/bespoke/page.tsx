@@ -46,8 +46,8 @@ const galleryImages1 = [
 ];
 
 const portfolioImages = [
-	{ src: "/bespoke/timeless-photos-2.jpg", alt: "Bespoke Work 1" },
-	{ src: "/bespoke/bracelets-1.jpg", alt: "Bespoke Work 2" },
+	{ src: "/bespoke/IMG_5654.JPG", alt: "Bespoke Work 1" },
+	{ src: "/bespoke/IMG_5653.JPG", alt: "Bespoke Work 2" },
 	{ src: "/bespoke/timeless-photos-3.jpg", alt: "Bespoke Work 3" },
 ];
 
@@ -314,10 +314,10 @@ export default function BespokePage() {
 				{/* Images Row */}
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 					<div className="relative h-72 sm:h-80 md:h-96 overflow-hidden">
-						<Image src="/bespoke/davido.jpg" alt="Dedicated Client Advisors" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+						<Image src="/IMG_3708.JPG" alt="Dedicated Client Advisors" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
 					</div>
 					<div className="relative h-72 sm:h-80 md:h-96 overflow-hidden">
-						<Image src="/bespoke/tade-chain-12.jpg" alt="Master Artisans" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+						<Image src="/bespoke/IMG_8744.JPG" alt="Master Artisans" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
 					</div>
 					<div className="relative h-72 sm:h-80 md:h-96 overflow-hidden">
 						<Image src="/bespoke/jefe-cover-blogs.jpg" alt="Celebrating Moments" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
