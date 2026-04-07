@@ -73,7 +73,7 @@ export default function OurBoutiquePage() {
 							{/* Floating badge */}
 							<div className="absolute -bottom-6 -left-6 bg-[#0a0a0a] border border-gray-800 p-6 max-w-[220px] hidden md:block">
 								<p className="text-[#D4AF37] text-xs tracking-[0.3em] uppercase mb-1">Est.</p>
-								<p className="text-white text-3xl font-bold font-heading">2009</p>
+								<p className="text-white text-3xl font-bold font-heading">2019</p>
 								<p className="text-gray-500 text-xs mt-1">Hatton Garden, London</p>
 							</div>
 						</div>

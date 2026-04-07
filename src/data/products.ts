@@ -70,7 +70,7 @@ export const navMenuData = {
         name: "Richard Mille",
         desc: "Revolutionary ultra-lightweight timepieces",
         link: "/shop?brand=richard-mille",
-        image: "/RM1103 & Nisha-11.jpg",
+        image: "/RM1103-Nisha-11.jpg",
       },
     ],
   },
