@@ -77,7 +77,12 @@ function LoginPageContent() {
           </div>
 
           <div className="space-y-2">
-            <Label className="text-gray-400 text-xs tracking-widest uppercase">Password</Label>
+            <div className="flex items-center justify-between">
+              <Label className="text-gray-400 text-xs tracking-widest uppercase">Password</Label>
+              <Link href="/forgot-password" className="text-gray-500 text-xs hover:text-white transition-colors">
+                Forgot password?
+              </Link>
+            </div>
             <div className="relative">
               <Input
                 type={showPassword ? "text" : "password"}

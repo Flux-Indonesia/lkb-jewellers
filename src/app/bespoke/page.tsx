@@ -46,9 +46,9 @@ const galleryImages1 = [
 ];
 
 const portfolioImages = [
-	{ src: "/bespoke/timeless-photos-2.jpg", alt: "Bespoke Work 1" },
-	{ src: "/bespoke/bracelets-1.jpg", alt: "Bespoke Work 2" },
-	{ src: "/bespoke/timeless-photos-3.jpg", alt: "Bespoke Work 3" },
+	{ src: "/bespoke/IMG_5654.JPG", alt: "Bespoke Work 1" },
+	{ src: "/bespoke/IMG_5653.JPG", alt: "Bespoke Work 2" },
+	{ src: "/bespoke/IMG_1487.JPG", alt: "Bespoke Work 3" },
 ];
 
 export default function BespokePage() {
@@ -314,10 +314,10 @@ export default function BespokePage() {
 				{/* Images Row */}
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 					<div className="relative h-72 sm:h-80 md:h-96 overflow-hidden">
-						<Image src="/bespoke/davido.jpg" alt="Dedicated Client Advisors" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+						<Image src="/IMG_3708.JPG" alt="Dedicated Client Advisors" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
 					</div>
 					<div className="relative h-72 sm:h-80 md:h-96 overflow-hidden">
-						<Image src="/bespoke/tade-chain-12.jpg" alt="Master Artisans" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+						<Image src="/bespoke/IMG_8744.JPG" alt="Master Artisans" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
 					</div>
 					<div className="relative h-72 sm:h-80 md:h-96 overflow-hidden">
 						<Image src="/bespoke/jefe-cover-blogs.jpg" alt="Celebrating Moments" fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
@@ -409,8 +409,8 @@ export default function BespokePage() {
 				</div>
 				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
 					{portfolioImages.map((img, i) => (
-						<div key={i} className={`overflow-hidden rounded-lg group relative h-72 sm:h-80 md:h-96 ${i === 2 ? "sm:col-span-2 md:col-span-1" : ""}`}>
-							<Image src={img.src} alt={img.alt} fill className="object-cover hover:scale-110 transition-transform duration-700 group-hover:brightness-110" sizes="(max-width: 768px) 100vw, 33vw" />
+						<div key={i} className={`overflow-hidden rounded-lg group ${i === 2 ? "sm:col-span-2 md:col-span-1" : ""}`}>
+							<Image src={img.src} alt={img.alt} width={0} height={0} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto hover:scale-105 transition-transform duration-700 group-hover:brightness-110" />
 						</div>
 					))}
 				</div>

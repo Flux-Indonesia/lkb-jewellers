@@ -70,8 +70,7 @@ export const navMenuData = {
         name: "Richard Mille",
         desc: "Revolutionary ultra-lightweight timepieces",
         link: "/shop?brand=richard-mille",
-        image:
-          "/images/static/nav-rm.jpg",
+        image: "/RM1103 & Nisha-11.jpg",
       },
     ],
   },
@@ -83,13 +82,13 @@ export const navMenuData = {
         name: "Chains",
         desc: "Cuban links, rope chains & tennis necklaces",
         link: "/shop?category=chains",
-        image: "/images/static/nav-chain.jpg",
+        image: "/IMG_3595.JPG",
       },
       {
         name: "Bracelets",
         desc: "Diamond & gold statement pieces",
         link: "/shop?category=bracelets",
-        image: "/images/static/nav-chain.jpg",
+        image: "/_B8A6461.jpg",
       },
       {
         name: "Rings",
@@ -101,7 +100,7 @@ export const navMenuData = {
         name: "Pendants",
         desc: "Custom designs & classic motifs",
         link: "/shop?category=pendants",
-        image: "/images/static/nav-pendant.jpg",
+        image: "/IMG_0711.JPG",
       },
     ],
   },
@@ -155,7 +154,7 @@ export const navMenuData = {
         name: "Sell",
         desc: "Get competitive valuations for your exclusive items",
         link: "/we-buy",
-        image: "/images/static/nav-patek.jpg",
+        image: "/RichardMilleChandellier-RA-5.jpg",
       },
       {
         name: "Watches/Jewellery Servicing",
