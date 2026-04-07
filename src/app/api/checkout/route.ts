@@ -134,8 +134,9 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const baseUrl =
-      process.env.NEXT_PUBLIC_BASE_URL || "https://www.lkbjewellers.com";
+    const host = req.headers.get("host") || "www.lkbjewellers.com";
+    const proto = host.includes("localhost") ? "http" : "https";
+    const baseUrl = `${proto}://${host}`;
 
     // Build order items metadata for saving after payment
     const orderItems = items.map((item: CartItem) => {
