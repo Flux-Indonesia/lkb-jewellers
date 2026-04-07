@@ -3,8 +3,10 @@
 import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Eye, EyeOff, Mail, Lock, ArrowRight } from "lucide-react";
+import { Eye, EyeOff, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { createClient } from "@/lib/supabase";
 
 function LoginPageContent() {
@@ -25,10 +27,7 @@ function LoginPageContent() {
     setLoading(true);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
 
       if (!error) {
         toast.success("Welcome back!");
@@ -59,67 +58,57 @@ function LoginPageContent() {
             <span className="text-gray-500 text-xs tracking-[0.3em] uppercase">Sign In</span>
             <div className="h-px w-12 bg-gray-700" />
           </div>
-          <p className="text-gray-400 text-sm">
-            Sign in to your account to continue
-          </p>
+          <p className="text-gray-400 text-sm">Sign in to your account to continue</p>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Email */}
-          <div className="relative">
-            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
-            <input
+          <div className="space-y-2">
+            <Label className="text-gray-400 text-xs tracking-widest uppercase">Email Address</Label>
+            <Input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email Address"
-              className="w-full bg-transparent border border-gray-800 text-white pl-14 pr-4 py-4 text-sm tracking-wider focus:outline-none focus:border-white transition-colors placeholder:text-gray-600"
+              placeholder="you@example.com"
+              className="bg-transparent border-gray-800 text-white placeholder:text-gray-600 focus-visible:ring-0 focus-visible:border-white py-6 text-sm"
               disabled={loading}
               autoFocus
             />
           </div>
 
-          {/* Password */}
-          <div className="relative">
-            <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
-            <input
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-              className="w-full bg-transparent border border-gray-800 text-white pl-14 pr-12 py-4 text-sm tracking-wider focus:outline-none focus:border-white transition-colors placeholder:text-gray-600"
-              disabled={loading}
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition-colors"
-              disabled={loading}
-            >
-              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-            </button>
+          <div className="space-y-2">
+            <Label className="text-gray-400 text-xs tracking-widest uppercase">Password</Label>
+            <div className="relative">
+              <Input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                className="bg-transparent border-gray-800 text-white placeholder:text-gray-600 focus-visible:ring-0 focus-visible:border-white py-6 text-sm pr-12"
+                disabled={loading}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition-colors"
+                disabled={loading}
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
           </div>
 
-          {error && (
-            <p className="text-red-400 text-sm text-center">{error}</p>
-          )}
+          {error && <p className="text-red-400 text-sm text-center">{error}</p>}
 
-          {/* Submit */}
           <button
             type="submit"
             className="w-full bg-white text-black py-4 text-sm font-bold tracking-[0.2em] uppercase hover:bg-gray-200 transition-all duration-300 active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
             disabled={loading}
           >
-            {loading ? "Signing In..." : (
-              <>
-                Sign In <ArrowRight size={16} />
-              </>
-            )}
+            {loading ? "Signing In..." : <> Sign In <ArrowRight size={16} /> </>}
           </button>
         </form>
 
-        {/* Footer Links */}
         <div className="mt-8 text-center">
           <p className="text-gray-500 text-sm">
             Don&apos;t have an account?{" "}
