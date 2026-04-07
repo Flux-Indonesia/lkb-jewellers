@@ -154,7 +154,7 @@ export const navMenuData = {
         name: "Sell",
         desc: "Get competitive valuations for your exclusive items",
         link: "/we-buy",
-        image: "/RM1103 & Nisha-11.jpg",
+        image: "/RichardMilleChandellier-RA-5.jpg",
       },
       {
         name: "Watches/Jewellery Servicing",
