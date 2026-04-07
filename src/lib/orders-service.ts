@@ -93,10 +93,23 @@ export async function fulfillOrder(session: {
   }, { onConflict: "payment_intent_id", ignoreDuplicates: true });
 
   if (isNewOrder) {
+    // Send order confirmation emails first
+    if (customerEmail) {
+      console.log("[fulfillOrder] Sending order emails to:", customerEmail);
+      const emailResults = await Promise.allSettled([
+        sendOrderConfirmation(customerEmail, billingName, session.id, amount, currency, items),
+        notifyAdminOrder(billingName, customerEmail, amount, currency),
+      ]);
+      emailResults.forEach((r, i) => {
+        if (r.status === "rejected") console.error(`[fulfillOrder] Email ${i} failed:`, r.reason);
+        else console.log(`[fulfillOrder] Email ${i} sent OK`);
+      });
+    }
+
     // Auto-create guest account if email not already registered
     if (customerEmail) {
       try {
-        const { data: existingUsers } = await supabase.auth.admin.listUsers();
+        const { data: existingUsers } = await supabase.auth.admin.listUsers({ perPage: 1000 });
         const alreadyExists = existingUsers?.users?.some((u) => u.email === customerEmail);
         if (!alreadyExists) {
           const tempPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-4).toUpperCase();
@@ -113,14 +126,6 @@ export async function fulfillOrder(session: {
       } catch (err) {
         console.error("Guest account creation error:", err);
       }
-    }
-
-    // Send order confirmation emails
-    if (customerEmail) {
-      await Promise.allSettled([
-        sendOrderConfirmation(customerEmail, billingName, session.id, amount, currency, items),
-        notifyAdminOrder(billingName, customerEmail, amount, currency),
-      ]);
     }
 
     // Decrement stock
