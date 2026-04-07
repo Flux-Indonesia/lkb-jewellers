@@ -206,6 +206,30 @@ export async function sendSignupWelcome(to: string, name: string) {
   });
 }
 
+export async function sendGuestAccountCreated(to: string, name: string, password: string) {
+  await transporter.sendMail({
+    from: FROM,
+    to,
+    subject: "Your LKB Jewellers account is ready",
+    html: baseLayout(`
+      <h1 style="color:#1a1a1a;font-size:22px;margin:0 0 16px;text-align:center;">Your Account is Ready</h1>
+      <p style="color:#555555;font-size:14px;line-height:1.6;margin:0 0 16px;text-align:center;">
+        Hi ${esc(name || "there")}, we've created an account for you so you can track your order.
+      </p>
+      <div style="background:#f5f5f5;border-radius:6px;padding:20px 24px;margin:0 0 24px;text-align:left;">
+        <p style="color:#888888;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:0 0 4px;">Email</p>
+        <p style="color:#1a1a1a;font-size:14px;font-weight:bold;margin:0 0 16px;">${esc(to)}</p>
+        <p style="color:#888888;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:0 0 4px;">Temporary Password</p>
+        <p style="color:#1a1a1a;font-size:18px;font-weight:bold;letter-spacing:2px;margin:0;">${esc(password)}</p>
+      </div>
+      <p style="color:#555555;font-size:13px;line-height:1.6;margin:0 0 24px;text-align:center;">
+        Please change your password after logging in for the first time.
+      </p>
+      <a href="https://www.lkbjewellers.com/login" style="display:inline-block;background:#1a1a1a;color:#ffffff;padding:12px 32px;font-size:13px;font-weight:bold;text-decoration:none;letter-spacing:2px;">LOG IN TO YOUR ACCOUNT</a>
+    `),
+  });
+}
+
 // ─── Admin notification emails ──────────────────────────────────────────────
 
 export async function notifyAdminContact(name: string, email: string, interest: string, message: string) {

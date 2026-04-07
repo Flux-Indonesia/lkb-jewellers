@@ -52,21 +52,19 @@ export const navMenuData = {
         name: "Audemars Piguet",
         desc: "Masters of haute horlogerie since 1875",
         link: "/shop?brand=audemars-piguet",
-        image:
-          "/images/static/nav-ap.jpg",
+        image: "/DXZ09994.jpg",
       },
       {
         name: "Cartier",
         desc: "Timeless elegance and French savoir-faire",
         link: "/shop?brand=cartier",
-        image:
-          "/images/static/nav-cartier.jpg",
+        image: "/DXZ00043.jpg",
       },
       {
         name: "Patek Philippe",
         desc: "The ultimate symbol of prestige",
         link: "/shop?brand=patek-philippe",
-        image: "/images/static/nav-patek.jpg",
+        image: "/DXZ00023.jpg",
       },
       {
         name: "Richard Mille",
@@ -178,6 +176,12 @@ export const navMenuData = {
       //   link: "/hall-of-fame",
       //   image: "/about-us/hall-of-fame.jpg",
       // },
+      {
+        name: "Our Boutique",
+        desc: "Visit our Hatton Garden showroom by appointment",
+        link: "/about/our-boutique",
+        image: "/images/static/showroom-entry.jpg",
+      },
       {
         name: "LKB Foundation",
         desc: "Our commitment to giving back",

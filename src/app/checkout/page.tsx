@@ -3,17 +3,15 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ShoppingBag, Lock, Trash2, User } from "lucide-react";
+import { ShoppingBag, Lock, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useCart } from "@/context/cart-context";
-import { useAuth } from "@/context/auth-context";
 
 export default function CheckoutPage() {
   const { items, cartTotal, updateQuantity, removeFromCart, syncPrices } = useCart();
-  const { user, userLoading } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const syncedRef = useRef(false);
@@ -27,7 +25,6 @@ export default function CheckoutPage() {
 
   const handleCheckout = async () => {
     if (items.length === 0) return;
-    if (!user) return;
     setLoading(true);
     setError("");
 
@@ -52,14 +49,6 @@ export default function CheckoutPage() {
       setLoading(false);
     }
   };
-
-  if (userLoading) {
-    return (
-      <div className="bg-black min-h-screen pt-32 pb-24 px-4 flex items-center justify-center">
-        <div className="text-gray-400 text-xs tracking-widest uppercase">Loading...</div>
-      </div>
-    );
-  }
 
   return (
     <div className="bg-black min-h-screen pt-32 pb-24 px-4 md:px-6">
@@ -172,32 +161,14 @@ export default function CheckoutPage() {
                     <p className="text-red-500 text-sm mt-4">{error}</p>
                   )}
 
-                  {!user ? (
-                    <div className="mt-6">
-                      <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4 mb-4 text-center">
-                        <User className="w-8 h-8 text-gray-500 mx-auto mb-2" />
-                        <p className="text-gray-300 text-sm mb-1">Sign in to checkout</p>
-                        <p className="text-gray-500 text-xs">Create an account or log in to complete your purchase</p>
-                      </div>
-                      <div className="flex gap-3">
-                        <Button asChild className="flex-1 h-auto bg-white text-black font-bold tracking-widest py-3 text-sm hover:bg-gray-200 transition-all">
-                          <Link href="/login?redirect=/checkout">LOG IN</Link>
-                        </Button>
-                        <Button asChild className="flex-1 h-auto bg-transparent border border-white text-white font-bold tracking-widest py-3 text-sm hover:bg-white hover:text-black transition-all">
-                          <Link href="/signup?redirect=/checkout">REGISTER</Link>
-                        </Button>
-                      </div>
-                    </div>
-                  ) : (
-                    <Button
-                      onClick={handleCheckout}
-                      disabled={loading}
-                      className="h-auto w-full bg-white text-black font-bold tracking-widest py-4 text-sm hover:bg-gray-200 transition-all duration-300 active:scale-95 disabled:opacity-50 flex items-center justify-center gap-3 mt-6"
-                    >
-                      <Lock className="w-4 h-4" />
-                      {loading ? "REDIRECTING..." : "PAY WITH STRIPE"}
-                    </Button>
-                  )}
+                  <Button
+                    onClick={handleCheckout}
+                    disabled={loading}
+                    className="h-auto w-full bg-white text-black font-bold tracking-widest py-4 text-sm hover:bg-gray-200 transition-all duration-300 active:scale-95 disabled:opacity-50 flex items-center justify-center gap-3 mt-6"
+                  >
+                    <Lock className="w-4 h-4" />
+                    {loading ? "REDIRECTING..." : "PAY WITH STRIPE"}
+                  </Button>
 
                   <div className="mt-4 flex items-center gap-2 text-gray-500 text-xs">
                     <Lock className="w-3 h-3" />

@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { createClient } from "@/lib/supabase";
-import { createClient as createServerClient } from "@/lib/supabase-server";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2026-03-25.dahlia",
@@ -10,7 +9,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 const ALLOWED_ORIGINS = [
   "https://www.lkbjewellers.com",
   "https://lkbjewellers.com",
+  "https://lkb-jewellers.vercel.app",
   "http://localhost:3000",
+  "http://localhost:3001",
 ];
 
 interface CartItem {
@@ -21,18 +22,14 @@ interface CartItem {
 export async function POST(req: NextRequest) {
   // CSRF: check origin
   const origin = req.headers.get("origin");
-  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+  const isAllowed = !origin ||
+    ALLOWED_ORIGINS.includes(origin) ||
+    origin.endsWith(".vercel.app");
+  if (!isAllowed) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
   try {
-    // Verify user is authenticated
-    const supabaseAuth = await createServerClient();
-    const { data: { user } } = await supabaseAuth.auth.getUser();
-    if (!user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
     const body = await req.json();
     const { items } = body as { items: CartItem[] };
 
@@ -137,8 +134,9 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const baseUrl =
-      process.env.NEXT_PUBLIC_BASE_URL || "https://www.lkbjewellers.com";
+    const host = req.headers.get("host") || "www.lkbjewellers.com";
+    const proto = host.includes("localhost") ? "http" : "https";
+    const baseUrl = `${proto}://${host}`;
 
     // Build order items metadata for saving after payment
     const orderItems = items.map((item: CartItem) => {

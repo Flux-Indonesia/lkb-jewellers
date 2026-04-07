@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import { sendOrderConfirmation, notifyAdminOrder } from "@/lib/email";
+import { sendOrderConfirmation, notifyAdminOrder, sendGuestAccountCreated } from "@/lib/email";
 
 function createServiceClient() {
   return createClient(
@@ -52,9 +52,20 @@ export async function fulfillOrder(session: {
   const customerEmail = customer?.email || "";
   const shippingName = shipping?.name || billingName;
 
+  const paymentIntentId = (session.payment_intent as string) || session.id;
+
+  // Check if order already exists before upsert
+  const { data: existing } = await supabase
+    .from("orders")
+    .select("id")
+    .eq("payment_intent_id", paymentIntentId)
+    .maybeSingle();
+
+  const isNewOrder = !existing;
+
   // Upsert prevents race condition — duplicate insert becomes a no-op
-  const { data: order } = await supabase.from("orders").upsert({
-    payment_intent_id: (session.payment_intent as string) || session.id,
+  await supabase.from("orders").upsert({
+    payment_intent_id: paymentIntentId,
     amount,
     currency,
     status: "paid",
@@ -79,18 +90,42 @@ export async function fulfillOrder(session: {
         : "",
     }),
     items,
-  }, { onConflict: "payment_intent_id", ignoreDuplicates: true }).select("id, created_at").maybeSingle();
-
-  // Check if this is a newly created order (created within last 60 seconds)
-  const isNewOrder = order && (Date.now() - new Date(order.created_at).getTime()) < 60_000;
+  }, { onConflict: "payment_intent_id", ignoreDuplicates: true });
 
   if (isNewOrder) {
-    // Send emails (non-blocking)
+    // Send order confirmation emails first
     if (customerEmail) {
-      Promise.allSettled([
+      console.log("[fulfillOrder] Sending order emails to:", customerEmail);
+      const emailResults = await Promise.allSettled([
         sendOrderConfirmation(customerEmail, billingName, session.id, amount, currency, items),
         notifyAdminOrder(billingName, customerEmail, amount, currency),
-      ]).catch((err) => console.error("Order email error:", err));
+      ]);
+      emailResults.forEach((r, i) => {
+        if (r.status === "rejected") console.error(`[fulfillOrder] Email ${i} failed:`, r.reason);
+        else console.log(`[fulfillOrder] Email ${i} sent OK`);
+      });
+    }
+
+    // Auto-create guest account if email not already registered
+    if (customerEmail) {
+      try {
+        const { data: existingUsers } = await supabase.auth.admin.listUsers({ perPage: 1000 });
+        const alreadyExists = existingUsers?.users?.some((u) => u.email === customerEmail);
+        if (!alreadyExists) {
+          const tempPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-4).toUpperCase();
+          const { error: createErr } = await supabase.auth.admin.createUser({
+            email: customerEmail,
+            password: tempPassword,
+            email_confirm: true,
+            user_metadata: { full_name: billingName },
+          });
+          if (!createErr) {
+            await sendGuestAccountCreated(customerEmail, billingName, tempPassword);
+          }
+        }
+      } catch (err) {
+        console.error("Guest account creation error:", err);
+      }
     }
 
     // Decrement stock
@@ -109,5 +144,5 @@ export async function fulfillOrder(session: {
     }
   }
 
-  return !!isNewOrder;
+  return isNewOrder;
 }
