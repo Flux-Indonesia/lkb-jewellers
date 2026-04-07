@@ -82,7 +82,7 @@ export const navMenuData = {
         name: "Chains",
         desc: "Cuban links, rope chains & tennis necklaces",
         link: "/shop?category=chains",
-        image: "/images/static/nav-chain.jpg",
+        image: "/IMG_3595.JPG",
       },
       {
         name: "Bracelets",
@@ -100,7 +100,7 @@ export const navMenuData = {
         name: "Pendants",
         desc: "Custom designs & classic motifs",
         link: "/shop?category=pendants",
-        image: "/IMG_3595.JPG",
+        image: "/IMG_0711.JPG",
       },
     ],
   },
