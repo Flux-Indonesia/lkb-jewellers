@@ -13,7 +13,9 @@ export async function POST(req: NextRequest) {
     const { items, shipping_country } = body as {
       items: CheckoutItemInput[];
       shipping_country?: string;
+      delivery_type?: "deliver" | "collect";
     };
+    const deliveryType = body?.delivery_type === "collect" ? "collect" : "deliver";
 
     if (!Array.isArray(items) || items.length === 0) {
       return NextResponse.json({ error: "Cart is empty" }, { status: 400 });
@@ -53,13 +55,14 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid shipping country" }, { status: 400 });
     }
 
-    const pricing = buildCheckoutPricing(items, productMap, normalizedShippingCountry);
+    const pricing = buildCheckoutPricing(items, productMap, normalizedShippingCountry, deliveryType);
 
     return NextResponse.json({
       subtotal_gbp: pricing.subtotalGbp,
       shipping_required: pricing.hatShippingRequired,
       shipping_country_required: pricing.shippingCountryRequired,
       shipping_country: pricing.selectedShippingCountry,
+      delivery_type: pricing.deliveryType,
       shipping: pricing.hatShippingRequired && pricing.selectedShippingCountry
         ? {
           amount_gbp: pricing.postageGbp,
@@ -67,7 +70,14 @@ export async function POST(req: NextRequest) {
           uk_gbp: HAT_UK_POSTAGE_FEE_GBP,
           international_gbp: HAT_INTERNATIONAL_POSTAGE_FEE_GBP,
         }
-        : null,
+        : pricing.deliveryType === "collect"
+          ? {
+            amount_gbp: 0,
+            label: "Collect in store",
+            uk_gbp: HAT_UK_POSTAGE_FEE_GBP,
+            international_gbp: HAT_INTERNATIONAL_POSTAGE_FEE_GBP,
+          }
+          : null,
       total_gbp: pricing.subtotalGbp + pricing.postageGbp,
     });
   } catch (err) {

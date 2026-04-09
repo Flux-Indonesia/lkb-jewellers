@@ -39,7 +39,9 @@ export async function POST(req: NextRequest) {
     const { items, shipping_country } = body as {
       items: CartItem[];
       shipping_country?: string;
+      delivery_type?: "deliver" | "collect";
     };
+    const deliveryType = body?.delivery_type === "collect" ? "collect" : "deliver";
 
     // Validate items array
     if (!Array.isArray(items) || items.length === 0) {
@@ -99,7 +101,8 @@ export async function POST(req: NextRequest) {
     const pricing = buildCheckoutPricing(
       items,
       productMap as Map<string, CheckoutProductRecord>,
-      normalizedShippingCountry
+      normalizedShippingCountry,
+      deliveryType
     );
 
     if (pricing.shippingCountryRequired && !pricing.selectedShippingCountry) {
@@ -139,6 +142,7 @@ export async function POST(req: NextRequest) {
         subtotal_gbp: String(pricing.subtotalGbp),
         shipping_country: pricing.selectedShippingCountry || "",
         postage_gbp: String(pricing.postageGbp),
+        delivery_type: pricing.deliveryType,
       },
       success_url: `${baseUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}/checkout`,

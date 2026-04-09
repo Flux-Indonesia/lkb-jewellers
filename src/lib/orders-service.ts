@@ -48,6 +48,7 @@ export async function fulfillOrder(session: {
 
   const amount = (session.amount_total || 0) / 100;
   const currency = session.currency || "gbp";
+  const deliveryType = session.metadata?.delivery_type || "deliver";
   const billingName = customer?.name || "";
   const customerEmail = customer?.email || "";
   const shippingName = shipping?.name || billingName;
@@ -81,8 +82,10 @@ export async function fulfillOrder(session: {
     state: shipping?.address?.state || "",
     postal_code: shipping?.address?.postal_code || "",
     country: shipping?.address?.country || "",
+    delivery_type: deliveryType,
     // Extra details: shipping name, billing address
     notes: JSON.stringify({
+      delivery_type: deliveryType,
       shipping_name: shippingName,
       billing_name: billingName,
       billing_address: billing

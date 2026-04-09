@@ -25,6 +25,7 @@ export interface CheckoutPricing {
   shippingCountryRequired: boolean;
   selectedShippingCountry: string | null;
   postageGbp: number;
+  deliveryType: "deliver" | "collect";
   shippingOptions: Array<{
     label: string;
     amountGbp: number;
@@ -52,7 +53,8 @@ function getImages(image?: string | null) {
 export function buildCheckoutPricing(
   items: CheckoutItemInput[],
   productMap: Map<string, CheckoutProductRecord>,
-  shippingCountry?: string | null
+  shippingCountry?: string | null,
+  deliveryType: "deliver" | "collect" = "deliver"
 ): CheckoutPricing {
   const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
   const orderItems: CheckoutPricing["orderItems"] = [];
@@ -114,7 +116,7 @@ export function buildCheckoutPricing(
     })
   );
 
-  const normalizedShippingCountry = hatShippingRequired
+  const normalizedShippingCountry = hatShippingRequired && deliveryType === "deliver"
     ? shippingCountry?.trim().toUpperCase() || null
     : null;
   const postageGbp = normalizedShippingCountry
@@ -124,9 +126,10 @@ export function buildCheckoutPricing(
   return {
     subtotalGbp,
     hatShippingRequired,
-    shippingCountryRequired: hatShippingRequired,
+    shippingCountryRequired: hatShippingRequired && deliveryType === "deliver",
     selectedShippingCountry: normalizedShippingCountry,
     postageGbp,
+    deliveryType,
     shippingOptions: hatShippingRequired && normalizedShippingCountry
       ? [
         {

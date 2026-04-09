@@ -23,6 +23,7 @@ interface CheckoutQuote {
   shipping_required: boolean;
   shipping_country_required: boolean;
   shipping_country: string | null;
+  delivery_type: "deliver" | "collect";
   shipping: {
     amount_gbp: number;
     label: string;
@@ -39,6 +40,7 @@ export default function CheckoutPage() {
   const [quote, setQuote] = useState<CheckoutQuote | null>(null);
   const [quoteLoading, setQuoteLoading] = useState(false);
   const [shippingCountry, setShippingCountry] = useState("GB");
+  const [deliveryType, setDeliveryType] = useState<"deliver" | "collect">("deliver");
   const syncedRef = useRef(false);
   const regionNamesRef = useRef<Intl.DisplayNames | null>(null);
 
@@ -82,6 +84,7 @@ export default function CheckoutPage() {
               quantity: item.quantity,
             })),
             shipping_country: shippingCountry,
+            delivery_type: deliveryType,
           }),
         });
 
@@ -112,7 +115,7 @@ export default function CheckoutPage() {
     return () => {
       cancelled = true;
     };
-  }, [items, shippingCountry]);
+  }, [items, shippingCountry, deliveryType]);
 
   const handleCheckout = async () => {
     if (items.length === 0) return;
@@ -123,7 +126,7 @@ export default function CheckoutPage() {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items, shipping_country: shippingCountry }),
+        body: JSON.stringify({ items, shipping_country: shippingCountry, delivery_type: deliveryType }),
       });
 
       const data = await res.json();
@@ -223,6 +226,24 @@ export default function CheckoutPage() {
                 </CardHeader>
                 <CardContent className="p-6 pt-6">
                   <div className="space-y-3">
+                    <div className="space-y-2">
+                      <label className="block text-xs text-gray-400 uppercase tracking-wider">
+                        Fulfilment
+                      </label>
+                      <Select value={deliveryType} onValueChange={(value: "deliver" | "collect") => setDeliveryType(value)}>
+                        <SelectTrigger className="w-full border-gray-800 bg-black text-white">
+                          <SelectValue placeholder="Select fulfilment" />
+                        </SelectTrigger>
+                        <SelectContent className="border-gray-800 bg-black text-white">
+                          <SelectItem value="deliver" className="text-white focus:bg-gray-800 focus:text-white">
+                            Deliver
+                          </SelectItem>
+                          <SelectItem value="collect" className="text-white focus:bg-gray-800 focus:text-white">
+                            Collect
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-400">
                         Subtotal ({items.reduce((s, i) => s + i.quantity, 0)} items)
@@ -237,11 +258,18 @@ export default function CheckoutPage() {
                       <span className="text-gray-400">Shipping</span>
                       <span className="text-white">
                         {quote?.shipping ? (
-                          <>&pound;{quote.shipping.amount_gbp.toLocaleString("en-GB", { minimumFractionDigits: 2 })}</>
+                          quote.delivery_type === "collect"
+                            ? "Collect"
+                            : <>&pound;{quote.shipping.amount_gbp.toLocaleString("en-GB", { minimumFractionDigits: 2 })}</>
                         ) : quote?.shipping_required ? "Select country" : quoteLoading ? "Calculating..." : "Free"}
                       </span>
                     </div>
                     <Separator className="bg-gray-800" />
+                    {quote?.delivery_type === "collect" && (
+                      <p className="text-xs text-gray-500">
+                        Collection selected. No delivery postage will be added.
+                      </p>
+                    )}
                     {quote?.shipping_country_required && (
                       <div className="space-y-2">
                         <label className="block text-xs text-gray-400 uppercase tracking-wider">
