@@ -49,9 +49,18 @@ export async function fulfillOrder(session: {
   const amount = (session.amount_total || 0) / 100;
   const currency = session.currency || "gbp";
   const deliveryType = session.metadata?.delivery_type || "deliver";
+  const subtotal = Number(session.metadata?.subtotal_gbp || 0);
+  const postage = Number(session.metadata?.postage_gbp || 0);
   const billingName = customer?.name || "";
   const customerEmail = customer?.email || "";
   const shippingName = shipping?.name || billingName;
+  const shippingCountry = session.metadata?.shipping_country || shipping?.address?.country || "";
+  const shippingAddress = shipping?.address
+    ? [shippingName, shipping.address.line1, shipping.address.line2, shipping.address.city, shipping.address.state, shipping.address.postal_code, shipping.address.country].filter(Boolean).join(", ")
+    : "";
+  const billingAddress = billing
+    ? [billing.line1, billing.line2, billing.city, billing.state, billing.postal_code, billing.country].filter(Boolean).join(", ")
+    : "";
 
   const paymentIntentId = (session.payment_intent as string) || session.id;
 
@@ -88,9 +97,8 @@ export async function fulfillOrder(session: {
       delivery_type: deliveryType,
       shipping_name: shippingName,
       billing_name: billingName,
-      billing_address: billing
-        ? [billing.line1, billing.line2, billing.city, billing.state, billing.postal_code, billing.country].filter(Boolean).join(", ")
-        : "",
+      shipping_address: shippingAddress,
+      billing_address: billingAddress,
     }),
     items,
   }, { onConflict: "payment_intent_id", ignoreDuplicates: true });
@@ -100,7 +108,14 @@ export async function fulfillOrder(session: {
     if (customerEmail) {
       console.log("[fulfillOrder] Sending order emails to:", customerEmail);
       const emailResults = await Promise.allSettled([
-        sendOrderConfirmation(customerEmail, billingName, session.id, amount, currency, items),
+        sendOrderConfirmation(customerEmail, billingName, session.id, amount, currency, items, {
+          subtotal,
+          postage,
+          deliveryType,
+          shippingCountry,
+          shippingAddress,
+          billingAddress,
+        }),
         notifyAdminOrder(billingName, customerEmail, amount, currency),
       ]);
       emailResults.forEach((r, i) => {
