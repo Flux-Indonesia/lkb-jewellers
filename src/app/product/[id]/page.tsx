@@ -13,6 +13,7 @@ import { EnquiryModal } from "@/components/enquiry-modal";
 import { ProductJsonLd, BreadcrumbJsonLd } from "@/components/json-ld";
 import { Breadcrumb } from "@/components/breadcrumb";
 import { RelatedProducts } from "@/components/related-products";
+import { isHatProduct } from "@/lib/shipping";
 
 const PLACEHOLDER_IMG =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect width='400' height='400' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-family='sans-serif' font-size='14'%3ENo Image%3C/text%3E%3C/svg%3E";
@@ -25,10 +26,6 @@ const CATEGORY_URL_MAP: Record<string, string> = {
 
 function categoryToPath(category: string) {
   return CATEGORY_URL_MAP[category] || category;
-}
-
-function formatCategory(category: string) {
-  return category.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 export default function ProductPage() {
@@ -105,6 +102,7 @@ export default function ProductPage() {
   const isEnquiryOnly = product.category !== "merchandise";
   const isOutOfStock = (product.stock || 0) === 0;
   const hasSpecs = product.category === "watch" && (product.model || product.caseSize || product.caseMaterial || product.dialColor || product.yearOfProduction);
+  const hasHatPostage = isHatProduct(product);
 
   const formatCategory = (cat: string) => cat.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
@@ -366,8 +364,12 @@ export default function ProductPage() {
                   <Truck size={20} className="text-white" />
                 </div>
                 <div>
-                  <p className="font-bold mb-1">Free Insured Worldwide Shipping</p>
-                  <p className="text-gray-600 text-xs">Delivered safely to your doorstep</p>
+                  <p className="font-bold mb-1">
+                    {hasHatPostage ? "Hat Postage Calculated At Checkout" : "Free Insured Worldwide Shipping"}
+                  </p>
+                  <p className="text-gray-600 text-xs">
+                    {hasHatPostage ? "UK hats ship for £7, international hats for £12" : "Delivered safely to your doorstep"}
+                  </p>
                 </div>
               </div>
               <div className="h-px bg-gray-200" />

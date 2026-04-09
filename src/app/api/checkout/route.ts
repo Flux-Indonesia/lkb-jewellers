@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { createClient } from "@/lib/supabase";
+import { buildCheckoutPricing, type CheckoutProductRecord } from "@/lib/checkout-pricing";
+import {
+  WORLDWIDE_ALLOWED_COUNTRIES,
+  isAllowedShippingCountry,
+} from "@/lib/shipping";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2026-03-25.dahlia",
@@ -31,7 +36,10 @@ export async function POST(req: NextRequest) {
 
   try {
     const body = await req.json();
-    const { items } = body as { items: CartItem[] };
+    const { items, shipping_country } = body as {
+      items: CartItem[];
+      shipping_country?: string;
+    };
 
     // Validate items array
     if (!Array.isArray(items) || items.length === 0) {
@@ -64,7 +72,7 @@ export async function POST(req: NextRequest) {
     const productIds = items.map((i) => i.id);
     const { data: products, error: dbError } = await supabase
       .from("products")
-      .select("id, name, price, image, stock")
+      .select("id, name, price, image, stock, category, tags")
       .in("id", productIds);
 
     if (dbError) {
@@ -79,86 +87,58 @@ export async function POST(req: NextRequest) {
       (products || []).map((p) => [p.id, p])
     );
 
-    // Verify all items exist and have valid prices
-    const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
-
-    for (const item of items) {
-      const product = productMap.get(item.id);
-
-      if (!product) {
-        return NextResponse.json(
-          { error: `Product not found: ${item.id}` },
-          { status: 400 }
-        );
-      }
-
-      const price = Number(product.price);
-      if (!price || price <= 0) {
-        return NextResponse.json(
-          { error: `${product.name} is not available for purchase` },
-          { status: 400 }
-        );
-      }
-
-      // Check stock availability
-      if (typeof product.stock === "number" && product.stock < item.quantity) {
-        return NextResponse.json(
-          { error: product.stock === 0 ? `${product.name} is out of stock` : `Only ${product.stock} of ${product.name} available` },
-          { status: 400 }
-        );
-      }
-
-      // Sanitize product name (max 250 chars for Stripe)
-      const name = String(product.name).slice(0, 250);
-
-      // Validate image URL if present
-      let images: string[] = [];
-      if (product.image && typeof product.image === "string") {
-        try {
-          const url = new URL(product.image);
-          if (url.protocol === "https:") {
-            images = [product.image];
-          }
-        } catch {
-          // Skip invalid image URLs
-        }
-      }
-
-      line_items.push({
-        price_data: {
-          currency: "gbp",
-          product_data: { name, images },
-          unit_amount: Math.round(price * 100),
-        },
-        quantity: item.quantity,
-      });
-    }
-
     const host = req.headers.get("host") || "www.lkbjewellers.com";
     const proto = host.includes("localhost") ? "http" : "https";
     const baseUrl = `${proto}://${host}`;
+    const normalizedShippingCountry = shipping_country?.trim().toUpperCase() || null;
 
-    // Build order items metadata for saving after payment
-    const orderItems = items.map((item: CartItem) => {
-      const product = productMap.get(item.id);
-      return {
-        id: item.id,
-        name: product?.name || item.id,
-        price: Number(product?.price) || 0,
-        quantity: item.quantity,
-      };
-    });
+    if (normalizedShippingCountry && !isAllowedShippingCountry(normalizedShippingCountry)) {
+      return NextResponse.json({ error: "Invalid shipping country" }, { status: 400 });
+    }
+
+    const pricing = buildCheckoutPricing(
+      items,
+      productMap as Map<string, CheckoutProductRecord>,
+      normalizedShippingCountry
+    );
+
+    if (pricing.shippingCountryRequired && !pricing.selectedShippingCountry) {
+      return NextResponse.json(
+        { error: "Shipping country is required for hat orders" },
+        { status: 400 }
+      );
+    }
+
+    const lineItems = [...pricing.lineItems];
+    if (pricing.postageGbp > 0) {
+      lineItems.push({
+        price_data: {
+          currency: "gbp",
+          product_data: {
+            name: pricing.selectedShippingCountry === "GB" ? "UK hat postage" : "International hat postage",
+          },
+          unit_amount: Math.round(pricing.postageGbp * 100),
+        },
+        quantity: 1,
+      });
+    }
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      line_items,
+      line_items: lineItems,
       billing_address_collection: "required",
       shipping_address_collection: {
-        allowed_countries: ["GB", "US", "AE", "SA", "QA", "KW", "BH", "OM"],
+        allowed_countries: pricing.selectedShippingCountry
+          ? [pricing.selectedShippingCountry] as Stripe.Checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry[]
+          : [...WORLDWIDE_ALLOWED_COUNTRIES] as Stripe.Checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry[],
       },
       phone_number_collection: { enabled: true },
       metadata: {
-        order_items: JSON.stringify(orderItems),
+        order_items: JSON.stringify(pricing.orderItems),
+        hat_shipping_required: String(pricing.hatShippingRequired),
+        subtotal_gbp: String(pricing.subtotalGbp),
+        shipping_country: pricing.selectedShippingCountry || "",
+        postage_gbp: String(pricing.postageGbp),
       },
       success_url: `${baseUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${baseUrl}/checkout`,

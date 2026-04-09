@@ -7,14 +7,52 @@ import { ShoppingBag, Lock, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { useCart } from "@/context/cart-context";
+import { WORLDWIDE_ALLOWED_COUNTRIES } from "@/lib/shipping";
+
+interface CheckoutQuote {
+  subtotal_gbp: number;
+  shipping_required: boolean;
+  shipping_country_required: boolean;
+  shipping_country: string | null;
+  shipping: {
+    amount_gbp: number;
+    label: string;
+    uk_gbp: number;
+    international_gbp: number;
+  } | null;
+  total_gbp: number;
+}
 
 export default function CheckoutPage() {
-  const { items, cartTotal, updateQuantity, removeFromCart, syncPrices } = useCart();
+  const { items, updateQuantity, removeFromCart, syncPrices } = useCart();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [quote, setQuote] = useState<CheckoutQuote | null>(null);
+  const [quoteLoading, setQuoteLoading] = useState(false);
+  const [shippingCountry, setShippingCountry] = useState("GB");
   const syncedRef = useRef(false);
+  const regionNamesRef = useRef<Intl.DisplayNames | null>(null);
+
+  if (!regionNamesRef.current && typeof Intl !== "undefined" && "DisplayNames" in Intl) {
+    regionNamesRef.current = new Intl.DisplayNames(["en"], { type: "region" });
+  }
+
+  const countryOptions = WORLDWIDE_ALLOWED_COUNTRIES
+    .filter((code) => !["AC", "TA", "ZZ"].includes(code))
+    .map((code) => ({
+      code,
+      label: regionNamesRef.current?.of(code) || code,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
 
   // Sync cart prices with database on mount
   useEffect(() => {
@@ -22,6 +60,59 @@ export default function CheckoutPage() {
     syncedRef.current = true;
     syncPrices();
   }, [items, syncPrices]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function fetchQuote() {
+      if (items.length === 0) {
+        setQuote(null);
+        return;
+      }
+
+      setQuoteLoading(true);
+
+      try {
+        const res = await fetch("/api/checkout/quote", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            items: items.map((item) => ({
+              id: item.id,
+              quantity: item.quantity,
+            })),
+            shipping_country: shippingCountry,
+          }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || "Failed to calculate checkout total");
+        }
+
+        if (!cancelled) {
+          setQuote(data);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          const msg = err instanceof Error ? err.message : "Failed to calculate checkout total";
+          setError(msg);
+          setQuote(null);
+        }
+      } finally {
+        if (!cancelled) {
+          setQuoteLoading(false);
+        }
+      }
+    }
+
+    void fetchQuote();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [items, shippingCountry]);
 
   const handleCheckout = async () => {
     if (items.length === 0) return;
@@ -32,7 +123,7 @@ export default function CheckoutPage() {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items }),
+        body: JSON.stringify({ items, shipping_country: shippingCountry }),
       });
 
       const data = await res.json();
@@ -70,7 +161,6 @@ export default function CheckoutPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Cart Items */}
             <div className="lg:col-span-2 space-y-4">
               {items.map((item) => (
                 <div
@@ -91,14 +181,14 @@ export default function CheckoutPage() {
                       {item.name}
                     </h3>
                     <p className="text-[#D4AF37] text-sm mt-1">
-                      £{item.price.toLocaleString("en-GB", { minimumFractionDigits: 2 })}
+                      &pound;{item.price.toLocaleString("en-GB", { minimumFractionDigits: 2 })}
                     </p>
                     <div className="flex items-center gap-3 mt-3">
                       <button
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
                         className="w-7 h-7 rounded border border-gray-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-gray-500 transition-colors"
                       >
-                        <span className="text-sm font-bold leading-none">−</span>
+                        <span className="text-sm font-bold leading-none">-</span>
                       </button>
                       <span className="text-white text-sm w-6 text-center">
                         {item.quantity}
@@ -118,13 +208,12 @@ export default function CheckoutPage() {
                     </div>
                   </div>
                   <p className="text-white text-sm font-medium whitespace-nowrap">
-                    £{(item.price * item.quantity).toLocaleString("en-GB", { minimumFractionDigits: 2 })}
+                    &pound;{(item.price * item.quantity).toLocaleString("en-GB", { minimumFractionDigits: 2 })}
                   </p>
                 </div>
               ))}
             </div>
 
-            {/* Order Summary */}
             <div>
               <Card className="bg-gray-900/50 border border-gray-800 rounded-lg shadow-none p-0 gap-0 sticky top-32">
                 <CardHeader className="p-6 pb-0">
@@ -139,19 +228,57 @@ export default function CheckoutPage() {
                         Subtotal ({items.reduce((s, i) => s + i.quantity, 0)} items)
                       </span>
                       <span className="text-white">
-                        £{cartTotal.toLocaleString("en-GB", { minimumFractionDigits: 2 })}
+                        {quote ? (
+                          <>&pound;{quote.subtotal_gbp.toLocaleString("en-GB", { minimumFractionDigits: 2 })}</>
+                        ) : quoteLoading ? "Calculating..." : "-"}
                       </span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-400">Shipping</span>
-                      <span className="text-white">Free</span>
+                      <span className="text-white">
+                        {quote?.shipping ? (
+                          <>&pound;{quote.shipping.amount_gbp.toLocaleString("en-GB", { minimumFractionDigits: 2 })}</>
+                        ) : quote?.shipping_required ? "Select country" : quoteLoading ? "Calculating..." : "Free"}
+                      </span>
                     </div>
                     <Separator className="bg-gray-800" />
+                    {quote?.shipping_country_required && (
+                      <div className="space-y-2">
+                        <label className="block text-xs text-gray-400 uppercase tracking-wider">
+                          Shipping country
+                        </label>
+                        <Select value={shippingCountry} onValueChange={setShippingCountry}>
+                          <SelectTrigger className="w-full border-gray-800 bg-black text-white">
+                            <SelectValue placeholder="Select country" />
+                          </SelectTrigger>
+                          <SelectContent className="border-gray-800 bg-black text-white">
+                            {countryOptions.map((country) => (
+                              <SelectItem
+                                key={country.code}
+                                value={country.code}
+                                className="text-white focus:bg-gray-800 focus:text-white"
+                              >
+                                {country.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <p className="text-xs text-gray-500">
+                          Hat postage is &pound;{quote?.shipping?.uk_gbp.toLocaleString("en-GB", { minimumFractionDigits: 2 }) ?? "7.00"} for UK or &pound;{quote?.shipping?.international_gbp.toLocaleString("en-GB", { minimumFractionDigits: 2 }) ?? "12.00"} for international addresses.
+                        </p>
+                      </div>
+                    )}
                     <div className="pt-3">
                       <div className="flex justify-between">
                         <span className="text-white font-semibold">Total</span>
                         <span className="text-white text-lg font-normal">
-                          £{cartTotal.toLocaleString("en-GB", { minimumFractionDigits: 2 })}
+                          {quote ? (
+                            <>&pound;{quote.total_gbp.toLocaleString("en-GB", { minimumFractionDigits: 2 })}</>
+                          ) : quoteLoading ? (
+                            "Calculating..."
+                          ) : (
+                            "-"
+                          )}
                         </span>
                       </div>
                     </div>
@@ -163,7 +290,7 @@ export default function CheckoutPage() {
 
                   <Button
                     onClick={handleCheckout}
-                    disabled={loading}
+                    disabled={loading || quoteLoading || !quote}
                     className="h-auto w-full bg-white text-black font-bold tracking-widest py-4 text-sm hover:bg-gray-200 transition-all duration-300 active:scale-95 disabled:opacity-50 flex items-center justify-center gap-3 mt-6"
                   >
                     <Lock className="w-4 h-4" />

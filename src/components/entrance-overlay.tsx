@@ -61,8 +61,7 @@ export default function EntranceOverlay({ onEnter }: EntranceOverlayProps) {
         playsInline
         preload="auto"
       >
-        <source src="/entrance/door-open.webm" type="video/webm" />
-        <source src="/entrance/door-open.mp4" type="video/mp4" />
+        <source src="/entrance/door-opening.mp4" type="video/mp4" />
       </video>
 
       {/* Content overlay */}
