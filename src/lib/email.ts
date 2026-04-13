@@ -13,7 +13,6 @@ const transporter = nodemailer.createTransport({
 const FROM = `"LKB Jewellers" <${process.env.SMTP_USER || "noreply@lkbjewellers.com"}>`;
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || process.env.SMTP_USER || "noreply@lkbjewellers.com";
 
-/** Escape HTML to prevent XSS in email templates */
 function esc(str: string): string {
   return String(str)
     .replace(/&/g, "&amp;")
@@ -43,19 +42,16 @@ function baseLayout(content: string): string {
     <tr>
       <td align="center" style="padding:32px 16px;background-color:#f5f5f5 !important;">
         <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background-color:#ffffff !important;border-radius:8px;overflow:hidden;">
-          <!-- Header -->
           <tr>
             <td style="text-align:center;padding:32px 32px 16px;background-color:#ffffff !important;">
               <img src="https://www.lkbjewellers.com/email-logo.jpeg" alt="LKB Jewellers" width="120" height="120" style="display:block;margin:0 auto;" />
             </td>
           </tr>
-          <!-- Content -->
           <tr>
             <td style="padding:24px 32px 40px;text-align:center;background-color:#ffffff !important;">
               ${content}
             </td>
           </tr>
-          <!-- Footer -->
           <tr>
             <td style="border-top:1px solid #eeeeee;padding:24px 32px;text-align:center;background-color:#f9f9f9 !important;">
               <p style="color:#999999 !important;font-size:11px;margin:0 0 6px;">New House, 67-68 Hatton Garden, London, EC1N 8JY</p>
@@ -70,13 +66,11 @@ function baseLayout(content: string): string {
 </html>`;
 }
 
-// ─── Customer emails ────────────────────────────────────────────────────────
-
 export async function sendContactConfirmation(to: string, name: string) {
   await transporter.sendMail({
     from: FROM,
     to,
-    subject: "We've received your message — LKB Jewellers",
+    subject: "We've received your message - LKB Jewellers",
     html: baseLayout(`
       <h1 style="color:#1a1a1a;font-size:22px;margin:0 0 16px;text-align:center;">Thank you, ${esc(name)}</h1>
       <p style="color:#555555;font-size:14px;line-height:1.6;margin:0 0 16px;text-align:center;">
@@ -93,11 +87,11 @@ export async function sendEnquiryConfirmation(to: string, name: string, productN
   await transporter.sendMail({
     from: FROM,
     to,
-    subject: `Enquiry received: ${productName} — LKB Jewellers`,
+    subject: `Enquiry received: ${productName} - LKB Jewellers`,
     html: baseLayout(`
       <h1 style="color:#1a1a1a;font-size:22px;margin:0 0 16px;text-align:center;">Enquiry Received</h1>
       <p style="color:#555555;font-size:14px;line-height:1.6;margin:0 0 16px;text-align:center;">
-        Hi ${esc(name)}, thank you for your interest in <strong style="color:#1a1a1a;">${esc(productName)}</strong> (£${productPrice.toLocaleString()}).
+        Hi ${esc(name)}, thank you for your interest in <strong style="color:#1a1a1a;">${esc(productName)}</strong> (GBP ${productPrice.toLocaleString()}).
       </p>
       <p style="color:#555555;font-size:14px;line-height:1.6;margin:0;text-align:center;">
         One of our specialists will be in touch shortly via your preferred contact method.
@@ -110,7 +104,7 @@ export async function sendSellSubmissionConfirmation(to: string, name: string, b
   await transporter.sendMail({
     from: FROM,
     to,
-    subject: "We're reviewing your submission — LKB Jewellers",
+    subject: "We're reviewing your submission - LKB Jewellers",
     html: baseLayout(`
       <h1 style="color:#1a1a1a;font-size:22px;margin:0 0 16px;text-align:center;">Submission Received</h1>
       <p style="color:#555555;font-size:14px;line-height:1.6;margin:0 0 16px;text-align:center;">
@@ -146,9 +140,17 @@ export async function sendOrderConfirmation(
   _orderId: string,
   amount: number,
   currency: string,
-  items: { name: string; price: number; quantity: number }[]
+  items: { name: string; price: number; quantity: number }[],
+  summary?: {
+    subtotal?: number;
+    postage?: number;
+    deliveryType?: string;
+    shippingCountry?: string;
+    shippingAddress?: string;
+    billingAddress?: string;
+  }
 ) {
-  const symbol = currency === "gbp" ? "£" : currency.toUpperCase() + " ";
+  const symbol = currency === "gbp" ? "GBP " : `${currency.toUpperCase()} `;
   const itemRows = items
     .map(
       (i) =>
@@ -159,11 +161,17 @@ export async function sendOrderConfirmation(
         </tr>`
     )
     .join("");
+  const subtotal = summary?.subtotal ?? items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const postage = summary?.postage ?? Math.max(0, amount - subtotal);
+  const deliveryType = summary?.deliveryType === "collect" ? "Collect" : "Deliver";
+  const shippingCountry = summary?.shippingCountry || "";
+  const shippingAddress = summary?.shippingAddress || "";
+  const billingAddress = summary?.billingAddress || "";
 
   await transporter.sendMail({
     from: FROM,
     to,
-    subject: `Order confirmed — LKB Jewellers`,
+    subject: "Order confirmed - LKB Jewellers",
     html: baseLayout(`
       <h1 style="color:#1a1a1a;font-size:22px;margin:0 0 16px;text-align:center;">Order Confirmed</h1>
       <p style="color:#555555;font-size:14px;line-height:1.6;margin:0 0 24px;text-align:center;">
@@ -177,10 +185,34 @@ export async function sendOrderConfirmation(
         </tr>
         ${itemRows}
       </table>
+      <table style="width:100%;border-collapse:collapse;margin:0 0 24px;">
+        <tr>
+          <td style="color:#888888;font-size:12px;padding:4px 0;text-align:left;">Fulfilment</td>
+          <td style="color:#1a1a1a;font-size:12px;padding:4px 0;text-align:right;">${esc(deliveryType)}</td>
+        </tr>
+        ${shippingCountry ? `<tr>
+          <td style="color:#888888;font-size:12px;padding:4px 0;text-align:left;">Country</td>
+          <td style="color:#1a1a1a;font-size:12px;padding:4px 0;text-align:right;">${esc(shippingCountry)}</td>
+        </tr>` : ""}
+        <tr>
+          <td style="color:#888888;font-size:12px;padding:4px 0;text-align:left;">Subtotal</td>
+          <td style="color:#1a1a1a;font-size:12px;padding:4px 0;text-align:right;">${symbol}${subtotal.toLocaleString()}</td>
+        </tr>
+        <tr>
+          <td style="color:#888888;font-size:12px;padding:4px 0;text-align:left;">Postage</td>
+          <td style="color:#1a1a1a;font-size:12px;padding:4px 0;text-align:right;">${symbol}${postage.toLocaleString()}</td>
+        </tr>
+      </table>
       <div style="text-align:right;margin:0 0 24px;">
         <p style="color:#888888;font-size:12px;margin:0 0 4px;">Total</p>
         <p style="color:#1a1a1a;font-size:24px;font-weight:bold;margin:0;">${symbol}${amount.toLocaleString()}</p>
       </div>
+      ${(shippingAddress || billingAddress) ? `<div style="text-align:left;background:#fafafa;border:1px solid #eeeeee;border-radius:6px;padding:16px 18px;margin:0 0 24px;">
+        ${shippingAddress ? `<p style="color:#888888;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:0 0 4px;">Shipping Address</p>
+        <p style="color:#1a1a1a;font-size:13px;line-height:1.6;margin:0 0 12px;">${esc(shippingAddress)}</p>` : ""}
+        ${billingAddress ? `<p style="color:#888888;font-size:11px;text-transform:uppercase;letter-spacing:1px;margin:0 0 4px;">Billing Address</p>
+        <p style="color:#1a1a1a;font-size:13px;line-height:1.6;margin:0;">${esc(billingAddress)}</p>` : ""}
+      </div>` : ""}
       <p style="color:#555555;font-size:14px;line-height:1.6;margin:0;text-align:center;">
         We'll send you an update once your order is on its way. If you have any questions, don't hesitate to reach out.
       </p>
@@ -230,13 +262,11 @@ export async function sendGuestAccountCreated(to: string, name: string, password
   });
 }
 
-// ─── Admin notification emails ──────────────────────────────────────────────
-
 export async function notifyAdminContact(name: string, email: string, interest: string, message: string) {
   await transporter.sendMail({
     from: FROM,
     to: ADMIN_EMAIL,
-    subject: `New contact: ${name} — ${interest}`,
+    subject: `New contact: ${name} - ${interest}`,
     html: baseLayout(`
       <h1 style="color:#1a1a1a;font-size:22px;margin:0 0 16px;text-align:center;">New Contact Inquiry</h1>
       <table style="width:100%;border-collapse:collapse;">
@@ -253,14 +283,14 @@ export async function notifyAdminEnquiry(name: string, email: string, productNam
   await transporter.sendMail({
     from: FROM,
     to: ADMIN_EMAIL,
-    subject: `New enquiry: ${productName} — ${name}`,
+    subject: `New enquiry: ${productName} - ${name}`,
     html: baseLayout(`
       <h1 style="color:#1a1a1a;font-size:22px;margin:0 0 16px;text-align:center;">New Product Enquiry</h1>
       <table style="width:100%;border-collapse:collapse;">
         <tr><td style="color:#888888;font-size:13px;padding:6px 0;width:100px;">Customer</td><td style="color:#1a1a1a;font-size:13px;padding:6px 0;">${esc(name)}</td></tr>
         <tr><td style="color:#888888;font-size:13px;padding:6px 0;">Email</td><td style="color:#1a1a1a;font-size:13px;padding:6px 0;">${esc(email)}</td></tr>
         <tr><td style="color:#888888;font-size:13px;padding:6px 0;">Product</td><td style="color:#1a1a1a;font-size:13px;padding:6px 0;">${esc(productName)}</td></tr>
-        <tr><td style="color:#888888;font-size:13px;padding:6px 0;">Price</td><td style="color:#1a1a1a;font-size:13px;padding:6px 0;">£${productPrice.toLocaleString()}</td></tr>
+        <tr><td style="color:#888888;font-size:13px;padding:6px 0;">Price</td><td style="color:#1a1a1a;font-size:13px;padding:6px 0;">GBP ${productPrice.toLocaleString()}</td></tr>
       </table>
     `),
   });
@@ -270,7 +300,7 @@ export async function notifyAdminSellSubmission(name: string, email: string, bra
   await transporter.sendMail({
     from: FROM,
     to: ADMIN_EMAIL,
-    subject: `New sell submission: ${brand} ${model} — ${name}`,
+    subject: `New sell submission: ${brand} ${model} - ${name}`,
     html: baseLayout(`
       <h1 style="color:#1a1a1a;font-size:22px;margin:0 0 16px;text-align:center;">New Sell Submission</h1>
       <table style="width:100%;border-collapse:collapse;">
@@ -284,11 +314,11 @@ export async function notifyAdminSellSubmission(name: string, email: string, bra
 }
 
 export async function notifyAdminOrder(name: string, email: string, amount: number, currency: string) {
-  const symbol = currency === "gbp" ? "£" : currency.toUpperCase() + " ";
+  const symbol = currency === "gbp" ? "GBP " : `${currency.toUpperCase()} `;
   await transporter.sendMail({
     from: FROM,
     to: ADMIN_EMAIL,
-    subject: `New order: ${symbol}${amount.toLocaleString()} — ${name}`,
+    subject: `New order: ${symbol}${amount.toLocaleString()} - ${name}`,
     html: baseLayout(`
       <h1 style="color:#1a1a1a;font-size:22px;margin:0 0 16px;text-align:center;">New Order Received</h1>
       <table style="width:100%;border-collapse:collapse;">

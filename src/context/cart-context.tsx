@@ -216,16 +216,35 @@ export function CartProvider({ children }: { children: ReactNode }) {
     if (items.length === 0) return;
     const supabase = createClient();
     const ids = items.map((i) => i.id);
-    supabase.from("products").select("id, price").in("id", ids).then(({ data }) => {
+    supabase.from("products").select("id, name, price").in("id", ids).then(({ data }) => {
       if (!data) return;
-      const priceMap = new Map(data.map((p: { id: string; price: number }) => [p.id, Number(p.price)]));
+      const productMap = new Map(
+        data.map((p: { id: string; name: string; price: number }) => [
+          p.id,
+          {
+            name: p.name,
+            price: Number(p.price),
+          },
+        ])
+      );
       setItems((prev) => {
         let changed = false;
         const updated = prev.map((item) => {
-          const dbPrice = priceMap.get(item.id);
-          if (dbPrice !== undefined && dbPrice !== item.price) {
+          const dbProduct = productMap.get(item.id);
+          if (!dbProduct) {
+            return item;
+          }
+
+          if (
+            dbProduct.price !== item.price ||
+            dbProduct.name !== item.name
+          ) {
             changed = true;
-            return { ...item, price: dbPrice };
+            return {
+              ...item,
+              name: dbProduct.name,
+              price: dbProduct.price,
+            };
           }
           return item;
         });
