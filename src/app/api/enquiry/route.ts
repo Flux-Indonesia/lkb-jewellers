@@ -6,7 +6,18 @@ export async function POST(request: NextRequest) {
 	try {
 		const body = await request.json();
 
-		const { fullName, email, phone, contactMethod, message, visitedOthers, optOutNewsletter, productId, productName, productPrice, productCategory, productImage } = body;
+		const { fullName, email, phone, contactMethod, message, visitedOthers, optOutNewsletter, ringDetails, productId, productName, productPrice, productCategory, productImage } = body;
+		const preferredContactMethods = Array.isArray(contactMethod)
+			? contactMethod.filter(Boolean).join(", ")
+			: typeof contactMethod === "string"
+				? contactMethod.trim()
+				: "call";
+		const notes = ringDetails || visitedOthers !== undefined
+			? JSON.stringify({
+				ringDetails: ringDetails ?? null,
+				visitedOthers: Boolean(visitedOthers),
+			})
+			: "";
 
 		if (!fullName || !email || !phone) {
 			return NextResponse.json({ error: "Full name, email, and phone are required" }, { status: 400 });
@@ -28,7 +39,8 @@ export async function POST(request: NextRequest) {
 				phone: phone.trim(),
 				interest: "Product Enquiry",
 				message: message || "",
-				preferred_contact_method: contactMethod || "call",
+				preferred_contact_method: preferredContactMethods || "call",
+				notes,
 				product_id: productId || "",
 				product_name: productName || "",
 				product_price: productPrice || 0,

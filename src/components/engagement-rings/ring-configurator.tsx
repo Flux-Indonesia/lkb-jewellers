@@ -2,24 +2,37 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Info, Leaf } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import type { Ring } from '@/data/engagement-rings'
 import { RING_METAL_OPTIONS, RING_SETTING_OPTIONS, RING_SIDE_STONE_OPTIONS, RING_SIZES } from '@/data/engagement-rings'
-import { stoneTypes, clarityOptions, caratRanges, colourOptions, recommendedGemstones as staticGemstones } from '@/data/gemstone-options'
-import type { RecommendedGemstone } from '@/data/gemstone-options'
-import { filterGemstones, formatGemstonePrice, getStoneTypeLabel } from '@/lib/gemstone-utils'
+import { stoneTypes, clarityOptions, caratRanges, colourOptions } from '@/data/gemstone-options'
 import type { GemstoneFilter } from '@/lib/gemstone-utils'
 
 
 const CERTIFICATES = ['GIA', 'IGI', 'AGS', 'SDC'] as const
 
+export interface RingEnquiryDetails {
+  selectedMetal: string
+  sideStones: string
+  setting: string
+  ringSize: string
+  gemstoneFilters: {
+    stoneType?: string
+    clarity?: string
+    caratRange?: string
+    colour?: string
+  }
+  certificate: string
+}
+
 interface RingConfiguratorProps {
-  ring: Ring
-  gemstones?: RecommendedGemstone[]
+  recommendedRings: Ring[]
   selectedMetal: string
   onMetalChange: (metal: string) => void
+  onEnquire: (details: RingEnquiryDetails) => void
 }
 
 function LabelWithTooltip({ label, tooltip }: { label: string; tooltip: string }) {
@@ -48,7 +61,7 @@ function ConfigRow({ label, tooltip, children }: { label: string; tooltip: strin
   return (
     <>
       <div className="flex flex-col sm:flex-row sm:items-center gap-3 py-4">
-        <div className="sm:w-48 flex-shrink-0">
+        <div className="sm:w-48 shrink-0">
           <LabelWithTooltip label={label} tooltip={tooltip} />
         </div>
         <div className="flex-1">
@@ -113,7 +126,7 @@ function SelectorButton({
   )
 }
 
-export function RingConfigurator({ ring, gemstones, selectedMetal, onMetalChange }: RingConfiguratorProps) {
+export function RingConfigurator({ recommendedRings, selectedMetal, onMetalChange, onEnquire }: RingConfiguratorProps) {
   // Your Setting state
   const [sideStones, setSideStones] = useState<string>(RING_SIDE_STONE_OPTIONS[0])
   const metalType = selectedMetal
@@ -124,11 +137,24 @@ export function RingConfigurator({ ring, gemstones, selectedMetal, onMetalChange
   const [gemFilter, setGemFilter] = useState<GemstoneFilter>({})
   const [certificate, setCertificate] = useState('')
 
-  const allGemstones = gemstones ?? staticGemstones
-  const filteredGemstones = filterGemstones(allGemstones, gemFilter)
-
   function updateGemFilter(key: keyof GemstoneFilter, value: string) {
     setGemFilter(prev => ({ ...prev, [key]: (value === 'all' || value === '') ? undefined : value }))
+  }
+
+  function handleEnquire() {
+    onEnquire({
+      selectedMetal: metalType,
+      sideStones,
+      setting,
+      ringSize,
+      gemstoneFilters: {
+        stoneType: gemFilter.stoneType,
+        clarity: gemFilter.clarity,
+        caratRange: gemFilter.caratRange,
+        colour: gemFilter.colour,
+      },
+      certificate,
+    })
   }
 
   return (
@@ -233,7 +259,7 @@ export function RingConfigurator({ ring, gemstones, selectedMetal, onMetalChange
         </div>
 
         <p className="text-gray-500 text-sm mb-6">
-          Select your stone preferences to see recommended options.
+          Select your stone preferences and ring details before sending your enquiry.
         </p>
 
         <div className="flex flex-col">
@@ -322,66 +348,53 @@ export function RingConfigurator({ ring, gemstones, selectedMetal, onMetalChange
           </ConfigRow>
         </div>
 
-        {/* Recommended Options */}
+        <div className="mt-8">
+          <button
+            type="button"
+            onClick={handleEnquire}
+            className="w-full bg-white text-black py-4 font-bold tracking-widest hover:bg-gray-200 transition-all duration-300 rounded-lg border border-white text-sm"
+          >
+            ENQUIRE NOW
+          </button>
+        </div>
+
+        {/* Random Rings */}
         <div className="mt-6">
           <h3 className="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-4">
-            Recommended Options
+            Random Rings
           </h3>
 
-          {filteredGemstones.length === 0 ? (
-            <div className="text-center py-8 text-gray-600">
-              <p className="text-sm">No gemstones match your selection.</p>
-              <button
-                onClick={() => setGemFilter({})}
-                className="mt-2 text-[#D4AF37] text-xs hover:underline"
+          <div className="grid grid-cols-2 gap-3">
+            {recommendedRings.map((recommendedRing) => (
+              <Link
+                key={recommendedRing.slug}
+                href={`/engagement-rings/${recommendedRing.slug}`}
+                className="bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden hover:border-zinc-600 transition-colors duration-200 group"
               >
-                Clear filters
-              </button>
-            </div>
-          ) : (
-            <div className="grid grid-cols-2 gap-3">
-              {filteredGemstones.map(gem => (
-                <div
-                  key={gem.id}
-                  className="bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden hover:border-zinc-600 transition-colors duration-200"
-                >
-                  {/* Gemstone image */}
-                  <div className="relative aspect-square bg-zinc-950">
-                    <Image
-                      src={gem.imageUrl}
-                      alt={`${getStoneTypeLabel(gem.type)} ${gem.carat}ct`}
-                      fill
-                      sizes="(max-width: 640px) 50vw, 200px"
-                      className="object-cover"
-                      onError={() => {}}
-                     
-                    />
-                    {gem.badge && (
-                      <div className="absolute top-2 left-2 bg-emerald-950/80 border border-emerald-800/50 rounded-full px-2 py-0.5">
-                        <span className="text-emerald-400 text-[10px] font-medium">{gem.badge}</span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Gemstone info */}
-                  <div className="p-3">
-                    <p className="text-white text-xs font-medium mb-1">
-                      {getStoneTypeLabel(gem.type)}
-                    </p>
-                    <p className="text-gray-500 text-[11px] mb-1">
-                      {gem.carat}ct · {gem.colour} · {gem.clarity}
-                    </p>
-                    <p className="text-gray-600 text-[11px] mb-2">
-                      {gem.dimensions}
-                    </p>
-                    <p className="text-[#D4AF37] text-sm font-medium">
-                      {formatGemstonePrice(gem.price, gem.currency)} {gem.currency}
-                    </p>
-                  </div>
+                <div className="relative aspect-square bg-zinc-950">
+                  <Image
+                    src={recommendedRing.thumbnails[0] || recommendedRing.images[0] || ''}
+                    alt={recommendedRing.name}
+                    fill
+                    sizes="(max-width: 640px) 50vw, 200px"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
-              ))}
-            </div>
-          )}
+
+                <div className="p-3">
+                  <p className="text-white text-xs font-medium mb-1 line-clamp-2">
+                    {recommendedRing.name}
+                  </p>
+                  <p className="text-gray-500 text-[11px] mb-2 line-clamp-2">
+                    {recommendedRing.title}
+                  </p>
+                  <p className="text-[#D4AF37] text-sm font-medium">
+                    £{recommendedRing.basePrice.toLocaleString()}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
     </div>

@@ -10,13 +10,13 @@ import { RingConfigurator } from '@/components/engagement-rings/ring-configurato
 import { EnquiryModal } from '@/components/enquiry-modal'
 import type { Ring } from '@/data/engagement-rings'
 import { RING_METAL_OPTIONS } from '@/data/engagement-rings'
-import type { RecommendedGemstone } from '@/data/gemstone-options'
+import type { RingEnquiryDetails } from '@/components/engagement-rings/ring-configurator'
 import { clarityOptions } from '@/data/gemstone-options'
 import type { Product } from '@/data/products'
 
 interface RingDetailContentProps {
   ring: Ring
-  gemstones?: RecommendedGemstone[]
+  recommendedRings: Ring[]
 }
 
 function TrustBadge({ icon: Icon, label }: { icon: React.ElementType; label: string }) {
@@ -84,9 +84,10 @@ const ringSizeRows = [
   { uk: 'Z', us: '13', eu: '67.5' },
 ]
 
-export function RingDetailContent({ ring, gemstones }: RingDetailContentProps) {
+export function RingDetailContent({ ring, recommendedRings }: RingDetailContentProps) {
   const [selectedMetal, setSelectedMetal] = useState<string>(RING_METAL_OPTIONS[0])
   const [enquiryOpen, setEnquiryOpen] = useState(false)
+  const [ringDetails, setRingDetails] = useState<RingEnquiryDetails | undefined>(undefined)
 
   const colorKey = metalToColorKey(selectedMetal)
 
@@ -174,21 +175,14 @@ export function RingDetailContent({ ring, gemstones }: RingDetailContentProps) {
                 </p>
               )}
 
-              <button
-                type="button"
-                onClick={() => setEnquiryOpen(true)}
-                className="w-full bg-white text-black py-4 font-bold tracking-widest hover:bg-gray-200 transition-all duration-300 rounded-lg border border-white text-sm"
-              >
-                ENQUIRE NOW
-              </button>
-
-              <Separator className="bg-zinc-800" />
-
               <RingConfigurator
-                ring={ring}
-                gemstones={gemstones}
+                recommendedRings={recommendedRings}
                 selectedMetal={selectedMetal}
                 onMetalChange={setSelectedMetal}
+                onEnquire={(details) => {
+                  setRingDetails(details)
+                  setEnquiryOpen(true)
+                }}
               />
 
               <Separator className="bg-zinc-800" />
@@ -297,8 +291,12 @@ export function RingDetailContent({ ring, gemstones }: RingDetailContentProps) {
 
       <EnquiryModal
         isOpen={enquiryOpen}
-        onClose={() => setEnquiryOpen(false)}
+        onClose={() => {
+          setEnquiryOpen(false)
+          setRingDetails(undefined)
+        }}
         product={enquiryProduct}
+        ringDetails={ringDetails}
       />
     </>
   )

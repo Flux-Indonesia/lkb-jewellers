@@ -2,12 +2,24 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { RingDetailContent } from '@/components/engagement-rings/ring-detail-content'
 import ShowroomSection from '@/components/showroom-section'
-import { fetchAllSlugs, fetchGemstones, fetchRingBySlug } from '@/lib/supabase-rings'
+import { fetchAllRings, fetchAllSlugs, fetchRingBySlug } from '@/lib/supabase-rings'
 import { ProductJsonLd, BreadcrumbJsonLd, FaqJsonLd } from '@/components/json-ld'
 import { Breadcrumb } from '@/components/breadcrumb'
 import { createClient } from '@/lib/supabase-server'
 
 export const revalidate = 3600
+
+function pickRandomRings(allRings: Awaited<ReturnType<typeof fetchAllRings>>, currentSlug: string, limit = 4) {
+  const pool = allRings.filter((ring) => ring.slug !== currentSlug)
+  const shuffled = [...pool]
+
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1))
+    ;[shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]]
+  }
+
+  return shuffled.slice(0, limit)
+}
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -79,13 +91,15 @@ async function getFaqs(slug: string) {
 export default async function RingDetailPage({ params }: PageProps) {
   const { slug } = await params
 
-  const [ring, gemstones, faqs] = await Promise.all([
+  const [ring, allRings, faqs] = await Promise.all([
     fetchRingBySlug(slug),
-    fetchGemstones(),
+    fetchAllRings(),
     getFaqs(slug),
   ])
 
   if (!ring) notFound()
+
+  const recommendedRings = pickRandomRings(allRings, slug, 4)
 
   const breadcrumbItems = [
     { name: 'Home', url: 'https://www.lkbjewellers.com' },
@@ -115,7 +129,7 @@ export default async function RingDetailPage({ params }: PageProps) {
           { label: ring.name },
         ]} />
       </div>
-      <RingDetailContent ring={ring} gemstones={gemstones} />
+      <RingDetailContent ring={ring} recommendedRings={recommendedRings} />
       <ShowroomSection />
     </>
   )

@@ -94,7 +94,7 @@ export async function sendEnquiryConfirmation(to: string, name: string, productN
         Hi ${esc(name)}, thank you for your interest in <strong style="color:#1a1a1a;">${esc(productName)}</strong> (GBP ${productPrice.toLocaleString()}).
       </p>
       <p style="color:#555555;font-size:14px;line-height:1.6;margin:0;text-align:center;">
-        One of our specialists will be in touch shortly via your preferred contact method.
+        One of our specialists will be in touch shortly via your preferred contact methods.
       </p>
     `),
   });

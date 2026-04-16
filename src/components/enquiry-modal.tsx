@@ -5,11 +5,35 @@ import { X, BadgeCheck } from "lucide-react";
 import { toast } from "sonner";
 import type { Product } from "@/data/products";
 
-export function EnquiryModal({ isOpen, onClose, product }: { isOpen: boolean; onClose: () => void; product: Product }) {
+export interface RingEnquiryDetails {
+  selectedMetal: string;
+  sideStones: string;
+  setting: string;
+  ringSize: string;
+  gemstoneFilters: {
+    stoneType?: string;
+    clarity?: string;
+    caratRange?: string;
+    colour?: string;
+  };
+  certificate: string;
+}
+
+export function EnquiryModal({
+  isOpen,
+  onClose,
+  product,
+  ringDetails,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  product: Product;
+  ringDetails?: RingEnquiryDetails;
+}) {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [contactMethod, setContactMethod] = useState<"call" | "email" | "whatsapp">("call");
+  const [contactMethods, setContactMethods] = useState<Array<"call" | "email" | "whatsapp">>(["call"]);
   const [message, setMessage] = useState("");
   const [visitedOthers, setVisitedOthers] = useState(false);
   const [optOutNewsletter, setOptOutNewsletter] = useState(false);
@@ -29,10 +53,11 @@ export function EnquiryModal({ isOpen, onClose, product }: { isOpen: boolean; on
           fullName,
           email,
           phone,
-          contactMethod,
+          contactMethod: contactMethods,
           message,
           visitedOthers,
           optOutNewsletter,
+          ringDetails,
           productId: product.id,
           productName: product.name,
           productPrice: product.price,
@@ -53,7 +78,7 @@ export function EnquiryModal({ isOpen, onClose, product }: { isOpen: boolean; on
   const inputClass = "w-full bg-black border border-gray-800 text-white p-3 text-sm focus:border-white outline-none transition-colors placeholder:text-gray-400";
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4" onClick={onClose}>
+    <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4" onClick={onClose}>
       <div
         className="bg-[#0a0a0a] border border-gray-800 rounded-none max-w-3xl w-full my-8 relative"
         onClick={(e) => e.stopPropagation()}
@@ -76,7 +101,7 @@ export function EnquiryModal({ isOpen, onClose, product }: { isOpen: boolean; on
           <div className="text-center py-16 px-8">
             <BadgeCheck className="mx-auto mb-4 text-white" size={48} />
             <h3 className="text-2xl text-white mb-3 font-serif">Enquiry Sent!</h3>
-            <p className="text-gray-400 text-sm mb-6">We&apos;ll get back to you shortly via your preferred contact method.</p>
+            <p className="text-gray-400 text-sm mb-6">We&apos;ll get back to you shortly via your preferred contact methods.</p>
             <button onClick={onClose} className="bg-white text-black px-8 py-3 font-bold tracking-widest text-sm hover:bg-gray-200 transition-colors">
               CLOSE
             </button>
@@ -104,15 +129,22 @@ export function EnquiryModal({ isOpen, onClose, product }: { isOpen: boolean; on
                 </div>
               </div>
               <div className="mt-4">
-                <label className="block text-sm text-gray-400 mb-2">Preferred Contact Method *</label>
+                <label className="block text-sm text-gray-400 mb-2">Preferred Contact Methods *</label>
                 <div className="grid grid-cols-3 gap-3">
                   {(["call", "email", "whatsapp"] as const).map((method) => (
                     <button
                       key={method}
                       type="button"
-                      onClick={() => setContactMethod(method)}
+                      onClick={() =>
+                        setContactMethods((current) =>
+                          current.includes(method)
+                            ? current.filter((selectedMethod) => selectedMethod !== method)
+                            : [...current, method]
+                        )
+                      }
+                      aria-pressed={contactMethods.includes(method)}
                       className={`py-3 px-4 border text-sm font-medium transition-all ${
-                        contactMethod === method
+                        contactMethods.includes(method)
                           ? "bg-white text-black border-white"
                           : "bg-black text-white border-gray-800 hover:border-white"
                       }`}

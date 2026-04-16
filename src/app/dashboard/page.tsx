@@ -65,6 +65,16 @@ import {
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
 
+function safeParseJson(value: string): Record<string, unknown> | null {
+  if (!value) return null;
+  try {
+    const parsed = JSON.parse(value);
+    return parsed && typeof parsed === "object" ? parsed as Record<string, unknown> : null;
+  } catch {
+    return null;
+  }
+}
+
 type TabType = "add" | "watches" | "jewellery" | "merchandise" | "orders" | "contacts" | "sell" | "newsletter" | "engagement-rings" | "seo";
 
 interface FormData {
@@ -1188,6 +1198,68 @@ function DashboardContent() {
                             </div>
                           )}
                           <p className="text-gray-300 text-sm mt-2">{contact.message}</p>
+                          {contact.notes && (
+                            (() => {
+                              const parsedNotes = safeParseJson(contact.notes);
+                              const ringDetails = parsedNotes?.ringDetails as
+                                | {
+                                    selectedMetal?: string;
+                                    sideStones?: string;
+                                    setting?: string;
+                                    ringSize?: string;
+                                    gemstoneFilters?: {
+                                      stoneType?: string;
+                                      clarity?: string;
+                                      caratRange?: string;
+                                      colour?: string;
+                                    };
+                                    certificate?: string;
+                                  }
+                                | null
+                                | undefined;
+
+                              const filteredRingDetails = ringDetails
+                                ? [
+                                    ringDetails.selectedMetal ? { label: "Metal", value: ringDetails.selectedMetal } : null,
+                                    ringDetails.sideStones ? { label: "Side Stones", value: ringDetails.sideStones } : null,
+                                    ringDetails.setting ? { label: "Setting", value: ringDetails.setting } : null,
+                                    ringDetails.ringSize ? { label: "Ring Size", value: ringDetails.ringSize } : null,
+                                    ringDetails.certificate ? { label: "Certificate", value: ringDetails.certificate } : null,
+                                    ringDetails.gemstoneFilters?.stoneType ? { label: "Stone Type", value: ringDetails.gemstoneFilters.stoneType } : null,
+                                    ringDetails.gemstoneFilters?.clarity ? { label: "Clarity", value: ringDetails.gemstoneFilters.clarity } : null,
+                                    ringDetails.gemstoneFilters?.caratRange ? { label: "Carat", value: ringDetails.gemstoneFilters.caratRange } : null,
+                                    ringDetails.gemstoneFilters?.colour ? { label: "Colour", value: ringDetails.gemstoneFilters.colour } : null,
+                                  ].filter(Boolean)
+                                : [];
+
+                              const visitedOtherDealers = Boolean(parsedNotes?.visitedOthers);
+
+                              if (!filteredRingDetails.length && !visitedOtherDealers) return null;
+
+                              return (
+                                <div className="mt-4 rounded-lg border border-gray-800 bg-black/40 p-4">
+                                  <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">Enquiry Details</p>
+                                  {filteredRingDetails.length > 0 && (
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                      {filteredRingDetails.map((detail) => (
+                                        detail && (
+                                          <div key={detail.label} className="rounded-md border border-gray-800 bg-[#0a0a0a] px-3 py-2">
+                                            <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">{detail.label}</p>
+                                            <p className="text-sm text-white">{detail.value}</p>
+                                          </div>
+                                        )
+                                      ))}
+                                    </div>
+                                  )}
+                                  {visitedOtherDealers && (
+                                    <div className="mt-3">
+                                      <Badge className="bg-white/10 text-white border border-white/20 text-xs">Visited other dealers</Badge>
+                                    </div>
+                                  )}
+                                </div>
+                              );
+                            })()
+                          )}
                           <p className="text-gray-600 text-xs mt-3">{new Date(contact.created_at).toLocaleString("en-GB")}</p>
                         </div>
                         <div className="flex flex-col gap-2 flex-shrink-0">
