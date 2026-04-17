@@ -7,7 +7,7 @@ import { Wand2 } from "lucide-react";
 import ThreeDCarousel from "@/components/three-d-carousel";
 import ShowroomSection from "@/components/showroom-section";
 
-const bespokeImages = ["/bespoke/jefe-cover-blogs.jpg", "/bespoke/rnt.jpg", "/bespoke/rich.jpg", "/bespoke/tade-chain-16.jpg", "/bespoke/tade-cover.jpg", "/bespoke/rich2.jpg", "/bespoke/timeless-photos-2.jpg"];
+const bespokeImages = ["/bespoke/jefe-cover-blogs.jpg", "/bespoke/rnt.jpg", "/bespoke/rich.jpg", "/bespoke/tade-chain-16.jpg", "/bespoke/tade-cover.jpg", "/bespoke/rich2.jpg", "/bespoke/timeless-photos-2.jpg", "/bespoke/IMG_6340.JPG.jpeg"];
 
 const tabs = [
 	{
@@ -49,6 +49,7 @@ const portfolioImages = [
 	{ src: "/bespoke/IMG_5654.JPG", alt: "Bespoke Work 1" },
 	{ src: "/bespoke/IMG_5653.JPG", alt: "Bespoke Work 2" },
 	{ src: "/bespoke/IMG_1487.JPG", alt: "Bespoke Work 3" },
+	{ src: "/bespoke/IMG_6890.PNG", alt: "Bespoke Work 4" },
 ];
 
 export default function BespokePage() {
@@ -258,7 +259,7 @@ export default function BespokePage() {
 												<div className="absolute bottom-0 left-0 w-7 h-7 border-b-2 border-l-2 border-white/70 z-20 rounded-bl-md" />
 												<div className="absolute bottom-0 right-0 w-7 h-7 border-b-2 border-r-2 border-white/70 z-20 rounded-br-md" />
 												<video autoPlay muted loop playsInline className="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-700" key={current.videoUrl}>
-													<source src={current.videoUrl.replace('.mp4', '.webm')} type="video/webm" />
+													<source src={current.videoUrl.replace(".mp4", ".webm")} type="video/webm" />
 													<source src={current.videoUrl} type="video/mp4" />
 												</video>
 												<div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
@@ -407,9 +408,9 @@ export default function BespokePage() {
 						At the heart of Bespoke Jewellery lies an unwavering dedication to craftsmanship. Every piece is meticulously handcrafted by skilled artisans who combine traditional techniques with innovative approaches.
 					</p>
 				</div>
-				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
 					{portfolioImages.map((img, i) => (
-						<div key={i} className={`overflow-hidden rounded-lg group ${i === 2 ? "sm:col-span-2 md:col-span-1" : ""}`}>
+						<div key={i} className="overflow-hidden rounded-lg group">
 							<Image src={img.src} alt={img.alt} width={0} height={0} sizes="(max-width: 768px) 100vw, 33vw" className="w-full h-auto hover:scale-105 transition-transform duration-700 group-hover:brightness-110" />
 						</div>
 					))}
