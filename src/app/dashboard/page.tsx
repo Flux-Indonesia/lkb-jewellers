@@ -28,6 +28,7 @@ import {
   ArrowUp,
   ArrowDown,
   LogOut,
+  Download,
 } from "lucide-react";
 import Image from "next/image";
 import type { Product } from "@/data/products";
@@ -73,6 +74,12 @@ function safeParseJson(value: string): Record<string, unknown> | null {
   } catch {
     return null;
   }
+}
+
+function triggerExport(type: string, format: string, filter?: string) {
+  const params = new URLSearchParams({ type, format });
+  if (filter && filter !== "all") params.set("filter", filter);
+  window.open(`/api/export?${params}`, "_blank");
 }
 
 type TabType = "add" | "watches" | "jewellery" | "merchandise" | "orders" | "contacts" | "sell" | "newsletter" | "engagement-rings" | "seo";
@@ -536,6 +543,7 @@ function DashboardContent() {
   const refreshNewsletters = useCallback(async () => {
     try { const data = await getSubscribers(); setNewsletters(data); } catch (err) { console.error("Failed to fetch newsletters:", err); }
   }, []);
+
 
   useEffect(() => {
     refreshContacts();
@@ -1013,6 +1021,17 @@ function DashboardContent() {
                   </div>
                 </div>
               </div>
+              <div className="flex justify-end gap-2">
+                <Button onClick={() => triggerExport("orders", "csv")} className="h-auto px-3 py-2 border border-gray-700 text-white hover:bg-white hover:text-black transition-colors text-xs flex items-center gap-1">
+                  <Download size={13} /> CSV
+                </Button>
+                <Button onClick={() => triggerExport("orders", "xlsx")} className="h-auto px-3 py-2 border border-gray-700 text-white hover:bg-white hover:text-black transition-colors text-xs flex items-center gap-1">
+                  <Download size={13} /> XLSX
+                </Button>
+                <Button onClick={() => triggerExport("orders", "pdf")} className="h-auto px-3 py-2 border border-gray-700 text-white hover:bg-white hover:text-black transition-colors text-xs flex items-center gap-1">
+                  <Download size={13} /> PDF
+                </Button>
+              </div>
               {orders.length === 0 ? (
                 <div className="text-center py-16 bg-gradient-to-b from-[#0a0a0a] to-black border border-gray-800 rounded-xl">
                   <BarChart3 size={64} className="mx-auto text-gray-700 mb-4" />
@@ -1151,6 +1170,17 @@ function DashboardContent() {
                     {f === "all" ? `All (${contacts.length})` : f}
                   </Button>
                 ))}
+              </div>
+              <div className="flex justify-end gap-2">
+                <Button onClick={() => triggerExport("contacts", "csv", contactFilter)} className="h-auto px-3 py-2 border border-gray-700 text-white hover:bg-white hover:text-black transition-colors text-xs flex items-center gap-1">
+                  <Download size={13} /> CSV
+                </Button>
+                <Button onClick={() => triggerExport("contacts", "xlsx", contactFilter)} className="h-auto px-3 py-2 border border-gray-700 text-white hover:bg-white hover:text-black transition-colors text-xs flex items-center gap-1">
+                  <Download size={13} /> XLSX
+                </Button>
+                <Button onClick={() => triggerExport("contacts", "pdf", contactFilter)} className="h-auto px-3 py-2 border border-gray-700 text-white hover:bg-white hover:text-black transition-colors text-xs flex items-center gap-1">
+                  <Download size={13} /> PDF
+                </Button>
               </div>
               {filtered.length === 0 ? (
                 <div className="text-center py-20 bg-gradient-to-b from-[#0a0a0a] to-black border border-gray-800 rounded-xl">
@@ -1324,13 +1354,26 @@ function DashboardContent() {
                   <p className="text-gray-400 text-sm">Accepted/Completed</p>
                 </div>
               </div>
-              <div className="flex flex-wrap gap-3">
-                {["all", "new", "reviewing", "offer-sent", "accepted", "completed", "declined"].map((f) => (
-                  <Button key={f} onClick={() => setSellFilter(f)}
-                    className={`px-6 py-3 font-medium transition-all border-b-2 h-auto capitalize ${sellFilter === f ? "border-white text-white" : "border-transparent text-gray-400 hover:text-white"}`}>
-                    {f === "all" ? `All (${sellSubmissions.length})` : f.replace("-", " ")}
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex flex-wrap gap-3">
+                  {["all", "new", "reviewing", "offer-sent", "accepted", "completed", "declined"].map((f) => (
+                    <Button key={f} onClick={() => setSellFilter(f)}
+                      className={`px-6 py-3 font-medium transition-all border-b-2 h-auto capitalize ${sellFilter === f ? "border-white text-white" : "border-transparent text-gray-400 hover:text-white"}`}>
+                      {f === "all" ? `All (${sellSubmissions.length})` : f.replace("-", " ")}
+                    </Button>
+                  ))}
+                </div>
+                <div className="flex gap-2">
+                  <Button onClick={() => triggerExport("sell", "csv", sellFilter)} className="h-auto px-3 py-2 border border-gray-700 text-white hover:bg-white hover:text-black transition-colors text-xs flex items-center gap-1">
+                    <Download size={13} /> CSV
                   </Button>
-                ))}
+                  <Button onClick={() => triggerExport("sell", "xlsx", sellFilter)} className="h-auto px-3 py-2 border border-gray-700 text-white hover:bg-white hover:text-black transition-colors text-xs flex items-center gap-1">
+                    <Download size={13} /> XLSX
+                  </Button>
+                  <Button onClick={() => triggerExport("sell", "pdf", sellFilter)} className="h-auto px-3 py-2 border border-gray-700 text-white hover:bg-white hover:text-black transition-colors text-xs flex items-center gap-1">
+                    <Download size={13} /> PDF
+                  </Button>
+                </div>
               </div>
               {filtered.length === 0 ? (
                 <div className="text-center py-20 bg-gradient-to-b from-[#0a0a0a] to-black border border-gray-800 rounded-xl">
@@ -1441,7 +1484,18 @@ function DashboardContent() {
               <div className="bg-gradient-to-b from-[#0a0a0a] to-black border border-gray-800 rounded-xl overflow-hidden">
                 <div className="p-6 border-b border-gray-800 flex items-center justify-between">
                   <h3 className="text-xl font-serif text-white">Subscribers</h3>
-                  <p className="text-gray-400 text-sm">{newsletters.length} total</p>
+                  <div className="flex items-center gap-3">
+                    <p className="text-gray-400 text-sm">{newsletters.length} total</p>
+                    <Button onClick={() => triggerExport("newsletter", "csv")} className="h-auto px-3 py-2 border border-gray-700 text-white hover:bg-white hover:text-black transition-colors text-xs flex items-center gap-1">
+                      <Download size={13} /> CSV
+                    </Button>
+                    <Button onClick={() => triggerExport("newsletter", "xlsx")} className="h-auto px-3 py-2 border border-gray-700 text-white hover:bg-white hover:text-black transition-colors text-xs flex items-center gap-1">
+                      <Download size={13} /> XLSX
+                    </Button>
+                    <Button onClick={() => triggerExport("newsletter", "pdf")} className="h-auto px-3 py-2 border border-gray-700 text-white hover:bg-white hover:text-black transition-colors text-xs flex items-center gap-1">
+                      <Download size={13} /> PDF
+                    </Button>
+                  </div>
                 </div>
                 {newsletters.length === 0 ? (
                   <div className="text-center py-16">
