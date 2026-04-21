@@ -1201,7 +1201,13 @@ function DashboardContent() {
                             </Badge>
                           </div>
                           <p className="text-gray-400 text-sm mb-1">{contact.email} {contact.phone && `• ${contact.phone}`}</p>
-                          {contact.interest && <p className="text-white text-sm mb-2">{contact.interest}</p>}
+                          <div className="flex flex-wrap items-center gap-2 mb-2">
+                            {contact.interest && <Badge className="bg-gray-800 text-gray-300 border border-gray-700 text-xs">{contact.interest}</Badge>}
+                            {contact.preferred_contact_method && contact.preferred_contact_method.split(", ").map((m) => (
+                              <Badge key={m} className="bg-blue-900/20 text-blue-400 border border-blue-800/30 text-xs capitalize">{m}</Badge>
+                            ))}
+                            {contact.opted_out_newsletter && <Badge className="bg-gray-800 text-gray-500 border border-gray-700 text-xs">Opted out of newsletter</Badge>}
+                          </div>
                           {contact.product_name && (
                             <div className="flex items-center gap-3 my-3 bg-purple-900/10 border border-purple-800/20 rounded-lg p-3">
                               {contact.product_image && (
@@ -1212,6 +1218,9 @@ function DashboardContent() {
                               <div className="min-w-0 flex-1">
                                 <p className="text-white text-sm font-medium truncate">{contact.product_name}</p>
                                 <div className="flex items-center gap-2 mt-0.5">
+                                  {contact.product_brand && (
+                                    <Badge className="bg-purple-900/20 text-purple-400 border border-purple-800/30 text-xs">{contact.product_brand}</Badge>
+                                  )}
                                   {contact.product_category && (
                                     <Badge className="bg-purple-900/20 text-purple-400 border border-purple-800/30 text-xs capitalize">{contact.product_category.replace(/-/g, " ")}</Badge>
                                   )}
@@ -1228,67 +1237,24 @@ function DashboardContent() {
                             </div>
                           )}
                           <p className="text-gray-300 text-sm mt-2">{contact.message}</p>
-                          {contact.notes && (
-                            (() => {
-                              const parsedNotes = safeParseJson(contact.notes);
-                              const ringDetails = parsedNotes?.ringDetails as
-                                | {
-                                    selectedMetal?: string;
-                                    sideStones?: string;
-                                    setting?: string;
-                                    ringSize?: string;
-                                    gemstoneFilters?: {
-                                      stoneType?: string;
-                                      clarity?: string;
-                                      caratRange?: string;
-                                      colour?: string;
-                                    };
-                                    certificate?: string;
-                                  }
-                                | null
-                                | undefined;
-
-                              const filteredRingDetails = ringDetails
-                                ? [
-                                    ringDetails.selectedMetal ? { label: "Metal", value: ringDetails.selectedMetal } : null,
-                                    ringDetails.sideStones ? { label: "Side Stones", value: ringDetails.sideStones } : null,
-                                    ringDetails.setting ? { label: "Setting", value: ringDetails.setting } : null,
-                                    ringDetails.ringSize ? { label: "Ring Size", value: ringDetails.ringSize } : null,
-                                    ringDetails.certificate ? { label: "Certificate", value: ringDetails.certificate } : null,
-                                    ringDetails.gemstoneFilters?.stoneType ? { label: "Stone Type", value: ringDetails.gemstoneFilters.stoneType } : null,
-                                    ringDetails.gemstoneFilters?.clarity ? { label: "Clarity", value: ringDetails.gemstoneFilters.clarity } : null,
-                                    ringDetails.gemstoneFilters?.caratRange ? { label: "Carat", value: ringDetails.gemstoneFilters.caratRange } : null,
-                                    ringDetails.gemstoneFilters?.colour ? { label: "Colour", value: ringDetails.gemstoneFilters.colour } : null,
-                                  ].filter(Boolean)
-                                : [];
-
-                              const visitedOtherDealers = Boolean(parsedNotes?.visitedOthers);
-
-                              if (!filteredRingDetails.length && !visitedOtherDealers) return null;
-
-                              return (
-                                <div className="mt-4 rounded-lg border border-gray-800 bg-black/40 p-4">
-                                  <p className="text-xs uppercase tracking-widest text-gray-500 mb-3">Enquiry Details</p>
-                                  {filteredRingDetails.length > 0 && (
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                      {filteredRingDetails.map((detail) => (
-                                        detail && (
-                                          <div key={detail.label} className="rounded-md border border-gray-800 bg-[#0a0a0a] px-3 py-2">
-                                            <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">{detail.label}</p>
-                                            <p className="text-sm text-white">{detail.value}</p>
-                                          </div>
-                                        )
-                                      ))}
-                                    </div>
-                                  )}
-                                  {visitedOtherDealers && (
-                                    <div className="mt-3">
-                                      <Badge className="bg-white/10 text-white border border-white/20 text-xs">Visited other dealers</Badge>
-                                    </div>
-                                  )}
-                                </div>
-                              );
-                            })()
+                          {contact.visited_other_dealers && (
+                            <div className="mt-4 rounded-lg border border-amber-800/30 bg-amber-900/10 p-4">
+                              <p className="text-xs uppercase tracking-widest text-amber-500 mb-3">Visited Other Dealers</p>
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                {contact.other_dealer_name && (
+                                  <div className="rounded-md border border-gray-800 bg-[#0a0a0a] px-3 py-2">
+                                    <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Dealer Visited</p>
+                                    <p className="text-sm text-white">{contact.other_dealer_name}</p>
+                                  </div>
+                                )}
+                                {contact.other_dealer_price && (
+                                  <div className="rounded-md border border-gray-800 bg-[#0a0a0a] px-3 py-2">
+                                    <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Their Quote</p>
+                                    <p className="text-sm text-white">{contact.other_dealer_price}</p>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
                           )}
                           <p className="text-gray-600 text-xs mt-3">{new Date(contact.created_at).toLocaleString("en-GB")}</p>
                         </div>

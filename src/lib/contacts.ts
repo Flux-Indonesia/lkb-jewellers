@@ -14,6 +14,11 @@ export interface Contact {
   product_price: number;
   product_category: string;
   product_image: string;
+  product_brand: string;
+  visited_other_dealers: boolean;
+  other_dealer_name: string;
+  other_dealer_price: string;
+  opted_out_newsletter: boolean;
   status: "new" | "read" | "contacted" | "closed";
   notes: string;
   created_at: string;

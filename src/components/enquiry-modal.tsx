@@ -36,6 +36,8 @@ export function EnquiryModal({
   const [contactMethods, setContactMethods] = useState<Array<"call" | "email" | "whatsapp">>(["call"]);
   const [message, setMessage] = useState("");
   const [visitedOthers, setVisitedOthers] = useState(false);
+  const [otherDealerName, setOtherDealerName] = useState("");
+  const [otherDealerPrice, setOtherDealerPrice] = useState("");
   const [optOutNewsletter, setOptOutNewsletter] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -56,6 +58,8 @@ export function EnquiryModal({
           contactMethod: contactMethods,
           message,
           visitedOthers,
+          otherDealerName: visitedOthers ? otherDealerName : "",
+          otherDealerPrice: visitedOthers ? otherDealerPrice : "",
           optOutNewsletter,
           ringDetails,
           productId: product.id,
@@ -63,6 +67,7 @@ export function EnquiryModal({
           productPrice: product.price,
           productCategory: product.category,
           productImage: product.images?.[0] || "",
+          productBrand: product.brand || "",
         }),
       });
       if (!res.ok) throw new Error("Failed to submit");
@@ -165,11 +170,23 @@ export function EnquiryModal({
               <textarea placeholder="Tell us any details you'd like us to know..." value={message} onChange={(e) => setMessage(e.target.value)} rows={5} className={`${inputClass} resize-none`} />
             </div>
 
-            <div className="border-t border-gray-800 pt-6">
+            <div className="border-t border-gray-800 pt-6 space-y-4">
               <label className="flex items-center gap-3 cursor-pointer group">
                 <input type="checkbox" checked={visitedOthers} onChange={(e) => setVisitedOthers(e.target.checked)} className="w-5 h-5 accent-white cursor-pointer" />
                 <span className="text-white text-sm group-hover:text-gray-300 transition-colors">I have visited other dealers</span>
               </label>
+              {visitedOthers && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pl-8">
+                  <div>
+                    <label className="block text-sm text-gray-400 mb-2">What dealer did you visit?</label>
+                    <input type="text" placeholder="e.g. Watches of Switzerland" value={otherDealerName} onChange={(e) => setOtherDealerName(e.target.value)} className={inputClass} />
+                  </div>
+                  <div>
+                    <label className="block text-sm text-gray-400 mb-2">What did they quote you?</label>
+                    <input type="text" placeholder="e.g. £12,500" value={otherDealerPrice} onChange={(e) => setOtherDealerPrice(e.target.value)} className={inputClass} />
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="border-t border-gray-800 pt-6">
