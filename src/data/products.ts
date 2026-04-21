@@ -44,32 +44,32 @@ export const navMenuData = {
       {
         name: "Rolex",
         desc: "The crown of watchmaking excellence",
-        link: "/shop?brand=rolex",
+        link: "/shop/rolex",
         image:
           "/images/static/nav-rolex.jpg",
       },
       {
         name: "Audemars Piguet",
         desc: "Masters of haute horlogerie since 1875",
-        link: "/shop?brand=audemars-piguet",
+        link: "/shop/audemars-piguet",
         image: "/DXZ09994.jpg",
       },
       {
         name: "Cartier",
         desc: "Timeless elegance and French savoir-faire",
-        link: "/shop?brand=cartier",
+        link: "/shop/cartier",
         image: "/DXZ00043.jpg",
       },
       {
         name: "Patek Philippe",
         desc: "The ultimate symbol of prestige",
-        link: "/shop?brand=patek-philippe",
+        link: "/shop/patek-philippe",
         image: "/DXZ00023.jpg",
       },
       {
         name: "Richard Mille",
         desc: "Revolutionary ultra-lightweight timepieces",
-        link: "/shop?brand=richard-mille",
+        link: "/shop/richard-mille",
         image: "/RM1103-Nisha-11.jpg",
       },
     ],

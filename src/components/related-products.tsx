@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/data/products";
 import { getProductsByCategory } from "@/lib/products";
+import { productUrl } from "@/lib/product-url";
 
 const PLACEHOLDER_IMG =
 	"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect width='400' height='400' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-family='sans-serif' font-size='14'%3ENo Image%3C/text%3E%3C/svg%3E";
@@ -55,7 +56,7 @@ export function RelatedProducts({
 				{related.map((product) => (
 					<Link
 						key={product.id}
-						href={`/product/${product.id}`}
+						href={productUrl(product)}
 						className="group"
 					>
 						<div className="aspect-square bg-gray-50 border border-gray-200 overflow-hidden mb-3 relative">

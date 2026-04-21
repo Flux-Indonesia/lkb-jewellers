@@ -14,6 +14,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const staticRoutes: MetadataRoute.Sitemap = [
 		{ url: baseUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
 		{ url: `${baseUrl}/shop`, lastModified: new Date(), changeFrequency: "daily", priority: 0.9 },
+		{ url: `${baseUrl}/shop/rolex`, lastModified: new Date(), changeFrequency: "daily", priority: 0.85 },
+		{ url: `${baseUrl}/shop/audemars-piguet`, lastModified: new Date(), changeFrequency: "daily", priority: 0.85 },
+		{ url: `${baseUrl}/shop/cartier`, lastModified: new Date(), changeFrequency: "daily", priority: 0.85 },
+		{ url: `${baseUrl}/shop/patek-philippe`, lastModified: new Date(), changeFrequency: "daily", priority: 0.85 },
+		{ url: `${baseUrl}/shop/richard-mille`, lastModified: new Date(), changeFrequency: "daily", priority: 0.85 },
 		{ url: `${baseUrl}/watches`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
 		{ url: `${baseUrl}/jewellery`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
 		{ url: `${baseUrl}/accessories`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
@@ -35,16 +40,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
 		const { data: products } = await supabase
 			.from("products")
-			.select("id, updated_at, noindex")
+			.select("id, brand, slug, updated_at, noindex")
 			.eq("noindex", false);
 
 		if (products) {
-			productRoutes = products.map((p) => ({
-				url: `${baseUrl}/product/${p.id}`,
-				lastModified: p.updated_at ? new Date(p.updated_at) : new Date(),
-				changeFrequency: "weekly" as const,
-				priority: 0.7,
-			}));
+			productRoutes = products.map((p) => {
+				const brandSlug = p.brand
+					? (p.brand as string).toLowerCase().replace(/\s+/g, "-")
+					: null;
+				const productSlug = p.slug || p.id;
+				const url = brandSlug
+					? `${baseUrl}/product/${brandSlug}/${productSlug}`
+					: `${baseUrl}/product/${productSlug}`;
+				return {
+					url,
+					lastModified: p.updated_at ? new Date(p.updated_at) : new Date(),
+					changeFrequency: "weekly" as const,
+					priority: 0.7,
+				};
+			});
 		}
 
 		const { data: rings } = await supabase

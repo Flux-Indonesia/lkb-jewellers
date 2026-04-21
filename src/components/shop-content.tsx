@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { SlidersHorizontal, RefreshCw } from "lucide-react";
@@ -87,12 +87,32 @@ const brandCarouselData = [
 
 interface ShopContentProps {
   defaultCategory?: string;
+  defaultBrand?: string;
 }
 
-export default function ShopContent({ defaultCategory }: ShopContentProps) {
+export default function ShopContent({ defaultCategory, defaultBrand }: ShopContentProps) {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const categoryParam = searchParams?.get("category") ?? null;
-  const brandParam = searchParams?.get("brand") ?? null;
+  const brandParam = searchParams?.get("brand") ?? defaultBrand ?? null;
+
+  const handleBrandSelect = (brand: string) => {
+    if (brand === "all") {
+      if (defaultBrand) {
+        // On brand page → back to /shop with category=watch
+        router.push("/shop?category=watch");
+      } else {
+        // On /shop → remove brand param, keep others
+        const params = new URLSearchParams(searchParams?.toString() ?? "");
+        params.delete("brand");
+        const qs = params.toString();
+        router.push(qs ? `/shop?${qs}` : "/shop");
+      }
+    } else {
+      // Always navigate to brand page, drop all query params
+      router.push(`/shop/${brand.toLowerCase().replace(/\s+/g, "-")}`);
+    }
+  };
 
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -451,7 +471,7 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
                     </h3>
                     <div className="space-y-2 text-sm max-h-40 overflow-y-auto">
                       <button
-                        onClick={() => setActiveBrand("all")}
+                        onClick={() => handleBrandSelect("all")}
                         className={`block hover:text-gray-900 transition-colors ${
                           activeBrand === "all"
                             ? "text-gray-900 font-bold"
@@ -463,9 +483,9 @@ export default function ShopContent({ defaultCategory }: ShopContentProps) {
                       {uniqueBrands.slice(0, 10).map((brand) => (
                         <button
                           key={brand}
-                          onClick={() => setActiveBrand(brand)}
+                          onClick={() => handleBrandSelect(brand)}
                           className={`block hover:text-gray-900 transition-colors ${
-                            activeBrand === brand
+                            activeBrand.toLowerCase() === brand.toLowerCase()
                               ? "text-gray-900 font-bold"
                               : "text-gray-600"
                           }`}

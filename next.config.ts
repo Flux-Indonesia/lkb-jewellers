@@ -40,6 +40,13 @@ const nextConfig: NextConfig = {
         destination: "https://www.lkbjewellers.com/:path*",
         permanent: true,
       },
+      // Redirect old brand query param URLs to new clean brand paths
+      { source: "/shop", has: [{ type: "query", key: "brand", value: "rolex" }], destination: "/shop/rolex", permanent: true },
+      { source: "/shop", has: [{ type: "query", key: "brand", value: "audemars-piguet" }], destination: "/shop/audemars-piguet", permanent: true },
+      { source: "/shop", has: [{ type: "query", key: "brand", value: "cartier" }], destination: "/shop/cartier", permanent: true },
+      { source: "/shop", has: [{ type: "query", key: "brand", value: "patek-philippe" }], destination: "/shop/patek-philippe", permanent: true },
+      { source: "/shop", has: [{ type: "query", key: "brand", value: "richard-mille" }], destination: "/shop/richard-mille", permanent: true },
+      // Redirect old /product/:id to /product/:brand/:id (handled client-side via 307 to avoid missing brand info)
       // Strip WordPress legacy query params (add_to_wishlist, _wpnonce)
       {
         source: "/product/:slug",

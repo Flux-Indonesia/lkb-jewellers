@@ -91,15 +91,13 @@ export async function getProducts(): Promise<Product[]> {
   return (data || []).map(mapRow);
 }
 
-export async function getProductById(id: string): Promise<Product | null> {
+export async function getProductById(idOrSlug: string): Promise<Product | null> {
   const supabase = createClient();
-  const { data, error } = await supabase
-    .from("products")
-    .select("*")
-    .eq("id", id)
-    .single();
-  if (error) return null;
-  return data ? mapRow(data) : null;
+  // Try slug first, fallback to id
+  const { data: bySlug } = await supabase.from("products").select("*").eq("slug", idOrSlug).single();
+  if (bySlug) return mapRow(bySlug);
+  const { data: byId } = await supabase.from("products").select("*").eq("id", idOrSlug).single();
+  return byId ? mapRow(byId) : null;
 }
 
 export async function getProductsByCategory(
