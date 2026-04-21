@@ -33,6 +33,7 @@ interface RingConfiguratorProps {
   selectedMetal: string
   onMetalChange: (metal: string) => void
   onEnquire: (details: RingEnquiryDetails) => void
+  initialSetting?: string
 }
 
 function LabelWithTooltip({ label, tooltip }: { label: string; tooltip: string }) {
@@ -126,11 +127,11 @@ function SelectorButton({
   )
 }
 
-export function RingConfigurator({ recommendedRings, selectedMetal, onMetalChange, onEnquire }: RingConfiguratorProps) {
+export function RingConfigurator({ recommendedRings, selectedMetal, onMetalChange, onEnquire, initialSetting }: RingConfiguratorProps) {
   // Your Setting state
   const [sideStones, setSideStones] = useState<string>(RING_SIDE_STONE_OPTIONS[0])
   const metalType = selectedMetal
-  const [setting, setSetting] = useState<string>(RING_SETTING_OPTIONS[0])
+  const [setting, setSetting] = useState<string>(initialSetting ?? RING_SETTING_OPTIONS[0])
   const [ringSize, setRingSize] = useState('')
 
   // Your Gemstone state

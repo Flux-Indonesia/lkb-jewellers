@@ -3,6 +3,7 @@
 import { useState, useRef, useCallback } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import type { RingListingItem } from '@/lib/supabase-rings'
 
 const BLUR_PLACEHOLDER =
@@ -29,11 +30,28 @@ export function RingListingCard({ ring, priority = false }: RingListingCardProps
   const [imgError, setImgError] = useState(false)
   const [hoverLoaded, setHoverLoaded] = useState(false)
   const preloadRef = useRef<{ img: HTMLImageElement; timeout: number } | null>(null)
+  const searchParams = useSearchParams()
 
   const thumbnail = ring.thumbnail
   const hoverImage = ring.hoverImage
 
   const hasHover = Boolean(hoverImage && hoverImage !== thumbnail)
+
+  const ringDetailHref = (() => {
+    const params = new URLSearchParams()
+    const metal = searchParams.get('metal')
+    const settingProfile = searchParams.get('settingProfile')
+    const shape = searchParams.get('shape')
+    const settingStyle = searchParams.get('settingStyle')
+    const bandType = searchParams.get('bandType')
+    if (metal) params.set('metal', metal)
+    if (settingProfile) params.set('settingProfile', settingProfile)
+    if (shape) params.set('shape', shape)
+    if (settingStyle) params.set('settingStyle', settingStyle)
+    if (bandType) params.set('bandType', bandType)
+    const qs = params.toString()
+    return `/engagement-rings/${ring.slug}${qs ? `?${qs}` : ''}`
+  })()
 
   const handleMouseEnter = useCallback(() => {
     setIsHovered(true)
@@ -56,7 +74,7 @@ export function RingListingCard({ ring, priority = false }: RingListingCardProps
 
   return (
     <Link
-      href={`/engagement-rings/${ring.slug}`}
+      href={ringDetailHref}
       className="group block"
       aria-label={`View ${ring.name} engagement ring`}
     >

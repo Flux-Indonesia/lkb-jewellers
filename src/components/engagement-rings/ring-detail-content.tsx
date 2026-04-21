@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, Star, Shield, RefreshCw, Truck, Gem } from 'lucide-react'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
@@ -37,6 +38,22 @@ function SpecRow({ label, value }: { label: string; value: string }) {
       <span className="text-white text-sm font-medium">{value}</span>
     </div>
   )
+}
+
+const FILTER_METAL_TO_OPTION: Record<string, string> = {
+  platinum: 'Platinum',
+  palladium: 'Palladium',
+  yellow_gold: '18k Yellow Gold',
+  rose_gold: '18k Rose Gold',
+  white_gold: '18k White Gold',
+  '9k_yellow_gold': '9k Yellow Gold',
+  '9k_rose_gold': '9k Rose Gold',
+  '9k_white_gold': '9k White Gold',
+}
+
+const FILTER_PROFILE_TO_SETTING: Record<string, string> = {
+  high_set: 'High Setting',
+  low_set: 'Low Setting',
 }
 
 function metalToColorKey(metal: string): string {
@@ -85,7 +102,19 @@ const ringSizeRows = [
 ]
 
 export function RingDetailContent({ ring, recommendedRings }: RingDetailContentProps) {
-  const [selectedMetal, setSelectedMetal] = useState<string>(RING_METAL_OPTIONS[0])
+  const searchParams = useSearchParams()
+
+  const initialMetal = (() => {
+    const m = searchParams.get('metal')
+    return (m && FILTER_METAL_TO_OPTION[m]) ? FILTER_METAL_TO_OPTION[m] : RING_METAL_OPTIONS[0]
+  })()
+
+  const initialSetting = (() => {
+    const p = searchParams.get('settingProfile')
+    return (p && FILTER_PROFILE_TO_SETTING[p]) ? FILTER_PROFILE_TO_SETTING[p] : undefined
+  })()
+
+  const [selectedMetal, setSelectedMetal] = useState<string>(initialMetal)
   const [enquiryOpen, setEnquiryOpen] = useState(false)
   const [ringDetails, setRingDetails] = useState<RingEnquiryDetails | undefined>(undefined)
 
@@ -179,6 +208,7 @@ export function RingDetailContent({ ring, recommendedRings }: RingDetailContentP
                 recommendedRings={recommendedRings}
                 selectedMetal={selectedMetal}
                 onMetalChange={setSelectedMetal}
+                initialSetting={initialSetting}
                 onEnquire={(details) => {
                   setRingDetails(details)
                   setEnquiryOpen(true)
