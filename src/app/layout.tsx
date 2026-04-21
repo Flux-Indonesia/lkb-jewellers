@@ -63,15 +63,12 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="google-site-verification" content="nAVWrhRlM6tORH0OR3pC3AAvtjo9EL85tRRLC6UFQfg" />
+        {/* Preload only the 2 critical font weights needed above the fold */}
+        <link rel="preload" href="/fonts/montserrat-400.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/montserrat-500.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <LocalBusinessJsonLd />
         <style>{`
-          @font-face {
-            font-family: 'Montserrat';
-            src: url('/fonts/montserrat-300.woff2') format('woff2');
-            font-weight: 300;
-            font-style: normal;
-            font-display: swap;
-          }
+          /* Critical fonts — loaded immediately */
           @font-face {
             font-family: 'Montserrat';
             src: url('/fonts/montserrat-400.woff2') format('woff2');
@@ -83,27 +80,6 @@ export default function RootLayout({
             font-family: 'Montserrat';
             src: url('/fonts/montserrat-500.woff2') format('woff2');
             font-weight: 500;
-            font-style: normal;
-            font-display: swap;
-          }
-          @font-face {
-            font-family: 'Montserrat';
-            src: url('/fonts/montserrat-600.woff2') format('woff2');
-            font-weight: 600;
-            font-style: normal;
-            font-display: swap;
-          }
-          @font-face {
-            font-family: 'Montserrat';
-            src: url('/fonts/montserrat-700.woff2') format('woff2');
-            font-weight: 700;
-            font-style: normal;
-            font-display: swap;
-          }
-          @font-face {
-            font-family: 'Montserrat';
-            src: url('/fonts/montserrat-800.woff2') format('woff2');
-            font-weight: 800;
             font-style: normal;
             font-display: swap;
           }
@@ -144,6 +120,17 @@ export default function RootLayout({
           gtag('js', new Date());
           gtag('config', 'G-RLDND22WJM');`}
         </Script>
+        {/* Defer non-critical font weights until after page is interactive */}
+        <Script id="deferred-fonts" strategy="afterInteractive">{`
+          var s=document.createElement('style');
+          s.textContent=[
+            "@font-face{font-family:'Montserrat';src:url('/fonts/montserrat-300.woff2') format('woff2');font-weight:300;font-style:normal;font-display:swap;}",
+            "@font-face{font-family:'Montserrat';src:url('/fonts/montserrat-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap;}",
+            "@font-face{font-family:'Montserrat';src:url('/fonts/montserrat-700.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}",
+            "@font-face{font-family:'Montserrat';src:url('/fonts/montserrat-800.woff2') format('woff2');font-weight:800;font-style:normal;font-display:swap;}"
+          ].join('');
+          document.head.appendChild(s);
+        `}</Script>
         <Script id="meta-pixel" strategy="afterInteractive">
           {`!function(f,b,e,v,n,t,s)
           {if(f.fbq)return;n=f.fbq=function(){n.callMethod?

@@ -248,9 +248,9 @@ export default function Navbar() {
 								</Link>
 							)}
 							{/* Cart icon */}
-							<Link href="/checkout" className="relative group shrink-0">
+							<Link href="/checkout" className="relative group shrink-0" aria-label={`Shopping cart${cartCount > 0 ? `, ${cartCount} item${cartCount > 1 ? "s" : ""}` : ""}`}>
 								<ShoppingBag size={22} strokeWidth={2} className="xl:size-[18px] text-white group-hover:text-gray-300 transition-colors" />
-								{cartCount > 0 && <Badge className="absolute -top-3 -right-3 bg-white text-black text-[9px] font-bold w-4 h-4 p-0 flex items-center justify-center hover:bg-white">{cartCount}</Badge>}
+								{cartCount > 0 && <Badge className="absolute -top-3 -right-3 bg-white text-black text-[9px] font-bold w-4 h-4 p-0 flex items-center justify-center hover:bg-white" aria-hidden="true">{cartCount}</Badge>}
 							</Link>
 							{/* Search icon - desktop only */}
 							<button type="button" className="hidden xl:block text-white hover:text-gray-300 transition-colors focus:outline-none shrink-0 cursor-pointer" aria-label="Search">
