@@ -10,6 +10,7 @@ import type { Ring } from '@/data/engagement-rings'
 import { RING_METAL_OPTIONS, RING_SETTING_OPTIONS, RING_SIDE_STONE_OPTIONS, RING_SIZES } from '@/data/engagement-rings'
 import { stoneTypes, clarityOptions, caratRanges, colourOptions } from '@/data/gemstone-options'
 import type { GemstoneFilter } from '@/lib/gemstone-utils'
+import { shapeOptions, settingStyleOptions, bandTypeOptions } from '@/data/ring-filters'
 
 
 const CERTIFICATES = ['GIA', 'IGI', 'AGS', 'SDC'] as const
@@ -19,6 +20,9 @@ export interface RingEnquiryDetails {
   sideStones: string
   setting: string
   ringSize: string
+  shape: string
+  settingStyle: string
+  bandType: string
   gemstoneFilters: {
     stoneType?: string
     clarity?: string
@@ -34,6 +38,9 @@ interface RingConfiguratorProps {
   onMetalChange: (metal: string) => void
   onEnquire: (details: RingEnquiryDetails) => void
   initialSetting?: string
+  initialShape?: string
+  initialSettingStyle?: string
+  initialBandType?: string
 }
 
 function LabelWithTooltip({ label, tooltip }: { label: string; tooltip: string }) {
@@ -127,11 +134,14 @@ function SelectorButton({
   )
 }
 
-export function RingConfigurator({ recommendedRings, selectedMetal, onMetalChange, onEnquire, initialSetting }: RingConfiguratorProps) {
+export function RingConfigurator({ recommendedRings, selectedMetal, onMetalChange, onEnquire, initialSetting, initialShape, initialSettingStyle, initialBandType }: RingConfiguratorProps) {
   // Your Setting state
   const [sideStones, setSideStones] = useState<string>(RING_SIDE_STONE_OPTIONS[0])
   const metalType = selectedMetal
   const [setting, setSetting] = useState<string>(initialSetting ?? RING_SETTING_OPTIONS[0])
+  const [shape, setShape] = useState<string>(initialShape ?? '')
+  const [settingStyle, setSettingStyle] = useState<string>(initialSettingStyle ?? '')
+  const [bandType, setBandType] = useState<string>(initialBandType ?? '')
   const [ringSize, setRingSize] = useState('')
 
   // Your Gemstone state
@@ -148,6 +158,9 @@ export function RingConfigurator({ recommendedRings, selectedMetal, onMetalChang
       sideStones,
       setting,
       ringSize,
+      shape,
+      settingStyle,
+      bandType,
       gemstoneFilters: {
         stoneType: gemFilter.stoneType,
         clarity: gemFilter.clarity,
@@ -239,6 +252,54 @@ export function RingConfigurator({ recommendedRings, selectedMetal, onMetalChang
               Not sure of your size?{' '}
               <span className="text-[#D4AF37] cursor-pointer hover:underline">We offer complimentary resizing.</span>
             </p>
+          </ConfigRow>
+
+          <ConfigRow
+            label="Shape"
+            tooltip="The shape of the centre stone. Each shape has a unique character and brilliance."
+          >
+            <div className="flex flex-wrap gap-2">
+              {shapeOptions.map(opt => (
+                <PillButton
+                  key={opt.value}
+                  label={opt.label}
+                  isSelected={shape === opt.value}
+                  onClick={() => setShape(shape === opt.value ? '' : opt.value)}
+                />
+              ))}
+            </div>
+          </ConfigRow>
+
+          <ConfigRow
+            label="Setting Style"
+            tooltip="The overall design style of the ring setting. From classic solitaires to romantic trilogy designs."
+          >
+            <div className="flex flex-wrap gap-2">
+              {settingStyleOptions.map(opt => (
+                <PillButton
+                  key={opt.value}
+                  label={opt.label}
+                  isSelected={settingStyle === opt.value}
+                  onClick={() => setSettingStyle(settingStyle === opt.value ? '' : opt.value)}
+                />
+              ))}
+            </div>
+          </ConfigRow>
+
+          <ConfigRow
+            label="Band Type"
+            tooltip="The style of the ring band. Plain bands are classic, pavé bands add sparkle."
+          >
+            <div className="flex flex-wrap gap-2">
+              {bandTypeOptions.map(opt => (
+                <PillButton
+                  key={opt.value}
+                  label={opt.label}
+                  isSelected={bandType === opt.value}
+                  onClick={() => setBandType(bandType === opt.value ? '' : opt.value)}
+                />
+              ))}
+            </div>
           </ConfigRow>
         </div>
       </section>

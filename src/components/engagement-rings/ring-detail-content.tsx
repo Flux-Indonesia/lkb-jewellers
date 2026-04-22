@@ -8,12 +8,11 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Separator } from '@/components/ui/separator'
 import { ImageGallery } from '@/components/engagement-rings/image-gallery'
 import { RingConfigurator } from '@/components/engagement-rings/ring-configurator'
-import { EnquiryModal } from '@/components/enquiry-modal'
+import { RingEnquiryModal } from '@/components/engagement-rings/ring-enquiry-modal'
 import type { Ring } from '@/data/engagement-rings'
 import { RING_METAL_OPTIONS } from '@/data/engagement-rings'
 import type { RingEnquiryDetails } from '@/components/engagement-rings/ring-configurator'
 import { clarityOptions } from '@/data/gemstone-options'
-import type { Product } from '@/data/products'
 
 interface RingDetailContentProps {
   ring: Ring
@@ -114,6 +113,10 @@ export function RingDetailContent({ ring, recommendedRings }: RingDetailContentP
     return (p && FILTER_PROFILE_TO_SETTING[p]) ? FILTER_PROFILE_TO_SETTING[p] : undefined
   })()
 
+  const initialShape = searchParams.get('shape') || undefined
+  const initialSettingStyle = searchParams.get('settingStyle') || undefined
+  const initialBandType = searchParams.get('bandType') || undefined
+
   const [selectedMetal, setSelectedMetal] = useState<string>(initialMetal)
   const [enquiryOpen, setEnquiryOpen] = useState(false)
   const [ringDetails, setRingDetails] = useState<RingEnquiryDetails | undefined>(undefined)
@@ -137,26 +140,6 @@ export function RingDetailContent({ ring, recommendedRings }: RingDetailContentP
     const source = filtered.length > 0 ? filtered : ring.thumbnails
     return dedupeUrls(source)
   }, [ring.thumbnails, colorKey])
-
-  const enquiryProduct: Product = {
-    _id: ring.id,
-    id: ring.id,
-    name: `${ring.name} Engagement Ring`,
-    price: ring.basePrice,
-    category: 'engagement-rings',
-    brand: 'LKB Jewellers',
-    image: galleryImages[0] || galleryThumbs[0] || '',
-    images: galleryImages,
-    description: ring.description,
-    tags: 'engagement ring',
-    featured: false,
-    stock: 1,
-    model: '',
-    caseSize: '',
-    caseMaterial: '',
-    dialColor: '',
-    yearOfProduction: 0,
-  }
 
   return (
     <>
@@ -209,6 +192,9 @@ export function RingDetailContent({ ring, recommendedRings }: RingDetailContentP
                 selectedMetal={selectedMetal}
                 onMetalChange={setSelectedMetal}
                 initialSetting={initialSetting}
+                initialShape={initialShape}
+                initialSettingStyle={initialSettingStyle}
+                initialBandType={initialBandType}
                 onEnquire={(details) => {
                   setRingDetails(details)
                   setEnquiryOpen(true)
@@ -319,13 +305,13 @@ export function RingDetailContent({ ring, recommendedRings }: RingDetailContentP
         </div>
       </div>
 
-      <EnquiryModal
+      <RingEnquiryModal
         isOpen={enquiryOpen}
         onClose={() => {
           setEnquiryOpen(false)
           setRingDetails(undefined)
         }}
-        product={enquiryProduct}
+        ring={ring}
         ringDetails={ringDetails}
       />
     </>

@@ -1230,13 +1230,98 @@ function DashboardContent() {
                                 </div>
                               </div>
                               {contact.product_id && (
-                                <Link href={`/product/${contact.product_id}`} target="_blank" className="text-gray-500 hover:text-white transition-colors flex-shrink-0">
+                                <Link
+                                  href={contact.product_category === "engagement-rings"
+                                    ? `/engagement-rings/${contact.product_id}`
+                                    : `/product/${contact.product_id}`}
+                                  target="_blank"
+                                  className="text-gray-500 hover:text-white transition-colors flex-shrink-0"
+                                >
                                   <ChevronRight size={16} />
                                 </Link>
                               )}
                             </div>
                           )}
                           <p className="text-gray-300 text-sm mt-2">{contact.message}</p>
+                          {contact.product_category === "engagement-rings" && (contact.ring_metal || contact.ring_stone_type || contact.ring_size || contact.ring_shape) && (
+                            <div className="mt-4 rounded-lg border border-[#D4AF37]/20 bg-[#D4AF37]/5 p-4">
+                              <p className="text-xs uppercase tracking-widest text-[#D4AF37] mb-3">Ring Configuration</p>
+                              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                                {contact.ring_shape && (
+                                  <div className="rounded-md border border-gray-800 bg-[#0a0a0a] px-3 py-2">
+                                    <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Shape</p>
+                                    <p className="text-sm text-white">{contact.ring_shape.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase())}</p>
+                                  </div>
+                                )}
+                                {contact.ring_metal && (
+                                  <div className="rounded-md border border-gray-800 bg-[#0a0a0a] px-3 py-2">
+                                    <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Metal</p>
+                                    <p className="text-sm text-white">{contact.ring_metal}</p>
+                                  </div>
+                                )}
+                                {contact.ring_side_stones && (
+                                  <div className="rounded-md border border-gray-800 bg-[#0a0a0a] px-3 py-2">
+                                    <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Side Stones</p>
+                                    <p className="text-sm text-white">{contact.ring_side_stones}</p>
+                                  </div>
+                                )}
+                                {contact.ring_setting && (
+                                  <div className="rounded-md border border-gray-800 bg-[#0a0a0a] px-3 py-2">
+                                    <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Setting</p>
+                                    <p className="text-sm text-white">{contact.ring_setting}</p>
+                                  </div>
+                                )}
+                                {contact.ring_setting_style && (
+                                  <div className="rounded-md border border-gray-800 bg-[#0a0a0a] px-3 py-2">
+                                    <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Setting Style</p>
+                                    <p className="text-sm text-white">{contact.ring_setting_style.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase())}</p>
+                                  </div>
+                                )}
+                                {contact.ring_band_type && (
+                                  <div className="rounded-md border border-gray-800 bg-[#0a0a0a] px-3 py-2">
+                                    <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Band Type</p>
+                                    <p className="text-sm text-white">{contact.ring_band_type.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase())}</p>
+                                  </div>
+                                )}
+                                {contact.ring_size && (
+                                  <div className="rounded-md border border-gray-800 bg-[#0a0a0a] px-3 py-2">
+                                    <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Ring Size</p>
+                                    <p className="text-sm text-white">{contact.ring_size}</p>
+                                  </div>
+                                )}
+                                {contact.ring_stone_type && (
+                                  <div className="rounded-md border border-gray-800 bg-[#0a0a0a] px-3 py-2">
+                                    <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Stone Type</p>
+                                    <p className="text-sm text-white">{contact.ring_stone_type}</p>
+                                  </div>
+                                )}
+                                {contact.ring_clarity && (
+                                  <div className="rounded-md border border-gray-800 bg-[#0a0a0a] px-3 py-2">
+                                    <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Clarity</p>
+                                    <p className="text-sm text-white">{contact.ring_clarity}</p>
+                                  </div>
+                                )}
+                                {contact.ring_carat_range && (
+                                  <div className="rounded-md border border-gray-800 bg-[#0a0a0a] px-3 py-2">
+                                    <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Carat</p>
+                                    <p className="text-sm text-white">{contact.ring_carat_range}</p>
+                                  </div>
+                                )}
+                                {contact.ring_colour && (
+                                  <div className="rounded-md border border-gray-800 bg-[#0a0a0a] px-3 py-2">
+                                    <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Colour</p>
+                                    <p className="text-sm text-white">{contact.ring_colour}</p>
+                                  </div>
+                                )}
+                                {contact.ring_certificate && (
+                                  <div className="rounded-md border border-gray-800 bg-[#0a0a0a] px-3 py-2">
+                                    <p className="text-[10px] uppercase tracking-widest text-gray-500 mb-1">Certificate</p>
+                                    <p className="text-sm text-white">{contact.ring_certificate}</p>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          )}
                           {contact.visited_other_dealers && (
                             <div className="mt-4 rounded-lg border border-amber-800/30 bg-amber-900/10 p-4">
                               <p className="text-xs uppercase tracking-widest text-amber-500 mb-3">Visited Other Dealers</p>

@@ -19,6 +19,19 @@ export interface Contact {
   other_dealer_name: string;
   other_dealer_price: string;
   opted_out_newsletter: boolean;
+  // Ring-specific fields
+  ring_metal: string;
+  ring_side_stones: string;
+  ring_setting: string;
+  ring_size: string;
+  ring_shape: string;
+  ring_setting_style: string;
+  ring_band_type: string;
+  ring_stone_type: string;
+  ring_clarity: string;
+  ring_carat_range: string;
+  ring_colour: string;
+  ring_certificate: string;
   status: "new" | "read" | "contacted" | "closed";
   notes: string;
   created_at: string;
