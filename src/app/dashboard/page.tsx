@@ -291,9 +291,25 @@ function ProductForm({
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-2">Brand</label>
-            <Input type="text" name="brand" value={formData.brand} onChange={handleInputChange}
-              className="w-full bg-[#0a0a0a] border border-gray-800 rounded px-4 py-3 text-white focus:border-white focus:outline-none h-auto"
-              placeholder="Rolex, Cartier, etc." />
+            <select name="brand" value={formData.brand} onChange={handleInputChange}
+              className="w-full bg-[#0a0a0a] border border-gray-800 rounded px-4 py-3 text-white focus:border-white focus:outline-none">
+              <option value="">Select Brand</option>
+              <option value="Rolex">Rolex</option>
+              <option value="Audemars Piguet">Audemars Piguet</option>
+              <option value="Cartier">Cartier</option>
+              <option value="Patek Philippe">Patek Philippe</option>
+              <option value="Richard Mille">Richard Mille</option>
+              <option value="Omega">Omega</option>
+              <option value="Breitling">Breitling</option>
+              <option value="IWC">IWC</option>
+              <option value="Hublot">Hublot</option>
+              <option value="TAG Heuer">TAG Heuer</option>
+              <option value="Panerai">Panerai</option>
+              <option value="Jaeger-LeCoultre">Jaeger-LeCoultre</option>
+              <option value="Vacheron Constantin">Vacheron Constantin</option>
+              <option value="A. Lange & Söhne">A. Lange &amp; Söhne</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
         </div>
 
@@ -316,11 +332,9 @@ function ProductForm({
                 <select name="caseSize" value={formData.caseSize} onChange={handleInputChange}
                   className="w-full bg-[#0a0a0a] border border-gray-800 rounded px-4 py-3 text-white focus:border-white focus:outline-none">
                   <option value="">Select Size</option>
-                  <option value="36 mm">36 mm</option>
-                  <option value="40 mm">40 mm</option>
-                  <option value="41 mm">41 mm</option>
-                  <option value="42 mm">42 mm</option>
-                  <option value="44 mm">44 mm</option>
+                  {Array.from({ length: 24 }, (_, i) => i + 23).map(mm => (
+                    <option key={mm} value={`${mm} mm`}>{mm} mm</option>
+                  ))}
                 </select>
               </div>
               <div>
@@ -361,7 +375,7 @@ function ProductForm({
                 <select name="yearOfProduction" value={formData.yearOfProduction} onChange={handleInputChange}
                   className="w-full bg-[#0a0a0a] border border-gray-800 rounded px-4 py-3 text-white focus:border-white focus:outline-none">
                   <option value="">Select Year</option>
-                  {[2025, 2024, 2023, 2022, 2021, 2020, 2018, 2017, 2015, 2012, 2008].map(y => (
+                  {Array.from({ length: 42 }, (_, i) => 2026 - i).map(y => (
                     <option key={y} value={y}>{y}</option>
                   ))}
                 </select>
