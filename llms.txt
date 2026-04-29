@@ -1,0 +1,35 @@
+# LKB Jewellers
+
+> LKB Jewellers (Local Kettle Brothers) is an independent luxury watch and engagement ring dealer based in London, UK. They specialise in pre-owned and new Rolex, Audemars Piguet, Cartier, Patek Philippe, and Richard Mille watches, as well as bespoke engagement rings. Known for competitive pricing, personal service, and celebrity clientele.
+
+## Watches
+
+- [Shop All Watches](https://www.lkbjewellers.com/shop): Browse the full collection of luxury pre-owned and new watches
+- [Rolex](https://www.lkbjewellers.com/shop/rolex): Rolex watches including Submariner, Daytona, Datejust, GMT-Master II, Day-Date
+- [Audemars Piguet](https://www.lkbjewellers.com/shop/audemars-piguet): AP Royal Oak, Royal Oak Offshore, and more
+- [Cartier](https://www.lkbjewellers.com/shop/cartier): Cartier Santos, Tank, Ballon Bleu, Panthère
+- [Patek Philippe](https://www.lkbjewellers.com/shop/patek-philippe): Patek Nautilus, Aquanaut, Calatrava
+- [Richard Mille](https://www.lkbjewellers.com/shop/richard-mille): Richard Mille ultra-luxury sports watches
+
+## Engagement Rings
+
+- [Engagement Rings Collection](https://www.lkbjewellers.com/engagement-rings): Browse and configure bespoke engagement rings with choice of metal, diamond shape, setting, stone type, clarity, carat, and certification (GIA, IGI, HRD)
+
+## Services
+
+- [Sell Your Watch](https://www.lkbjewellers.com/sell): LKB buys pre-owned luxury watches at fair market prices
+- [Bespoke Jewellery](https://www.lkbjewellers.com/bespoke): Custom jewellery design service with AI-assisted concept generation
+- [Contact](https://www.lkbjewellers.com/contact): Enquire via phone, email, or WhatsApp
+
+## About
+
+- [About LKB Jewellers](https://www.lkbjewellers.com/about): The story of Local Kettle Brothers, their values, community work, and the LKB Foundation
+
+## Blog
+
+- [Blog](https://www.lkbjewellers.com/blog): Articles on luxury watches, engagement rings, brand breakdowns, and the LKB story
+
+## Optional
+
+- [Privacy Policy](https://www.lkbjewellers.com/privacy-policy)
+- [Terms and Conditions](https://www.lkbjewellers.com/terms-and-conditions)
